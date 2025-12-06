@@ -212,6 +212,36 @@ const MOCK_PROJECTS = [
     tags: ["Angular", ".NET Core", "SQL Server"],
     description: "End-to-end ERP solution managing supply chain, employee shifts, machine maintenance, and output logistics for a major steel plant.",
     stats: { users: "2k+", efficiency: "+45%", uptime: "99.9%" }
+  },
+  {
+    id: 4,
+    title: "EduTech Learning App",
+    category: "app",
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
+    client: "LearnX Academy",
+    tags: ["React Native", "Firebase", "WebRTC"],
+    description: "Live classroom application with whiteboard sharing, quiz modules, and AI-driven student progress tracking.",
+    stats: { users: "50k+", classes: "500/day", uptime: "99.9%" }
+  },
+  {
+    id: 5,
+    title: "Retail Analytics BI",
+    category: "bi",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    client: "SuperMart Retail",
+    tags: ["Power BI", "Azure", "Python"],
+    description: "Custom Power BI connectors to visualize sales data across 200 stores, predicting trends and optimizing inventory levels.",
+    stats: { users: "100+", insights: "Real-time", uptime: "100%" }
+  },
+  {
+    id: 6,
+    title: "Logistics Fleet Manager",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+    client: "FastMove Logistics",
+    tags: ["Vue.js", "Go", "PostGIS"],
+    description: "Real-time fleet tracking system using GPS telemetry. route optimization algorithms reduced fuel costs by 30%.",
+    stats: { users: "1k+", vehicles: "500+", uptime: "99.9%" }
   }
 ];
 
@@ -462,6 +492,7 @@ const ContactForm = () => {
       setStatus('submitting');
       
       const data = new FormData();
+      // UPDATED: Keys match Google Sheet headers EXACTLY (Date handled by script)
       data.append('Name', formData.name);
       data.append('Email', formData.email);
       data.append('Service', formData.service);
