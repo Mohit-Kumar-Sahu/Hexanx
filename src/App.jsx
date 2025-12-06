@@ -6,7 +6,7 @@ import {
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Twitter, Facebook, Instagram, Terminal,
-  TrendingUp, Target, Lightbulb
+  TrendingUp, Target, Lightbulb, Map
 } from 'lucide-react';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
@@ -37,15 +37,15 @@ const styles = `
 
   /* --- Navbar Fix --- */
   .nav-scrolled {
-    background-color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   }
 
   /* --- Luxury Glassmorphism --- */
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
@@ -53,6 +53,17 @@ const styles = `
 
   .glass-card-hover {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card-hover::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #2563eb, #ec4899);
+    opacity: 0;
+    transition: opacity 0.3s;
   }
 
   .glass-card-hover:hover {
@@ -61,29 +72,45 @@ const styles = `
     border-color: rgba(37, 99, 235, 0.3);
   }
 
-  /* --- Advanced Backgrounds --- */
-  .bg-grid {
-    background-size: 60px 60px;
-    background-image: 
-      linear-gradient(to right, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
-    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  .glass-card-hover:hover::before {
+    opacity: 1;
   }
 
-  .bg-gradient-mesh {
+  /* --- Advanced Backgrounds --- */
+  .bg-grid {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 50%, transparent 100%);
+  }
+
+  .mesh-gradient {
     background-color: #ffffff;
     background-image: 
-      radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,30%,0) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(339,49%,30%,0) 0, transparent 50%);
+        radial-gradient(at 40% 20%, hsla(250,100%,94%,1) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, hsla(189,100%,96%,1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(341,100%,96%,1) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, hsla(356,100%,96%,1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(22,100%,96%,1) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, hsla(242,100%,96%,1) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, hsla(343,100%,96%,1) 0px, transparent 50%);
   }
 
   /* --- Typography Effects --- */
   .gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #ec4899 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% 200%;
+    animation: gradient-move 5s ease infinite;
+  }
+
+  @keyframes gradient-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   /* --- Animations --- */
@@ -98,13 +125,13 @@ const styles = `
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-  .animate-scroll { animation: scroll 30s linear infinite; }
+  .animate-scroll { animation: scroll 40s linear infinite; }
 
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
-    50% { box-shadow: 0 0 40px rgba(37, 99, 235, 0.5); }
+    0%, 100% { box-shadow: 0 0 0 rgba(37, 99, 235, 0); }
+    50% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
   }
-  .animate-pulse-glow { animation: pulse-glow 3s infinite; }
+  .animate-pulse-glow { animation: pulse-glow 2s infinite; }
 
   @keyframes slideIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -115,7 +142,7 @@ const styles = `
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
   }
   .reveal.active {
     opacity: 1;
@@ -138,7 +165,7 @@ const TEAM = [
   { 
     name: "Rahul Kumar Sahu", 
     role: "Founder & CEO", 
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" // Replace with actual image in future
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" 
   },
   { 
     name: "Mohit Kumar Sahu", 
@@ -206,33 +233,33 @@ const Button = ({ children, primary = false, onClick, className = "", type = "bu
     onClick={onClick}
     disabled={disabled}
     className={`
-      px-8 py-4 rounded-full font-bold tracking-wide transition-all duration-300 relative overflow-hidden group shadow-lg flex items-center justify-center gap-2
+      px-8 py-4 rounded-full font-bold tracking-wide transition-all duration-300 relative overflow-hidden group shadow-xl flex items-center justify-center gap-2
       ${primary 
-        ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-blue-500/30" 
-        : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600"}
+        ? "bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white hover:shadow-blue-500/40" 
+        : "bg-white text-slate-800 border border-slate-200 hover:bg-slate-50 hover:border-blue-400 hover:text-blue-600"}
       ${disabled ? "opacity-70 cursor-not-allowed" : ""}
       ${className}
     `}
   >
     <span className="relative z-10 flex items-center gap-2">{children}</span>
-    {primary && <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>}
+    {primary && <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>}
   </button>
 );
 
 const SectionTitle = ({ title, subtitle, center = true }) => (
-  <RevealOnScroll className={`mb-16 ${center ? 'text-center' : 'text-left'}`}>
-    <div className={`inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4 shadow-sm ${center ? 'mx-auto' : ''}`}>
-      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
+  <RevealOnScroll className={`mb-20 ${center ? 'text-center' : 'text-left'}`}>
+    <div className={`inline-flex items-center px-4 py-2 rounded-full bg-white border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
+      <span className="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
       {subtitle}
     </div>
-    <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+    <h2 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight">
       {title.split(" ").map((word, i) => (
         <span key={i} className={i === 1 ? "gradient-text" : ""}>
           {word} 
         </span>
       ))}
     </h2>
-    <div className={`h-1.5 w-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mt-6 ${center ? 'mx-auto' : ''}`}></div>
+    <div className={`h-2 w-24 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-8 ${center ? 'mx-auto' : ''}`}></div>
   </RevealOnScroll>
 );
 
@@ -244,7 +271,7 @@ const Badge = ({ text, color = "blue" }) => {
     orange: "bg-orange-50 text-orange-700 border-orange-100",
   };
   return (
-    <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider border ${colors[color] || colors.blue}`}>
+    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${colors[color] || colors.blue}`}>
       {text}
     </span>
   );
@@ -254,15 +281,15 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
-      <div className="relative bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-in border border-white/20">
-        <div className="sticky top-0 bg-white/90 backdrop-blur-md border-b border-slate-100 p-6 flex items-center justify-between z-10">
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity" onClick={onClose}></div>
+      <div className="relative bg-white rounded-[2rem] w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-in border border-white/40">
+        <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-100 p-6 flex items-center justify-between z-10">
           <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
-          <button onClick={onClose} className="p-2 rounded-full hover:bg-slate-100 transition-colors">
-            <X className="w-6 h-6 text-slate-500" />
+          <button onClick={onClose} className="p-2 rounded-full bg-slate-100 hover:bg-red-50 hover:text-red-500 transition-colors">
+            <X className="w-6 h-6" />
           </button>
         </div>
-        <div className="p-6 md:p-8">
+        <div className="p-6 md:p-10">
           {children}
         </div>
       </div>
@@ -283,6 +310,41 @@ const RevealOnScroll = ({ children, className = "" }) => {
   }, []);
   return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
 };
+
+// --- Helper for Number Counting ---
+const CountUp = ({ end, duration = 2000 }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  useEffect(() => {
+    let startTime;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const animate = (time) => {
+          if (!startTime) startTime = time;
+          const progress = time - startTime;
+          const percentage = Math.min(progress / duration, 1);
+          setCount(Math.floor(end * percentage));
+          if (progress < duration) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+        observer.disconnect();
+      }
+    });
+    if (ref.current) observer.observe(ref.current);
+  }, [end, duration]);
+  return <span ref={ref}>{count}</span>;
+};
+
+// --- Helper for Text Rotating ---
+const TextRotator = () => {
+  const words = ["Empires", "Solutions", "Future", "Dreams"];
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => setIndex(i => (i + 1) % words.length), 2500);
+    return () => clearInterval(interval);
+  }, []);
+  return <span className="gradient-text transition-all duration-500 inline-block min-w-[200px]">{words[index]}</span>;
+}
 
 // --- 4. FEATURE COMPONENTS ---
 
@@ -326,7 +388,7 @@ const ChatBot = () => {
     <>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-blue-600 text-white shadow-2xl hover:bg-blue-700 transition-all hover:scale-110 active:scale-95 animate-pulse-glow"
+        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300"
       >
         {isOpen ? <X /> : <MessageCircle />}
       </button>
@@ -334,20 +396,20 @@ const ChatBot = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[500px] animate-slide-in">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center gap-3 text-white">
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-              <MessageSquare size={16} />
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+              <MessageSquare size={20} />
             </div>
             <div>
-              <h4 className="font-bold text-sm">Hexanx Support</h4>
+              <h4 className="font-bold text-base">Hexanx Support</h4>
               <p className="text-[10px] text-blue-100 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Online
               </p>
             </div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto bg-slate-50 space-y-3">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.isBot ? 'bg-white border border-slate-200 text-slate-700 rounded-tl-none' : 'bg-blue-600 text-white rounded-tr-none'}`}>
+                <div className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${msg.isBot ? 'bg-white border border-slate-200 text-slate-700 rounded-tl-none' : 'bg-blue-600 text-white rounded-tr-none'}`}>
                   {msg.text}
                 </div>
               </div>
@@ -399,13 +461,13 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="glass-card p-8 md:p-10 rounded-3xl border border-slate-200 shadow-xl relative overflow-hidden">
+    <div className="glass-card p-8 md:p-12 rounded-[2rem] border border-white/60 shadow-2xl relative overflow-hidden bg-white/80">
        {status === 'success' && (
          <div className="absolute inset-0 bg-white/95 backdrop-blur z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-              <CheckCircle2 className="w-10 h-10 text-green-600" />
+            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+              <CheckCircle2 className="w-12 h-12 text-green-600" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
+            <h3 className="text-3xl font-bold text-slate-900 mb-2">Message Sent!</h3>
             <p className="text-slate-500 mb-8">Thank you for contacting Hexanx. We will get back to you within 24 hours.</p>
             <Button onClick={() => setStatus('idle')}>Send Another</Button>
          </div>
@@ -465,7 +527,7 @@ const ContactForm = () => {
            {errors.message && <p className="text-red-500 text-xs ml-1">{errors.message}</p>}
         </div>
 
-        <Button primary className="w-full" type="submit" disabled={status === 'submitting'}>
+        <Button primary className="w-full h-14 text-lg" type="submit" disabled={status === 'submitting'}>
           {status === 'submitting' ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
@@ -475,16 +537,33 @@ const ContactForm = () => {
 
 // --- 5. PAGE SECTIONS ---
 
+const TopTicker = () => (
+  <div className="bg-slate-900 text-white text-[10px] md:text-xs font-bold py-2 overflow-hidden border-b border-slate-800 z-[60] relative">
+    <div className="flex animate-scroll whitespace-nowrap gap-12 w-max items-center">
+        {[1,2,3,4].map(i => (
+            <React.Fragment key={i}>
+                <span className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> ACCEPTING PROJECTS IN INDIA & WORLDWIDE</span>
+                <span className="text-slate-600">|</span>
+                <span className="flex items-center gap-2">🇮🇳 PROUDLY MADE IN RAIPUR</span>
+                <span className="text-slate-600">|</span>
+                <span className="flex items-center gap-2">🚀 ENTERPRISE GRADE SOLUTIONS</span>
+                <span className="text-slate-600">|</span>
+            </React.Fragment>
+        ))}
+    </div>
+  </div>
+);
+
 const TechStack = () => {
   const techs = ["React", "Angular", "Vue.js", "Node.js", "Python", "Flutter", "AWS", "Docker", "Kubernetes", "Firebase", "MongoDB", "PostgreSQL", "Power BI", "Azure", "Terraform"];
   return (
-    <div className="py-10 bg-slate-900 overflow-hidden relative border-t border-slate-800">
-      <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-slate-900 to-transparent z-10"></div>
-      <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-slate-900 to-transparent z-10"></div>
+    <div className="py-12 bg-white overflow-hidden relative border-y border-slate-100">
+      <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+      <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
       <div className="flex animate-scroll whitespace-nowrap gap-16 w-max">
         {[...techs, ...techs].map((tech, i) => (
-          <div key={i} className="text-slate-500 font-bold text-2xl uppercase tracking-wider hover:text-white transition-colors cursor-default flex items-center">
-            <span className="w-2 h-2 rounded-full bg-blue-600 mr-4"></span>{tech}
+          <div key={i} className="text-slate-400 font-bold text-2xl uppercase tracking-wider hover:text-blue-600 transition-colors cursor-default flex items-center">
+            <span className="w-2 h-2 rounded-full bg-slate-200 mr-4"></span>{tech}
           </div>
         ))}
       </div>
@@ -493,31 +572,30 @@ const TechStack = () => {
 };
 
 const WhyChooseUs = () => (
-  <section className="py-24 bg-white relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-[100px] -z-10"></div>
+  <section className="py-32 bg-slate-50 relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
+    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
+    
     <div className="container mx-auto px-6">
       <SectionTitle title="Why Choose Hexanx" subtitle="Our Advantage" />
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          { title: "Local Presence, Global Quality", desc: "Based in Raipur, we deliver world-class software standards with local accessibility.", icon: MapPin },
-          { title: "Agile Methodology", desc: "We use iterative development to ensure you see progress every week, not just at the end.", icon: Repeat },
-          { title: "Enterprise Security", desc: "Security isn't an afterthought. We build with OWASP top 10 standards from day one.", icon: ShieldCheck }
+          { title: "Local Presence, Global Quality", desc: "Based in Raipur, we deliver world-class software standards with local accessibility and trust.", icon: MapPin, color: "blue" },
+          { title: "Agile Methodology", desc: "We use iterative development to ensure you see progress every week, not just at the deadline.", icon: Zap, color: "purple" },
+          { title: "Enterprise Security", desc: "Security isn't an afterthought. We build with OWASP top 10 standards from day one.", icon: ShieldCheck, color: "green" }
         ].map((item, i) => (
-          <RevealOnScroll key={i} className="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-            <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
-              <item.icon className="w-7 h-7 text-blue-600" />
+          <RevealOnScroll key={i} className="group p-10 rounded-[2rem] bg-white border border-slate-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <div className={`w-16 h-16 bg-${item.color}-50 rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300`}>
+              <item.icon className={`w-8 h-8 text-${item.color}-600`} />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-            <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h3>
+            <p className="text-slate-600 leading-relaxed text-lg">{item.desc}</p>
           </RevealOnScroll>
         ))}
       </div>
     </div>
   </section>
 );
-
-// Dummy icon for WhyChooseUs
-const Repeat = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>;
 
 const PortfolioSection = () => {
   const [filter, setFilter] = useState('all');
@@ -536,7 +614,7 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-slate-50 relative" id="portfolio">
+    <section className="py-32 bg-white relative" id="portfolio">
       <div className="container mx-auto px-6">
         <SectionTitle title="Our Recent Work" subtitle="Case Studies" />
         
@@ -545,10 +623,10 @@ const PortfolioSection = () => {
             <button
               key={cat.id}
               onClick={() => setFilter(cat.id)}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+              className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
                 filter === cat.id 
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105" 
-                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105" 
+                  : "bg-slate-50 text-slate-600 border border-slate-200 hover:bg-white hover:shadow-md"
               }`}
             >
               {cat.label}
@@ -561,27 +639,27 @@ const PortfolioSection = () => {
             <div 
               key={project.id}
               onClick={() => setSelectedProject(project)}
-              className="group bg-white rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100"
+              className="group bg-white rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-72 overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <span className="text-white font-bold flex items-center gap-2">View Details <ArrowRight size={16}/></span>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                  <span className="text-white font-bold flex items-center gap-2 text-lg">View Case Study <ArrowRight size={20}/></span>
                 </div>
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-blue-600 shadow-sm">
+                <div className="absolute top-6 right-6 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-600 shadow-lg">
                   {project.category}
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h3>
-                <p className="text-slate-500 text-sm line-clamp-2 mb-6">{project.description}</p>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{project.title}</h3>
+                <p className="text-slate-500 text-sm line-clamp-2 mb-6 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-2 py-1 bg-slate-50 border border-slate-100 rounded text-xs text-slate-500 font-medium">{tag}</span>
+                    <span key={i} className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-500 font-bold">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -593,37 +671,37 @@ const PortfolioSection = () => {
       <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)} title={selectedProject?.title}>
         {selectedProject && (
           <div className="space-y-8">
-            <div className="rounded-2xl overflow-hidden h-64 md:h-96 w-full relative">
+            <div className="rounded-2xl overflow-hidden h-64 md:h-96 w-full relative shadow-lg">
               <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2 space-y-6">
+            <div className="grid md:grid-cols-3 gap-10">
+              <div className="md:col-span-2 space-y-8">
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">Project Overview</h4>
-                  <p className="text-slate-600 leading-relaxed">{selectedProject.description}</p>
+                  <h4 className="text-xl font-bold text-slate-900 mb-3">Project Overview</h4>
+                  <p className="text-slate-600 leading-relaxed text-lg">{selectedProject.description}</p>
                 </div>
                 <div>
-                   <h4 className="text-lg font-bold text-slate-900 mb-2">Tech Stack</h4>
-                   <div className="flex flex-wrap gap-2">
+                   <h4 className="text-xl font-bold text-slate-900 mb-3">Tech Stack</h4>
+                   <div className="flex flex-wrap gap-3">
                       {selectedProject.tags.map(t => <Badge key={t} text={t} color="blue" />)}
                    </div>
                 </div>
               </div>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 h-fit">
-                <h4 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Key Metrics</h4>
-                <div className="space-y-4">
+              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 h-fit shadow-sm">
+                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">Key Performance Metrics</h4>
+                <div className="space-y-6">
                   {Object.entries(selectedProject.stats).map(([key, value]) => (
-                    <div key={key} className="flex justify-between items-center border-b border-slate-200 pb-2 last:border-0">
-                      <span className="text-slate-600 capitalize">{key}</span>
-                      <span className="font-bold text-slate-900">{value}</span>
+                    <div key={key} className="flex justify-between items-center border-b border-slate-200 pb-4 last:border-0">
+                      <span className="text-slate-600 capitalize font-medium">{key}</span>
+                      <span className="font-bold text-slate-900 text-lg">{value}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-4 pt-4 border-t border-slate-100">
+            <div className="flex justify-end gap-4 pt-6 border-t border-slate-100">
                <Button onClick={() => setSelectedProject(null)}>Close</Button>
-               <Button primary>Request Similar</Button>
+               <Button primary>Start Similar Project</Button>
             </div>
           </div>
         )}
@@ -639,36 +717,41 @@ const Testimonials = () => {
   const prev = () => setActive((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   useEffect(() => {
-    timeoutRef.current = setTimeout(next, 5000);
+    timeoutRef.current = setTimeout(next, 6000);
     return () => clearTimeout(timeoutRef.current);
   }, [active]);
 
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
+    <section className="py-32 bg-slate-50 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <SectionTitle title="Client Success Stories" subtitle="Testimonials" />
-        <div className="max-w-5xl mx-auto relative">
-          <div className="absolute top-1/2 -left-12 -translate-y-1/2 hidden lg:block z-10">
-            <button onClick={prev} className="p-3 rounded-full bg-white border border-slate-200 shadow-lg hover:bg-slate-50 transition-colors"><ChevronLeft className="w-6 h-6 text-slate-600" /></button>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="absolute top-1/2 -left-4 md:-left-16 -translate-y-1/2 z-10">
+            <button onClick={prev} className="p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:bg-slate-50 transition-colors"><ChevronLeft className="w-6 h-6 text-slate-600" /></button>
           </div>
-          <div className="absolute top-1/2 -right-12 -translate-y-1/2 hidden lg:block z-10">
-            <button onClick={next} className="p-3 rounded-full bg-white border border-slate-200 shadow-lg hover:bg-slate-50 transition-colors"><ChevronRight className="w-6 h-6 text-slate-600" /></button>
+          <div className="absolute top-1/2 -right-4 md:-right-16 -translate-y-1/2 z-10">
+            <button onClick={next} className="p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:bg-slate-50 transition-colors"><ChevronRight className="w-6 h-6 text-slate-600" /></button>
           </div>
-          <div className="relative overflow-hidden min-h-[300px]">
+          <div className="relative overflow-hidden min-h-[400px]">
             {TESTIMONIALS.map((t, i) => {
-              let position = 'translate-x-full opacity-0';
-              if (i === active) position = 'translate-x-0 opacity-100';
-              if (i === (active - 1 + TESTIMONIALS.length) % TESTIMONIALS.length) position = '-translate-x-full opacity-0';
+              let position = 'translate-x-full opacity-0 scale-95';
+              if (i === active) position = 'translate-x-0 opacity-100 scale-100';
+              if (i === (active - 1 + TESTIMONIALS.length) % TESTIMONIALS.length) position = '-translate-x-full opacity-0 scale-95';
               return (
-                <div key={t.id} className={`absolute top-0 left-0 w-full transition-all duration-700 ease-in-out ${position}`}>
-                   <div className="bg-slate-50 rounded-[3rem] p-10 md:p-16 border border-slate-100 relative mx-4">
-                      <div className="absolute top-10 left-10 text-9xl text-blue-100 font-serif leading-none opacity-50">"</div>
+                <div key={t.id} className={`absolute top-0 left-0 w-full transition-all duration-700 ease-in-out ${position} px-4`}>
+                   <div className="bg-white rounded-[3rem] p-10 md:p-20 border border-slate-100 relative shadow-xl mx-auto max-w-4xl">
+                      <div className="absolute top-10 left-10 text-9xl text-blue-100 font-serif leading-none opacity-50 font-black">"</div>
                       <div className="relative z-10 text-center">
-                        <div className="flex justify-center gap-1 mb-6">{[1,2,3,4,5].map(s => <Star key={s} className="w-5 h-5 text-yellow-400 fill-current" />)}</div>
-                        <p className="text-xl md:text-3xl font-light text-slate-800 leading-relaxed mb-8">{t.content}</p>
-                        <div className="flex items-center justify-center gap-4">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">{t.avatar}</div>
-                          <div className="text-left"><h5 className="font-bold text-slate-900">{t.name}</h5><p className="text-sm text-slate-500">{t.role}</p></div>
+                        <div className="flex justify-center gap-1 mb-8">{[1,2,3,4,5].map(s => <Star key={s} className="w-6 h-6 text-yellow-400 fill-current" />)}</div>
+                        <p className="text-2xl md:text-4xl font-medium text-slate-800 leading-relaxed mb-10 tracking-tight">
+                          {t.content}
+                        </p>
+                        <div className="flex items-center justify-center gap-6">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">{t.avatar}</div>
+                          <div className="text-left">
+                            <h5 className="font-bold text-slate-900 text-lg">{t.name}</h5>
+                            <p className="text-slate-500">{t.role}</p>
+                          </div>
                         </div>
                       </div>
                    </div>
@@ -683,27 +766,31 @@ const Testimonials = () => {
 };
 
 const Pricing = () => (
-  <section className="py-24 bg-slate-50" id="pricing">
+  <section className="py-32 bg-white" id="pricing">
     <div className="container mx-auto px-6">
       <SectionTitle title="Flexible Pricing" subtitle="Choose Your Plan" />
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {[
           { name: "Starter", price: "₹25k", desc: "Perfect for small businesses", features: ["5 Page Website", "Basic SEO", "Contact Form", "1 Month Support"] },
           { name: "Business", price: "₹60k", desc: "For growing companies", features: ["10+ Pages", "CMS Integration", "Advanced SEO", "Analytics Dashboard", "3 Months Support"], pop: true },
           { name: "Enterprise", price: "Custom", desc: "Large scale solutions", features: ["Custom ERP/CRM", "Mobile App Included", "Cloud Hosting", "Dedicated Manager", "1 Year Support"] }
         ].map((plan, i) => (
           <RevealOnScroll key={i}>
-            <div className={`p-8 rounded-3xl border transition-all duration-300 relative ${plan.pop ? 'bg-white border-blue-500 shadow-2xl scale-105 z-10' : 'bg-white border-slate-200 hover:shadow-xl'}`}>
-              {plan.pop && <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl">POPULAR</div>}
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h3>
-              <div className="text-4xl font-extrabold text-blue-600 mb-2">{plan.price}<span className="text-base font-normal text-slate-500">/project</span></div>
-              <p className="text-slate-500 text-sm mb-6">{plan.desc}</p>
-              <ul className="space-y-3 mb-8">
+            <div className={`p-10 rounded-[2rem] border transition-all duration-500 relative flex flex-col h-full ${plan.pop ? 'bg-slate-900 text-white shadow-2xl scale-105 z-10 border-slate-800' : 'bg-white border-slate-100 hover:shadow-2xl hover:border-blue-100'}`}>
+              {plan.pop && <div className="absolute top-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl rounded-tr-2xl shadow-lg">MOST POPULAR</div>}
+              <h3 className={`text-2xl font-bold mb-2 ${plan.pop ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h3>
+              <div className={`text-5xl font-extrabold mb-2 ${plan.pop ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400' : 'text-blue-600'}`}>{plan.price}<span className={`text-base font-normal ${plan.pop ? 'text-slate-400' : 'text-slate-500'}`}>/project</span></div>
+              <p className={`text-sm mb-8 ${plan.pop ? 'text-slate-400' : 'text-slate-500'}`}>{plan.desc}</p>
+              
+              <ul className="space-y-4 mb-10 flex-1">
                 {plan.features.map((f, j) => (
-                  <li key={j} className="flex items-center text-sm text-slate-600"><CheckCircle2 size={16} className="text-green-500 mr-2" /> {f}</li>
+                  <li key={j} className={`flex items-center text-sm ${plan.pop ? 'text-slate-300' : 'text-slate-600'}`}>
+                    <CheckCircle2 size={18} className={`mr-3 ${plan.pop ? 'text-green-400' : 'text-green-500'}`} /> {f}
+                  </li>
                 ))}
               </ul>
-              <Button primary={plan.pop} className="w-full">Choose Plan</Button>
+              
+              <Button primary={!plan.pop} className={`w-full ${plan.pop ? 'bg-white text-slate-900 hover:bg-slate-100 border-none' : ''}`}>Choose Plan</Button>
             </div>
           </RevealOnScroll>
         ))}
@@ -721,26 +808,44 @@ const Careers = () => {
   return (
     <section className="py-32 bg-slate-900 text-white relative overflow-hidden" id="careers">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/30 rounded-full blur-[120px]"></div>
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px]"></div>
+      
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div>
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-900/50 border border-blue-500/30 text-blue-300 text-xs font-bold uppercase tracking-widest mb-4">We Are Hiring</div>
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-6">Join The <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Elite Team</span></h2>
-            <p className="text-slate-400 text-lg mb-8 leading-relaxed max-w-lg">Work on challenging enterprise projects from our Raipur HQ or remotely.</p>
-            <Button primary>View All Openings</Button>
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+               We Are Hiring
+            </div>
+            <h2 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">Join The <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Elite Team</span></h2>
+            <p className="text-slate-400 text-xl mb-10 leading-relaxed max-w-lg">
+              Work on challenging enterprise projects, cutting-edge tech stacks, and enjoy a culture of learning and growth.
+            </p>
+            <div className="flex gap-8 mb-12">
+               <div>
+                  <h4 className="text-4xl font-bold text-white mb-1">4.8</h4>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest">Glassdoor</p>
+               </div>
+               <div className="w-px bg-white/10"></div>
+               <div>
+                  <h4 className="text-4xl font-bold text-white mb-1">96%</h4>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest">Retention</p>
+               </div>
+            </div>
+            <Button primary className="border-none">View All Openings</Button>
           </div>
+          
           <div className="space-y-4">
              {jobs.map((job, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors cursor-pointer group">
-                   <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{job.title}</h4>
+                <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all cursor-pointer group hover:-translate-x-2">
+                   <div className="flex justify-between items-start mb-3">
+                      <h4 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">{job.title}</h4>
                       <ArrowRight className="text-slate-500 group-hover:text-white transition-colors"/>
                    </div>
-                   <div className="flex gap-4 text-sm text-slate-400">
-                      <span className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</span>
-                      <span className="flex items-center gap-1"><MapPin size={14}/> {job.loc}</span>
-                      <span className="flex items-center gap-1"><Clock size={14}/> {job.exp}</span>
+                   <div className="flex gap-6 text-sm text-slate-400 mt-4">
+                      <span className="flex items-center gap-2"><Briefcase size={16}/> {job.type}</span>
+                      <span className="flex items-center gap-2"><MapPin size={16}/> {job.loc}</span>
+                      <span className="flex items-center gap-2"><Clock size={16}/> {job.exp}</span>
                    </div>
                 </div>
              ))}
@@ -754,18 +859,18 @@ const Careers = () => {
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
   return (
-    <section className="py-32 bg-slate-50">
+    <section className="py-32 bg-white">
       <div className="container mx-auto px-6 max-w-4xl">
         <SectionTitle title="Common Questions" subtitle="FAQ" />
         <div className="space-y-4">
           {FAQS.map((item, i) => (
-            <div key={i} className="bg-white rounded-2xl border border-slate-200 overflow-hidden transition-all duration-300">
-              <button onClick={() => setOpenIndex(openIndex === i ? -1 : i)} className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors">
-                <span className="font-bold text-lg text-slate-900">{item.q}</span>
+            <div key={i} className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+              <button onClick={() => setOpenIndex(openIndex === i ? -1 : i)} className="w-full flex items-center justify-between p-8 text-left hover:bg-slate-100 transition-colors">
+                <span className="font-bold text-xl text-slate-900">{item.q}</span>
                 <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
               </button>
-              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-100 mt-2">{item.a}</div>
+              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="p-8 pt-0 text-slate-600 leading-relaxed text-lg">{item.a}</div>
               </div>
             </div>
           ))}
@@ -776,20 +881,23 @@ const FAQ = () => {
 };
 
 const Team = () => (
-  <section className="py-24 bg-white" id="team">
-    <div className="container mx-auto px-6">
-      <SectionTitle title="Leadership Team" subtitle="Meet The Founders" />
-      <div className="grid md:grid-cols-3 gap-8">
+  <section className="py-32 bg-slate-50 relative overflow-hidden" id="team">
+    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+    <div className="container mx-auto px-6 relative z-10">
+      <SectionTitle title="Leadership Team" subtitle="Visionaries" />
+      <div className="grid md:grid-cols-3 gap-12">
         {TEAM.map((member, i) => (
           <RevealOnScroll key={i} className="group text-center">
-             <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-slate-100 shadow-xl group-hover:border-blue-500 transition-all duration-500">
-                <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+             <div className="relative w-64 h-64 mx-auto mb-8 rounded-full p-2 border-2 border-dashed border-blue-200 group-hover:border-blue-500 transition-colors duration-500">
+                <div className="w-full h-full rounded-full overflow-hidden shadow-2xl">
+                    <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                </div>
              </div>
-             <h3 className="text-xl font-bold text-slate-900">{member.name}</h3>
-             <p className="text-blue-600 font-medium text-sm mb-4 uppercase tracking-wide">{member.role}</p>
-             <div className="flex justify-center gap-3">
-                <div className="p-2 bg-slate-100 rounded-full hover:bg-blue-600 hover:text-white transition-colors cursor-pointer"><Linkedin size={16}/></div>
-                <div className="p-2 bg-slate-100 rounded-full hover:bg-blue-400 hover:text-white transition-colors cursor-pointer"><Twitter size={16}/></div>
+             <h3 className="text-2xl font-bold text-slate-900 mb-2">{member.name}</h3>
+             <p className="text-blue-600 font-bold text-sm mb-6 uppercase tracking-widest">{member.role}</p>
+             <div className="flex justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                <div className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-600 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm"><Linkedin size={18}/></div>
+                <div className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-400 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm"><Twitter size={18}/></div>
              </div>
           </RevealOnScroll>
         ))}
@@ -799,97 +907,145 @@ const Team = () => (
 );
 
 const CTABanner = () => (
-  <section className="py-20 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+  <section className="py-24 relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
     <div className="absolute inset-0 bg-grid opacity-20"></div>
+    
+    {/* Floating Shapes */}
+    <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
+    <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+
     <div className="container mx-auto px-6 relative z-10 text-center text-white">
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Ready to Scale Your Business?</h2>
-      <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">Join 50+ enterprise clients who trust Hexanx for their digital transformation.</p>
-      <button className="px-10 py-4 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all">Get Started Now</button>
+      <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
+      <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+        Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <button className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
+        <button className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+      </div>
     </div>
   </section>
 );
 
 const Hero = ({ navigateTo }) => (
-  <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
+  <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-white mesh-gradient">
     <style>{styles}</style>
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute inset-0 bg-grid"></div>
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100 rounded-full blur-[120px] animate-blob opacity-40 mix-blend-multiply"></div>
-      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-purple-100 rounded-full blur-[120px] animate-blob delay-2000 opacity-40 mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-grid opacity-60"></div>
     </div>
 
-    <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-      <div className="space-y-10 animate-slide-in">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 rounded-full border border-slate-200">
-           <span className="relative flex h-2 w-2">
+    <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-20 items-center">
+      <div className="space-y-12 animate-slide-in">
+        <div className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-blue-100 shadow-sm hover:shadow-md transition-shadow cursor-default">
+           <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-xs font-semibold text-slate-600">Accepting New Projects in Raipur</span>
+            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Accepting Projects in India</span>
         </div>
         
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[0.9] tracking-tighter">
+        <h1 className="text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-tighter">
           BUILDING <br/>
-          <span className="gradient-text">DIGITAL</span> <br/>
-          EMPIRES
+          DIGITAL <br/>
+          <TextRotator />
         </h1>
         
-        <p className="text-xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-6">
-          We are <strong>Hexanx</strong>. Raipur's premier IT consultancy. We architect enterprise software, sophisticated ERPs, and scalable digital ecosystems.
+        <p className="text-2xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-8">
+          We are <strong>Hexanx</strong>. Raipur's premier IT consultancy. We architect enterprise software & scalable digital ecosystems.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-5">
-          <Button primary onClick={() => navigateTo('contact')}>
-            Start Journey <Rocket className="ml-2 w-4 h-4" />
+        <div className="flex flex-col sm:flex-row gap-6">
+          <Button primary onClick={() => navigateTo('contact')} className="h-16 px-10 text-lg">
+            Start Journey <Rocket className="ml-3 w-5 h-5" />
           </Button>
-          <Button onClick={() => navigateTo('portfolio')}>View Projects</Button>
+          <Button onClick={() => navigateTo('portfolio')} className="h-16 px-10 text-lg">
+             View Case Studies
+          </Button>
         </div>
         
-        <div className="grid grid-cols-3 gap-8 pt-8 border-t border-slate-200">
+        <div className="grid grid-cols-3 gap-12 pt-10 border-t border-slate-200/60">
           {[
-             { num: "50+", label: "Clients", icon: Users },
-             { num: "99%", label: "Success", icon: ShieldCheck },
-             { num: "24/7", label: "Support", icon: Clock }
+             { num: 50, label: "Clients", icon: Users },
+             { num: 99, label: "Success", icon: ShieldCheck },
+             { num: 24, label: "Support", icon: Clock }
           ].map((stat, i) => (
              <div key={i}>
-                <h4 className="text-3xl font-bold text-slate-900 mb-1">{stat.num}</h4>
-                <p className="text-slate-500 text-sm">{stat.label}</p>
+                <h4 className="text-4xl font-black text-slate-900 mb-1 flex items-baseline">
+                    <CountUp end={stat.num} />
+                    <span className="text-blue-600 text-2xl ml-1">+</span>
+                </h4>
+                <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
              </div>
           ))}
         </div>
       </div>
 
-      <div className="hidden lg:block relative animate-float">
-         <div className="relative z-10 glass-card p-2 rounded-[2rem] shadow-2xl rotate-[-2deg] hover:rotate-0 transition-all duration-500">
-            <div className="bg-slate-50 rounded-[1.8rem] overflow-hidden border border-slate-200 relative">
-               <div className="h-10 bg-white border-b border-slate-200 flex items-center px-6 gap-2">
+      <div className="hidden lg:block relative animate-float perspective-1000">
+         {/* Main Dashboard Card */}
+         <div className="relative z-10 glass-card p-3 rounded-[2.5rem] shadow-2xl rotate-y-12 hover:rotate-y-0 transition-transform duration-700">
+            <div className="bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-200 relative aspect-[4/3] flex flex-col shadow-inner">
+               {/* Browser Header */}
+               <div className="h-14 bg-white border-b border-slate-200 flex items-center px-8 gap-3">
                   <div className="flex gap-2"><div className="w-3 h-3 rounded-full bg-red-400"></div><div className="w-3 h-3 rounded-full bg-yellow-400"></div><div className="w-3 h-3 rounded-full bg-green-400"></div></div>
-                  <div className="mx-auto bg-slate-100 px-4 py-1 rounded-md text-[10px] text-slate-400 font-mono">api.hexanx.com/v1/analytics</div>
+                  <div className="mx-auto bg-slate-100 px-6 py-1.5 rounded-full text-[10px] text-slate-400 font-mono flex items-center gap-2"><ShieldCheck size={10}/> secure | api.hexanx.com</div>
                </div>
-               <div className="p-8 grid grid-cols-2 gap-6 bg-slate-50/50">
-                   <div className="col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+               {/* Dashboard Content */}
+               <div className="p-8 grid grid-cols-2 gap-6 bg-slate-50/50 flex-1 relative overflow-hidden">
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
+                   
+                   <div className="col-span-2 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
                       <div className="flex justify-between items-center mb-6">
-                         <div><h5 className="text-sm text-slate-500 font-bold uppercase">Total Revenue</h5><h3 className="text-3xl font-bold text-slate-900">$2,450,900</h3></div>
-                         <div className="p-3 bg-green-50 rounded-xl"><BarChart3 className="text-green-600"/></div>
+                         <div><h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Total Revenue</h5><h3 className="text-3xl font-bold text-slate-900">$2,450,900</h3></div>
+                         <div className="p-4 bg-green-50 rounded-2xl"><TrendingUp className="text-green-600 w-6 h-6"/></div>
                       </div>
-                      <div className="h-32 w-full bg-gradient-to-t from-blue-50 to-transparent rounded-lg border-b border-blue-200 relative"></div>
+                      <div className="h-24 w-full bg-gradient-to-t from-blue-50 to-transparent rounded-xl border-b border-blue-100 relative overflow-hidden">
+                          <div className="absolute bottom-0 left-0 w-full h-full flex items-end justify-between px-2 pb-2">
+                              {[40, 70, 50, 90, 60, 80, 50].map((h, i) => (
+                                  <div key={i} style={{height: `${h}%`}} className="w-8 bg-blue-500/20 rounded-t-sm"></div>
+                              ))}
+                          </div>
+                      </div>
                    </div>
-                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-1">+14.2%</h3><p className="text-xs text-green-500 font-bold">Growth</p>
+                   
+                   <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                      <div className="p-3 bg-purple-50 rounded-2xl w-fit mb-4"><Users size={20} className="text-purple-600"/></div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-1">+14.2%</h3>
+                        <p className="text-xs text-green-500 font-bold uppercase tracking-wide">User Growth</p>
+                      </div>
                    </div>
-                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-1">24ms</h3><p className="text-xs text-green-500 font-bold">Latency</p>
+                   
+                   <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                      <div className="p-3 bg-orange-50 rounded-2xl w-fit mb-4"><Zap size={20} className="text-orange-600"/></div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-1">24ms</h3>
+                        <p className="text-xs text-green-500 font-bold uppercase tracking-wide">Latency</p>
+                      </div>
                    </div>
                </div>
             </div>
          </div>
-         {/* Floating Elements */}
-         <div className="absolute -left-12 top-1/3 glass-card p-4 rounded-2xl animate-bounce delay-1000 shadow-lg">
-            <div className="flex items-center gap-3">
-               <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">R</div>
-               <div><p className="text-xs font-bold text-slate-900">New Lead</p><p className="text-[10px] text-slate-500">Just Now</p></div>
+         
+         {/* Floating Notification Cards */}
+         <div className="absolute -left-12 top-1/4 glass-card p-5 rounded-2xl animate-float shadow-xl backdrop-blur-xl border border-white/80" style={{animationDelay: '1s'}}>
+            <div className="flex items-center gap-4">
+               <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">R</div>
+               <div>
+                  <p className="text-sm font-bold text-slate-900">New Project</p>
+                  <p className="text-xs text-slate-500">2 min ago</p>
+               </div>
             </div>
+         </div>
+         
+         <div className="absolute -right-8 bottom-1/3 glass-card p-5 rounded-2xl animate-float shadow-xl backdrop-blur-xl border border-white/80" style={{animationDelay: '2.5s'}}>
+             <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600"><Server size={24}/></div>
+                <div>
+                   <p className="text-sm font-bold text-slate-900">System Stable</p>
+                   <p className="text-xs text-green-600 font-bold">99.99% Uptime</p>
+                </div>
+             </div>
          </div>
       </div>
     </div>
@@ -912,14 +1068,14 @@ const Services = () => {
         <SectionTitle title="Our Core Services" subtitle="What We Deliver" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesList.map((service, index) => (
-            <div key={index} className="glass-card glass-card-hover p-8 rounded-3xl group">
-               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
+            <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
+               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300 shadow-sm group-hover:shadow-blue-500/30">
+                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
                </div>
-               <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-               <p className="text-slate-600 text-sm mb-6 leading-relaxed">{service.description}</p>
+               <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+               <p className="text-slate-600 text-base mb-8 leading-relaxed">{service.description}</p>
                <div className="flex flex-wrap gap-2">
-                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-2 py-1 bg-slate-100 rounded text-slate-500">{t}</span>)}
+                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-3 py-1 bg-slate-100 rounded-full text-slate-500 border border-slate-200">{t}</span>)}
                </div>
             </div>
           ))}
@@ -930,49 +1086,49 @@ const Services = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-slate-950 text-slate-400 pt-24 pb-10 relative z-10 border-t border-slate-900">
-    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
+  <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
+    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20">
       <div className="col-span-1 md:col-span-2">
-        <h2 className="text-3xl font-bold text-white mb-6 flex items-center">
-          <img src="/logo.png" alt="Hexanx Logo" className="w-10 h-10 object-contain mr-3" />
+        <h2 className="text-4xl font-bold text-white mb-8 flex items-center">
+          <img src="/logo.png" alt="Hexanx Logo" className="w-12 h-12 object-contain mr-4 bg-white rounded-xl p-1" />
           Hexanx
         </h2>
-        <p className="max-w-sm text-base leading-relaxed mb-8 text-slate-500">
-          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world.
+        <p className="max-w-md text-lg leading-relaxed mb-10 text-slate-500 font-light">
+          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
         </p>
         <div className="flex gap-4">
-           {[Globe, Mail, Phone].map((Icon, i) => (
-             <div key={i} className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer">
-               <Icon size={18}/>
+           {[Globe, Mail, Phone, Linkedin, Twitter].map((Icon, i) => (
+             <div key={i} className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
+               <Icon size={20}/>
              </div>
            ))}
         </div>
       </div>
       
       <div>
-        <h3 className="text-white font-bold mb-6 text-lg">Quick Links</h3>
-        <ul className="space-y-4">
-          {["Services", "Portfolio", "Careers", "About Us"].map(item => (
-             <li key={item} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center">
-                <ChevronRight size={14} className="mr-2"/> {item}
+        <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
+        <ul className="space-y-4 text-base">
+          {["Services", "Portfolio", "Pricing", "Careers", "About Us"].map(item => (
+             <li key={item} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
+                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> {item}
              </li>
           ))}
         </ul>
       </div>
 
       <div>
-        <h3 className="text-white font-bold mb-6 text-lg">Contact</h3>
-        <ul className="space-y-4 text-sm">
-          <li className="flex items-start gap-3">
-             <MapPin className="shrink-0 text-blue-500" size={18}/>
-             <span>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
+        <h3 className="text-white font-bold mb-8 text-xl">Contact</h3>
+        <ul className="space-y-6 text-base">
+          <li className="flex items-start gap-4">
+             <MapPin className="shrink-0 text-blue-500 mt-1" size={20}/>
+             <span>Hexanx Tech Park,<br/>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
           </li>
-          <li className="flex items-center gap-3">
-             <Phone className="shrink-0 text-blue-500" size={18}/>
+          <li className="flex items-center gap-4">
+             <Phone className="shrink-0 text-blue-500" size={20}/>
              <span>+91 98765 43210</span>
           </li>
-          <li className="flex items-center gap-3">
-             <Mail className="shrink-0 text-blue-500" size={18}/>
+          <li className="flex items-center gap-4">
+             <Mail className="shrink-0 text-blue-500" size={20}/>
              <span>contact@hexanx.com</span>
           </li>
         </ul>
@@ -981,10 +1137,10 @@ const Footer = () => (
     
     <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
       <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
-      <div className="flex gap-6 mt-4 md:mt-0">
-         <span>Privacy Policy</span>
-         <span>Terms of Service</span>
-         <span>Sitemap</span>
+      <div className="flex gap-8 mt-4 md:mt-0">
+         <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
+         <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
+         <span className="hover:text-white cursor-pointer transition-colors">Sitemap</span>
       </div>
     </div>
   </footer>
@@ -1019,27 +1175,32 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white">
+      {/* Top Ticker */}
+      <TopTicker />
+
       {/* Navbar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-[33px]`}> {/* Added top offset for ticker */}
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="text-2xl font-bold flex items-center cursor-pointer group" onClick={() => navigateTo('home')}>
-            <img src="/logo.png" alt="Hexanx Logo" className="w-10 h-10 object-contain mr-3" />
-            <span className="tracking-tight text-slate-900">Hexanx</span>
+            <div className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
+                <img src="/logo.png" alt="Hexanx" className="w-8 h-8 object-contain" />
+            </div>
+            <span className="tracking-tight text-slate-900 font-extrabold text-xl">Hexanx</span>
           </div>
 
-          <div className="hidden md:flex items-center space-x-1">
-            <div className={`rounded-full px-2 py-1 mr-4 flex transition-all ${scrolled ? 'bg-slate-100' : 'bg-white/80 backdrop-blur border border-slate-200'}`}>
+          <div className="hidden md:flex items-center space-x-2">
+            <div className={`rounded-full px-2 py-1.5 mr-6 flex transition-all ${scrolled ? 'bg-slate-100/80' : 'bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg'}`}>
                 {navLinks.map((link) => (
                 <button
                     key={link.id}
                     onClick={() => navigateTo(link.id)}
-                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === link.id ? 'bg-slate-900 text-white shadow-md' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'}`}
+                    className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === link.id ? 'bg-slate-900 text-white shadow-md transform scale-105' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'}`}
                 >
                     {link.label}
                 </button>
                 ))}
             </div>
-            <Button className="py-2.5 px-6 text-sm !rounded-full" primary onClick={() => navigateTo('contact')}>Get Quote</Button>
+            <Button className="py-3 px-8 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigateTo('contact')}>Get Quote</Button>
           </div>
 
           <button className="md:hidden text-slate-900 p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -1048,9 +1209,9 @@ export default function App() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-b border-slate-100 p-6 flex flex-col space-y-4 shadow-2xl md:hidden animate-slide-in">
+          <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 p-6 flex flex-col space-y-4 shadow-2xl md:hidden animate-slide-in">
             {navLinks.map((link) => (
-              <button key={link.id} onClick={() => navigateTo(link.id)} className="text-left py-3 px-4 rounded-lg font-medium bg-slate-50 text-slate-700 hover:bg-slate-100">
+              <button key={link.id} onClick={() => navigateTo(link.id)} className="text-left py-4 px-6 rounded-2xl font-bold text-lg bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                 {link.label}
               </button>
             ))}
@@ -1075,35 +1236,35 @@ export default function App() {
             <CTABanner />
             <Careers />
             <FAQ />
-            <section className="py-32 bg-white relative">
+            <section className="py-32 bg-slate-50 relative">
               <div className="container mx-auto px-6">
                  <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
                  <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
                     <div className="lg:col-span-1 space-y-6">
-                       <div className="glass-card p-8 rounded-3xl h-full border-t-4 border-t-blue-600 flex flex-col justify-between">
+                       <div className="glass-card p-10 rounded-[2rem] h-full border-t-4 border-t-blue-600 flex flex-col justify-between bg-white">
                           <div>
-                            <h3 className="text-2xl font-bold text-slate-900 mb-8">Contact Info</h3>
-                            <div className="space-y-8">
+                            <h3 className="text-3xl font-bold text-slate-900 mb-10">Contact Info</h3>
+                            <div className="space-y-10">
                                {[
                                  { icon: Mail, label: "Email Us", val: "contact@hexanx.com", sub: "support@hexanx.com", bg: "blue" },
                                  { icon: Phone, label: "Call Us", val: "+91 98765 43210", sub: "Mon-Fri, 9am - 6pm", bg: "purple" },
                                  { icon: MapPin, label: "Visit Us", val: "Hexanx Tech Park", sub: "Santoshi Nagar, Raipur", bg: "green" }
                                ].map((c, i) => (
                                  <div key={i} className="flex items-start group">
-                                    <div className={`w-12 h-12 bg-${c.bg}-50 rounded-xl flex items-center justify-center mr-4 shrink-0 transition-colors`}>
-                                       <c.icon className={`w-6 h-6 text-${c.bg}-600`} />
+                                    <div className={`w-14 h-14 bg-${c.bg}-50 rounded-2xl flex items-center justify-center mr-6 shrink-0 transition-transform group-hover:scale-110 duration-300`}>
+                                       <c.icon className={`w-7 h-7 text-${c.bg}-600`} />
                                     </div>
                                     <div>
-                                       <h4 className="text-slate-900 font-semibold mb-1">{c.label}</h4>
-                                       <p className="text-slate-500 text-sm">{c.val}</p>
-                                       <p className="text-slate-400 text-xs">{c.sub}</p>
+                                       <h4 className="text-slate-900 font-bold mb-1 text-lg">{c.label}</h4>
+                                       <p className="text-slate-600 font-medium">{c.val}</p>
+                                       <p className="text-slate-400 text-sm">{c.sub}</p>
                                     </div>
                                  </div>
                                ))}
                             </div>
                           </div>
                           <div className="mt-12 pt-8 border-t border-slate-100">
-                             <p className="text-xs text-slate-400 text-center">We respect your privacy. No spam.</p>
+                             <p className="text-xs text-slate-400 text-center font-medium uppercase tracking-wider">We respect your privacy. No spam.</p>
                           </div>
                        </div>
                     </div>
@@ -1120,7 +1281,7 @@ export default function App() {
         {activeTab === 'pricing' && <Pricing />}
         {activeTab === 'careers' && <Careers />}
         {activeTab === 'contact' && (
-           <section className="pt-32 pb-20 bg-white">
+           <section className="pt-40 pb-20 bg-slate-50">
               <div className="container mx-auto px-6">
                  <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
                  <div className="max-w-4xl mx-auto"><ContactForm /></div>
