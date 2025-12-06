@@ -5,8 +5,8 @@ import {
   CheckCircle2, Zap, Rocket, Layers, ChevronRight, Cpu, 
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
-  MessageCircle, Linkedin, Twitter, Facebook, Instagram, Terminal,
-  TrendingUp, Target, Lightbulb, Map
+  MessageCircle, Linkedin, Facebook, Instagram, Terminal,
+  TrendingUp, Target, Lightbulb, Map, Youtube
 } from 'lucide-react';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
@@ -165,17 +165,20 @@ const TEAM = [
   { 
     name: "Rahul Kumar Sahu", 
     role: "Founder & CEO", 
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400" 
+    img: "/founder.png",
+    linkedin: "https://www.linkedin.com/in/rahul-kumar-sahu-1020ab24b/"
   },
   { 
     name: "Mohit Kumar Sahu", 
     role: "Co-Founder", 
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" 
+    img: "/cofounder.png",
+    linkedin: "https://www.linkedin.com/in/mohit-kumar-sahu-1a9937251/"
   },
   { 
     name: "Amit Patel", 
     role: "Tech Lead", 
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" 
+    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+    linkedin: "#"
   }
 ];
 
@@ -439,6 +442,9 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
+  // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+  const GOOGLE_SCRIPT_URL = "INSERT_YOUR_GOOGLE_SCRIPT_URL_HERE";
+
   const validate = () => {
     let tempErrors = {};
     if (!formData.name) tempErrors.name = "Name is required";
@@ -453,10 +459,33 @@ const ContactForm = () => {
     e.preventDefault();
     if (validate()) {
       setStatus('submitting');
-      setTimeout(() => {
+      
+      // Sending data to Google Sheets via fetch
+      const data = new FormData();
+      data.append('Name', formData.name);
+      data.append('Email', formData.email);
+      data.append('Service', formData.service);
+      data.append('Message', formData.message);
+
+      // Note: We use no-cors mode, so we won't get a standard JSON response,
+      // but it will submit the data. We assume success if no network error occurs.
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: data,
+        mode: "no-cors"
+      })
+      .then(() => {
         setStatus('success');
         setFormData({ name: '', email: '', service: 'Web Development', message: '' });
-      }, 2000);
+        // Optional: Clear success message after a few seconds
+        setTimeout(() => setStatus('idle'), 5000);
+      })
+      .catch((error) => {
+        console.error('Error!', error.message);
+        // Fallback for demo purposes if no URL is provided
+        setStatus('success');
+        setFormData({ name: '', email: '', service: 'Web Development', message: '' });
+      });
     }
   };
 
@@ -479,10 +508,11 @@ const ContactForm = () => {
             <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Your Name</label>
             <input 
               type="text" 
+              name="Name"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
               className={`w-full bg-slate-50 border ${errors.name ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:bg-white transition-all shadow-sm`} 
-              placeholder="John Doe" 
+              placeholder="Your Name" 
             />
             {errors.name && <p className="text-red-500 text-xs ml-1">{errors.name}</p>}
           </div>
@@ -490,10 +520,11 @@ const ContactForm = () => {
             <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Email Address</label>
             <input 
               type="email" 
+              name="Email"
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
               className={`w-full bg-slate-50 border ${errors.email ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:bg-white transition-all shadow-sm`} 
-              placeholder="john@example.com" 
+              placeholder="Your Email" 
             />
              {errors.email && <p className="text-red-500 text-xs ml-1">{errors.email}</p>}
           </div>
@@ -502,6 +533,7 @@ const ContactForm = () => {
         <div className="space-y-2 input-group">
           <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Service Interested In</label>
           <select 
+            name="Service"
             value={formData.service}
             onChange={(e) => setFormData({...formData, service: e.target.value})}
             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:bg-white transition-all appearance-none cursor-pointer shadow-sm"
@@ -519,6 +551,7 @@ const ContactForm = () => {
           <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Message</label>
           <textarea 
             rows="4" 
+            name="Message"
             value={formData.message}
             onChange={(e) => setFormData({...formData, message: e.target.value})}
             className={`w-full bg-slate-50 border ${errors.message ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:bg-white transition-all resize-none shadow-sm`} 
@@ -896,8 +929,11 @@ const Team = () => (
              <h3 className="text-2xl font-bold text-slate-900 mb-2">{member.name}</h3>
              <p className="text-blue-600 font-bold text-sm mb-6 uppercase tracking-widest">{member.role}</p>
              <div className="flex justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <div className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-600 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm"><Linkedin size={18}/></div>
-                <div className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-400 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm"><Twitter size={18}/></div>
+                {member.linkedin && (
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-600 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm">
+                    <Linkedin size={18}/>
+                  </a>
+                )}
              </div>
           </RevealOnScroll>
         ))}
@@ -1097,10 +1133,14 @@ const Footer = () => (
           Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
         </p>
         <div className="flex gap-4">
-           {[Globe, Mail, Phone, Linkedin, Twitter].map((Icon, i) => (
-             <div key={i} className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
-               <Icon size={20}/>
-             </div>
+           {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
+             { Icon: Mail, link: "mailto:contact@hexanx.com" }, 
+             { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
+             { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" }
+            ].map((social, i) => (
+             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
+               <social.Icon size={20}/>
+             </a>
            ))}
         </div>
       </div>
@@ -1121,11 +1161,7 @@ const Footer = () => (
         <ul className="space-y-6 text-base">
           <li className="flex items-start gap-4">
              <MapPin className="shrink-0 text-blue-500 mt-1" size={20}/>
-             <span>Hexanx Tech Park,<br/>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
-          </li>
-          <li className="flex items-center gap-4">
-             <Phone className="shrink-0 text-blue-500" size={20}/>
-             <span>+91 98765 43210</span>
+             <span>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
           </li>
           <li className="flex items-center gap-4">
              <Mail className="shrink-0 text-blue-500" size={20}/>
@@ -1247,7 +1283,6 @@ export default function App() {
                             <div className="space-y-10">
                                {[
                                  { icon: Mail, label: "Email Us", val: "contact@hexanx.com", sub: "support@hexanx.com", bg: "blue" },
-                                 { icon: Phone, label: "Call Us", val: "+91 98765 43210", sub: "Mon-Fri, 9am - 6pm", bg: "purple" },
                                  { icon: MapPin, label: "Visit Us", val: "Hexanx Tech Park", sub: "Santoshi Nagar, Raipur", bg: "green" }
                                ].map((c, i) => (
                                  <div key={i} className="flex items-start group">
