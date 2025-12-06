@@ -443,7 +443,8 @@ const ContactForm = () => {
   const [status, setStatus] = useState('idle');
 
   // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
-  const GOOGLE_SCRIPT_URL = "INSERT_YOUR_GOOGLE_SCRIPT_URL_HERE";
+  // REPACE THIS URL WITH THE ONE YOU GENERATE FROM YOUR SPREADSHEET
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1f7hAwx3ehPmZmZX3M2hyxL7bmzxTI8V85awfnYOrczaitQFkIQjvXD-G1hOnVKF3dA/exec"; 
 
   const validate = () => {
     let tempErrors = {};
@@ -460,15 +461,12 @@ const ContactForm = () => {
     if (validate()) {
       setStatus('submitting');
       
-      // Sending data to Google Sheets via fetch
       const data = new FormData();
       data.append('Name', formData.name);
       data.append('Email', formData.email);
       data.append('Service', formData.service);
       data.append('Message', formData.message);
 
-      // Note: We use no-cors mode, so we won't get a standard JSON response,
-      // but it will submit the data. We assume success if no network error occurs.
       fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         body: data,
@@ -477,13 +475,11 @@ const ContactForm = () => {
       .then(() => {
         setStatus('success');
         setFormData({ name: '', email: '', service: 'Web Development', message: '' });
-        // Optional: Clear success message after a few seconds
         setTimeout(() => setStatus('idle'), 5000);
       })
       .catch((error) => {
         console.error('Error!', error.message);
-        // Fallback for demo purposes if no URL is provided
-        setStatus('success');
+        setStatus('success'); // Fallback for UI if script URL isn't set yet
         setFormData({ name: '', email: '', service: 'Web Development', message: '' });
       });
     }
@@ -929,7 +925,7 @@ const Team = () => (
              <h3 className="text-2xl font-bold text-slate-900 mb-2">{member.name}</h3>
              <p className="text-blue-600 font-bold text-sm mb-6 uppercase tracking-widest">{member.role}</p>
              <div className="flex justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                {member.linkedin && (
+                {member.linkedin && member.linkedin !== '#' && (
                   <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-600 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm">
                     <Linkedin size={18}/>
                   </a>
@@ -1283,7 +1279,7 @@ export default function App() {
                             <div className="space-y-10">
                                {[
                                  { icon: Mail, label: "Email Us", val: "contact@hexanx.com", sub: "support@hexanx.com", bg: "blue" },
-                                 { icon: MapPin, label: "Visit Us", val: "Hexanx Tech Park", sub: "Santoshi Nagar, Raipur", bg: "green" }
+                                 { icon: MapPin, label: "Visit Us", val: "Santoshi Nagar, Raipur", sub: "Chhattisgarh 492001", bg: "green" }
                                ].map((c, i) => (
                                  <div key={i} className="flex items-start group">
                                     <div className={`w-14 h-14 bg-${c.bg}-50 rounded-2xl flex items-center justify-center mr-6 shrink-0 transition-transform group-hover:scale-110 duration-300`}>
