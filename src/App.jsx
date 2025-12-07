@@ -161,27 +161,6 @@ const styles = `
 
 // --- 2. DATA CONSTANTS ---
 
-const TEAM = [
-  { 
-    name: "Rahul Kumar Sahu", 
-    role: "Founder & CEO", 
-    img: "/founder.png",
-    linkedin: "https://www.linkedin.com/in/rahul-kumar-sahu-1020ab24b/"
-  },
-  { 
-    name: "Mohit Kumar Sahu", 
-    role: "Co-Founder", 
-    img: "/cofounder.png",
-    linkedin: "https://www.linkedin.com/in/mohit-kumar-sahu-1a9937251/"
-  },
-  { 
-    name: "Amit Patel", 
-    role: "Tech Lead", 
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
-    linkedin: "#"
-  }
-];
-
 const MOCK_PROJECTS = [
   {
     id: 1,
@@ -940,35 +919,6 @@ const FAQ = () => {
   );
 };
 
-const Team = () => (
-  <section className="py-32 bg-slate-50 relative overflow-hidden" id="team">
-    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-    <div className="container mx-auto px-6 relative z-10">
-      <SectionTitle title="Leadership Team" subtitle="Visionaries" />
-      <div className="grid md:grid-cols-3 gap-12">
-        {TEAM.map((member, i) => (
-          <RevealOnScroll key={i} className="group text-center">
-             <div className="relative w-64 h-64 mx-auto mb-8 rounded-full p-2 border-2 border-dashed border-blue-200 group-hover:border-blue-500 transition-colors duration-500">
-                <div className="w-full h-full rounded-full overflow-hidden shadow-2xl">
-                    <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                </div>
-             </div>
-             <h3 className="text-2xl font-bold text-slate-900 mb-2">{member.name}</h3>
-             <p className="text-blue-600 font-bold text-sm mb-6 uppercase tracking-widest">{member.role}</p>
-             <div className="flex justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                {member.linkedin && member.linkedin !== '#' && (
-                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-white border border-slate-200 rounded-full hover:bg-blue-600 hover:text-white hover:border-transparent transition-all cursor-pointer shadow-sm">
-                    <Linkedin size={18}/>
-                  </a>
-                )}
-             </div>
-          </RevealOnScroll>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
 const CTABanner = () => (
   <section className="py-24 relative overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
@@ -1295,7 +1245,7 @@ export default function App() {
             <PortfolioSection />
             <Pricing />
             <Testimonials />
-            <Team />
+            {/* Removed the Team component call from here to remove the section */}
             <CTABanner />
             <Careers />
             <FAQ />
