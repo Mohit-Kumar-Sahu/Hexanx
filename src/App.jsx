@@ -225,9 +225,9 @@ const MOCK_PROJECTS = [
 ];
 
 const TESTIMONIALS = [
-  { id: 1, name: "Rajesh Kumar", role: "CTO, Apollo Pharmacy", content: "Hexanx transformed our legacy systems into a modern digital powerhouse. Their team is technically brilliant and reliable.", avatar: "RK" },
-  { id: 2, name: "Sarah Williams", role: "Director, LearnX", content: "The mobile app they built for us helped us scale from 100 students to 50,000 in just one year. Incredible scalability.", avatar: "SW" },
-  { id: 3, name: "Vikram Singh", role: "Ops Manager, Tata Steel Sub", content: "Their ERP solution is the backbone of our factory now. Downtime has reduced significantly. Highly recommended.", avatar: "VS" }
+  { id: 1, name: "Amit Verma", role: "Owner, Verma Textiles, Surat", content: "We needed a custom inventory system for our textile business. Hexanx delivered a solution that perfectly fits our workflow. Highly recommended for SMEs!", avatar: "AV" },
+  { id: 2, name: "Sneha Gupta", role: "Founder, GreenLeaf Organics, Pune", content: "Their team built our e-commerce store from scratch. The design is beautiful and sales have increased by 40% since launch. Great support too.", avatar: "SG" },
+  { id: 3, name: "Rohan Mehta", role: "Director, Mehta Transport, Indore", content: "Managing our fleet was a headache until Hexanx built our logistics dashboard. Now we track everything in real-time. Excellent service.", avatar: "RM" }
 ];
 
 const FAQS = [
@@ -472,10 +472,10 @@ const ContactForm = () => {
       
       const data = new FormData();
       // UPDATED: Keys match Google Sheet headers EXACTLY (Date handled by script)
-      data.append('Name', formData.name);
-      data.append('Email', formData.email);
-      data.append('Service', formData.service);
-      data.append('Message', formData.message);
+      data.append('YOUR NAME', formData.name);
+      data.append('EMAIL ADDRESS', formData.email);
+      data.append('SERVICE INTERESTED IN', formData.service);
+      data.append('MESSAGE', formData.message);
 
       fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -609,6 +609,45 @@ const TechStack = () => {
     </div>
   );
 };
+
+const About = () => (
+  <section className="py-32 bg-slate-50 relative overflow-hidden" id="about">
+    <div className="container mx-auto px-6">
+      <SectionTitle title="Who We Are" subtitle="About Hexanx" />
+      <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="relative">
+           <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] blur-2xl opacity-20"></div>
+           <div className="relative glass-card p-10 rounded-[2rem] border border-white/50">
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">Innovating from Raipur for the World</h3>
+              <p className="text-slate-600 leading-relaxed mb-6 text-lg">
+                Founded in the heart of Chhattisgarh, Hexanx has grown from a small team of passionate coders to a premier IT consultancy serving enterprise clients across India and beyond.
+              </p>
+              <p className="text-slate-600 leading-relaxed text-lg">
+                We believe in the power of technology to transform businesses. Whether it's a complex ERP system or a high-performance mobile app, we bring the same level of dedication and engineering excellence to every project.
+              </p>
+           </div>
+        </div>
+        <div className="space-y-8">
+           {[
+             { title: "Our Mission", desc: "To empower businesses with scalable, secure, and future-proof digital solutions.", icon: Target, color: "blue" },
+             { title: "Our Vision", desc: "To be the most trusted technology partner for enterprises worldwide.", icon: Globe, color: "purple" },
+             { title: "Our Values", desc: "Integrity in our code, transparency in our dealings, and excellence in our delivery.", icon: Award, color: "green" }
+           ].map((item, i) => (
+              <RevealOnScroll key={i} className="flex gap-6 p-6 rounded-2xl bg-white border border-slate-100 hover:shadow-lg transition-all">
+                 <div className={`w-14 h-14 bg-${item.color}-50 rounded-xl flex items-center justify-center shrink-0`}>
+                    <item.icon className={`w-7 h-7 text-${item.color}-600`} />
+                 </div>
+                 <div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h4>
+                    <p className="text-slate-600">{item.desc}</p>
+                 </div>
+              </RevealOnScroll>
+           ))}
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 const WhyChooseUs = () => (
   <section className="py-32 bg-slate-50 relative overflow-hidden">
@@ -1150,6 +1189,12 @@ const Footer = () => (
     
     <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
       <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
+      
+      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
+        <p>Customised Software Development | Enterprise Software Development | Custom Software Development | Cloud Software Development | Desktop Software Development | Inventory Software Development | Hospital Management Software Development | Billing Software Development | Accounting Software Development | Gym Software | Gym Management Software | Transport Management Software | Truck Management Software | Restaurant Management Software | Real Estate Software Development | Lead Software Development | HRM Development | School Management Software | Raipur Chhattisgarh</p>
+        <p className="mt-2">Customised Website Development | Enterprise Website Development | Custom Website Development | Corporate Website Development | CryptoCurrency Website Development | Dental Website Development | Hospital Website Development | Magento E-commmerce Website Development | Shopify Website Development | Ecommerce Website Development | Custom Ecommerce Website Development | Real Estate Website Development | Raipur Website Development | Restaurant Website Development | School Website Development | Steel Website Development | Responsive Website Development | Affordable Website Development | AWS Development | CakePHP | CodeIgniter Development | WordPress Development | WooCommerce Development | WooCommerce Developers | OpenCart Developers | Python Development | Raipur Chhattisgarh</p>
+      </div>
+
       <div className="flex gap-8 mt-4 md:mt-0">
          <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
          <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
@@ -1180,6 +1225,7 @@ export default function App() {
 
   const navLinks = [
     { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
     { id: 'pricing', label: 'Pricing' },
@@ -1240,12 +1286,12 @@ export default function App() {
           <>
             <Hero navigateTo={navigateTo} />
             <TechStack />
+            <About />
             <WhyChooseUs />
             <Services />
             <PortfolioSection />
             <Pricing />
             <Testimonials />
-            {/* Removed the Team component call from here to remove the section */}
             <CTABanner />
             <Careers />
             <FAQ />
@@ -1288,6 +1334,7 @@ export default function App() {
             </section>
           </>
         )}
+        {activeTab === 'about' && <About />}
         {activeTab === 'services' && <Services />}
         {activeTab === 'portfolio' && <PortfolioSection />}
         {activeTab === 'pricing' && <Pricing />}
