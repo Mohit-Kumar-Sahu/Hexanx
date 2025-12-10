@@ -454,6 +454,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
+  // YOUR SPECIFIC GOOGLE SCRIPT URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const validate = () => {
@@ -849,6 +850,7 @@ const BookingSection = () => {
   const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
   const [submitted, setSubmitted] = useState(false);
 
+  // YOUR SPECIFIC GOOGLE SCRIPT URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const handleSubmit = (e) => {
@@ -879,7 +881,7 @@ const BookingSection = () => {
     <section className="py-32 bg-white" id="booking">
       <div className="container mx-auto px-6">
         <SectionTitle title="Book Your Consultation" subtitle="Schedule A Call" />
-        <div className="max-w-4xl mx-auto glass-card p-12 rounded-[3rem] border border-slate-100 shadow-2xl relative overflow-hidden">
+        <div className="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-[2rem] border border-slate-100 shadow-2xl relative overflow-hidden">
           
            {submitted && (
              <div className="absolute inset-0 bg-white/95 backdrop-blur z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
@@ -928,7 +930,9 @@ const BookingSection = () => {
                    <option>Digital Marketing / SEO</option>
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              
+              {/* --- THIS LINE IS THE FIX (grid-cols-1 on mobile) --- */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2 input-group">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Preferred Date</label>
                   <input required type="date" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.date} onChange={e=>setForm({...form, date: e.target.value})} />
@@ -938,6 +942,7 @@ const BookingSection = () => {
                   <input required type="time" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.time} onChange={e=>setForm({...form, time: e.target.value})} />
                 </div>
               </div>
+              
               <Button primary type="submit" className="w-full mt-4">Confirm Booking</Button>
             </form>
           </div>
