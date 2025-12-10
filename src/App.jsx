@@ -248,13 +248,14 @@ const Button = ({ children, primary = false, onClick, className = "", type = "bu
   </button>
 );
 
-const SectionTitle = ({ title, subtitle, center = true }) => (
+// UPDATED: SectionTitle now supports dark mode
+const SectionTitle = ({ title, subtitle, center = true, dark = false }) => (
   <RevealOnScroll className={`mb-20 ${center ? 'text-center' : 'text-left'}`}>
-    <div className={`inline-flex items-center px-4 py-2 rounded-full bg-white border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
-      <span className="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
+    <div className={`inline-flex items-center px-4 py-2 rounded-full ${dark ? 'bg-slate-800 border-slate-700 text-blue-400' : 'bg-white border-blue-100 text-blue-600'} border text-xs font-bold uppercase tracking-widest mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
+      <span className={`w-2 h-2 rounded-full ${dark ? 'bg-blue-400' : 'bg-blue-600'} mr-2 animate-pulse`}></span>
       {subtitle}
     </div>
-    <h2 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight">
+    <h2 className={`text-5xl md:text-7xl font-extrabold tracking-tight leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>
       {title.split(" ").map((word, i) => (
         <span key={i} className={i === 1 ? "gradient-text" : ""}>
           {word} 
@@ -265,7 +266,7 @@ const SectionTitle = ({ title, subtitle, center = true }) => (
   </RevealOnScroll>
 );
 
-// UPDATED: Page Header with Home-Like Animation (Mesh Gradient + Floating Blobs)
+// Page Header with Home-Like Animation (Mesh Gradient + Floating Blobs)
 const PageHeader = ({ title, subtitle }) => (
   <div className="relative pt-48 pb-24 overflow-hidden mesh-gradient">
     <div className="absolute inset-0 bg-grid opacity-60"></div>
@@ -402,7 +403,7 @@ const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
   };
 
   return (
-    <div className="glass-card p-8 md:p-10 rounded-3xl border border-slate-200 bg-white relative overflow-hidden">
+    <div className="glass-card p-6 md:p-10 rounded-3xl border border-slate-200 bg-white relative overflow-hidden">
        {status === 'success' && (
          <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
             <CheckCircle2 className="w-16 h-16 text-green-500 mb-4" />
@@ -1154,7 +1155,7 @@ const InternshipPage = () => {
   );
 };
 
-// CAREERS PAGE
+// CAREERS PAGE - FIXED RESPONSIVENESS
 const CareersPage = () => {
   const jobs = [
     { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
@@ -1167,22 +1168,22 @@ const CareersPage = () => {
     <div className="min-h-screen bg-slate-50 pb-20">
        <PageHeader title="Join Our Team" subtitle="Current Openings" />
        
-       <div className="container mx-auto px-6 -mt-10 relative z-10">
-          <div className="grid lg:grid-cols-3 gap-10">
+       <div className="container mx-auto px-4 md:px-6 mt-10 lg:-mt-10 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Job List */}
             <div className="lg:col-span-2 space-y-6">
               {jobs.map((job) => (
                 <div key={job.id} className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group cursor-pointer">
-                   <div className="flex justify-between items-start mb-4">
+                   <div className="flex flex-col md:flex-row justify-between items-start mb-4">
                      <div>
                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{job.title}</h3>
-                       <div className="flex gap-4 text-sm text-slate-500 mt-2">
+                       <div className="flex flex-wrap gap-4 text-sm text-slate-500 mt-2">
                           <span className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</span>
                           <span className="flex items-center gap-1"><MapPin size={14}/> {job.loc}</span>
                           <span className="flex items-center gap-1"><Clock size={14}/> {job.exp}</span>
                        </div>
                      </div>
-                     <span className="px-4 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">{job.salary}</span>
+                     <span className="mt-4 md:mt-0 px-4 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">{job.salary}</span>
                    </div>
                    <div className="flex flex-wrap gap-2 mb-6">
                       {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
@@ -1254,7 +1255,7 @@ const DemoPage = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
        <div className="container mx-auto px-6">
-          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" />
+          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" dark={true} />
           <p className="text-center text-slate-400 mb-12 -mt-10 max-w-2xl mx-auto">
             This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
           </p>
