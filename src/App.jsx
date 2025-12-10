@@ -7,7 +7,7 @@ import {
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Facebook, Instagram, Terminal,
   TrendingUp, Target, Lightbulb, Map, Youtube, Bell, Lock, DollarSign,
-  HeartHandshake, FileText, Bot, Wifi
+  HeartHandshake
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -290,6 +290,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 const ApplicationModal = ({ isOpen, onClose, role, type = "Job" }) => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', resume: '' });
   const [status, setStatus] = useState('idle');
+  // ⚠️⚠️⚠️ THIS IS YOUR GOOGLE SCRIPT URL ⚠️⚠️⚠️
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const handleSubmit = (e) => {
