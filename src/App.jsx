@@ -1167,17 +1167,24 @@ const Footer = () => (
           Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
         </p>
         <div className="flex gap-4">
-           {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
-             { Icon: Mail, link: "mailto:contact@hexanx.com" }, 
-             { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
-             { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" }
-            ].map((social, i) => (
-             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
-               <social.Icon size={20}/>
-             </a>
-           ))}
-        </div>
-      </div>
+  {[
+    { Icon: Globe, link: "https://www.hexanx.in/" },
+    { Icon: Mail, link: "mailto:contact@hexanx.in" },
+    { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" },
+    { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
+    { Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" } // 🆕 Added Instagram
+  ].map((social, i) => (
+    <a
+      key={i}
+      href={social.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500"
+    >
+      <social.Icon size={20} />
+    </a>
+  ))}
+</div>
       
       <div>
         <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
