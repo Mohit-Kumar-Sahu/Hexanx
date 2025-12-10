@@ -6,7 +6,8 @@ import {
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Facebook, Instagram, Terminal,
-  TrendingUp, Target, Lightbulb, Map, Youtube, Bell
+  TrendingUp, Target, Lightbulb, Map, Youtube, Bell, Lock, DollarSign,
+  HeartHandshake
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -453,9 +454,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
-  // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
-  // REPACE THIS URL WITH THE ONE YOU GENERATE FROM YOUR SPREADSHEET
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1f7hAwx3ehPmZmZX3M2hyxL7bmzxTI8V85awfnYOrczaitQFkIQjvXD-G1hOnVKF3dA/exec"; 
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const validate = () => {
     let tempErrors = {};
@@ -473,11 +472,11 @@ const ContactForm = () => {
       setStatus('submitting');
       
       const data = new FormData();
-      // UPDATED: Keys match Google Sheet headers EXACTLY (Date handled by script)
-      data.append('YOUR NAME', formData.name);
-      data.append('EMAIL ADDRESS', formData.email);
-      data.append('SERVICE INTERESTED IN', formData.service);
-      data.append('MESSAGE', formData.message);
+      data.append('formType', 'contact'); // Tell script this is a contact form
+      data.append('Name', formData.name);
+      data.append('Email', formData.email);
+      data.append('Service', formData.service);
+      data.append('Message', formData.message);
 
       fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
@@ -491,7 +490,7 @@ const ContactForm = () => {
       })
       .catch((error) => {
         console.error('Error!', error.message);
-        setStatus('success'); // Fallback for UI if script URL isn't set yet
+        setStatus('success'); 
         setFormData({ name: '', email: '', service: 'Web Development', message: '' });
       });
     }
@@ -845,39 +844,108 @@ const Testimonials = () => {
   );
 };
 
-const Pricing = () => (
-  <section className="py-32 bg-white" id="pricing">
-    <div className="container mx-auto px-6">
-      <SectionTitle title="Flexible Pricing" subtitle="Choose Your Plan" />
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {[
-          { name: "Starter", price: "₹25k", desc: "Perfect for small businesses", features: ["5 Page Website", "Basic SEO", "Contact Form", "1 Month Support"] },
-          { name: "Business", price: "₹60k", desc: "For growing companies", features: ["10+ Pages", "CMS Integration", "Advanced SEO", "Analytics Dashboard", "3 Months Support"], pop: true },
-          { name: "Enterprise", price: "Custom", desc: "Large scale solutions", features: ["Custom ERP/CRM", "Mobile App Included", "Cloud Hosting", "Dedicated Manager", "1 Year Support"] }
-        ].map((plan, i) => (
-          <RevealOnScroll key={i}>
-            <div className={`p-10 rounded-[2rem] border transition-all duration-500 relative flex flex-col h-full ${plan.pop ? 'bg-slate-900 text-white shadow-2xl scale-105 z-10 border-slate-800' : 'bg-white border-slate-100 hover:shadow-2xl hover:border-blue-100'}`}>
-              {plan.pop && <div className="absolute top-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl rounded-tr-2xl shadow-lg">MOST POPULAR</div>}
-              <h3 className={`text-2xl font-bold mb-2 ${plan.pop ? 'text-white' : 'text-slate-900'}`}>{plan.name}</h3>
-              <div className={`text-5xl font-extrabold mb-2 ${plan.pop ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400' : 'text-blue-600'}`}>{plan.price}<span className={`text-base font-normal ${plan.pop ? 'text-slate-400' : 'text-slate-500'}`}>/project</span></div>
-              <p className={`text-sm mb-8 ${plan.pop ? 'text-slate-400' : 'text-slate-500'}`}>{plan.desc}</p>
-              
-              <ul className="space-y-4 mb-10 flex-1">
-                {plan.features.map((f, j) => (
-                  <li key={j} className={`flex items-center text-sm ${plan.pop ? 'text-slate-300' : 'text-slate-600'}`}>
-                    <CheckCircle2 size={18} className={`mr-3 ${plan.pop ? 'text-green-400' : 'text-green-500'}`} /> {f}
-                  </li>
-                ))}
+// --- UPDATED BOOKING SECTION (CONNECTED TO GOOGLE SHEETS) ---
+const BookingSection = () => {
+  const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const data = new FormData();
+    data.append('formType', 'booking'); // Tell script this is a booking form
+    data.append('Name', form.name);
+    data.append('Email', form.email);
+    data.append('Service', form.service);
+    data.append('MeetingDate', form.date);
+    data.append('MeetingTime', form.time);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: data,
+        mode: "no-cors"
+    })
+    .then(() => {
+        setSubmitted(true);
+        setForm({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+    })
+    .catch((error) => console.error('Error!', error.message));
+  };
+
+  return (
+    <section className="py-32 bg-white" id="booking">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Book Your Consultation" subtitle="Schedule A Call" />
+        <div className="max-w-4xl mx-auto glass-card p-12 rounded-[3rem] border border-slate-100 shadow-2xl relative overflow-hidden">
+          
+           {submitted && (
+             <div className="absolute inset-0 bg-white/95 backdrop-blur z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
+                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-12 h-12 text-green-600" />
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-2">Meeting Requested!</h3>
+                <p className="text-slate-500 mb-8">We have received your details. Our team will confirm the slot shortly.</p>
+                <Button onClick={() => setSubmitted(false)}>Book Another</Button>
+             </div>
+           )}
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-3xl font-bold text-slate-900 mb-4">Let's Discuss Your Idea</h3>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                Schedule a free 30-minute consultation with our lead architects. We'll discuss your project requirements, technical feasibility, and provide a roadmap.
+              </p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"><Lock size={16}/></span>
+                  NDA Protected Conversation
+                </li>
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"><DollarSign size={16}/></span>
+                  Free Cost Estimation
+                </li>
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"><Code size={16}/></span>
+                  Technical Roadmap Included
+                </li>
               </ul>
-              
-              <Button primary={!plan.pop} className={`w-full ${plan.pop ? 'bg-white text-slate-900 hover:bg-slate-100 border-none' : ''}`}>Choose Plan</Button>
             </div>
-          </RevealOnScroll>
-        ))}
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Your Name</label>
+                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" placeholder="Enter name" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} />
+              </div>
+              <div className="space-y-2 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Service Required</label>
+                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.service} onChange={e=>setForm({...form, service: e.target.value})}>
+                   <option>Web Development</option>
+                   <option>Mobile App</option>
+                   <option>ERP / SaaS</option>
+                   <option>Digital Marketing / SEO</option>
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2 input-group">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Preferred Date</label>
+                  <input required type="date" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.date} onChange={e=>setForm({...form, date: e.target.value})} />
+                </div>
+                <div className="space-y-2 input-group">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Time</label>
+                  <input required type="time" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.time} onChange={e=>setForm({...form, time: e.target.value})} />
+                </div>
+              </div>
+              <Button primary type="submit" className="w-full mt-4">Confirm Booking</Button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
@@ -1109,7 +1177,7 @@ const Footer = () => (
       <div>
         <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
         <ul className="space-y-4 text-base">
-          {["Services", "Portfolio", "Pricing", "Careers", "About Us"].map(item => (
+          {["Services", "Portfolio", "Book Call", "Careers", "About Us"].map(item => (
              <li key={item} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
                 <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> {item}
              </li>
@@ -1272,7 +1340,7 @@ const CareersPage = () => {
   );
 };
 
-// DEMO PAGE (Interactive Dashboard Showcase)
+// DEMO PAGE (Interactive Dashboard Showcase & Roadmap)
 const DemoPage = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
@@ -1282,7 +1350,7 @@ const DemoPage = () => {
             This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
           </p>
 
-          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] mb-32">
              {/* Fake Sidebar */}
              <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
                 <div className="flex items-center gap-3 mb-8 px-2">
@@ -1348,6 +1416,53 @@ const DemoPage = () => {
                 </div>
              </div>
           </div>
+          
+          {/* UPDATED: Development Roadmap Section */}
+          <div className="max-w-5xl mx-auto">
+             <div className="text-center mb-16">
+               <h3 className="text-3xl md:text-5xl font-bold mb-4">Development Lifecycle</h3>
+               <p className="text-slate-400 text-lg">How we bring your idea to life</p>
+             </div>
+             
+             <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
+                {[
+                  { 
+                    step: "01", title: "Architecture & RBAC", 
+                    desc: "We start by setting up a secure Project Structure. We implement Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have strictly separated permissions.",
+                    icon: Lock 
+                  },
+                  { 
+                    step: "02", title: "Embedded Development", 
+                    desc: "Core feature development using high-performance component architecture. We ensure all external APIs and microservices are deeply embedded for speed.",
+                    icon: Cpu 
+                  },
+                  { 
+                    step: "03", title: "SEO & Monetization", 
+                    desc: "Post-development, we handle the technical SEO Setup (Meta tags, Sitemap, SSR) and integrate AdSense Management for revenue generation immediately after launch.",
+                    icon: DollarSign 
+                  },
+                  { 
+                    step: "04", title: "Launch & Support", 
+                    desc: "After deployment, we provide 1 Month of Free Maintenance for all new customers to ensure a bug-free experience and smooth handover.",
+                    icon: HeartHandshake 
+                  }
+                ].map((phase, i) => (
+                  <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-900 group-[.is-active]:bg-blue-600 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                         <phase.icon size={18}/>
+                      </div>
+                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
+                         <div className="flex items-center justify-between space-x-2 mb-2">
+                           <div className="font-bold text-slate-200">{phase.title}</div>
+                           <div className="font-mono text-xs text-slate-500">{phase.step}</div>
+                         </div>
+                         <div className="text-slate-400 text-sm leading-relaxed">{phase.desc}</div>
+                      </div>
+                  </div>
+                ))}
+             </div>
+          </div>
+
        </div>
     </div>
   );
@@ -1392,6 +1507,7 @@ export default function App() {
     { path: '/internships', label: 'Internships' },
     { path: '/careers', label: 'Careers' },
     { path: '/demo', label: 'Live Demo' },
+    { path: '/booking', label: 'Book Call' }, // RENAMED FROM PRICING
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -1424,7 +1540,7 @@ export default function App() {
                 </Link>
               ))}
             </div>
-            <Button className="py-3 px-6 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigate('/contact')}>Get Quote</Button>
+            <Button className="py-3 px-6 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigate('/booking')}>Book Meeting</Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -1447,7 +1563,7 @@ export default function App() {
 
       <style>{styles}</style>
 
-      {/* --- ROUTES (This creates the separate URLs Google needs) --- */}
+      {/* --- ROUTES --- */}
       <main>
         <Routes>
           <Route path="/" element={
@@ -1458,7 +1574,7 @@ export default function App() {
               <WhyChooseUs />
               <Services />
               <PortfolioSection />
-              <Pricing />
+              <BookingSection /> {/* Replaced Pricing with Booking here too */}
               <Testimonials />
               <CTABanner />
               <FAQ />
@@ -1500,6 +1616,12 @@ export default function App() {
           <Route path="/demo" element={
             <PageSEO title="Live Demo" description="Experience our interactive dashboard technology live.">
               <DemoPage />
+            </PageSEO>
+          } />
+          
+          <Route path="/booking" element={ // NEW ROUTE
+            <PageSEO title="Book a Meeting" description="Schedule a consultation with our technical team.">
+              <BookingSection />
             </PageSEO>
           } />
 
