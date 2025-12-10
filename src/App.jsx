@@ -7,7 +7,7 @@ import {
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Facebook, Instagram, Terminal,
   TrendingUp, Target, Lightbulb, Map, Youtube, Bell, Lock, DollarSign,
-  HeartHandshake
+  HeartHandshake, FileText, Wifi
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -177,13 +177,13 @@ const MOCK_PROJECTS = [
   },
   {
     id: 2,
-    title: "FinTech Dashboard",
-    category: "web",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    client: "Global Finance Corp",
-    tags: ["React", "D3.js", "AWS"],
-    description: "High-performance analytics dashboard for stock market visualization. Processes millions of data points per second with WebSocket connections.",
-    stats: { users: "5k+", speed: "20ms", uptime: "99.99%" }
+    title: "NewsDaily 24x7 Portal",
+    category: "news",
+    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800",
+    client: "Chhattisgarh Times",
+    tags: ["WordPress", "PHP", "AMP"],
+    description: "High-traffic news portal handling 5M+ monthly visitors. Features include automated AMP generation, ad-revenue optimization, and regional language support.",
+    stats: { visitors: "5M/mo", speed: "1.2s", ads: "$5k+/mo" }
   },
   {
     id: 3,
@@ -197,33 +197,33 @@ const MOCK_PROJECTS = [
   },
   {
     id: 4,
-    title: "EduTech Learning App",
-    category: "app",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
-    client: "LearnX Academy",
-    tags: ["React Native", "Firebase", "WebRTC"],
-    description: "Live classroom application with whiteboard sharing, quiz modules, and AI-driven student progress tracking.",
-    stats: { users: "50k+", classes: "500/day", uptime: "99.9%" }
+    title: "Luxury Estate Web",
+    category: "wordpress",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
+    client: "Royal Reality",
+    tags: ["WordPress", "Elementor", "MySQL"],
+    description: "Premium real estate showcase website with virtual tour integration, CRM lead capture, and property comparison tools.",
+    stats: { leads: "500/mo", loadTime: "0.8s", uptime: "100%" }
   },
   {
     id: 5,
     title: "Retail Analytics BI",
-    category: "bi",
+    category: "data",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
     client: "SuperMart Retail",
     tags: ["Power BI", "Azure", "Python"],
-    description: "Custom Power BI connectors to visualize sales data across 200 stores, predicting trends and optimizing inventory levels.",
+    description: "Custom Power BI connectors to visualize sales data across 200 stores, predicting trends and optimizing inventory levels using data automation.",
     stats: { users: "100+", insights: "Real-time", uptime: "100%" }
   },
   {
     id: 6,
-    title: "Logistics Fleet Manager",
-    category: "web",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
-    client: "FastMove Logistics",
-    tags: ["Vue.js", "Go", "PostGIS"],
-    description: "Real-time fleet tracking system using GPS telemetry. route optimization algorithms reduced fuel costs by 30%.",
-    stats: { users: "1k+", vehicles: "500+", uptime: "99.9%" }
+    title: "AI Customer Bot",
+    category: "ai",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    client: "TechSupport Inc",
+    tags: ["OpenAI API", "Python", "React"],
+    description: "Intelligent chatbot integration that reduced support ticket volume by 60%. trained on company knowledge base to answer technical queries automatically.",
+    stats: { accuracy: "94%", savings: "60%", response: "<2s" }
   }
 ];
 
@@ -276,6 +276,24 @@ const SectionTitle = ({ title, subtitle, center = true }) => (
     </h2>
     <div className={`h-2 w-24 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-8 ${center ? 'mx-auto' : ''}`}></div>
   </RevealOnScroll>
+);
+
+// NEW: Reusable Page Header with Animation
+const PageHeader = ({ title, subtitle, bgClass = "bg-slate-50" }) => (
+  <div className={`relative pt-48 pb-24 overflow-hidden ${bgClass}`}>
+    <div className="absolute inset-0 bg-grid opacity-30"></div>
+    {/* Animated Floating Blobs */}
+    <div className="absolute top-20 right-20 w-72 h-72 bg-blue-400/20 rounded-full blur-[80px] animate-float"></div>
+    <div className="absolute bottom-10 left-20 w-64 h-64 bg-purple-400/20 rounded-full blur-[80px] animate-float" style={{animationDelay: "2s"}}></div>
+    
+    <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="inline-block px-4 py-1.5 rounded-full border border-slate-200 bg-white/50 backdrop-blur mb-6">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{subtitle}</span>
+      </div>
+      <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight">{title}</h1>
+      <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+    </div>
+  </div>
 );
 
 const Badge = ({ text, color = "blue" }) => {
@@ -360,6 +378,90 @@ const TextRotator = () => {
   }, []);
   return <span className="gradient-text transition-all duration-500 inline-block min-w-[200px]">{words[index]}</span>;
 }
+
+// --- NEW: RESUME APPLICATION FORM (Connects to Sheets) ---
+const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
+  const [formData, setFormData] = useState({ name: '', email: '', contact: '', resumeUrl: '', position: defaultPosition });
+  const [status, setStatus] = useState('idle');
+
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    const data = new FormData();
+    data.append('formType', 'resume'); // Identifier for script
+    data.append('Name', formData.name);
+    data.append('Email', formData.email);
+    data.append('Contact', formData.contact);
+    data.append('ResumeUrl', formData.resumeUrl);
+    data.append('Position', formData.position);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: data,
+        mode: "no-cors"
+    })
+    .then(() => {
+        setStatus('success');
+        setFormData({ name: '', email: '', contact: '', resumeUrl: '', position: defaultPosition });
+        setTimeout(() => setStatus('idle'), 5000);
+    })
+    .catch((error) => {
+        console.error('Error!', error.message);
+        setStatus('error');
+    });
+  };
+
+  return (
+    <div className="glass-card p-8 md:p-10 rounded-3xl border border-slate-200 bg-white relative overflow-hidden">
+       {status === 'success' && (
+         <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
+            <CheckCircle2 className="w-16 h-16 text-green-500 mb-4" />
+            <h3 className="text-2xl font-bold text-slate-900">Application Submitted!</h3>
+            <p className="text-slate-500 mb-6">Our HR team will review your resume and contact you shortly.</p>
+            <Button onClick={() => setStatus('idle')}>Submit Another</Button>
+         </div>
+       )}
+
+       <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+         <FileText className="text-blue-600"/> Submit Your Application
+       </h3>
+       
+       <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-1 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase">Full Name</label>
+                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.name} onChange={e=>setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
+            </div>
+            <div className="space-y-1 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase">Contact Number</label>
+                <input required type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.contact} onChange={e=>setFormData({...formData, contact: e.target.value})} placeholder="+91 98765 43210" />
+            </div>
+          </div>
+
+          <div className="space-y-1 input-group">
+              <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
+              <input required type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.email} onChange={e=>setFormData({...formData, email: e.target.value})} placeholder="john@example.com" />
+          </div>
+
+          <div className="space-y-1 input-group">
+              <label className="text-xs font-bold text-slate-500 uppercase">Resume Link (Google Drive / LinkedIn)</label>
+              <input required type="url" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.resumeUrl} onChange={e=>setFormData({...formData, resumeUrl: e.target.value})} placeholder="https://drive.google.com/..." />
+              <p className="text-[10px] text-slate-400">Please ensure the link is publicly accessible.</p>
+          </div>
+          
+          <input type="hidden" value={formData.position} />
+
+          <Button primary type="submit" className="w-full" disabled={status === 'submitting'}>
+            {status === 'submitting' ? 'Submitting...' : 'Apply Now'}
+          </Button>
+       </form>
+    </div>
+  );
+};
+
 
 // --- 4. FEATURE COMPONENTS ---
 
@@ -454,7 +556,6 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
-  // YOUR SPECIFIC GOOGLE SCRIPT URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const validate = () => {
@@ -473,7 +574,7 @@ const ContactForm = () => {
       setStatus('submitting');
       
       const data = new FormData();
-      data.append('formType', 'contact'); // Tell script this is a contact form
+      data.append('formType', 'contact');
       data.append('Name', formData.name);
       data.append('Email', formData.email);
       data.append('Service', formData.service);
@@ -681,17 +782,24 @@ const PortfolioSection = () => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
 
+  // Updated Filters based on user request
+  const categories = [
+    { id: 'all', label: 'All' },
+    { id: 'wordpress', label: 'WordPress' },
+    { id: 'news', label: 'News' },
+    { id: 'ecommerce', label: 'E-commerce' }, // Mapped to 'web' in mocks for now, or add new data
+    { id: 'erp', label: 'ERP' },
+    { id: 'crm', label: 'CRM' }, // Map to 'app' or create new
+    { id: 'data', label: 'Automation' },
+    { id: 'ai', label: 'AI Integration' },
+    { id: 'smart', label: 'Smart Devices' }
+  ];
+
+  // Logic to show "Coming Soon" for smart devices
+  const isComingSoon = filter === 'smart';
   const filteredProjects = filter === 'all' 
     ? MOCK_PROJECTS 
-    : MOCK_PROJECTS.filter(p => p.category === filter);
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'web', label: 'Web Apps' },
-    { id: 'app', label: 'Mobile Apps' },
-    { id: 'erp', label: 'ERP Systems' },
-    { id: 'bi', label: 'Analytics' },
-  ];
+    : MOCK_PROJECTS.filter(p => p.category === filter || (filter === 'ecommerce' && p.category === 'web') || (filter === 'crm' && p.category === 'app'));
 
   return (
     <section className="py-32 bg-white relative" id="portfolio">
@@ -703,7 +811,7 @@ const PortfolioSection = () => {
             <button
               key={cat.id}
               onClick={() => setFilter(cat.id)}
-              className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
+              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-300 ${
                 filter === cat.id 
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105" 
                   : "bg-slate-50 text-slate-600 border border-slate-200 hover:bg-white hover:shadow-md"
@@ -714,6 +822,17 @@ const PortfolioSection = () => {
           ))}
         </div>
 
+        {isComingSoon ? (
+          <div className="text-center py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-300">
+             <Wifi size={48} className="mx-auto text-slate-400 mb-4" />
+             <h3 className="text-2xl font-bold text-slate-600">Smart Devices & IoT Solutions</h3>
+             <p className="text-slate-500">Coming Soon. We are building the future.</p>
+          </div>
+        ) : filteredProjects.length === 0 ? (
+           <div className="text-center py-20">
+             <p className="text-slate-500">No projects found in this category yet. We are working on it!</p>
+           </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div 
@@ -746,6 +865,7 @@ const PortfolioSection = () => {
             </div>
           ))}
         </div>
+        )}
       </div>
 
       <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)} title={selectedProject?.title}>
@@ -850,7 +970,6 @@ const BookingSection = () => {
   const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  // YOUR SPECIFIC GOOGLE SCRIPT URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
 
   const handleSubmit = (e) => {
@@ -931,7 +1050,6 @@ const BookingSection = () => {
                 </select>
               </div>
               
-              {/* --- THIS LINE IS THE FIX (grid-cols-1 on mobile) --- */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2 input-group">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Preferred Date</label>
@@ -976,26 +1094,409 @@ const FAQ = () => {
   );
 };
 
-const CTABanner = () => (
-  <section className="py-24 relative overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
-    <div className="absolute inset-0 bg-grid opacity-20"></div>
-    
-    {/* Floating Shapes */}
-    <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
-    <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+const CTABanner = () => {
+    const navigate = useNavigate();
+    return (
+        <section className="py-24 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
+            <div className="absolute inset-0 bg-grid opacity-20"></div>
+            
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
 
-    <div className="container mx-auto px-6 relative z-10 text-center text-white">
-      <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
-      <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-        Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-6 justify-center">
-        <button className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
-        <button className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+            <div className="container mx-auto px-6 relative z-10 text-center text-white">
+            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
+            <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <button onClick={() => navigate('/contact')} className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
+                <button onClick={() => navigate('/booking')} className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+            </div>
+            </div>
+        </section>
+    );
+};
+
+// --- 6. PAGE COMPONENTS ---
+
+// INTERNSHIP PAGE
+const InternshipPage = () => {
+  const tracks = [
+    { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
+    { title: "App Development", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "Delivery App, Chat App" },
+    { title: "UI/UX Design", icon: LayoutDashboard, desc: "Learn Figma, prototyping, and user research.", projects: "Website Redesign, Mobile UI" },
+    { title: "Data Analytics", icon: BarChart3, desc: "Python, SQL, and Power BI visualization.", projects: "Sales Dashboard, Stock Predictor" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 pb-20">
+      <PageHeader title="Student Internship Program" subtitle="Launch Your Career" />
+      
+      <div className="container mx-auto px-6 -mt-16 relative z-10">
+        <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50">
+           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+           <h3 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h3>
+           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+             Work on live projects, get mentorship from senior engineers, and earn a 
+             <span className="font-bold text-blue-600"> Professional Experience Certificate</span>.
+             Top performers get PPO (Pre-Placement Offers).
+           </p>
+        </div>
+
+        {/* Tracks */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {tracks.map((t, i) => (
+            <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group">
+              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
+                <t.icon className="w-7 h-7 text-blue-600 group-hover:text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 mb-2">{t.title}</h4>
+              <p className="text-slate-500 text-sm mb-4">{t.desc}</p>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Projects:</div>
+              <p className="text-sm font-medium text-slate-700">{t.projects}</p>
+            </RevealOnScroll>
+          ))}
+        </div>
+
+        {/* Live Resume Form for Internships */}
+        <div className="max-w-2xl mx-auto">
+            <h3 className="text-center text-3xl font-bold mb-8">Apply for Internship</h3>
+            <ResumeApplicationForm defaultPosition="Internship Applicant" />
+        </div>
       </div>
     </div>
-  </section>
+  );
+};
+
+// CAREERS PAGE
+const CareersPage = () => {
+  const jobs = [
+    { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
+    { id: 2, title: "Backend Engineer (Node/Go)", type: "Full Time", loc: "Raipur", exp: "2+ Years", salary: "₹6L - ₹10L PA", skills: ["Node.js", "MongoDB", "AWS"] },
+    { id: 3, title: "UI/UX Designer", type: "Contract", loc: "Remote", exp: "2+ Years", salary: "Project Basis", skills: ["Figma", "Adobe XD"] },
+    { id: 4, title: "Business Development Manager", type: "Full Time", loc: "Raipur", exp: "1+ Years", salary: "₹4L - ₹8L PA", skills: ["Sales", "CRM", "English"] },
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 pb-20">
+       <PageHeader title="Join Our Team" subtitle="Current Openings" />
+       
+       <div className="container mx-auto px-6 -mt-10 relative z-10">
+          <div className="grid lg:grid-cols-3 gap-10">
+            {/* Job List */}
+            <div className="lg:col-span-2 space-y-6">
+              {jobs.map((job) => (
+                <div key={job.id} className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group cursor-pointer">
+                   <div className="flex justify-between items-start mb-4">
+                     <div>
+                       <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{job.title}</h3>
+                       <div className="flex gap-4 text-sm text-slate-500 mt-2">
+                          <span className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</span>
+                          <span className="flex items-center gap-1"><MapPin size={14}/> {job.loc}</span>
+                          <span className="flex items-center gap-1"><Clock size={14}/> {job.exp}</span>
+                       </div>
+                     </div>
+                     <span className="px-4 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">{job.salary}</span>
+                   </div>
+                   <div className="flex flex-wrap gap-2 mb-6">
+                      {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
+                   </div>
+                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-500 mb-4">
+                        Clicking Apply will submit your general profile to our database. Please specify this role in the form below.
+                   </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Application Form Sidebar */}
+            <div className="space-y-6">
+               <div className="bg-slate-900 text-white p-8 rounded-3xl">
+                  <h4 className="text-xl font-bold mb-4">Why Hexanx?</h4>
+                  <ul className="space-y-4 text-slate-300">
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> 5 Days Working</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Health Insurance</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Performance Bonus</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Yearly Trip</li>
+                  </ul>
+               </div>
+               
+               {/* Live Resume Form Sidebar */}
+               <div>
+                  <h4 className="font-bold text-slate-900 mb-4">Quick Application</h4>
+                  <ResumeApplicationForm defaultPosition="General Career Application" />
+               </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  );
+};
+
+// LEGAL PAGES
+const TermsPage = () => (
+    <div className="min-h-screen bg-slate-50 pb-20">
+        <PageHeader title="Terms of Service" subtitle="Legal" />
+        <div className="container mx-auto px-6 max-w-4xl bg-white p-10 rounded-[2rem] border border-slate-100 shadow-sm -mt-16 relative z-10 text-slate-600 space-y-6">
+            <h3 className="text-2xl font-bold text-slate-900">1. Introduction</h3>
+            <p>Welcome to Hexanx. By accessing our website and using our services, you agree to comply with these terms.</p>
+            <h3 className="text-2xl font-bold text-slate-900">2. Services</h3>
+            <p>We provide software development, consultancy, and IT services. All project scope and deliverables are defined in separate contracts.</p>
+            <h3 className="text-2xl font-bold text-slate-900">3. Intellectual Property</h3>
+            <p>Unless otherwise stated, Hexanx owns the intellectual property rights for all material on Hexanx. All intellectual property rights are reserved.</p>
+            <p className="text-sm text-slate-400 italic">Last updated: December 2025</p>
+        </div>
+    </div>
+);
+
+const PrivacyPage = () => (
+    <div className="min-h-screen bg-slate-50 pb-20">
+        <PageHeader title="Privacy Policy" subtitle="Data Protection" />
+        <div className="container mx-auto px-6 max-w-4xl bg-white p-10 rounded-[2rem] border border-slate-100 shadow-sm -mt-16 relative z-10 text-slate-600 space-y-6">
+            <h3 className="text-2xl font-bold text-slate-900">1. Data Collection</h3>
+            <p>We collect information you provide directly to us, such as when you fill out a form, request a demo, or apply for a job. This includes Name, Email, and Phone Number.</p>
+            <h3 className="text-2xl font-bold text-slate-900">2. Use of Data</h3>
+            <p>We use your data to provide, maintain, and improve our services, and to communicate with you about projects and offers.</p>
+            <h3 className="text-2xl font-bold text-slate-900">3. Security</h3>
+            <p>We implement appropriate technical measures to protect your personal data against unauthorized access.</p>
+            <p className="text-sm text-slate-400 italic">Last updated: December 2025</p>
+        </div>
+    </div>
+);
+
+// DEMO PAGE (Interactive Dashboard Showcase & Roadmap)
+const DemoPage = () => {
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
+       <div className="container mx-auto px-6">
+          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" />
+          <p className="text-center text-slate-400 mb-12 -mt-10 max-w-2xl mx-auto">
+            This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
+          </p>
+
+          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] mb-32">
+             {/* Fake Sidebar */}
+             <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
+                <div className="flex items-center gap-3 mb-8 px-2">
+                   <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
+                   <span className="font-bold">Admin Panel</span>
+                </div>
+                {['Overview', 'Analytics', 'Customers', 'Settings'].map((item, i) => (
+                   <div key={i} className={`p-3 rounded-xl cursor-pointer flex items-center gap-3 ${i === 0 ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
+                      <LayoutDashboard size={18} /> {item}
+                   </div>
+                ))}
+             </div>
+
+             {/* Main Content */}
+             <div className="flex-1 p-8 bg-slate-800">
+                <div className="flex justify-between items-center mb-8">
+                   <h3 className="text-2xl font-bold">Dashboard Overview</h3>
+                   <div className="flex gap-3">
+                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Search size={18} /></button>
+                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Bell size={18} /></button>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"></div>
+                   </div>
+                </div>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                   {[
+                     { label: "Total Revenue", val: "$45,231.89", change: "+20.1%", color: "text-green-400" },
+                     { label: "Active Users", val: "+2350", change: "+180.1%", color: "text-green-400" },
+                     { label: "Server Load", val: "34%", change: "-5%", color: "text-blue-400" },
+                   ].map((stat, i) => (
+                      <div key={i} className="bg-slate-700/50 p-6 rounded-2xl border border-slate-600 hover:bg-slate-700 transition-colors">
+                         <p className="text-slate-400 text-sm font-medium mb-1">{stat.label}</p>
+                         <h4 className="text-3xl font-bold mb-1">{stat.val}</h4>
+                         <span className={`text-xs ${stat.color}`}>{stat.change} from last month</span>
+                      </div>
+                   ))}
+                </div>
+
+                {/* Chart Area */}
+                <div className="grid md:grid-cols-3 gap-6 h-64">
+                   <div className="md:col-span-2 bg-slate-700/50 rounded-2xl border border-slate-600 p-6 flex items-end justify-between gap-2">
+                      {[30, 50, 45, 80, 60, 90, 70, 40, 60, 80, 50, 70].map((h, i) => (
+                         <div key={i} style={{height: `${h}%`}} className="w-full bg-blue-600/50 rounded-t hover:bg-blue-500 transition-colors cursor-pointer relative group">
+                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">{h}%</div>
+                         </div>
+                      ))}
+                   </div>
+                   <div className="bg-slate-700/50 rounded-2xl border border-slate-600 p-6">
+                      <h5 className="font-bold mb-4">Recent Activity</h5>
+                      <div className="space-y-4">
+                         {[1,2,3].map(i => (
+                            <div key={i} className="flex gap-3 items-center">
+                               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                               <div className="text-sm">
+                                  <p className="text-slate-200">New user registered</p>
+                                  <p className="text-xs text-slate-500">2 mins ago</p>
+                               </div>
+                            </div>
+                         ))}
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          
+          <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-16">
+                <h3 className="text-3xl md:text-5xl font-bold mb-4">Development Lifecycle</h3>
+                <p className="text-slate-400 text-lg">How we bring your idea to life</p>
+              </div>
+              
+              <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
+                 {[
+                   { 
+                     step: "01", title: "Architecture & RBAC", 
+                     desc: "We start by setting up a secure Project Structure. We implement Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have strictly separated permissions.",
+                     icon: Lock 
+                   },
+                   { 
+                     step: "02", title: "Embedded Development", 
+                     desc: "Core feature development using high-performance component architecture. We ensure all external APIs and microservices are deeply embedded for speed.",
+                     icon: Cpu 
+                   },
+                   { 
+                     step: "03", title: "SEO & Monetization", 
+                     desc: "Post-development, we handle the technical SEO Setup (Meta tags, Sitemap, SSR) and integrate AdSense Management for revenue generation immediately after launch.",
+                     icon: DollarSign 
+                   },
+                   { 
+                     step: "04", title: "Launch & Support", 
+                     desc: "After deployment, we provide 1 Month of Free Maintenance for all new customers to ensure a bug-free experience and smooth handover.",
+                     icon: HeartHandshake 
+                   }
+                 ].map((phase, i) => (
+                   <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                       <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-900 group-[.is-active]:bg-blue-600 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                          <phase.icon size={18}/>
+                       </div>
+                       <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
+                          <div className="flex items-center justify-between space-x-2 mb-2">
+                            <div className="font-bold text-slate-200">{phase.title}</div>
+                            <div className="font-mono text-xs text-slate-500">{phase.step}</div>
+                          </div>
+                          <div className="text-slate-400 text-sm leading-relaxed">{phase.desc}</div>
+                       </div>
+                   </div>
+                 ))}
+              </div>
+          </div>
+
+       </div>
+    </div>
+  );
+};
+
+const Services = () => {
+  const servicesList = [
+    { icon: Code, title: "Web Development", description: "Custom scalable websites with React/Next.js.", tags: ["React", "Enterprise"] },
+    { icon: BarChart3, title: "BI & Analytics", description: "Data visualization dashboards with Power BI.", tags: ["Data", "Insights"] },
+    { icon: Smartphone, title: "App Development", description: "Native iOS/Android apps with Flutter.", tags: ["Mobile", "Cross-Platform"] },
+    { icon: Server, title: "HRMS Systems", description: "Employee management and payroll automation.", tags: ["SaaS", "Automation"] },
+    { icon: Database, title: "ERP Solutions", description: "End-to-end business resource planning.", tags: ["Operations", "Scale"] },
+    { icon: ShieldCheck, title: "Cyber Security", description: "Enterprise grade security auditing.", tags: ["Audit", "Protection"] },
+  ];
+
+  return (
+    <section className="py-32 bg-slate-50 relative" id="services">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Our Core Services" subtitle="What We Deliver" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesList.map((service, index) => (
+            <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
+               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300 shadow-sm group-hover:shadow-blue-500/30">
+                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+               </div>
+               <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+               <p className="text-slate-600 text-base mb-8 leading-relaxed">{service.description}</p>
+               <div className="flex flex-wrap gap-2">
+                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-3 py-1 bg-slate-100 rounded-full text-slate-500 border border-slate-200">{t}</span>)}
+               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => (
+  <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
+    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20">
+      <div className="col-span-1 md:col-span-2">
+        <h2 className="text-4xl font-bold text-white mb-8 flex items-center">
+          <img src="/logo.png" alt="Hexanx Logo" className="w-12 h-12 object-contain mr-4 bg-white rounded-xl p-1" />
+          Hexanx
+        </h2>
+        <p className="max-w-md text-lg leading-relaxed mb-10 text-slate-500 font-light">
+          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
+        </p>
+        <div className="flex gap-4">
+           {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
+             { Icon: Mail, link: "mailto:contact@hexanx.in" }, 
+             { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
+             { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
+             { Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" }
+            ].map((social, i) => (
+             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
+               <social.Icon size={20}/>
+             </a>
+           ))}
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
+        <ul className="space-y-4 text-base">
+          {[
+             { name: "Services", path: "/services"}, 
+             { name: "Portfolio", path: "/work"}, 
+             { name: "Book Call", path: "/booking"}, 
+             { name: "Careers", path: "/careers"}, 
+             { name: "About Us", path: "/about"}
+          ].map(item => (
+             <li key={item.name} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
+                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> 
+                <Link to={item.path}>{item.name}</Link>
+             </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 className="text-white font-bold mb-8 text-xl">Contact</h3>
+        <ul className="space-y-6 text-base">
+          <li className="flex items-start gap-4">
+             <MapPin className="shrink-0 text-blue-500 mt-1" size={20}/>
+             <span>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
+          </li>
+          <li className="flex items-center gap-4">
+             <Mail className="shrink-0 text-blue-500" size={20}/>
+             <a href="mailto:contact@hexanx.in" className="hover:text-white transition-colors">contact@hexanx.in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
+      <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
+      
+      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
+        <p>Customised Software Development | Enterprise Software Development | Custom Software Development | Cloud Software Development | Desktop Software Development | Inventory Software Development | Hospital Management Software Development | Billing Software Development | Accounting Software Development | Gym Software | Gym Management Software | Transport Management Software | Truck Management Software | Restaurant Management Software | Real Estate Software Development | Lead Software Development | HRM Development | School Management Software | Raipur Chhattisgarh</p>
+        <p className="mt-2">Customised Website Development | Enterprise Website Development | Custom Website Development | Corporate Website Development | CryptoCurrency Website Development | Dental Website Development | Hospital Website Development | Magento E-commmerce Website Development | Shopify Website Development | Ecommerce Website Development | Custom Ecommerce Website Development | Real Estate Website Development | Raipur Website Development | Restaurant Website Development | School Website Development | Steel Website Development | Responsive Website Development | Affordable Website Development | AWS Development | CakePHP | CodeIgniter Development | WordPress Development | WooCommerce Development | WooCommerce Developers | OpenCart Developers | Python Development | Raipur Chhattisgarh</p>
+      </div>
+
+      <div className="flex gap-8 mt-4 md:mt-0">
+         <Link to="/privacy" className="hover:text-white cursor-pointer transition-colors">Privacy Policy</Link>
+         <Link to="/terms" className="hover:text-white cursor-pointer transition-colors">Terms of Service</Link>
+         <span className="hover:text-white cursor-pointer transition-colors">Sitemap</span>
+      </div>
+    </div>
+  </footer>
 );
 
 const Hero = ({ navigateTo }) => (
@@ -1030,7 +1531,7 @@ const Hero = ({ navigateTo }) => (
             Start Journey <Rocket className="ml-3 w-5 h-5" />
           </Button>
           <Button onClick={() => navigateTo('work')} className="h-16 px-10 text-lg">
-             View Case Studies
+              View Case Studies
           </Button>
         </div>
         
@@ -1122,359 +1623,6 @@ const Hero = ({ navigateTo }) => (
   </section>
 );
 
-const Services = () => {
-  const servicesList = [
-    { icon: Code, title: "Web Development", description: "Custom scalable websites with React/Next.js.", tags: ["React", "Enterprise"] },
-    { icon: BarChart3, title: "BI & Analytics", description: "Data visualization dashboards with Power BI.", tags: ["Data", "Insights"] },
-    { icon: Smartphone, title: "App Development", description: "Native iOS/Android apps with Flutter.", tags: ["Mobile", "Cross-Platform"] },
-    { icon: Server, title: "HRMS Systems", description: "Employee management and payroll automation.", tags: ["SaaS", "Automation"] },
-    { icon: Database, title: "ERP Solutions", description: "End-to-end business resource planning.", tags: ["Operations", "Scale"] },
-    { icon: ShieldCheck, title: "Cyber Security", description: "Enterprise grade security auditing.", tags: ["Audit", "Protection"] },
-  ];
-
-  return (
-    <section className="py-32 bg-slate-50 relative" id="services">
-      <div className="container mx-auto px-6">
-        <SectionTitle title="Our Core Services" subtitle="What We Deliver" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {servicesList.map((service, index) => (
-            <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
-               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300 shadow-sm group-hover:shadow-blue-500/30">
-                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
-               </div>
-               <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{service.title}</h3>
-               <p className="text-slate-600 text-base mb-8 leading-relaxed">{service.description}</p>
-               <div className="flex flex-wrap gap-2">
-                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-3 py-1 bg-slate-100 rounded-full text-slate-500 border border-slate-200">{t}</span>)}
-               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => (
-  <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
-    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20">
-      <div className="col-span-1 md:col-span-2">
-        <h2 className="text-4xl font-bold text-white mb-8 flex items-center">
-          <img src="/logo.png" alt="Hexanx Logo" className="w-12 h-12 object-contain mr-4 bg-white rounded-xl p-1" />
-          Hexanx
-        </h2>
-        <p className="max-w-md text-lg leading-relaxed mb-10 text-slate-500 font-light">
-          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
-        </p>
-        <div className="flex gap-4">
-           {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
-             { Icon: Mail, link: "mailto:contact@hexanx.in" }, 
-             { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
-             { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
-             { Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" }
-            ].map((social, i) => (
-             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
-               <social.Icon size={20}/>
-             </a>
-           ))}
-        </div>
-      </div>
-      
-      <div>
-        <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
-        <ul className="space-y-4 text-base">
-          {["Services", "Portfolio", "Book Call", "Careers", "About Us"].map(item => (
-             <li key={item} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
-                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> {item}
-             </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3 className="text-white font-bold mb-8 text-xl">Contact</h3>
-        <ul className="space-y-6 text-base">
-          <li className="flex items-start gap-4">
-             <MapPin className="shrink-0 text-blue-500 mt-1" size={20}/>
-             <span>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
-          </li>
-          <li className="flex items-center gap-4">
-             <Mail className="shrink-0 text-blue-500" size={20}/>
-             <span>contact@hexanx.com</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-    <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
-      <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
-      
-      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
-        <p>Customised Software Development | Enterprise Software Development | Custom Software Development | Cloud Software Development | Desktop Software Development | Inventory Software Development | Hospital Management Software Development | Billing Software Development | Accounting Software Development | Gym Software | Gym Management Software | Transport Management Software | Truck Management Software | Restaurant Management Software | Real Estate Software Development | Lead Software Development | HRM Development | School Management Software | Raipur Chhattisgarh</p>
-        <p className="mt-2">Customised Website Development | Enterprise Website Development | Custom Website Development | Corporate Website Development | CryptoCurrency Website Development | Dental Website Development | Hospital Website Development | Magento E-commmerce Website Development | Shopify Website Development | Ecommerce Website Development | Custom Ecommerce Website Development | Real Estate Website Development | Raipur Website Development | Restaurant Website Development | School Website Development | Steel Website Development | Responsive Website Development | Affordable Website Development | AWS Development | CakePHP | CodeIgniter Development | WordPress Development | WooCommerce Development | WooCommerce Developers | OpenCart Developers | Python Development | Raipur Chhattisgarh</p>
-      </div>
-
-      <div className="flex gap-8 mt-4 md:mt-0">
-         <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-         <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
-         <span className="hover:text-white cursor-pointer transition-colors">Sitemap</span>
-      </div>
-    </div>
-  </footer>
-);
-
-// --- 6. NEW PAGE COMPONENTS ---
-
-// INTERNSHIP PAGE
-const InternshipPage = () => {
-  const tracks = [
-    { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
-    { title: "App Development", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "Delivery App, Chat App" },
-    { title: "UI/UX Design", icon: LayoutDashboard, desc: "Learn Figma, prototyping, and user research.", projects: "Website Redesign, Mobile UI" },
-    { title: "Data Analytics", icon: BarChart3, desc: "Python, SQL, and Power BI visualization.", projects: "Sales Dashboard, Stock Predictor" }
-  ];
-
-  return (
-    <div className="pt-32 pb-20 min-h-screen bg-slate-50">
-      <div className="container mx-auto px-6">
-        <SectionTitle title="Student Internship Program" subtitle="Launch Your Career" />
-        
-        {/* Hero Section of Internship */}
-        <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50">
-           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-           <h3 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h3>
-           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-             Work on live projects, get mentorship from senior engineers, and earn a 
-             <span className="font-bold text-blue-600"> Professional Experience Certificate</span>.
-             Top performers get PPO (Pre-Placement Offers).
-           </p>
-           <Button primary>Apply for Batch 2025</Button>
-        </div>
-
-        {/* Tracks */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {tracks.map((t, i) => (
-            <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group">
-              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                <t.icon className="w-7 h-7 text-blue-600 group-hover:text-white" />
-              </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-2">{t.title}</h4>
-              <p className="text-slate-500 text-sm mb-4">{t.desc}</p>
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Projects:</div>
-              <p className="text-sm font-medium text-slate-700">{t.projects}</p>
-            </RevealOnScroll>
-          ))}
-        </div>
-
-        {/* Why Join */}
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-           {[
-             { title: "100% Practical", desc: "No boring theory. You code from Day 1." },
-             { title: "Code Reviews", desc: "Get your code reviewed by industry experts." },
-             { title: "Job Assistance", desc: "We help refine your resume and portfolio." }
-           ].map((item, i) => (
-             <div key={i} className="p-6">
-                <div className="text-4xl mb-4">🚀</div>
-                <h4 className="text-lg font-bold text-slate-900">{item.title}</h4>
-                <p className="text-slate-500">{item.desc}</p>
-             </div>
-           ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// CAREERS PAGE
-const CareersPage = () => {
-  const jobs = [
-    { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
-    { id: 2, title: "Backend Engineer (Node/Go)", type: "Full Time", loc: "Raipur", exp: "2+ Years", salary: "₹6L - ₹10L PA", skills: ["Node.js", "MongoDB", "AWS"] },
-    { id: 3, title: "UI/UX Designer", type: "Contract", loc: "Remote", exp: "2+ Years", salary: "Project Basis", skills: ["Figma", "Adobe XD"] },
-    { id: 4, title: "Business Development Manager", type: "Full Time", loc: "Raipur", exp: "1+ Years", salary: "₹4L - ₹8L PA", skills: ["Sales", "CRM", "English"] },
-  ];
-
-  return (
-    <div className="pt-32 pb-20 min-h-screen bg-slate-50">
-       <div className="container mx-auto px-6">
-          <SectionTitle title="Join Our Team" subtitle="Current Openings" />
-          
-          <div className="grid lg:grid-cols-3 gap-10">
-            {/* Job List */}
-            <div className="lg:col-span-2 space-y-6">
-              {jobs.map((job) => (
-                <div key={job.id} className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group cursor-pointer">
-                   <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{job.title}</h3>
-                        <div className="flex gap-4 text-sm text-slate-500 mt-2">
-                           <span className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</span>
-                           <span className="flex items-center gap-1"><MapPin size={14}/> {job.loc}</span>
-                           <span className="flex items-center gap-1"><Clock size={14}/> {job.exp}</span>
-                        </div>
-                      </div>
-                      <span className="px-4 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">{job.salary}</span>
-                   </div>
-                   <div className="flex flex-wrap gap-2 mb-6">
-                      {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
-                   </div>
-                   <Button className="w-full md:w-auto h-10 text-sm">View Details & Apply</Button>
-                </div>
-              ))}
-            </div>
-
-            {/* Culture Sidebar */}
-            <div className="space-y-6">
-               <div className="bg-slate-900 text-white p-8 rounded-3xl">
-                  <h4 className="text-xl font-bold mb-4">Why Hexanx?</h4>
-                  <ul className="space-y-4 text-slate-300">
-                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> 5 Days Working</li>
-                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Health Insurance</li>
-                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Performance Bonus</li>
-                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Yearly Trip</li>
-                  </ul>
-               </div>
-               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-3xl text-center">
-                  <h4 className="text-xl font-bold mb-2">Can't find a role?</h4>
-                  <p className="text-blue-100 mb-6 text-sm">Send your resume, we are always looking for talent.</p>
-                  <Button className="bg-white text-blue-600 w-full border-none hover:bg-blue-50">Email HR</Button>
-               </div>
-            </div>
-          </div>
-       </div>
-    </div>
-  );
-};
-
-// DEMO PAGE (Interactive Dashboard Showcase & Roadmap)
-const DemoPage = () => {
-  return (
-    <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
-       <div className="container mx-auto px-6">
-          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" />
-          <p className="text-center text-slate-400 mb-12 -mt-10 max-w-2xl mx-auto">
-            This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
-          </p>
-
-          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] mb-32">
-             {/* Fake Sidebar */}
-             <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
-                <div className="flex items-center gap-3 mb-8 px-2">
-                   <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
-                   <span className="font-bold">Admin Panel</span>
-                </div>
-                {['Overview', 'Analytics', 'Customers', 'Settings'].map((item, i) => (
-                   <div key={i} className={`p-3 rounded-xl cursor-pointer flex items-center gap-3 ${i === 0 ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
-                      <LayoutDashboard size={18} /> {item}
-                   </div>
-                ))}
-             </div>
-
-             {/* Main Content */}
-             <div className="flex-1 p-8 bg-slate-800">
-                <div className="flex justify-between items-center mb-8">
-                   <h3 className="text-2xl font-bold">Dashboard Overview</h3>
-                   <div className="flex gap-3">
-                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Search size={18} /></button>
-                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Bell size={18} /></button>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"></div>
-                   </div>
-                </div>
-
-                {/* Stats Row */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                   {[
-                     { label: "Total Revenue", val: "$45,231.89", change: "+20.1%", color: "text-green-400" },
-                     { label: "Active Users", val: "+2350", change: "+180.1%", color: "text-green-400" },
-                     { label: "Server Load", val: "34%", change: "-5%", color: "text-blue-400" },
-                   ].map((stat, i) => (
-                      <div key={i} className="bg-slate-700/50 p-6 rounded-2xl border border-slate-600 hover:bg-slate-700 transition-colors">
-                         <p className="text-slate-400 text-sm font-medium mb-1">{stat.label}</p>
-                         <h4 className="text-3xl font-bold mb-1">{stat.val}</h4>
-                         <span className={`text-xs ${stat.color}`}>{stat.change} from last month</span>
-                      </div>
-                   ))}
-                </div>
-
-                {/* Chart Area */}
-                <div className="grid md:grid-cols-3 gap-6 h-64">
-                   <div className="md:col-span-2 bg-slate-700/50 rounded-2xl border border-slate-600 p-6 flex items-end justify-between gap-2">
-                      {[30, 50, 45, 80, 60, 90, 70, 40, 60, 80, 50, 70].map((h, i) => (
-                         <div key={i} style={{height: `${h}%`}} className="w-full bg-blue-600/50 rounded-t hover:bg-blue-500 transition-colors cursor-pointer relative group">
-                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">{h}%</div>
-                         </div>
-                      ))}
-                   </div>
-                   <div className="bg-slate-700/50 rounded-2xl border border-slate-600 p-6">
-                      <h5 className="font-bold mb-4">Recent Activity</h5>
-                      <div className="space-y-4">
-                         {[1,2,3].map(i => (
-                            <div key={i} className="flex gap-3 items-center">
-                               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                               <div className="text-sm">
-                                  <p className="text-slate-200">New user registered</p>
-                                  <p className="text-xs text-slate-500">2 mins ago</p>
-                               </div>
-                            </div>
-                         ))}
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          
-          {/* UPDATED: Development Roadmap Section */}
-          <div className="max-w-5xl mx-auto">
-             <div className="text-center mb-16">
-               <h3 className="text-3xl md:text-5xl font-bold mb-4">Development Lifecycle</h3>
-               <p className="text-slate-400 text-lg">How we bring your idea to life</p>
-             </div>
-             
-             <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
-                {[
-                  { 
-                    step: "01", title: "Architecture & RBAC", 
-                    desc: "We start by setting up a secure Project Structure. We implement Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have strictly separated permissions.",
-                    icon: Lock 
-                  },
-                  { 
-                    step: "02", title: "Embedded Development", 
-                    desc: "Core feature development using high-performance component architecture. We ensure all external APIs and microservices are deeply embedded for speed.",
-                    icon: Cpu 
-                  },
-                  { 
-                    step: "03", title: "SEO & Monetization", 
-                    desc: "Post-development, we handle the technical SEO Setup (Meta tags, Sitemap, SSR) and integrate AdSense Management for revenue generation immediately after launch.",
-                    icon: DollarSign 
-                  },
-                  { 
-                    step: "04", title: "Launch & Support", 
-                    desc: "After deployment, we provide 1 Month of Free Maintenance for all new customers to ensure a bug-free experience and smooth handover.",
-                    icon: HeartHandshake 
-                  }
-                ].map((phase, i) => (
-                  <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-900 group-[.is-active]:bg-blue-600 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                         <phase.icon size={18}/>
-                      </div>
-                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
-                         <div className="flex items-center justify-between space-x-2 mb-2">
-                           <div className="font-bold text-slate-200">{phase.title}</div>
-                           <div className="font-mono text-xs text-slate-500">{phase.step}</div>
-                         </div>
-                         <div className="text-slate-400 text-sm leading-relaxed">{phase.desc}</div>
-                      </div>
-                  </div>
-                ))}
-             </div>
-          </div>
-
-       </div>
-    </div>
-  );
-};
-
-// SEO WRAPPER COMPONENT
 const PageSEO = ({ title, description, children }) => (
   <>
     <Helmet>
@@ -1513,7 +1661,7 @@ export default function App() {
     { path: '/internships', label: 'Internships' },
     { path: '/careers', label: 'Careers' },
     { path: '/demo', label: 'Live Demo' },
-    { path: '/booking', label: 'Book Call' }, // RENAMED FROM PRICING
+    { path: '/booking', label: 'Book Call' },
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -1580,7 +1728,7 @@ export default function App() {
               <WhyChooseUs />
               <Services />
               <PortfolioSection />
-              <BookingSection /> {/* Replaced Pricing with Booking here too */}
+              <BookingSection />
               <Testimonials />
               <CTABanner />
               <FAQ />
@@ -1589,6 +1737,7 @@ export default function App() {
 
           <Route path="/about" element={
             <PageSEO title="About Us" description="Learn about Hexanx's mission to transform businesses in Chhattisgarh and beyond.">
+              <PageHeader title="Who We Are" subtitle="About Us" />
               <About />
               <WhyChooseUs />
             </PageSEO>
@@ -1596,6 +1745,7 @@ export default function App() {
 
           <Route path="/services" element={
             <PageSEO title="Services" description="Web Development, App Development, and ERP Solutions in Raipur.">
+              <PageHeader title="What We Do" subtitle="Our Services" />
               <Services />
               <CTABanner />
             </PageSEO>
@@ -1603,6 +1753,7 @@ export default function App() {
 
           <Route path="/work" element={
             <PageSEO title="Portfolio" description="Check out our recent projects and case studies.">
+              <PageHeader title="Our Work" subtitle="Case Studies" />
               <PortfolioSection />
             </PageSEO>
           } />
@@ -1625,22 +1776,28 @@ export default function App() {
             </PageSEO>
           } />
           
-          <Route path="/booking" element={ // NEW ROUTE
+          <Route path="/booking" element={ 
             <PageSEO title="Book a Meeting" description="Schedule a consultation with our technical team.">
+              <PageHeader title="Schedule Consultation" subtitle="Book Now" />
               <BookingSection />
             </PageSEO>
           } />
 
           <Route path="/contact" element={
             <PageSEO title="Contact Us" description="Get a quote for your project. Visit us at Santoshi Nagar, Raipur.">
-               <section className="pt-40 pb-20 bg-slate-50">
+              <PageHeader title="Get In Touch" subtitle="Contact Us" />
+               <section className="pt-20 pb-20 bg-slate-50">
                   <div className="container mx-auto px-6">
-                     <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
                      <div className="max-w-4xl mx-auto"><ContactForm /></div>
                   </div>
                </section>
             </PageSEO>
           } />
+
+          {/* Legal Routes */}
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+
         </Routes>
       </main>
 
