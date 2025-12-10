@@ -6,8 +6,10 @@ import {
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
   ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Facebook, Instagram, Terminal,
-  TrendingUp, Target, Lightbulb, Map, Youtube
+  TrendingUp, Target, Lightbulb, Map, Youtube, Bell
 } from 'lucide-react';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
 const styles = `
@@ -877,63 +879,6 @@ const Pricing = () => (
   </section>
 );
 
-const Careers = () => {
-  const jobs = [
-    { title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years" },
-    { title: "Backend Engineer (Go/Node)", type: "Full Time", loc: "Raipur", exp: "3+ Years" },
-    { title: "UI/UX Designer", type: "Contract", loc: "Remote", exp: "2+ Years" },
-  ];
-  return (
-    <section className="py-32 bg-slate-900 text-white relative overflow-hidden" id="careers">
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px]"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
-               We Are Hiring
-            </div>
-            <h2 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">Join The <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Elite Team</span></h2>
-            <p className="text-slate-400 text-xl mb-10 leading-relaxed max-w-lg">
-              Work on challenging enterprise projects, cutting-edge tech stacks, and enjoy a culture of learning and growth.
-            </p>
-            <div className="flex gap-8 mb-12">
-               <div>
-                  <h4 className="text-4xl font-bold text-white mb-1">4.8</h4>
-                  <p className="text-xs text-slate-500 uppercase tracking-widest">Glassdoor</p>
-               </div>
-               <div className="w-px bg-white/10"></div>
-               <div>
-                  <h4 className="text-4xl font-bold text-white mb-1">96%</h4>
-                  <p className="text-xs text-slate-500 uppercase tracking-widest">Retention</p>
-               </div>
-            </div>
-            <Button primary className="border-none">View All Openings</Button>
-          </div>
-          
-          <div className="space-y-4">
-             {jobs.map((job, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all cursor-pointer group hover:-translate-x-2">
-                   <div className="flex justify-between items-start mb-3">
-                      <h4 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">{job.title}</h4>
-                      <ArrowRight className="text-slate-500 group-hover:text-white transition-colors"/>
-                   </div>
-                   <div className="flex gap-6 text-sm text-slate-400 mt-4">
-                      <span className="flex items-center gap-2"><Briefcase size={16}/> {job.type}</span>
-                      <span className="flex items-center gap-2"><MapPin size={16}/> {job.loc}</span>
-                      <span className="flex items-center gap-2"><Clock size={16}/> {job.exp}</span>
-                   </div>
-                </div>
-             ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
   return (
@@ -1011,7 +956,7 @@ const Hero = ({ navigateTo }) => (
           <Button primary onClick={() => navigateTo('contact')} className="h-16 px-10 text-lg">
             Start Journey <Rocket className="ml-3 w-5 h-5" />
           </Button>
-          <Button onClick={() => navigateTo('portfolio')} className="h-16 px-10 text-lg">
+          <Button onClick={() => navigateTo('work')} className="h-16 px-10 text-lg">
              View Case Studies
           </Button>
         </div>
@@ -1024,8 +969,8 @@ const Hero = ({ navigateTo }) => (
           ].map((stat, i) => (
              <div key={i}>
                 <h4 className="text-4xl font-black text-slate-900 mb-1 flex items-baseline">
-                    <CountUp end={stat.num} />
-                    <span className="text-blue-600 text-2xl ml-1">+</span>
+                   <CountUp end={stat.num} />
+                   <span className="text-blue-600 text-2xl ml-1">+</span>
                 </h4>
                 <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
              </div>
@@ -1204,12 +1149,229 @@ const Footer = () => (
   </footer>
 );
 
-// --- 6. MAIN APP COMPONENT ---
+// --- 6. NEW PAGE COMPONENTS ---
+
+// INTERNSHIP PAGE
+const InternshipPage = () => {
+  const tracks = [
+    { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
+    { title: "App Development", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "Delivery App, Chat App" },
+    { title: "UI/UX Design", icon: LayoutDashboard, desc: "Learn Figma, prototyping, and user research.", projects: "Website Redesign, Mobile UI" },
+    { title: "Data Analytics", icon: BarChart3, desc: "Python, SQL, and Power BI visualization.", projects: "Sales Dashboard, Stock Predictor" }
+  ];
+
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-slate-50">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Student Internship Program" subtitle="Launch Your Career" />
+        
+        {/* Hero Section of Internship */}
+        <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50">
+           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+           <h3 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h3>
+           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+             Work on live projects, get mentorship from senior engineers, and earn a 
+             <span className="font-bold text-blue-600"> Professional Experience Certificate</span>.
+             Top performers get PPO (Pre-Placement Offers).
+           </p>
+           <Button primary>Apply for Batch 2025</Button>
+        </div>
+
+        {/* Tracks */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {tracks.map((t, i) => (
+            <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group">
+              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
+                <t.icon className="w-7 h-7 text-blue-600 group-hover:text-white" />
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 mb-2">{t.title}</h4>
+              <p className="text-slate-500 text-sm mb-4">{t.desc}</p>
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Projects:</div>
+              <p className="text-sm font-medium text-slate-700">{t.projects}</p>
+            </RevealOnScroll>
+          ))}
+        </div>
+
+        {/* Why Join */}
+        <div className="grid md:grid-cols-3 gap-8 text-center">
+           {[
+             { title: "100% Practical", desc: "No boring theory. You code from Day 1." },
+             { title: "Code Reviews", desc: "Get your code reviewed by industry experts." },
+             { title: "Job Assistance", desc: "We help refine your resume and portfolio." }
+           ].map((item, i) => (
+             <div key={i} className="p-6">
+                <div className="text-4xl mb-4">🚀</div>
+                <h4 className="text-lg font-bold text-slate-900">{item.title}</h4>
+                <p className="text-slate-500">{item.desc}</p>
+             </div>
+           ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// CAREERS PAGE
+const CareersPage = () => {
+  const jobs = [
+    { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
+    { id: 2, title: "Backend Engineer (Node/Go)", type: "Full Time", loc: "Raipur", exp: "2+ Years", salary: "₹6L - ₹10L PA", skills: ["Node.js", "MongoDB", "AWS"] },
+    { id: 3, title: "UI/UX Designer", type: "Contract", loc: "Remote", exp: "2+ Years", salary: "Project Basis", skills: ["Figma", "Adobe XD"] },
+    { id: 4, title: "Business Development Manager", type: "Full Time", loc: "Raipur", exp: "1+ Years", salary: "₹4L - ₹8L PA", skills: ["Sales", "CRM", "English"] },
+  ];
+
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-slate-50">
+       <div className="container mx-auto px-6">
+          <SectionTitle title="Join Our Team" subtitle="Current Openings" />
+          
+          <div className="grid lg:grid-cols-3 gap-10">
+            {/* Job List */}
+            <div className="lg:col-span-2 space-y-6">
+              {jobs.map((job) => (
+                <div key={job.id} className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group cursor-pointer">
+                   <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{job.title}</h3>
+                        <div className="flex gap-4 text-sm text-slate-500 mt-2">
+                           <span className="flex items-center gap-1"><Briefcase size={14}/> {job.type}</span>
+                           <span className="flex items-center gap-1"><MapPin size={14}/> {job.loc}</span>
+                           <span className="flex items-center gap-1"><Clock size={14}/> {job.exp}</span>
+                        </div>
+                      </div>
+                      <span className="px-4 py-1 bg-green-50 text-green-700 rounded-full text-xs font-bold border border-green-100">{job.salary}</span>
+                   </div>
+                   <div className="flex flex-wrap gap-2 mb-6">
+                      {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
+                   </div>
+                   <Button className="w-full md:w-auto h-10 text-sm">View Details & Apply</Button>
+                </div>
+              ))}
+            </div>
+
+            {/* Culture Sidebar */}
+            <div className="space-y-6">
+               <div className="bg-slate-900 text-white p-8 rounded-3xl">
+                  <h4 className="text-xl font-bold mb-4">Why Hexanx?</h4>
+                  <ul className="space-y-4 text-slate-300">
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> 5 Days Working</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Health Insurance</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Performance Bonus</li>
+                    <li className="flex gap-3"><CheckCircle2 className="text-blue-400 shrink-0"/> Yearly Trip</li>
+                  </ul>
+               </div>
+               <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-3xl text-center">
+                  <h4 className="text-xl font-bold mb-2">Can't find a role?</h4>
+                  <p className="text-blue-100 mb-6 text-sm">Send your resume, we are always looking for talent.</p>
+                  <Button className="bg-white text-blue-600 w-full border-none hover:bg-blue-50">Email HR</Button>
+               </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  );
+};
+
+// DEMO PAGE (Interactive Dashboard Showcase)
+const DemoPage = () => {
+  return (
+    <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
+       <div className="container mx-auto px-6">
+          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" />
+          <p className="text-center text-slate-400 mb-12 -mt-10 max-w-2xl mx-auto">
+            This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
+          </p>
+
+          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+             {/* Fake Sidebar */}
+             <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
+                <div className="flex items-center gap-3 mb-8 px-2">
+                   <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
+                   <span className="font-bold">Admin Panel</span>
+                </div>
+                {['Overview', 'Analytics', 'Customers', 'Settings'].map((item, i) => (
+                   <div key={i} className={`p-3 rounded-xl cursor-pointer flex items-center gap-3 ${i === 0 ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
+                      <LayoutDashboard size={18} /> {item}
+                   </div>
+                ))}
+             </div>
+
+             {/* Main Content */}
+             <div className="flex-1 p-8 bg-slate-800">
+                <div className="flex justify-between items-center mb-8">
+                   <h3 className="text-2xl font-bold">Dashboard Overview</h3>
+                   <div className="flex gap-3">
+                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Search size={18} /></button>
+                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Bell size={18} /></button>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"></div>
+                   </div>
+                </div>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                   {[
+                     { label: "Total Revenue", val: "$45,231.89", change: "+20.1%", color: "text-green-400" },
+                     { label: "Active Users", val: "+2350", change: "+180.1%", color: "text-green-400" },
+                     { label: "Server Load", val: "34%", change: "-5%", color: "text-blue-400" },
+                   ].map((stat, i) => (
+                      <div key={i} className="bg-slate-700/50 p-6 rounded-2xl border border-slate-600 hover:bg-slate-700 transition-colors">
+                         <p className="text-slate-400 text-sm font-medium mb-1">{stat.label}</p>
+                         <h4 className="text-3xl font-bold mb-1">{stat.val}</h4>
+                         <span className={`text-xs ${stat.color}`}>{stat.change} from last month</span>
+                      </div>
+                   ))}
+                </div>
+
+                {/* Chart Area */}
+                <div className="grid md:grid-cols-3 gap-6 h-64">
+                   <div className="md:col-span-2 bg-slate-700/50 rounded-2xl border border-slate-600 p-6 flex items-end justify-between gap-2">
+                      {[30, 50, 45, 80, 60, 90, 70, 40, 60, 80, 50, 70].map((h, i) => (
+                         <div key={i} style={{height: `${h}%`}} className="w-full bg-blue-600/50 rounded-t hover:bg-blue-500 transition-colors cursor-pointer relative group">
+                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">{h}%</div>
+                         </div>
+                      ))}
+                   </div>
+                   <div className="bg-slate-700/50 rounded-2xl border border-slate-600 p-6">
+                      <h5 className="font-bold mb-4">Recent Activity</h5>
+                      <div className="space-y-4">
+                         {[1,2,3].map(i => (
+                            <div key={i} className="flex gap-3 items-center">
+                               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                               <div className="text-sm">
+                                  <p className="text-slate-200">New user registered</p>
+                                  <p className="text-xs text-slate-500">2 mins ago</p>
+                               </div>
+                            </div>
+                         ))}
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  );
+};
+
+// SEO WRAPPER COMPONENT
+const PageSEO = ({ title, description, children }) => (
+  <>
+    <Helmet>
+      <title>{title} | Hexanx IT Solutions</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={window.location.href} />
+    </Helmet>
+    {children}
+  </>
+);
+
+// --- 7. MAIN APP COMPONENT ---
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -1217,62 +1379,67 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navigateTo = (tab) => {
-    setActiveTab(tab);
+  // Helper to scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [location.pathname]);
 
   const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'contact', label: 'Contact' },
+    { path: '/', label: 'Home' },
+    { path: '/services', label: 'Services' },
+    { path: '/work', label: 'Work' },
+    { path: '/internships', label: 'Internships' },
+    { path: '/careers', label: 'Careers' },
+    { path: '/demo', label: 'Live Demo' },
+    { path: '/contact', label: 'Contact' },
   ];
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white">
-      {/* Top Ticker */}
       <TopTicker />
 
-      {/* Navbar */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-[33px]`}> {/* Added top offset for ticker */}
+      {/* --- NAVIGATION WITH REAL LINKS --- */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-[33px]`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="text-2xl font-bold flex items-center cursor-pointer group" onClick={() => navigateTo('home')}>
+          
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-bold flex items-center group">
             <div className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
-                <img src="/logo.png" alt="Hexanx" className="w-8 h-8 object-contain" />
+              <img src="/logo.png" alt="Hexanx" className="w-8 h-8 object-contain" />
             </div>
             <span className="tracking-tight text-slate-900 font-extrabold text-xl">Hexanx</span>
-          </div>
+          </Link>
 
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center space-x-2">
             <div className={`rounded-full px-2 py-1.5 mr-6 flex transition-all ${scrolled ? 'bg-slate-100/80' : 'bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg'}`}>
-                {navLinks.map((link) => (
-                <button
-                    key={link.id}
-                    onClick={() => navigateTo(link.id)}
-                    className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === link.id ? 'bg-slate-900 text-white shadow-md transform scale-105' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'}`}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-300 ${location.pathname === link.path ? 'bg-slate-900 text-white shadow-md transform scale-105' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'}`}
                 >
-                    {link.label}
-                </button>
-                ))}
+                  {link.label}
+                </Link>
+              ))}
             </div>
-            <Button className="py-3 px-8 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigateTo('contact')}>Get Quote</Button>
+            <Button className="py-3 px-6 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigate('/contact')}>Get Quote</Button>
           </div>
 
-          <button className="md:hidden text-slate-900 p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {/* Mobile Menu Toggle */}
+          <button className="lg:hidden text-slate-900 p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 p-6 flex flex-col space-y-4 shadow-2xl md:hidden animate-slide-in">
+          <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 p-6 flex flex-col space-y-4 shadow-2xl lg:hidden animate-slide-in">
             {navLinks.map((link) => (
-              <button key={link.id} onClick={() => navigateTo(link.id)} className="text-left py-4 px-6 rounded-2xl font-bold text-lg bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+              <Link key={link.path} to={link.path} className="text-left py-4 px-6 rounded-2xl font-bold text-lg bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                 {link.label}
-              </button>
+              </Link>
             ))}
           </div>
         )}
@@ -1280,73 +1447,73 @@ export default function App() {
 
       <style>{styles}</style>
 
-      {/* Main Content Area */}
+      {/* --- ROUTES (This creates the separate URLs Google needs) --- */}
       <main>
-        {activeTab === 'home' && (
-          <>
-            <Hero navigateTo={navigateTo} />
-            <TechStack />
-            <About />
-            <WhyChooseUs />
-            <Services />
-            <PortfolioSection />
-            <Pricing />
-            <Testimonials />
-            <CTABanner />
-            <Careers />
-            <FAQ />
-            <section className="py-32 bg-slate-50 relative">
-              <div className="container mx-auto px-6">
-                 <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
-                 <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
-                    <div className="lg:col-span-1 space-y-6">
-                       <div className="glass-card p-10 rounded-[2rem] h-full border-t-4 border-t-blue-600 flex flex-col justify-between bg-white">
-                          <div>
-                            <h3 className="text-3xl font-bold text-slate-900 mb-10">Contact Info</h3>
-                            <div className="space-y-10">
-                               {[
-                                 { icon: Mail, label: "Email Us", val: "contact@hexanx.com", sub: "support@hexanx.com", bg: "blue" },
-                                 { icon: MapPin, label: "Visit Us", val: "Santoshi Nagar, Raipur", sub: "Chhattisgarh 492001", bg: "green" }
-                               ].map((c, i) => (
-                                 <div key={i} className="flex items-start group">
-                                    <div className={`w-14 h-14 bg-${c.bg}-50 rounded-2xl flex items-center justify-center mr-6 shrink-0 transition-transform group-hover:scale-110 duration-300`}>
-                                       <c.icon className={`w-7 h-7 text-${c.bg}-600`} />
-                                    </div>
-                                    <div>
-                                       <h4 className="text-slate-900 font-bold mb-1 text-lg">{c.label}</h4>
-                                       <p className="text-slate-600 font-medium">{c.val}</p>
-                                       <p className="text-slate-400 text-sm">{c.sub}</p>
-                                    </div>
-                                 </div>
-                               ))}
-                            </div>
-                          </div>
-                          <div className="mt-12 pt-8 border-t border-slate-100">
-                             <p className="text-xs text-slate-400 text-center font-medium uppercase tracking-wider">We respect your privacy. No spam.</p>
-                          </div>
-                       </div>
-                    </div>
-                    <div className="lg:col-span-2">
-                       <ContactForm />
-                    </div>
-                 </div>
-              </div>
-            </section>
-          </>
-        )}
-        {activeTab === 'about' && <About />}
-        {activeTab === 'services' && <Services />}
-        {activeTab === 'portfolio' && <PortfolioSection />}
-        {activeTab === 'pricing' && <Pricing />}
-        {activeTab === 'careers' && <Careers />}
-        {activeTab === 'contact' && (
-           <section className="pt-40 pb-20 bg-slate-50">
-              <div className="container mx-auto px-6">
-                 <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
-                 <div className="max-w-4xl mx-auto"><ContactForm /></div>
-              </div>
-           </section>
-        )}
+        <Routes>
+          <Route path="/" element={
+            <PageSEO title="Home" description="Hexanx is Raipur's premier IT consultancy for Enterprise Software and Web Development.">
+              <Hero navigateTo={(path) => navigate('/' + path)} />
+              <TechStack />
+              <About />
+              <WhyChooseUs />
+              <Services />
+              <PortfolioSection />
+              <Pricing />
+              <Testimonials />
+              <CTABanner />
+              <FAQ />
+            </PageSEO>
+          } />
+
+          <Route path="/about" element={
+            <PageSEO title="About Us" description="Learn about Hexanx's mission to transform businesses in Chhattisgarh and beyond.">
+              <About />
+              <WhyChooseUs />
+            </PageSEO>
+          } />
+
+          <Route path="/services" element={
+            <PageSEO title="Services" description="Web Development, App Development, and ERP Solutions in Raipur.">
+              <Services />
+              <CTABanner />
+            </PageSEO>
+          } />
+
+          <Route path="/work" element={
+            <PageSEO title="Portfolio" description="Check out our recent projects and case studies.">
+              <PortfolioSection />
+            </PageSEO>
+          } />
+
+          <Route path="/careers" element={
+            <PageSEO title="Careers" description="Join the Hexanx team. View open positions for Developers and Designers.">
+              <CareersPage />
+            </PageSEO>
+          } />
+
+          <Route path="/internships" element={
+            <PageSEO title="Internship Program" description="Apply for 6 Month Industrial Training and Internship at Hexanx.">
+              <InternshipPage />
+            </PageSEO>
+          } />
+
+          <Route path="/demo" element={
+            <PageSEO title="Live Demo" description="Experience our interactive dashboard technology live.">
+              <DemoPage />
+            </PageSEO>
+          } />
+
+          <Route path="/contact" element={
+            <PageSEO title="Contact Us" description="Get a quote for your project. Visit us at Santoshi Nagar, Raipur.">
+               <section className="pt-40 pb-20 bg-slate-50">
+                  <div className="container mx-auto px-6">
+                     <SectionTitle title="Start Your Project" subtitle="Get In Touch" />
+                     <div className="max-w-4xl mx-auto"><ContactForm /></div>
+                  </div>
+               </section>
+            </PageSEO>
+          } />
+        </Routes>
       </main>
 
       <Footer />
