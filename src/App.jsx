@@ -164,55 +164,80 @@ const styles = `
 
 // --- 2. DATA CONSTANTS ---
 
-// UPDATED PROJECT LIST
 const MOCK_PROJECTS = [
   {
-    id: 1, title: "MedCare Pro System", category: "app",
+    id: 1,
+    title: "MedCare Pro System",
+    category: "app",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-    client: "Apollo Pharmacy", tags: ["Flutter", "Node.js"], description: "Complete inventory and billing mobile application.", stats: { users: "10k+", uptime: "99.9%" }
+    client: "Apollo Pharmacy Chain",
+    tags: ["Flutter", "Node.js", "MongoDB"],
+    description: "A complete inventory and billing mobile application for a chain of 500+ pharmacies. Features include real-time stock tracking, QR billing, and automated purchase orders.",
+    stats: { users: "10k+", transactions: "1M/day", uptime: "99.9%" }
   },
   {
-    id: 2, title: "Global News Portal", category: "web",
-    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800",
-    client: "Daily Times", tags: ["WordPress", "PHP", "AMP"], description: "High-traffic news website with ad integration and CMS.", stats: { views: "1M/mo", speed: "0.8s" }
+    id: 2,
+    title: "FinTech Dashboard",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    client: "Global Finance Corp",
+    tags: ["React", "D3.js", "AWS"],
+    description: "High-performance analytics dashboard for stock market visualization. Processes millions of data points per second with WebSocket connections.",
+    stats: { users: "5k+", speed: "20ms", uptime: "99.99%" }
   },
   {
-    id: 3, title: "Steel Plant ERP", category: "erp",
+    id: 3,
+    title: "Manufacture ERP",
+    category: "erp",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-    client: "Tata Steel Sub", tags: ["Angular", ".NET", "SQL"], description: "End-to-end ERP solution managing supply chain and shifts.", stats: { efficiency: "+45%" }
+    client: "Tata Steel Subsidiary",
+    tags: ["Angular", ".NET Core", "SQL Server"],
+    description: "End-to-end ERP solution managing supply chain, employee shifts, machine maintenance, and output logistics for a major steel plant.",
+    stats: { users: "2k+", efficiency: "+45%", uptime: "99.9%" }
   },
   {
-    id: 4, title: "AutoBot AI Customer Support", category: "ai",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-    client: "TechSolutions", tags: ["Python", "OpenAI API", "React"], description: "Automated customer service bot handling 80% of queries.", stats: { savings: "60%" }
+    id: 4,
+    title: "EduTech Learning App",
+    category: "app",
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
+    client: "LearnX Academy",
+    tags: ["React Native", "Firebase", "WebRTC"],
+    description: "Live classroom application with whiteboard sharing, quiz modules, and AI-driven student progress tracking.",
+    stats: { users: "50k+", classes: "500/day", uptime: "99.9%" }
   },
   {
-    id: 5, title: "E-Kart Multi-Vendor", category: "web",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=800",
-    client: "RetailHub", tags: ["MERN Stack", "Stripe"], description: "Scalable e-commerce platform with admin dashboard.", stats: { sales: "$50k/mo" }
+    id: 5,
+    title: "Retail Analytics BI",
+    category: "bi",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    client: "SuperMart Retail",
+    tags: ["Power BI", "Azure", "Python"],
+    description: "Custom Power BI connectors to visualize sales data across 200 stores, predicting trends and optimizing inventory levels.",
+    stats: { users: "100+", insights: "Real-time", uptime: "100%" }
   },
   {
-    id: 6, title: "CRM Automation Suite", category: "erp",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
-    client: "SalesForce Team", tags: ["Vue.js", "Firebase"], description: "Lead tracking and automated follow-up system.", stats: { leads: "+200%" }
-  },
-  {
-    id: 7, title: "Smart Home Hub (Coming Soon)", category: "iot",
-    image: "https://images.unsplash.com/photo-1558002038-10917738179d?auto=format&fit=crop&q=80&w=800",
-    client: "Future Homes", tags: ["IoT", "Embedded C"], description: "Next-gen smart device controller.", stats: { status: "In Dev" }
+    id: 6,
+    title: "Logistics Fleet Manager",
+    category: "web",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+    client: "FastMove Logistics",
+    tags: ["Vue.js", "Go", "PostGIS"],
+    description: "Real-time fleet tracking system using GPS telemetry. route optimization algorithms reduced fuel costs by 30%.",
+    stats: { users: "1k+", vehicles: "500+", uptime: "99.9%" }
   }
 ];
 
 const TESTIMONIALS = [
-  { id: 1, name: "Amit Verma", role: "Owner, Verma Textiles", content: "We needed a custom inventory system. Hexanx delivered a solution that perfectly fits our workflow.", avatar: "AV" },
-  { id: 2, name: "Sneha Gupta", role: "Founder, GreenLeaf", content: "Their team built our e-commerce store from scratch. The design is beautiful and sales have increased.", avatar: "SG" },
-  { id: 3, name: "Rohan Mehta", role: "Director, Mehta Transport", content: "Managing our fleet was a headache until Hexanx built our logistics dashboard. Excellent service.", avatar: "RM" }
+  { id: 1, name: "Amit Verma", role: "Owner, Verma Textiles, Surat", content: "We needed a custom inventory system for our textile business. Hexanx delivered a solution that perfectly fits our workflow. Highly recommended for SMEs!", avatar: "AV" },
+  { id: 2, name: "Sneha Gupta", role: "Founder, GreenLeaf Organics, Pune", content: "Their team built our e-commerce store from scratch. The design is beautiful and sales have increased by 40% since launch. Great support too.", avatar: "SG" },
+  { id: 3, name: "Rohan Mehta", role: "Director, Mehta Transport, Indore", content: "Managing our fleet was a headache until Hexanx built our logistics dashboard. Now we track everything in real-time. Excellent service.", avatar: "RM" }
 ];
 
 const FAQS = [
-  { q: "Do you provide post-launch support?", a: "Yes, we offer 6 months of free critical support with every enterprise project." },
-  { q: "What technologies do you specialize in?", a: "MERN Stack, Flutter, Python, .NET, WordPress, and AI Integration." },
-  { q: "Can you take over an existing project?", a: "Absolutely. We specialize in legacy modernization and code optimization." }
+  { q: "Do you provide post-launch support?", a: "Yes, we offer 6 months of free critical support with every enterprise project. We also have dedicated AMC packages." },
+  { q: "What technologies do you specialize in?", a: "We are full-stack experts. Frontend: React, Angular, Vue, Flutter. Backend: Node.js, Python, .NET, Go. Database: MongoDB, PostgreSQL." },
+  { q: "How long does it take to build a custom ERP?", a: "A basic module takes 2-3 months, while a full-scale enterprise ERP can take 6-12 months." },
+  { q: "Can you take over an existing project?", a: "Absolutely. We specialize in legacy modernization. We will audit your current code and optimize it." }
 ];
 
 // --- 3. REUSABLE UI COMPONENTS ---
@@ -284,61 +309,6 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-const ApplicationModal = ({ isOpen, onClose, role, type = "Job" }) => {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', resume: '' });
-  const [status, setStatus] = useState('idle');
-  // ⚠️⚠️⚠️ THIS IS YOUR GOOGLE SCRIPT URL ⚠️⚠️⚠️
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setStatus('submitting');
-    
-    const data = new FormData();
-    data.append('formType', 'application'); 
-    data.append('Name', form.name);
-    data.append('Email', form.email);
-    data.append('Phone', form.phone);
-    data.append('Role', role);
-    data.append('Resume', form.resume);
-
-    fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: data, mode: "no-cors" })
-    .then(() => {
-        setStatus('success');
-        setTimeout(() => { setStatus('idle'); onClose(); setForm({ name: '', email: '', phone: '', resume: '' }) }, 3000);
-    })
-    .catch(() => setStatus('error'));
-  };
-
-  return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Apply for ${role}`}>
-       {status === 'success' ? (
-          <div className="text-center py-10">
-             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle2 className="text-green-600 w-10 h-10"/></div>
-             <h3 className="text-2xl font-bold text-slate-900">Application Sent!</h3>
-             <p className="text-slate-500 mt-2">Our HR team will review your resume.</p>
-          </div>
-       ) : (
-         <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-               <div className="input-group"><label className="text-xs font-bold text-slate-500">Full Name</label><input required className="w-full border border-slate-200 rounded-xl px-4 py-3 bg-slate-50 focus:outline-none" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} placeholder="John Doe"/></div>
-               <div className="input-group"><label className="text-xs font-bold text-slate-500">Phone</label><input required className="w-full border border-slate-200 rounded-xl px-4 py-3 bg-slate-50 focus:outline-none" value={form.phone} onChange={e=>setForm({...form, phone: e.target.value})} placeholder="+91 98765 43210"/></div>
-            </div>
-            <div className="input-group"><label className="text-xs font-bold text-slate-500">Email</label><input required type="email" className="w-full border border-slate-200 rounded-xl px-4 py-3 bg-slate-50 focus:outline-none" value={form.email} onChange={e=>setForm({...form, email: e.target.value})} placeholder="john@example.com"/></div>
-            <div className="input-group">
-               <label className="text-xs font-bold text-slate-500">Resume Link (GDrive/LinkedIn)</label>
-               <div className="flex items-center bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus-within:ring-2 ring-blue-100">
-                  <ExternalLink size={18} className="text-slate-400 mr-2"/>
-                  <input required type="url" className="bg-transparent w-full focus:outline-none" value={form.resume} onChange={e=>setForm({...form, resume: e.target.value})} placeholder="https://docs.google.com/..."/>
-               </div>
-            </div>
-            <Button primary type="submit" className="w-full mt-4" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending...' : 'Submit Application'}</Button>
-         </form>
-       )}
-    </Modal>
   );
 };
 
@@ -713,14 +683,14 @@ const PortfolioSection = () => {
 
   const filteredProjects = filter === 'all' 
     ? MOCK_PROJECTS 
-    : MOCK_PROJECTS.filter(p => p.category === filter || p.category === 'iot'); // Include IoT in all
+    : MOCK_PROJECTS.filter(p => p.category === filter);
 
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'web', label: 'Web Apps' },
     { id: 'app', label: 'Mobile Apps' },
-    { id: 'erp', label: 'ERP/CRM' },
-    { id: 'ai', label: 'AI & Automation' },
+    { id: 'erp', label: 'ERP Systems' },
+    { id: 'bi', label: 'Analytics' },
   ];
 
   return (
@@ -748,27 +718,18 @@ const PortfolioSection = () => {
           {filteredProjects.map((project) => (
             <div 
               key={project.id}
-              onClick={() => project.category !== 'iot' && setSelectedProject(project)}
-              className={`group bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 ${project.category === 'iot' ? 'opacity-90 cursor-default' : 'cursor-pointer hover:-translate-y-2'}`}
+              onClick={() => setSelectedProject(project)}
+              className="group bg-white rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100"
             >
               <div className="relative h-72 overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className={`w-full h-full object-cover transition-transform duration-700 ${project.category !== 'iot' ? 'group-hover:scale-110' : ''}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
-                {project.category === 'iot' ? (
-                   <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm flex flex-col items-center justify-center">
-                      <Lock className="text-white w-12 h-12 mb-2"/>
-                      <span className="text-white font-bold text-xl uppercase tracking-widest border-2 border-white px-6 py-2 rounded-full">Coming Soon</span>
-                   </div>
-                ) : (
-                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                     <span className="text-white font-bold flex items-center gap-2 text-lg">View Case Study <ArrowRight size={20}/></span>
-                   </div>
-                )}
-
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                  <span className="text-white font-bold flex items-center gap-2 text-lg">View Case Study <ArrowRight size={20}/></span>
+                </div>
                 <div className="absolute top-6 right-6 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-600 shadow-lg">
                   {project.category}
                 </div>
@@ -829,65 +790,371 @@ const PortfolioSection = () => {
   );
 };
 
-// --- UPDATED CTA BANNER (FIXED LINKS) ---
-const CTABanner = () => {
-  const navigate = useNavigate();
-  return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
-      <div className="absolute inset-0 bg-grid opacity-20"></div>
-      
-      {/* Floating Shapes */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+const Testimonials = () => {
+  const [active, setActive] = useState(0);
+  const timeoutRef = useRef(null);
+  const next = () => setActive((prev) => (prev + 1) % TESTIMONIALS.length);
+  const prev = () => setActive((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
-      <div className="container mx-auto px-6 relative z-10 text-center text-white">
-        <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
-        <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-          Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <button onClick={() => navigate('/contact')} className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
-          <button onClick={() => navigate('/booking')} className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+  useEffect(() => {
+    timeoutRef.current = setTimeout(next, 6000);
+    return () => clearTimeout(timeoutRef.current);
+  }, [active]);
+
+  return (
+    <section className="py-32 bg-slate-50 relative overflow-hidden">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Client Success Stories" subtitle="Testimonials" />
+        <div className="max-w-6xl mx-auto relative">
+          <div className="absolute top-1/2 -left-4 md:-left-16 -translate-y-1/2 z-10">
+            <button onClick={prev} className="p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:bg-slate-50 transition-colors"><ChevronLeft className="w-6 h-6 text-slate-600" /></button>
+          </div>
+          <div className="absolute top-1/2 -right-4 md:-right-16 -translate-y-1/2 z-10">
+            <button onClick={next} className="p-4 rounded-full bg-white border border-slate-200 shadow-xl hover:bg-slate-50 transition-colors"><ChevronRight className="w-6 h-6 text-slate-600" /></button>
+          </div>
+          <div className="relative overflow-hidden min-h-[400px]">
+            {TESTIMONIALS.map((t, i) => {
+              let position = 'translate-x-full opacity-0 scale-95';
+              if (i === active) position = 'translate-x-0 opacity-100 scale-100';
+              if (i === (active - 1 + TESTIMONIALS.length) % TESTIMONIALS.length) position = '-translate-x-full opacity-0 scale-95';
+              return (
+                <div key={t.id} className={`absolute top-0 left-0 w-full transition-all duration-700 ease-in-out ${position} px-4`}>
+                   <div className="bg-white rounded-[3rem] p-10 md:p-20 border border-slate-100 relative shadow-xl mx-auto max-w-4xl">
+                      <div className="absolute top-10 left-10 text-9xl text-blue-100 font-serif leading-none opacity-50 font-black">"</div>
+                      <div className="relative z-10 text-center">
+                        <div className="flex justify-center gap-1 mb-8">{[1,2,3,4,5].map(s => <Star key={s} className="w-6 h-6 text-yellow-400 fill-current" />)}</div>
+                        <p className="text-2xl md:text-4xl font-medium text-slate-800 leading-relaxed mb-10 tracking-tight">
+                          {t.content}
+                        </p>
+                        <div className="flex items-center justify-center gap-6">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">{t.avatar}</div>
+                          <div className="text-left">
+                            <h5 className="font-bold text-slate-900 text-lg">{t.name}</h5>
+                            <p className="text-slate-500">{t.role}</p>
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// --- LEGAL PAGES ---
-const PrivacyPolicy = () => (
-  <div className="pt-32 pb-20 min-h-screen bg-white">
-     <div className="container mx-auto px-6 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-        <div className="prose prose-lg text-slate-600">
-           <p className="mb-4">Last updated: December 2025</p>
-           <p className="mb-4">At Hexanx, we value your privacy. This policy explains how we handle your data.</p>
-           <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">1. Information We Collect</h3>
-           <p className="mb-4">We collect information you provide directly to us via contact forms, job applications, or meeting bookings. This includes Name, Email, Phone Number, and Project Details.</p>
-           <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">2. How We Use Information</h3>
-           <p className="mb-4">To respond to inquiries, schedule meetings, and evaluate job applications. We do not sell your data to third parties.</p>
+// --- UPDATED BOOKING SECTION (CONNECTED TO GOOGLE SHEETS) ---
+const BookingSection = () => {
+  const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  // YOUR SPECIFIC GOOGLE SCRIPT URL
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const data = new FormData();
+    data.append('formType', 'booking'); // Tell script this is a booking form
+    data.append('Name', form.name);
+    data.append('Email', form.email);
+    data.append('Service', form.service);
+    data.append('MeetingDate', form.date);
+    data.append('MeetingTime', form.time);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: data,
+        mode: "no-cors"
+    })
+    .then(() => {
+        setSubmitted(true);
+        setForm({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+    })
+    .catch((error) => console.error('Error!', error.message));
+  };
+
+  return (
+    <section className="py-32 bg-white" id="booking">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Book Your Consultation" subtitle="Schedule A Call" />
+        <div className="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-[2rem] border border-slate-100 shadow-2xl relative overflow-hidden">
+          
+           {submitted && (
+             <div className="absolute inset-0 bg-white/95 backdrop-blur z-20 flex flex-col items-center justify-center text-center p-8 animate-slide-in">
+                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-12 h-12 text-green-600" />
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-2">Meeting Requested!</h3>
+                <p className="text-slate-500 mb-8">We have received your details. Our team will confirm the slot shortly.</p>
+                <Button onClick={() => setSubmitted(false)}>Book Another</Button>
+             </div>
+           )}
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-3xl font-bold text-slate-900 mb-4">Let's Discuss Your Idea</h3>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                Schedule a free 30-minute consultation with our lead architects. We'll discuss your project requirements, technical feasibility, and provide a roadmap.
+              </p>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"><Lock size={16}/></span>
+                  NDA Protected Conversation
+                </li>
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"><DollarSign size={16}/></span>
+                  Free Cost Estimation
+                </li>
+                <li className="flex items-center gap-3 text-slate-700 font-medium">
+                  <span className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"><Code size={16}/></span>
+                  Technical Roadmap Included
+                </li>
+              </ul>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Your Name</label>
+                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" placeholder="Enter name" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} />
+              </div>
+              <div className="space-y-2 input-group">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Service Required</label>
+                <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.service} onChange={e=>setForm({...form, service: e.target.value})}>
+                   <option>Web Development</option>
+                   <option>Mobile App</option>
+                   <option>ERP / SaaS</option>
+                   <option>Digital Marketing / SEO</option>
+                </select>
+              </div>
+              
+              {/* --- THIS LINE IS THE FIX (grid-cols-1 on mobile) --- */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2 input-group">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Preferred Date</label>
+                  <input required type="date" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.date} onChange={e=>setForm({...form, date: e.target.value})} />
+                </div>
+                <div className="space-y-2 input-group">
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Time</label>
+                  <input required type="time" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.time} onChange={e=>setForm({...form, time: e.target.value})} />
+                </div>
+              </div>
+              
+              <Button primary type="submit" className="w-full mt-4">Confirm Booking</Button>
+            </form>
+          </div>
         </div>
-     </div>
-  </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState(0);
+  return (
+    <section className="py-32 bg-white">
+      <div className="container mx-auto px-6 max-w-4xl">
+        <SectionTitle title="Common Questions" subtitle="FAQ" />
+        <div className="space-y-4">
+          {FAQS.map((item, i) => (
+            <div key={i} className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
+              <button onClick={() => setOpenIndex(openIndex === i ? -1 : i)} className="w-full flex items-center justify-between p-8 text-left hover:bg-slate-100 transition-colors">
+                <span className="font-bold text-xl text-slate-900">{item.q}</span>
+                <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="p-8 pt-0 text-slate-600 leading-relaxed text-lg">{item.a}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CTABanner = () => (
+  <section className="py-24 relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
+    <div className="absolute inset-0 bg-grid opacity-20"></div>
+    
+    {/* Floating Shapes */}
+    <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
+    <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+
+    <div className="container mx-auto px-6 relative z-10 text-center text-white">
+      <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
+      <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+        Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <button className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
+        <button className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+      </div>
+    </div>
+  </section>
 );
 
-const TermsOfService = () => (
-  <div className="pt-32 pb-20 min-h-screen bg-white">
-     <div className="container mx-auto px-6 max-w-4xl">
-        <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
-        <div className="prose prose-lg text-slate-600">
-           <p className="mb-4">By accessing the Hexanx website, you agree to these terms.</p>
-           <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">1. Services</h3>
-           <p className="mb-4">Hexanx provides software development services. Project terms are defined in separate contracts per client.</p>
-           <h3 className="text-xl font-bold text-slate-900 mt-8 mb-4">2. Intellectual Property</h3>
-           <p className="mb-4">All content on this website is the property of Hexanx unless otherwise stated.</p>
+const Hero = ({ navigateTo }) => (
+  <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-white mesh-gradient">
+    <style>{styles}</style>
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 bg-grid opacity-60"></div>
+    </div>
+
+    <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-20 items-center">
+      <div className="space-y-12 animate-slide-in">
+        <div className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-blue-100 shadow-sm hover:shadow-md transition-shadow cursor-default">
+           <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Accepting Projects in India</span>
         </div>
-     </div>
-  </div>
+        
+        <h1 className="text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-tighter">
+          BUILDING <br/>
+          DIGITAL <br/>
+          <TextRotator />
+        </h1>
+        
+        <p className="text-2xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-8">
+          We are <strong>Hexanx</strong>. Raipur's premier IT consultancy. We architect enterprise software & scalable digital ecosystems.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-6">
+          <Button primary onClick={() => navigateTo('contact')} className="h-16 px-10 text-lg">
+            Start Journey <Rocket className="ml-3 w-5 h-5" />
+          </Button>
+          <Button onClick={() => navigateTo('work')} className="h-16 px-10 text-lg">
+             View Case Studies
+          </Button>
+        </div>
+        
+        <div className="grid grid-cols-3 gap-12 pt-10 border-t border-slate-200/60">
+          {[
+             { num: 50, label: "Clients", icon: Users },
+             { num: 99, label: "Success", icon: ShieldCheck },
+             { num: 24, label: "Support", icon: Clock }
+          ].map((stat, i) => (
+             <div key={i}>
+                <h4 className="text-4xl font-black text-slate-900 mb-1 flex items-baseline">
+                   <CountUp end={stat.num} />
+                   <span className="text-blue-600 text-2xl ml-1">+</span>
+                </h4>
+                <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
+             </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="hidden lg:block relative animate-float perspective-1000">
+         {/* Main Dashboard Card */}
+         <div className="relative z-10 glass-card p-3 rounded-[2.5rem] shadow-2xl rotate-y-12 hover:rotate-y-0 transition-transform duration-700">
+            <div className="bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-200 relative aspect-[4/3] flex flex-col shadow-inner">
+               {/* Browser Header */}
+               <div className="h-14 bg-white border-b border-slate-200 flex items-center px-8 gap-3">
+                  <div className="flex gap-2"><div className="w-3 h-3 rounded-full bg-red-400"></div><div className="w-3 h-3 rounded-full bg-yellow-400"></div><div className="w-3 h-3 rounded-full bg-green-400"></div></div>
+                  <div className="mx-auto bg-slate-100 px-6 py-1.5 rounded-full text-[10px] text-slate-400 font-mono flex items-center gap-2"><ShieldCheck size={10}/> secure | api.hexanx.com</div>
+               </div>
+               {/* Dashboard Content */}
+               <div className="p-8 grid grid-cols-2 gap-6 bg-slate-50/50 flex-1 relative overflow-hidden">
+                   <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
+                   
+                   <div className="col-span-2 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                      <div className="flex justify-between items-center mb-6">
+                         <div><h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Total Revenue</h5><h3 className="text-3xl font-bold text-slate-900">$2,450,900</h3></div>
+                         <div className="p-4 bg-green-50 rounded-2xl"><TrendingUp className="text-green-600 w-6 h-6"/></div>
+                      </div>
+                      <div className="h-24 w-full bg-gradient-to-t from-blue-50 to-transparent rounded-xl border-b border-blue-100 relative overflow-hidden">
+                          <div className="absolute bottom-0 left-0 w-full h-full flex items-end justify-between px-2 pb-2">
+                              {[40, 70, 50, 90, 60, 80, 50].map((h, i) => (
+                                  <div key={i} style={{height: `${h}%`}} className="w-8 bg-blue-500/20 rounded-t-sm"></div>
+                              ))}
+                          </div>
+                      </div>
+                   </div>
+                   
+                   <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                      <div className="p-3 bg-purple-50 rounded-2xl w-fit mb-4"><Users size={20} className="text-purple-600"/></div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-1">+14.2%</h3>
+                        <p className="text-xs text-green-500 font-bold uppercase tracking-wide">User Growth</p>
+                      </div>
+                   </div>
+                   
+                   <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                      <div className="p-3 bg-orange-50 rounded-2xl w-fit mb-4"><Zap size={20} className="text-orange-600"/></div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-1">24ms</h3>
+                        <p className="text-xs text-green-500 font-bold uppercase tracking-wide">Latency</p>
+                      </div>
+                   </div>
+               </div>
+            </div>
+         </div>
+         
+         {/* Floating Notification Cards */}
+         <div className="absolute -left-12 top-1/4 glass-card p-5 rounded-2xl animate-float shadow-xl backdrop-blur-xl border border-white/80" style={{animationDelay: '1s'}}>
+            <div className="flex items-center gap-4">
+               <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">R</div>
+               <div>
+                  <p className="text-sm font-bold text-slate-900">New Project</p>
+                  <p className="text-xs text-slate-500">2 min ago</p>
+               </div>
+            </div>
+         </div>
+         
+         <div className="absolute -right-8 bottom-1/3 glass-card p-5 rounded-2xl animate-float shadow-xl backdrop-blur-xl border border-white/80" style={{animationDelay: '2.5s'}}>
+             <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600"><Server size={24}/></div>
+                <div>
+                   <p className="text-sm font-bold text-slate-900">System Stable</p>
+                   <p className="text-xs text-green-600 font-bold">99.99% Uptime</p>
+                </div>
+             </div>
+         </div>
+      </div>
+    </div>
+  </section>
 );
 
-// --- UPDATED FOOTER (FIXED LINKS & EMAIL) ---
+const Services = () => {
+  const servicesList = [
+    { icon: Code, title: "Web Development", description: "Custom scalable websites with React/Next.js.", tags: ["React", "Enterprise"] },
+    { icon: BarChart3, title: "BI & Analytics", description: "Data visualization dashboards with Power BI.", tags: ["Data", "Insights"] },
+    { icon: Smartphone, title: "App Development", description: "Native iOS/Android apps with Flutter.", tags: ["Mobile", "Cross-Platform"] },
+    { icon: Server, title: "HRMS Systems", description: "Employee management and payroll automation.", tags: ["SaaS", "Automation"] },
+    { icon: Database, title: "ERP Solutions", description: "End-to-end business resource planning.", tags: ["Operations", "Scale"] },
+    { icon: ShieldCheck, title: "Cyber Security", description: "Enterprise grade security auditing.", tags: ["Audit", "Protection"] },
+  ];
+
+  return (
+    <section className="py-32 bg-slate-50 relative" id="services">
+      <div className="container mx-auto px-6">
+        <SectionTitle title="Our Core Services" subtitle="What We Deliver" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesList.map((service, index) => (
+            <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
+               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300 shadow-sm group-hover:shadow-blue-500/30">
+                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+               </div>
+               <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+               <p className="text-slate-600 text-base mb-8 leading-relaxed">{service.description}</p>
+               <div className="flex flex-wrap gap-2">
+                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-3 py-1 bg-slate-100 rounded-full text-slate-500 border border-slate-200">{t}</span>)}
+               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Footer = () => (
   <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
     <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20">
@@ -897,7 +1164,7 @@ const Footer = () => (
           Hexanx
         </h2>
         <p className="max-w-md text-lg leading-relaxed mb-10 text-slate-500 font-light">
-          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world.
+          Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
         </p>
         <div className="flex gap-4">
            {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
@@ -916,17 +1183,9 @@ const Footer = () => (
       <div>
         <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
         <ul className="space-y-4 text-base">
-          {[
-            { label: "Services", path: "/services" },
-            { label: "Portfolio", path: "/work" },
-            { label: "Book Call", path: "/booking" },
-            { label: "Careers", path: "/careers" },
-            { label: "About Us", path: "/about" }
-          ].map((item, i) => (
-             <li key={i}>
-                <Link to={item.path} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
-                   <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> {item.label}
-                </Link>
+          {["Services", "Portfolio", "Book Call", "Careers", "About Us"].map(item => (
+             <li key={item} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
+                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> {item}
              </li>
           ))}
         </ul>
@@ -941,7 +1200,7 @@ const Footer = () => (
           </li>
           <li className="flex items-center gap-4">
              <Mail className="shrink-0 text-blue-500" size={20}/>
-             <span>contact@hexanx.in</span>
+             <span>contact@hexanx.com</span>
           </li>
         </ul>
       </div>
@@ -949,9 +1208,15 @@ const Footer = () => (
     
     <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
       <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
+      
+      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
+        <p>Customised Software Development | Enterprise Software Development | Custom Software Development | Cloud Software Development | Desktop Software Development | Inventory Software Development | Hospital Management Software Development | Billing Software Development | Accounting Software Development | Gym Software | Gym Management Software | Transport Management Software | Truck Management Software | Restaurant Management Software | Real Estate Software Development | Lead Software Development | HRM Development | School Management Software | Raipur Chhattisgarh</p>
+        <p className="mt-2">Customised Website Development | Enterprise Website Development | Custom Website Development | Corporate Website Development | CryptoCurrency Website Development | Dental Website Development | Hospital Website Development | Magento E-commmerce Website Development | Shopify Website Development | Ecommerce Website Development | Custom Ecommerce Website Development | Real Estate Website Development | Raipur Website Development | Restaurant Website Development | School Website Development | Steel Website Development | Responsive Website Development | Affordable Website Development | AWS Development | CakePHP | CodeIgniter Development | WordPress Development | WooCommerce Development | WooCommerce Developers | OpenCart Developers | Python Development | Raipur Chhattisgarh</p>
+      </div>
+
       <div className="flex gap-8 mt-4 md:mt-0">
-         <Link to="/privacy" className="hover:text-white cursor-pointer transition-colors">Privacy Policy</Link>
-         <Link to="/terms" className="hover:text-white cursor-pointer transition-colors">Terms of Service</Link>
+         <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
+         <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
          <span className="hover:text-white cursor-pointer transition-colors">Sitemap</span>
       </div>
     </div>
@@ -962,14 +1227,6 @@ const Footer = () => (
 
 // INTERNSHIP PAGE
 const InternshipPage = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('');
-
-  const handleApply = (role) => {
-    setSelectedRole(role);
-    setModalOpen(true);
-  };
-
   const tracks = [
     { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
     { title: "App Development", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "Delivery App, Chat App" },
@@ -983,7 +1240,7 @@ const InternshipPage = () => {
         <SectionTitle title="Student Internship Program" subtitle="Launch Your Career" />
         
         {/* Hero Section of Internship */}
-        <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50 animate-slide-in">
+        <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50">
            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
            <h3 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h3>
            <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
@@ -991,13 +1248,13 @@ const InternshipPage = () => {
              <span className="font-bold text-blue-600"> Professional Experience Certificate</span>.
              Top performers get PPO (Pre-Placement Offers).
            </p>
-           <Button primary onClick={() => handleApply("Industrial Training Batch")}>Apply for Batch 2025</Button>
+           <Button primary>Apply for Batch 2025</Button>
         </div>
 
         {/* Tracks */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {tracks.map((t, i) => (
-            <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group cursor-pointer" onClick={() => handleApply(t.title + " Internship")}>
+            <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group">
               <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
                 <t.icon className="w-7 h-7 text-blue-600 group-hover:text-white" />
               </div>
@@ -1024,21 +1281,12 @@ const InternshipPage = () => {
            ))}
         </div>
       </div>
-      <ApplicationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} role={selectedRole} type="Internship" />
     </div>
   );
 };
 
 // CAREERS PAGE
 const CareersPage = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('');
-
-  const handleApply = (role) => {
-    setSelectedRole(role);
-    setModalOpen(true);
-  };
-
   const jobs = [
     { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
     { id: 2, title: "Backend Engineer (Node/Go)", type: "Full Time", loc: "Raipur", exp: "2+ Years", salary: "₹6L - ₹10L PA", skills: ["Node.js", "MongoDB", "AWS"] },
@@ -1070,7 +1318,7 @@ const CareersPage = () => {
                    <div className="flex flex-wrap gap-2 mb-6">
                       {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
                    </div>
-                   <Button className="w-full md:w-auto h-10 text-sm" onClick={() => handleApply(job.title)}>Apply Now</Button>
+                   <Button className="w-full md:w-auto h-10 text-sm">View Details & Apply</Button>
                 </div>
               ))}
             </div>
@@ -1089,12 +1337,11 @@ const CareersPage = () => {
                <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-3xl text-center">
                   <h4 className="text-xl font-bold mb-2">Can't find a role?</h4>
                   <p className="text-blue-100 mb-6 text-sm">Send your resume, we are always looking for talent.</p>
-                  <Button className="bg-white text-blue-600 w-full border-none hover:bg-blue-50" onClick={() => handleApply("General Application")}>Email HR</Button>
+                  <Button className="bg-white text-blue-600 w-full border-none hover:bg-blue-50">Email HR</Button>
                </div>
             </div>
           </div>
        </div>
-       <ApplicationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} role={selectedRole} type="Job" />
     </div>
   );
 };
@@ -1392,18 +1639,6 @@ export default function App() {
                      <div className="max-w-4xl mx-auto"><ContactForm /></div>
                   </div>
                </section>
-            </PageSEO>
-          } />
-
-          <Route path="/privacy" element={
-            <PageSEO title="Privacy Policy" description="Hexanx Privacy Policy">
-               <PrivacyPolicy />
-            </PageSEO>
-          } />
-
-          <Route path="/terms" element={
-            <PageSEO title="Terms of Service" description="Hexanx Terms of Service">
-               <TermsOfService />
             </PageSEO>
           } />
         </Routes>
