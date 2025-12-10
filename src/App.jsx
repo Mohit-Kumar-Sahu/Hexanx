@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Code, BarChart3, Smartphone, LayoutDashboard, Database, Server, 
-  Stethoscope, Globe, Menu, X, ArrowRight, Mail, MapPin, Phone, 
-  CheckCircle2, Zap, Rocket, Layers, ChevronRight, Cpu, 
+  Globe, Menu, X, ArrowRight, Mail, MapPin, 
+  CheckCircle2, Zap, Rocket, ChevronRight, Cpu, 
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
-  ExternalLink, Calendar, Clock, Award, ShieldCheck, Search, Send, 
-  MessageCircle, Linkedin, Facebook, Instagram, Terminal,
-  TrendingUp, Target, Lightbulb, Map, Youtube, Bell, Lock, DollarSign,
+  Clock, Award, ShieldCheck, Search, Send, 
+  MessageCircle, Linkedin, Instagram,
+  TrendingUp, Target, Youtube, Bell, Lock, DollarSign,
   HeartHandshake, FileText, Wifi
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -60,23 +60,10 @@ const styles = `
     overflow: hidden;
   }
 
-  .glass-card-hover::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, #2563eb, #ec4899);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
   .glass-card-hover:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
     border-color: rgba(37, 99, 235, 0.3);
-  }
-
-  .glass-card-hover:hover::before {
-    opacity: 1;
   }
 
   /* --- Advanced Backgrounds --- */
@@ -278,17 +265,17 @@ const SectionTitle = ({ title, subtitle, center = true }) => (
   </RevealOnScroll>
 );
 
-// NEW: Reusable Page Header with Animation
-const PageHeader = ({ title, subtitle, bgClass = "bg-slate-50" }) => (
-  <div className={`relative pt-48 pb-24 overflow-hidden ${bgClass}`}>
-    <div className="absolute inset-0 bg-grid opacity-30"></div>
-    {/* Animated Floating Blobs */}
+// UPDATED: Page Header with Home-Like Animation (Mesh Gradient + Floating Blobs)
+const PageHeader = ({ title, subtitle }) => (
+  <div className="relative pt-48 pb-24 overflow-hidden mesh-gradient">
+    <div className="absolute inset-0 bg-grid opacity-60"></div>
+    {/* Animated Floating Blobs similar to Hero */}
     <div className="absolute top-20 right-20 w-72 h-72 bg-blue-400/20 rounded-full blur-[80px] animate-float"></div>
     <div className="absolute bottom-10 left-20 w-64 h-64 bg-purple-400/20 rounded-full blur-[80px] animate-float" style={{animationDelay: "2s"}}></div>
     
-    <div className="container mx-auto px-6 relative z-10 text-center">
-      <div className="inline-block px-4 py-1.5 rounded-full border border-slate-200 bg-white/50 backdrop-blur mb-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{subtitle}</span>
+    <div className="container mx-auto px-6 relative z-10 text-center animate-slide-in">
+      <div className="inline-block px-4 py-1.5 rounded-full border border-slate-200 bg-white/50 backdrop-blur mb-6 shadow-sm">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-600">{subtitle}</span>
       </div>
       <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight">{title}</h1>
       <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
@@ -433,22 +420,22 @@ const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-1 input-group">
                 <label className="text-xs font-bold text-slate-500 uppercase">Full Name</label>
-                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.name} onChange={e=>setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
+                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.name} onChange={e=>setFormData({...formData, name: e.target.value})} placeholder="Your Name" />
             </div>
             <div className="space-y-1 input-group">
                 <label className="text-xs font-bold text-slate-500 uppercase">Contact Number</label>
-                <input required type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.contact} onChange={e=>setFormData({...formData, contact: e.target.value})} placeholder="+91 98765 43210" />
+                <input required type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.contact} onChange={e=>setFormData({...formData, contact: e.target.value})} placeholder="Your Phone Number" />
             </div>
           </div>
 
           <div className="space-y-1 input-group">
               <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
-              <input required type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.email} onChange={e=>setFormData({...formData, email: e.target.value})} placeholder="john@example.com" />
+              <input required type="email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.email} onChange={e=>setFormData({...formData, email: e.target.value})} placeholder="Your Email" />
           </div>
 
           <div className="space-y-1 input-group">
               <label className="text-xs font-bold text-slate-500 uppercase">Resume Link (Google Drive / LinkedIn)</label>
-              <input required type="url" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.resumeUrl} onChange={e=>setFormData({...formData, resumeUrl: e.target.value})} placeholder="https://drive.google.com/..." />
+              <input required type="url" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={formData.resumeUrl} onChange={e=>setFormData({...formData, resumeUrl: e.target.value})} placeholder="https://..." />
               <p className="text-[10px] text-slate-400">Please ensure the link is publicly accessible.</p>
           </div>
           
@@ -778,24 +765,22 @@ const WhyChooseUs = () => (
   </section>
 );
 
-const PortfolioSection = () => {
+const PortfolioSection = ({ showTitle = true }) => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // Updated Filters based on user request
   const categories = [
     { id: 'all', label: 'All' },
     { id: 'wordpress', label: 'WordPress' },
     { id: 'news', label: 'News' },
-    { id: 'ecommerce', label: 'E-commerce' }, // Mapped to 'web' in mocks for now, or add new data
+    { id: 'ecommerce', label: 'E-commerce' },
     { id: 'erp', label: 'ERP' },
-    { id: 'crm', label: 'CRM' }, // Map to 'app' or create new
+    { id: 'crm', label: 'CRM' },
     { id: 'data', label: 'Automation' },
     { id: 'ai', label: 'AI Integration' },
     { id: 'smart', label: 'Smart Devices' }
   ];
 
-  // Logic to show "Coming Soon" for smart devices
   const isComingSoon = filter === 'smart';
   const filteredProjects = filter === 'all' 
     ? MOCK_PROJECTS 
@@ -804,7 +789,7 @@ const PortfolioSection = () => {
   return (
     <section className="py-32 bg-white relative" id="portfolio">
       <div className="container mx-auto px-6">
-        <SectionTitle title="Our Recent Work" subtitle="Case Studies" />
+        {showTitle && <SectionTitle title="Our Recent Work" subtitle="Case Studies" />}
         
         <div className="flex flex-wrap justify-center gap-3 mb-16">
           {categories.map(cat => (
@@ -966,7 +951,7 @@ const Testimonials = () => {
 };
 
 // --- UPDATED BOOKING SECTION (CONNECTED TO GOOGLE SHEETS) ---
-const BookingSection = () => {
+const BookingSection = ({ showTitle = true }) => {
   const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
   const [submitted, setSubmitted] = useState(false);
 
@@ -999,7 +984,7 @@ const BookingSection = () => {
   return (
     <section className="py-32 bg-white" id="booking">
       <div className="container mx-auto px-6">
-        <SectionTitle title="Book Your Consultation" subtitle="Schedule A Call" />
+        {showTitle && <SectionTitle title="Book Your Consultation" subtitle="Schedule A Call" />}
         <div className="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-[2rem] border border-slate-100 shadow-2xl relative overflow-hidden">
           
            {submitted && (
@@ -1038,7 +1023,7 @@ const BookingSection = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2 input-group">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Your Name</label>
-                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" placeholder="Enter name" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} />
+                <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" placeholder="Your Name" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} />
               </div>
               <div className="space-y-2 input-group">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Service Required</label>
@@ -1391,7 +1376,7 @@ const DemoPage = () => {
   );
 };
 
-const Services = () => {
+const Services = ({ showTitle = true }) => {
   const servicesList = [
     { icon: Code, title: "Web Development", description: "Custom scalable websites with React/Next.js.", tags: ["React", "Enterprise"] },
     { icon: BarChart3, title: "BI & Analytics", description: "Data visualization dashboards with Power BI.", tags: ["Data", "Insights"] },
@@ -1404,7 +1389,7 @@ const Services = () => {
   return (
     <section className="py-32 bg-slate-50 relative" id="services">
       <div className="container mx-auto px-6">
-        <SectionTitle title="Our Core Services" subtitle="What We Deliver" />
+        {showTitle && <SectionTitle title="Our Core Services" subtitle="What We Deliver" />}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesList.map((service, index) => (
             <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
@@ -1746,7 +1731,7 @@ export default function App() {
           <Route path="/services" element={
             <PageSEO title="Services" description="Web Development, App Development, and ERP Solutions in Raipur.">
               <PageHeader title="What We Do" subtitle="Our Services" />
-              <Services />
+              <Services showTitle={false} />
               <CTABanner />
             </PageSEO>
           } />
@@ -1754,7 +1739,7 @@ export default function App() {
           <Route path="/work" element={
             <PageSEO title="Portfolio" description="Check out our recent projects and case studies.">
               <PageHeader title="Our Work" subtitle="Case Studies" />
-              <PortfolioSection />
+              <PortfolioSection showTitle={false} />
             </PageSEO>
           } />
 
@@ -1779,7 +1764,7 @@ export default function App() {
           <Route path="/booking" element={ 
             <PageSEO title="Book a Meeting" description="Schedule a consultation with our technical team.">
               <PageHeader title="Schedule Consultation" subtitle="Book Now" />
-              <BookingSection />
+              <BookingSection showTitle={false} />
             </PageSEO>
           } />
 
