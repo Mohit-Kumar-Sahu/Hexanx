@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Explicitly allow the branding files (Just to be safe)
+Allow: /logo.png
+Allow: /favicon.ico
+Allow: /android-chrome-512x512.png
+Allow: /site.webmanifest
+
+# Disallow internal admin or account pages (Optional/Example)
+Disallow: /account/
+Disallow: /admin/
+
+# Point Google directly to your Sitemap
+Sitemap: https://www.hexanx.in/sitemap.xml
