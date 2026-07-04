@@ -248,7 +248,6 @@ const Button = ({ children, primary = false, onClick, className = "", type = "bu
   </button>
 );
 
-// UPDATED: SectionTitle now supports dark mode
 const SectionTitle = ({ title, subtitle, center = true, dark = false }) => (
   <RevealOnScroll className={`mb-20 ${center ? 'text-center' : 'text-left'}`}>
     <div className={`inline-flex items-center px-4 py-2 rounded-full ${dark ? 'bg-slate-800 border-slate-700 text-blue-400' : 'bg-white border-blue-100 text-blue-600'} border text-xs font-bold uppercase tracking-widest mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
@@ -266,11 +265,9 @@ const SectionTitle = ({ title, subtitle, center = true, dark = false }) => (
   </RevealOnScroll>
 );
 
-// Page Header with Home-Like Animation (Mesh Gradient + Floating Blobs)
 const PageHeader = ({ title, subtitle }) => (
   <div className="relative pt-48 pb-24 overflow-hidden mesh-gradient">
     <div className="absolute inset-0 bg-grid opacity-60"></div>
-    {/* Animated Floating Blobs similar to Hero */}
     <div className="absolute top-20 right-20 w-72 h-72 bg-blue-400/20 rounded-full blur-[80px] animate-float"></div>
     <div className="absolute bottom-10 left-20 w-64 h-64 bg-purple-400/20 rounded-full blur-[80px] animate-float" style={{animationDelay: "2s"}}></div>
     
@@ -318,7 +315,6 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   );
 };
 
-// --- Helper for scroll animations ---
 const RevealOnScroll = ({ children, className = "" }) => {
   const ref = useRef(null);
   useEffect(() => {
@@ -332,7 +328,6 @@ const RevealOnScroll = ({ children, className = "" }) => {
   return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
 };
 
-// --- Helper for Number Counting ---
 const CountUp = ({ end, duration = 2000 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -356,7 +351,6 @@ const CountUp = ({ end, duration = 2000 }) => {
   return <span ref={ref}>{count}</span>;
 };
 
-// --- Helper for Text Rotating ---
 const TextRotator = () => {
   const words = ["Empires", "Solutions", "Future", "Dreams"];
   const [index, setIndex] = useState(0);
@@ -367,7 +361,6 @@ const TextRotator = () => {
   return <span className="gradient-text transition-all duration-500 inline-block min-w-[200px]">{words[index]}</span>;
 }
 
-// --- NEW: RESUME APPLICATION FORM (Connects to Sheets) ---
 const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
   const [formData, setFormData] = useState({ name: '', email: '', contact: '', resumeUrl: '', position: defaultPosition });
   const [status, setStatus] = useState('idle');
@@ -379,7 +372,7 @@ const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
     setStatus('submitting');
     
     const data = new FormData();
-    data.append('formType', 'resume'); // Identifier for script
+    data.append('formType', 'resume');
     data.append('Name', formData.name);
     data.append('Email', formData.email);
     data.append('Contact', formData.contact);
@@ -449,7 +442,6 @@ const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
     </div>
   );
 };
-
 
 // --- 4. FEATURE COMPONENTS ---
 
@@ -769,6 +761,9 @@ const WhyChooseUs = () => (
 const PortfolioSection = ({ showTitle = true }) => {
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  
+  // 1. ADDED USE-NAVIGATE HOOK HERE
+  const navigate = useNavigate();
 
   const categories = [
     { id: 'all', label: 'All' },
@@ -887,7 +882,13 @@ const PortfolioSection = ({ showTitle = true }) => {
             </div>
             <div className="flex justify-end gap-4 pt-6 border-t border-slate-100">
                <Button onClick={() => setSelectedProject(null)}>Close</Button>
-               <Button primary>Start Similar Project</Button>
+               {/* 2. MODIFIED START PROJECT BUTTON HERE */}
+               <Button primary onClick={() => {
+                 setSelectedProject(null);
+                 navigate('/booking');
+               }}>
+                 Start Similar Project
+               </Button>
             </div>
           </div>
         )}
@@ -951,7 +952,6 @@ const Testimonials = () => {
   );
 };
 
-// --- UPDATED BOOKING SECTION (CONNECTED TO GOOGLE SHEETS) ---
 const BookingSection = ({ showTitle = true }) => {
   const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -962,7 +962,7 @@ const BookingSection = ({ showTitle = true }) => {
     e.preventDefault();
     
     const data = new FormData();
-    data.append('formType', 'booking'); // Tell script this is a booking form
+    data.append('formType', 'booking'); 
     data.append('Name', form.name);
     data.append('Email', form.email);
     data.append('Service', form.service);
@@ -1106,7 +1106,6 @@ const CTABanner = () => {
 
 // --- 6. PAGE COMPONENTS ---
 
-// INTERNSHIP PAGE
 const InternshipPage = () => {
   const tracks = [
     { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
@@ -1130,7 +1129,6 @@ const InternshipPage = () => {
            </p>
         </div>
 
-        {/* Tracks */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {tracks.map((t, i) => (
             <RevealOnScroll key={i} className="bg-white p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-2 group">
@@ -1145,7 +1143,6 @@ const InternshipPage = () => {
           ))}
         </div>
 
-        {/* Live Resume Form for Internships */}
         <div className="max-w-2xl mx-auto">
             <h3 className="text-center text-3xl font-bold mb-8">Apply for Internship</h3>
             <ResumeApplicationForm defaultPosition="Internship Applicant" />
@@ -1155,7 +1152,6 @@ const InternshipPage = () => {
   );
 };
 
-// CAREERS PAGE - FIXED RESPONSIVENESS
 const CareersPage = () => {
   const jobs = [
     { id: 1, title: "Senior React Developer", type: "Full Time", loc: "Remote", exp: "4+ Years", salary: "₹12L - ₹18L PA", skills: ["React", "Redux", "TypeScript"] },
@@ -1170,7 +1166,6 @@ const CareersPage = () => {
        
        <div className="container mx-auto px-4 md:px-6 mt-10 lg:-mt-10 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Job List */}
             <div className="lg:col-span-2 space-y-6">
               {jobs.map((job) => (
                 <div key={job.id} className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all group cursor-pointer">
@@ -1189,13 +1184,12 @@ const CareersPage = () => {
                       {job.skills.map(s => <span key={s} className="px-2 py-1 bg-slate-50 rounded text-xs font-bold text-slate-500">{s}</span>)}
                    </div>
                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-500 mb-4">
-                        Clicking Apply will submit your general profile to our database. Please specify this role in the form below.
+                       Clicking Apply will submit your general profile to our database. Please specify this role in the form below.
                    </div>
                 </div>
               ))}
             </div>
 
-            {/* Application Form Sidebar */}
             <div className="space-y-6">
                <div className="bg-slate-900 text-white p-8 rounded-3xl">
                   <h4 className="text-xl font-bold mb-4">Why Hexanx?</h4>
@@ -1207,7 +1201,6 @@ const CareersPage = () => {
                   </ul>
                </div>
                
-               {/* Live Resume Form Sidebar */}
                <div>
                   <h4 className="font-bold text-slate-900 mb-4">Quick Application</h4>
                   <ResumeApplicationForm defaultPosition="General Career Application" />
@@ -1219,7 +1212,6 @@ const CareersPage = () => {
   );
 };
 
-// LEGAL PAGES
 const TermsPage = () => (
     <div className="min-h-screen bg-slate-50 pb-20">
         <PageHeader title="Terms of Service" subtitle="Legal" />
@@ -1250,7 +1242,6 @@ const PrivacyPage = () => (
     </div>
 );
 
-// DEMO PAGE (Interactive Dashboard Showcase & Roadmap)
 const DemoPage = () => {
   return (
     <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
@@ -1261,7 +1252,6 @@ const DemoPage = () => {
           </p>
 
           <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] mb-32">
-             {/* Fake Sidebar */}
              <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
                 <div className="flex items-center gap-3 mb-8 px-2">
                    <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
@@ -1274,7 +1264,6 @@ const DemoPage = () => {
                 ))}
              </div>
 
-             {/* Main Content */}
              <div className="flex-1 p-8 bg-slate-800">
                 <div className="flex justify-between items-center mb-8">
                    <h3 className="text-2xl font-bold">Dashboard Overview</h3>
@@ -1285,7 +1274,6 @@ const DemoPage = () => {
                    </div>
                 </div>
 
-                {/* Stats Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                    {[
                      { label: "Total Revenue", val: "$45,231.89", change: "+20.1%", color: "text-green-400" },
@@ -1300,7 +1288,6 @@ const DemoPage = () => {
                    ))}
                 </div>
 
-                {/* Chart Area */}
                 <div className="grid md:grid-cols-3 gap-6 h-64">
                    <div className="md:col-span-2 bg-slate-700/50 rounded-2xl border border-slate-600 p-6 flex items-end justify-between gap-2">
                       {[30, 50, 45, 80, 60, 90, 70, 40, 60, 80, 50, 70].map((h, i) => (
@@ -1539,15 +1526,12 @@ const Hero = ({ navigateTo }) => (
       </div>
 
       <div className="hidden lg:block relative animate-float perspective-1000">
-         {/* Main Dashboard Card */}
          <div className="relative z-10 glass-card p-3 rounded-[2.5rem] shadow-2xl rotate-y-12 hover:rotate-y-0 transition-transform duration-700">
             <div className="bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-200 relative aspect-[4/3] flex flex-col shadow-inner">
-               {/* Browser Header */}
                <div className="h-14 bg-white border-b border-slate-200 flex items-center px-8 gap-3">
                   <div className="flex gap-2"><div className="w-3 h-3 rounded-full bg-red-400"></div><div className="w-3 h-3 rounded-full bg-yellow-400"></div><div className="w-3 h-3 rounded-full bg-green-400"></div></div>
                   <div className="mx-auto bg-slate-100 px-6 py-1.5 rounded-full text-[10px] text-slate-400 font-mono flex items-center gap-2"><ShieldCheck size={10}/> secure | api.hexanx.com</div>
                </div>
-               {/* Dashboard Content */}
                <div className="p-8 grid grid-cols-2 gap-6 bg-slate-50/50 flex-1 relative overflow-hidden">
                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
                    
@@ -1584,7 +1568,6 @@ const Hero = ({ navigateTo }) => (
             </div>
          </div>
          
-         {/* Floating Notification Cards */}
          <div className="absolute -left-12 top-1/4 glass-card p-5 rounded-2xl animate-float shadow-xl backdrop-blur-xl border border-white/80" style={{animationDelay: '1s'}}>
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">R</div>
@@ -1634,7 +1617,6 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Helper to scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
@@ -1655,11 +1637,9 @@ export default function App() {
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white">
       <TopTicker />
 
-      {/* --- NAVIGATION WITH REAL LINKS --- */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-[33px]`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           
-          {/* Logo */}
           <Link to="/" className="text-2xl font-bold flex items-center group">
             <div className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
               <img src="/logo.png" alt="Hexanx" className="w-8 h-8 object-contain" />
@@ -1667,7 +1647,6 @@ export default function App() {
             <span className="tracking-tight text-slate-900 font-extrabold text-xl">Hexanx</span>
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-2">
             <div className={`rounded-full px-2 py-1.5 mr-6 flex transition-all ${scrolled ? 'bg-slate-100/80' : 'bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg'}`}>
               {navLinks.map((link) => (
@@ -1683,13 +1662,11 @@ export default function App() {
             <Button className="py-3 px-6 text-sm font-bold !rounded-full shadow-xl hover:shadow-2xl" primary onClick={() => navigate('/booking')}>Book Meeting</Button>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button className="lg:hidden text-slate-900 p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 p-6 flex flex-col space-y-4 shadow-2xl lg:hidden animate-slide-in">
             {navLinks.map((link) => (
@@ -1703,7 +1680,6 @@ export default function App() {
 
       <style>{styles}</style>
 
-      {/* --- ROUTES --- */}
       <main>
         <Routes>
           <Route path="/" element={
@@ -1780,7 +1756,6 @@ export default function App() {
             </PageSEO>
           } />
 
-          {/* Legal Routes */}
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
 
