@@ -365,7 +365,7 @@ const ResumeApplicationForm = ({ defaultPosition = "General Application" }) => {
   const [formData, setFormData] = useState({ name: '', email: '', contact: '', resumeUrl: '', position: defaultPosition });
   const [status, setStatus] = useState('idle');
 
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/library/d/12pJoepZnTD7l5aNriy8aprQC4t3QGyy5zVMcD-EOnnhiCldmtuS8zzYT/5";
 
   const handleSubmit = (e) => {
     e.preventDefault();
