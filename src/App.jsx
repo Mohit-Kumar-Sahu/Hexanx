@@ -159,7 +159,7 @@ const MOCK_PROJECTS = [
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "Enterprise Workspace",
     tags: ["Enterprise", "Cloud-Native", "Payroll Automation", "Analytics"],
-    description: "Cloud-native Human Resource Management System for enterprise attendance, payroll, leaves, and performance tracking.",
+    description: "A comprehensive Enterprise Workspace and HRMS platform designed to streamline workforce management. It offers robust features including intelligent attendance tracking, automated payroll processing, streamlined leave management, and deep performance analytics, empowering organizations to manage their human capital efficiently.",
     stats: { employees: "50k+", security: "AES-256", availability: "99.9%" }
   },
   {
@@ -169,7 +169,7 @@ const MOCK_PROJECTS = [
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "F&B Chains",
     tags: ["Socket.io", "Multi-tenant", "React Native", "MongoDB"],
-    description: "Omnichannel Restaurant OS. Unifies POS, online ordering, and in-house delivery. Built with multi-tenant architecture and socket.io real-time sync.",
+    description: "An advanced Omnichannel Restaurant OS that revolutionizes the F&B industry. Flasto seamlessly unifies Point of Sale (POS), digital online ordering, inventory management, and in-house delivery networks. Built on a highly scalable multi-tenant architecture with real-time socket.io synchronization.",
     stats: { orders: "1M+", latency: "<50ms", outlets: "500+" }
   },
   {
@@ -179,7 +179,7 @@ const MOCK_PROJECTS = [
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "Global Hospitality",
     tags: ["React", "Node.js", "QR Tech", "Session-State"],
-    description: "Property Management System with automated revenue capture, dynamic session-state architecture, and QR in-room ordering for modern hospitality businesses.",
+    description: "A Smart Hotel Concierge and Property Management System tailored for modern hospitality. Room Yes features automated revenue capture, dynamic session-state architecture, and intuitive QR-based in-room ordering to elevate guest experiences and optimize hotel operations seamlessly.",
     stats: { uptime: "99.99%", revenueLift: "+25%", users: "10k+" }
   }
 ];
@@ -730,7 +730,7 @@ const ProductsShowcase = ({ showTitle = true }) => {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
       <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-purple-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
       <div className="container mx-auto px-6">
-        {showTitle && <SectionTitle title="Our Flagship Products" subtitle="Enterprise USPs" />}
+        {showTitle && <SectionTitle title="Our Products" subtitle="Enterprise USPs" />}
         
         <div className="space-y-32 mt-16">
           {MOCK_PROJECTS.map((product, i) => (
@@ -1241,38 +1241,7 @@ const DemoPage = () => {
   );
 };
 
-const GlobalITServices = ({ showTitle = true }) => {
-  const servicesList = [
-    { icon: Cpu, title: "Custom Workflow Software", description: "Tailor-made software to streamline your unique business operations and scale efficiency.", tags: ["Custom", "Workflow"] },
-    { icon: Database, title: "ERP Solutions", description: "Comprehensive enterprise resource planning for intelligent, data-driven management.", tags: ["ERP", "Enterprise"] },
-    { icon: Zap, title: "Business Automation", description: "Automate repetitive tasks to increase productivity, reduce human error, and lower costs.", tags: ["Automation", "Scale"] },
-    { icon: Globe, title: "Global IT Solutions", description: "We deal across the world, serving clients in every single country and nation.", tags: ["Global", "IT Sector"] },
-  ];
 
-  return (
-    <section className="py-32 bg-slate-900 relative text-white" id="services">
-      <div className="absolute inset-0 bg-grid opacity-20"></div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="container mx-auto px-6 relative z-10">
-        {showTitle && <SectionTitle title="Our Core Services" subtitle="Global Reach" dark={true} />}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {servicesList.map((service, index) => (
-            <div key={index} className="bg-slate-800/50 backdrop-blur-xl p-10 rounded-[2.5rem] group border border-slate-700 hover:border-blue-500 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-blue-500/20 flex flex-col h-full">
-               <div className="w-20 h-20 bg-slate-700/50 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-500 shadow-inner">
-                  <service.icon className="w-10 h-10 text-blue-400 group-hover:text-white transition-colors duration-500" />
-               </div>
-               <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
-               <p className="text-slate-400 text-base mb-8 leading-relaxed flex-1">{service.description}</p>
-               <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-slate-700/50">
-                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-4 py-1.5 bg-slate-900/50 rounded-full text-blue-300 border border-slate-700">{t}</span>)}
-               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const Footer = () => (
   <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
@@ -1303,8 +1272,7 @@ const Footer = () => (
         <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
         <ul className="space-y-4 text-base">
           {[
-             { name: "Services", path: "/services"}, 
-             { name: "Portfolio", path: "/work"}, 
+             { name: "Products", path: "/products"}, 
              { name: "Book Call", path: "/booking"}, 
              { name: "Careers", path: "/careers"}, 
              { name: "About Us", path: "/about"}
@@ -1500,8 +1468,7 @@ export default function App() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/services', label: 'Services' },
-    { path: '/work', label: 'Work' },
+    { path: '/products', label: 'Products' },
     { path: '/internships', label: 'Internships' },
     { path: '/careers', label: 'Careers' },
     { path: '/demo', label: 'Live Demo' },
@@ -1564,7 +1531,6 @@ export default function App() {
               
               <About />
               <WhyChooseUs />
-              <GlobalITServices />
               <ProductsShowcase />
               <BookingSection />
               <Testimonials />
@@ -1580,17 +1546,9 @@ export default function App() {
             </PageSEO>
           } />
 
-          <Route path="/services" element={
-            <PageSEO title="Services" description="Enterprise SaaS Implementation, Automation, and Ecosystem Products.">
-              <PageHeader title="What We Do" subtitle="Our Services" />
-              <GlobalITServices showTitle={false} />
-              <CTABanner />
-            </PageSEO>
-          } />
-
-          <Route path="/work" element={
-            <PageSEO title="Portfolio" description="Check out our recent projects and case studies.">
-              <PageHeader title="Our Work" subtitle="Case Studies" />
+          <Route path="/products" element={
+            <PageSEO title="Products" description="Enterprise SaaS Implementation, Automation, and Ecosystem Products.">
+              <PageHeader title="Our Products" subtitle="SaaS Solutions" />
               <ProductsShowcase showTitle={false} />
             </PageSEO>
           } />
