@@ -158,9 +158,9 @@ const MOCK_PROJECTS = [
     category: "enterprise",
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "Enterprise Workspace",
-    tags: ["Enterprise", "Cloud-Native", "Payroll Automation", "Analytics"],
-    description: "A comprehensive Enterprise Workspace and HRMS platform designed to streamline workforce management. It offers robust features including intelligent attendance tracking, automated payroll processing, streamlined leave management, and deep performance analytics, empowering organizations to manage their human capital efficiently.",
-    stats: { employees: "50k+", security: "AES-256", availability: "99.9%" }
+    tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"],
+    description: "Hexanx HRMS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department. Empower your workforce with our self-service mobile app and real-time HR analytics.",
+    stats: { employees: "50k+", security: "AES-256", modules: "12+" }
   },
   {
     id: 2,
@@ -168,8 +168,8 @@ const MOCK_PROJECTS = [
     category: "restaurant",
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "F&B Chains",
-    tags: ["Socket.io", "Multi-tenant", "React Native", "MongoDB"],
-    description: "An advanced Omnichannel Restaurant OS that revolutionizes the F&B industry. Flasto seamlessly unifies Point of Sale (POS), digital online ordering, inventory management, and in-house delivery networks. Built on a highly scalable multi-tenant architecture with real-time socket.io synchronization.",
+    tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"],
+    description: "Flasto is an Omnichannel Restaurant OS built for scale. Unifying your entire F&B operation, it provides a lightning-fast Cloud POS, contactless QR digital menus, a real-time Kitchen Display System (KDS), and predictive inventory management with recipe costing. Seamlessly aggregates Swiggy, Zomato, and direct delivery orders into a single dashboard.",
     stats: { orders: "1M+", latency: "<50ms", outlets: "500+" }
   },
   {
@@ -178,8 +178,8 @@ const MOCK_PROJECTS = [
     category: "hospitality",
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "Global Hospitality",
-    tags: ["React", "Node.js", "QR Tech", "Session-State"],
-    description: "A Smart Hotel Concierge and Property Management System tailored for modern hospitality. Room Yes features automated revenue capture, dynamic session-state architecture, and intuitive QR-based in-room ordering to elevate guest experiences and optimize hotel operations seamlessly.",
+    tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"],
+    description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management to maximize RevPAR across OTAs.",
     stats: { uptime: "99.99%", revenueLift: "+25%", users: "10k+" }
   }
 ];
@@ -1119,127 +1119,7 @@ const PrivacyPage = () => (
     </div>
 );
 
-const DemoPage = () => {
-  return (
-    <div className="pt-32 pb-20 min-h-screen bg-slate-900 text-white overflow-hidden">
-       <div className="container mx-auto px-6">
-          <SectionTitle title="Live Product Demo" subtitle="Hexanx Dashboard Engine" dark={true} />
-          <p className="text-center text-slate-400 mb-12 -mt-10 max-w-2xl mx-auto">
-            This is a fully interactive React component demonstrating our capability to build complex, data-driven dashboards.
-          </p>
 
-          <div className="max-w-6xl mx-auto bg-slate-800 rounded-[2rem] border border-slate-700 shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] mb-32">
-             <div className="w-full md:w-64 bg-slate-900/50 border-r border-slate-700 p-6 flex flex-col gap-2">
-                <div className="flex items-center gap-3 mb-8 px-2">
-                   <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
-                   <span className="font-bold">Admin Panel</span>
-                </div>
-                {['Overview', 'Analytics', 'Customers', 'Settings'].map((item, i) => (
-                   <div key={i} className={`p-3 rounded-xl cursor-pointer flex items-center gap-3 ${i === 0 ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>
-                      <LayoutDashboard size={18} /> {item}
-                   </div>
-                ))}
-             </div>
-
-             <div className="flex-1 p-8 bg-slate-800">
-                <div className="flex justify-between items-center mb-8">
-                   <h3 className="text-2xl font-bold">Dashboard Overview</h3>
-                   <div className="flex gap-3">
-                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Search size={18} /></button>
-                      <button className="p-2 bg-slate-700 rounded-lg hover:bg-slate-600"><Bell size={18} /></button>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500"></div>
-                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                   {[
-                     { label: "Total Revenue", val: "$45,231.89", change: "+20.1%", color: "text-green-400" },
-                     { label: "Active Users", val: "+2350", change: "+180.1%", color: "text-green-400" },
-                     { label: "Server Load", val: "34%", change: "-5%", color: "text-blue-400" },
-                   ].map((stat, i) => (
-                      <div key={i} className="bg-slate-700/50 p-6 rounded-2xl border border-slate-600 hover:bg-slate-700 transition-colors">
-                         <p className="text-slate-400 text-sm font-medium mb-1">{stat.label}</p>
-                         <h4 className="text-3xl font-bold mb-1">{stat.val}</h4>
-                         <span className={`text-xs ${stat.color}`}>{stat.change} from last month</span>
-                      </div>
-                   ))}
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6 h-64">
-                   <div className="md:col-span-2 bg-slate-700/50 rounded-2xl border border-slate-600 p-6 flex items-end justify-between gap-2">
-                      {[30, 50, 45, 80, 60, 90, 70, 40, 60, 80, 50, 70].map((h, i) => (
-                         <div key={i} style={{height: `${h}%`}} className="w-full bg-blue-600/50 rounded-t hover:bg-blue-500 transition-colors cursor-pointer relative group">
-                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">{h}%</div>
-                         </div>
-                      ))}
-                   </div>
-                   <div className="bg-slate-700/50 rounded-2xl border border-slate-600 p-6">
-                      <h5 className="font-bold mb-4">Recent Activity</h5>
-                      <div className="space-y-4">
-                         {[1,2,3].map(i => (
-                            <div key={i} className="flex gap-3 items-center">
-                               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                               <div className="text-sm">
-                                  <p className="text-slate-200">New user registered</p>
-                                  <p className="text-xs text-slate-500">2 mins ago</p>
-                               </div>
-                            </div>
-                         ))}
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          
-          <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-16">
-                <h3 className="text-3xl md:text-5xl font-bold mb-4">Product Implementation</h3>
-                <p className="text-slate-400 text-lg">How we onboard your business to our ecosystem</p>
-              </div>
-              
-              <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
-                 {[
-                   { 
-                     step: "01", title: "Environment Setup & RBAC", 
-                     desc: "We start by setting up your secure tenant environment. We configure Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have appropriate permissions.",
-                     icon: Lock 
-                   },
-                   { 
-                     step: "02", title: "Core Integration", 
-                     desc: "We seamlessly connect our SaaS products to your existing workflows. We ensure all external APIs and microservices are deeply embedded for immediate productivity.",
-                     icon: Cpu 
-                   },
-                   { 
-                     step: "03", title: "Data Migration", 
-                     desc: "We handle the secure migration of your existing data to our cloud infrastructure, ensuring zero downtime and complete data integrity.",
-                     icon: DollarSign 
-                   },
-                   { 
-                     step: "04", title: "Launch & Ongoing Support", 
-                     desc: "After onboarding, our enterprise support team monitors your systems 24/7. You receive continuous free updates and feature enhancements.",
-                     icon: HeartHandshake 
-                   }
-                 ].map((phase, i) => (
-                   <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                       <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-900 group-[.is-active]:bg-blue-600 text-slate-500 group-[.is-active]:text-emerald-50 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-                          <phase.icon size={18}/>
-                       </div>
-                       <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
-                          <div className="flex items-center justify-between space-x-2 mb-2">
-                            <div className="font-bold text-slate-200">{phase.title}</div>
-                            <div className="font-mono text-xs text-slate-500">{phase.step}</div>
-                          </div>
-                          <div className="text-slate-400 text-sm leading-relaxed">{phase.desc}</div>
-                       </div>
-                   </div>
-                 ))}
-              </div>
-          </div>
-
-       </div>
-    </div>
-  );
-};
 
 
 
@@ -1471,7 +1351,6 @@ export default function App() {
     { path: '/products', label: 'Products' },
     { path: '/internships', label: 'Internships' },
     { path: '/careers', label: 'Careers' },
-    { path: '/demo', label: 'Live Demo' },
     { path: '/booking', label: 'Book Call' },
     { path: '/contact', label: 'Contact' },
   ];
@@ -1565,11 +1444,7 @@ export default function App() {
             </PageSEO>
           } />
 
-          <Route path="/demo" element={
-            <PageSEO title="Live Demo" description="Experience our interactive dashboard technology live.">
-              <DemoPage />
-            </PageSEO>
-          } />
+
           
           <Route path="/booking" element={ 
             <PageSEO title="Book a Meeting" description="Schedule a consultation with our technical team.">
