@@ -728,136 +728,76 @@ const WhyChooseUs = () => (
   </section>
 );
 
-const PortfolioSection = ({ showTitle = true }) => {
-  const [filter, setFilter] = useState('all');
-  const [selectedProject, setSelectedProject] = useState(null);
-  
-  // 1. ADDED USE-NAVIGATE HOOK HERE
+const ProductsShowcase = ({ showTitle = true }) => {
   const navigate = useNavigate();
-
-  const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'hospitality', label: 'Hospitality Tech' },
-    { id: 'restaurant', label: 'Restaurant OS' },
-    { id: 'enterprise', label: 'Enterprise HRMS' }
-  ];
-
-  const isComingSoon = filter === 'smart';
-  const filteredProjects = filter === 'all' 
-    ? MOCK_PROJECTS 
-    : MOCK_PROJECTS.filter(p => p.category === filter || (filter === 'ecommerce' && p.category === 'web') || (filter === 'crm' && p.category === 'app'));
-
   return (
-    <section className="py-32 bg-white relative" id="portfolio">
+    <section className="py-32 bg-slate-50 relative overflow-hidden" id="products">
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
+      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-purple-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
       <div className="container mx-auto px-6">
-        {showTitle && <SectionTitle title="Our Recent Work" subtitle="Case Studies" />}
+        {showTitle && <SectionTitle title="Our Flagship Products" subtitle="Enterprise USPs" />}
         
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => setFilter(cat.id)}
-              className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-300 ${
-                filter === cat.id 
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105" 
-                  : "bg-slate-50 text-slate-600 border border-slate-200 hover:bg-white hover:shadow-md"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {isComingSoon ? (
-          <div className="text-center py-20 bg-slate-50 rounded-[3rem] border border-dashed border-slate-300">
-             <Wifi size={48} className="mx-auto text-slate-400 mb-4" />
-             <h3 className="text-2xl font-bold text-slate-600">Smart Devices & IoT Solutions</h3>
-             <p className="text-slate-500">Coming Soon. We are building the future.</p>
-          </div>
-        ) : filteredProjects.length === 0 ? (
-           <div className="text-center py-20">
-             <p className="text-slate-500">No projects found in this category yet. We are working on it!</p>
-           </div>
-        ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div 
-              key={project.id}
-              onClick={() => setSelectedProject(project)}
-              className="group bg-white rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100"
-            >
-              <div className="relative h-72 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                  <span className="text-white font-bold flex items-center gap-2 text-lg">View Case Study <ArrowRight size={20}/></span>
-                </div>
-                <div className="absolute top-6 right-6 bg-white/95 backdrop-blur px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-blue-600 shadow-lg">
-                  {project.category}
-                </div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{project.title}</h3>
-                <p className="text-slate-500 text-sm line-clamp-2 mb-6 leading-relaxed">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-500 font-bold">{tag}</span>
-                  ))}
-                </div>
-              </div>
+        <div className="space-y-32 mt-16">
+          {MOCK_PROJECTS.map((product, i) => (
+            <div key={product.id} className={`flex flex-col lg:flex-row gap-16 items-center ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+               {/* Image Side */}
+               <div className="w-full lg:w-1/2 relative group perspective-1000">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+                  <div className="relative bg-white p-4 rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
+                      <div className="rounded-[2.5rem] overflow-hidden relative aspect-video">
+                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                          <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                              <span className="px-5 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
+                          </div>
+                      </div>
+                      
+                      {/* Floating Stats */}
+                      <div className="absolute -bottom-8 -right-8 glass-card p-6 rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i}s`}}>
+                         <div className="flex flex-col gap-1 text-center">
+                            <span className="text-3xl font-black text-slate-900">{Object.values(product.stats)[0]}</span>
+                            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{Object.keys(product.stats)[0]}</span>
+                         </div>
+                      </div>
+                      <div className="absolute -top-8 -left-8 glass-card p-6 rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i + 1}s`}}>
+                         <div className="flex flex-col gap-1 text-center">
+                            <span className="text-2xl font-black text-blue-600">{Object.values(product.stats)[1]}</span>
+                            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{Object.keys(product.stats)[1]}</span>
+                         </div>
+                      </div>
+                  </div>
+               </div>
+               
+               {/* Content Side */}
+               <div className="w-full lg:w-1/2 space-y-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full border border-blue-100">
+                      <Star className="w-4 h-4 text-blue-600 fill-current" />
+                      <span className="text-xs font-bold tracking-widest text-blue-600 uppercase">Featured USP: {product.client}</span>
+                  </div>
+                  <h3 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">{product.title}</h3>
+                  <p className="text-xl text-slate-600 leading-relaxed">{product.description}</p>
+                  
+                  <div className="grid grid-cols-2 gap-6 pt-6">
+                     {product.tags.map(tag => (
+                        <div key={tag} className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                           <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                           </div>
+                           <span className="font-bold text-slate-700">{tag}</span>
+                        </div>
+                     ))}
+                  </div>
+                  
+                  <div className="pt-10 flex gap-4">
+                     <Button primary onClick={() => navigate('/booking')} className="px-10 py-5 text-sm">
+                        Request Demo <ArrowRight className="ml-2 w-5 h-5" />
+                     </Button>
+                  </div>
+               </div>
             </div>
           ))}
         </div>
-        )}
       </div>
-
-      <Modal isOpen={!!selectedProject} onClose={() => setSelectedProject(null)} title={selectedProject?.title}>
-        {selectedProject && (
-          <div className="space-y-8">
-            <div className="rounded-2xl overflow-hidden h-64 md:h-96 w-full relative shadow-lg">
-              <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-            </div>
-            <div className="grid md:grid-cols-3 gap-10">
-              <div className="md:col-span-2 space-y-8">
-                <div>
-                  <h4 className="text-xl font-bold text-slate-900 mb-3">Project Overview</h4>
-                  <p className="text-slate-600 leading-relaxed text-lg">{selectedProject.description}</p>
-                </div>
-                <div>
-                   <h4 className="text-xl font-bold text-slate-900 mb-3">Tech Stack</h4>
-                   <div className="flex flex-wrap gap-3">
-                      {selectedProject.tags.map(t => <Badge key={t} text={t} color="blue" />)}
-                   </div>
-                </div>
-              </div>
-              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 h-fit shadow-sm">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">Key Performance Metrics</h4>
-                <div className="space-y-6">
-                  {Object.entries(selectedProject.stats).map(([key, value]) => (
-                    <div key={key} className="flex justify-between items-center border-b border-slate-200 pb-4 last:border-0">
-                      <span className="text-slate-600 capitalize font-medium">{key}</span>
-                      <span className="font-bold text-slate-900 text-lg">{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end gap-4 pt-6 border-t border-slate-100">
-               <Button onClick={() => setSelectedProject(null)}>Close</Button>
-               {/* 2. MODIFIED START PROJECT BUTTON HERE */}
-               <Button primary onClick={() => {
-                 setSelectedProject(null);
-                 navigate('/booking');
-               }}>
-                 Start Similar Project
-               </Button>
-            </div>
-          </div>
-        )}
-      </Modal>
     </section>
   );
 };
@@ -1329,28 +1269,30 @@ const DemoPage = () => {
   );
 };
 
-const Services = ({ showTitle = true }) => {
+const GlobalITServices = ({ showTitle = true }) => {
   const servicesList = [
-    { icon: Code, title: "Custom Workflow Software", description: "Tailor-made software to streamline your unique business operations.", tags: ["Custom", "Workflow"] },
-    { icon: Database, title: "ERP Software", description: "Comprehensive enterprise resource planning for efficient management.", tags: ["ERP", "Enterprise"] },
-    { icon: Zap, title: "Business Automation", description: "Automate repetitive tasks to increase productivity and reduce errors.", tags: ["Automation", "Scale"] },
-    { icon: Globe, title: "Global IT Solutions", description: "We deal across the world, serving clients in every single country.", tags: ["Global", "IT"] },
+    { icon: Cpu, title: "Custom Workflow Software", description: "Tailor-made software to streamline your unique business operations and scale efficiency.", tags: ["Custom", "Workflow"] },
+    { icon: Database, title: "ERP Solutions", description: "Comprehensive enterprise resource planning for intelligent, data-driven management.", tags: ["ERP", "Enterprise"] },
+    { icon: Zap, title: "Business Automation", description: "Automate repetitive tasks to increase productivity, reduce human error, and lower costs.", tags: ["Automation", "Scale"] },
+    { icon: Globe, title: "Global IT Solutions", description: "We deal across the world, serving clients in every single country and nation.", tags: ["Global", "IT Sector"] },
   ];
 
   return (
-    <section className="py-32 bg-slate-50 relative" id="services">
-      <div className="container mx-auto px-6">
-        {showTitle && <SectionTitle title="Our Core Services" subtitle="What We Deliver" />}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section className="py-32 bg-slate-900 relative text-white" id="services">
+      <div className="absolute inset-0 bg-grid opacity-20"></div>
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="container mx-auto px-6 relative z-10">
+        {showTitle && <SectionTitle title="Our Core Services" subtitle="Global Reach" dark={true} />}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {servicesList.map((service, index) => (
-            <div key={index} className="glass-card glass-card-hover p-10 rounded-[2rem] group bg-white border border-white/50">
-               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 transition-colors duration-300 shadow-sm group-hover:shadow-blue-500/30">
-                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+            <div key={index} className="bg-slate-800/50 backdrop-blur-xl p-10 rounded-[2.5rem] group border border-slate-700 hover:border-blue-500 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-blue-500/20 flex flex-col h-full">
+               <div className="w-20 h-20 bg-slate-700/50 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-500 shadow-inner">
+                  <service.icon className="w-10 h-10 text-blue-400 group-hover:text-white transition-colors duration-500" />
                </div>
-               <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">{service.title}</h3>
-               <p className="text-slate-600 text-base mb-8 leading-relaxed">{service.description}</p>
-               <div className="flex flex-wrap gap-2">
-                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-3 py-1 bg-slate-100 rounded-full text-slate-500 border border-slate-200">{t}</span>)}
+               <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+               <p className="text-slate-400 text-base mb-8 leading-relaxed flex-1">{service.description}</p>
+               <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-slate-700/50">
+                  {service.tags.map(t => <span key={t} className="text-[10px] font-bold uppercase px-4 py-1.5 bg-slate-900/50 rounded-full text-blue-300 border border-slate-700">{t}</span>)}
                </div>
             </div>
           ))}
@@ -1651,8 +1593,8 @@ export default function App() {
               
               <About />
               <WhyChooseUs />
-              <Services />
-              <PortfolioSection />
+              <GlobalITServices />
+              <ProductsShowcase />
               <BookingSection />
               <Testimonials />
               <CTABanner />
@@ -1671,7 +1613,7 @@ export default function App() {
           <Route path="/services" element={
             <PageSEO title="Services" description="Web Development, App Development, and ERP Solutions in Raipur.">
               <PageHeader title="What We Do" subtitle="Our Services" />
-              <Services showTitle={false} />
+              <GlobalITServices showTitle={false} />
               <CTABanner />
             </PageSEO>
           } />
@@ -1679,7 +1621,7 @@ export default function App() {
           <Route path="/work" element={
             <PageSEO title="Portfolio" description="Check out our recent projects and case studies.">
               <PageHeader title="Our Work" subtitle="Case Studies" />
-              <PortfolioSection showTitle={false} />
+              <ProductsShowcase showTitle={false} />
             </PageSEO>
           } />
 
