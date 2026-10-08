@@ -154,17 +154,17 @@ const styles = `
 const MOCK_PROJECTS = [
   {
     id: 1,
-    title: "Hexanx Ecosystem",
-    category: "hospitality",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    client: "Global Hospitality",
-    tags: ["React", "Node.js", "QR Tech", "Session-State"],
-    description: "Property Management System with automated revenue capture, dynamic session-state architecture, and QR in-room ordering for modern hospitality businesses.",
-    stats: { uptime: "99.99%", revenueLift: "+25%", users: "10k+" }
+    title: "Hexanx HRMS",
+    category: "enterprise",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    client: "Enterprise Workspace",
+    tags: ["Enterprise", "Cloud-Native", "Payroll Automation", "Analytics"],
+    description: "Cloud-native Human Resource Management System for enterprise attendance, payroll, leaves, and performance tracking.",
+    stats: { employees: "50k+", security: "AES-256", availability: "99.9%" }
   },
   {
     id: 2,
-    title: "Flasto (Hexanx-HCMS)",
+    title: "Flasto",
     category: "restaurant",
     image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     client: "F&B Chains",
@@ -174,13 +174,13 @@ const MOCK_PROJECTS = [
   },
   {
     id: 3,
-    title: "Hexanx HRMS",
-    category: "enterprise",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    client: "Enterprise Workspace",
-    tags: ["Enterprise", "Cloud-Native", "Payroll Automation", "Analytics"],
-    description: "Cloud-native Human Resource Management System for enterprise attendance, payroll, leaves, and performance tracking.",
-    stats: { employees: "50k+", security: "AES-256", availability: "99.9%" }
+    title: "Room Yes",
+    category: "hospitality",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    client: "Global Hospitality",
+    tags: ["React", "Node.js", "QR Tech", "Session-State"],
+    description: "Property Management System with automated revenue capture, dynamic session-state architecture, and QR in-room ordering for modern hospitality businesses.",
+    stats: { uptime: "99.99%", revenueLift: "+25%", users: "10k+" }
   }
 ];
 
@@ -190,12 +190,7 @@ const TESTIMONIALS = [
   { id: 3, name: "Rohan Mehta", role: "Director, Mehta Transport, Indore", content: "Managing our fleet was a headache until Hexanx built our logistics dashboard. Now we track everything in real-time. Excellent service.", avatar: "RM" }
 ];
 
-const FAQS = [
-  { q: "Do you provide post-implementation support?", a: "Yes, our SaaS subscriptions include 24/7 dedicated enterprise support and continuous automatic updates." },
-  { q: "What technologies power your SaaS products?", a: "We build our ecosystem on cloud-native architecture using high-performance stacks like Node.js, Go, React, and MongoDB for maximum scalability." },
-  { q: "How long does it take to deploy Hexanx OS or Room ERP?", a: "Our SaaS products are pre-built and configurable. Deployment and onboarding typically take just 1-2 weeks depending on data migration." },
-  { q: "Can you integrate with our existing legacy systems?", a: "Absolutely. Our SaaS ecosystem is API-first, allowing seamless integration with your existing databases and legacy software." }
-];
+// FAQs have been removed
 
 // --- 3. REUSABLE UI COMPONENTS ---
 
@@ -961,29 +956,6 @@ const BookingSection = ({ showTitle = true }) => {
   );
 };
 
-const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(0);
-  return (
-    <section className="py-32 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <SectionTitle title="Common Questions" subtitle="FAQ" />
-        <div className="space-y-4">
-          {FAQS.map((item, i) => (
-            <div key={i} className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-lg">
-              <button onClick={() => setOpenIndex(openIndex === i ? -1 : i)} className="w-full flex items-center justify-between p-8 text-left hover:bg-slate-100 transition-colors">
-                <span className="font-bold text-xl text-slate-900">{item.q}</span>
-                <ChevronDown className={`text-slate-400 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
-              </button>
-              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="p-8 pt-0 text-slate-600 leading-relaxed text-lg">{item.a}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const CTABanner = () => {
     const navigate = useNavigate();
@@ -1597,7 +1569,6 @@ export default function App() {
               <BookingSection />
               <Testimonials />
               <CTABanner />
-              <FAQ />
             </PageSEO>
           } />
 
