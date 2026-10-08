@@ -154,63 +154,33 @@ const styles = `
 const MOCK_PROJECTS = [
   {
     id: 1,
-    title: "MedCare Pro System",
-    category: "app",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-    client: "Apollo Pharmacy Chain",
-    tags: ["Flutter", "Node.js", "MongoDB"],
-    description: "A complete inventory and billing mobile application for a chain of 500+ pharmacies. Features include real-time stock tracking, QR billing, and automated purchase orders.",
-    stats: { users: "10k+", transactions: "1M/day", uptime: "99.9%" }
+    title: "Hexanx Ecosystem",
+    category: "hospitality",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    client: "Global Hospitality",
+    tags: ["React", "Node.js", "QR Tech", "Session-State"],
+    description: "Property Management System with automated revenue capture, dynamic session-state architecture, and QR in-room ordering for modern hospitality businesses.",
+    stats: { uptime: "99.99%", revenueLift: "+25%", users: "10k+" }
   },
   {
     id: 2,
-    title: "NewsDaily 24x7 Portal",
-    category: "news",
-    image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800",
-    client: "Chhattisgarh Times",
-    tags: ["WordPress", "PHP", "AMP"],
-    description: "High-traffic news portal handling 5M+ monthly visitors. Features include automated AMP generation, ad-revenue optimization, and regional language support.",
-    stats: { visitors: "5M/mo", speed: "1.2s", ads: "$5k+/mo" }
+    title: "Flasto (Hexanx-HCMS)",
+    category: "restaurant",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    client: "F&B Chains",
+    tags: ["Socket.io", "Multi-tenant", "React Native", "MongoDB"],
+    description: "Omnichannel Restaurant OS. Unifies POS, online ordering, and in-house delivery. Built with multi-tenant architecture and socket.io real-time sync.",
+    stats: { orders: "1M+", latency: "<50ms", outlets: "500+" }
   },
   {
     id: 3,
-    title: "Manufacture ERP",
-    category: "erp",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-    client: "Tata Steel Subsidiary",
-    tags: ["Angular", ".NET Core", "SQL Server"],
-    description: "End-to-end ERP solution managing supply chain, employee shifts, machine maintenance, and output logistics for a major steel plant.",
-    stats: { users: "2k+", efficiency: "+45%", uptime: "99.9%" }
-  },
-  {
-    id: 4,
-    title: "Luxury Estate Web",
-    category: "wordpress",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
-    client: "Royal Reality",
-    tags: ["WordPress", "Elementor", "MySQL"],
-    description: "Premium real estate showcase website with virtual tour integration, CRM lead capture, and property comparison tools.",
-    stats: { leads: "500/mo", loadTime: "0.8s", uptime: "100%" }
-  },
-  {
-    id: 5,
-    title: "Retail Analytics BI",
-    category: "data",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-    client: "SuperMart Retail",
-    tags: ["Power BI", "Azure", "Python"],
-    description: "Custom Power BI connectors to visualize sales data across 200 stores, predicting trends and optimizing inventory levels using data automation.",
-    stats: { users: "100+", insights: "Real-time", uptime: "100%" }
-  },
-  {
-    id: 6,
-    title: "AI Customer Bot",
-    category: "ai",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-    client: "TechSupport Inc",
-    tags: ["OpenAI API", "Python", "React"],
-    description: "Intelligent chatbot integration that reduced support ticket volume by 60%. trained on company knowledge base to answer technical queries automatically.",
-    stats: { accuracy: "94%", savings: "60%", response: "<2s" }
+    title: "Hexanx HRMS",
+    category: "enterprise",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    client: "Enterprise Workspace",
+    tags: ["Enterprise", "Cloud-Native", "Payroll Automation", "Analytics"],
+    description: "Cloud-native Human Resource Management System for enterprise attendance, payroll, leaves, and performance tracking.",
+    stats: { employees: "50k+", security: "AES-256", availability: "99.9%" }
   }
 ];
 
@@ -767,14 +737,9 @@ const PortfolioSection = ({ showTitle = true }) => {
 
   const categories = [
     { id: 'all', label: 'All' },
-    { id: 'wordpress', label: 'WordPress' },
-    { id: 'news', label: 'News' },
-    { id: 'ecommerce', label: 'E-commerce' },
-    { id: 'erp', label: 'ERP' },
-    { id: 'crm', label: 'CRM' },
-    { id: 'data', label: 'Automation' },
-    { id: 'ai', label: 'AI Integration' },
-    { id: 'smart', label: 'Smart Devices' }
+    { id: 'hospitality', label: 'Hospitality Tech' },
+    { id: 'restaurant', label: 'Restaurant OS' },
+    { id: 'enterprise', label: 'Enterprise HRMS' }
   ];
 
   const isComingSoon = filter === 'smart';
@@ -1366,12 +1331,10 @@ const DemoPage = () => {
 
 const Services = ({ showTitle = true }) => {
   const servicesList = [
-    { icon: Code, title: "Web Development", description: "Custom scalable websites with React/Next.js.", tags: ["React", "Enterprise"] },
-    { icon: BarChart3, title: "BI & Analytics", description: "Data visualization dashboards with Power BI.", tags: ["Data", "Insights"] },
-    { icon: Smartphone, title: "App Development", description: "Native iOS/Android apps with Flutter.", tags: ["Mobile", "Cross-Platform"] },
-    { icon: Server, title: "HRMS Systems", description: "Employee management and payroll automation.", tags: ["SaaS", "Automation"] },
-    { icon: Database, title: "ERP Solutions", description: "End-to-end business resource planning.", tags: ["Operations", "Scale"] },
-    { icon: ShieldCheck, title: "Cyber Security", description: "Enterprise grade security auditing.", tags: ["Audit", "Protection"] },
+    { icon: Code, title: "Custom Workflow Software", description: "Tailor-made software to streamline your unique business operations.", tags: ["Custom", "Workflow"] },
+    { icon: Database, title: "ERP Software", description: "Comprehensive enterprise resource planning for efficient management.", tags: ["ERP", "Enterprise"] },
+    { icon: Zap, title: "Business Automation", description: "Automate repetitive tasks to increase productivity and reduce errors.", tags: ["Automation", "Scale"] },
+    { icon: Globe, title: "Global IT Solutions", description: "We deal across the world, serving clients in every single country.", tags: ["Global", "IT"] },
   ];
 
   return (
@@ -1635,9 +1598,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white">
-      <TopTicker />
+      
 
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-[33px]`}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-0`}>
         <div className="container mx-auto px-6 flex items-center justify-between">
           
           <Link to="/" className="text-2xl font-bold flex items-center group">
@@ -1685,7 +1648,7 @@ export default function App() {
           <Route path="/" element={
             <PageSEO title="Home" description="Hexanx is Raipur's premier IT consultancy for Enterprise Software and Web Development.">
               <Hero navigateTo={(path) => navigate('/' + path)} />
-              <TechStack />
+              
               <About />
               <WhyChooseUs />
               <Services />
