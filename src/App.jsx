@@ -191,10 +191,10 @@ const TESTIMONIALS = [
 ];
 
 const FAQS = [
-  { q: "Do you provide post-launch support?", a: "Yes, we offer 6 months of free critical support with every enterprise project. We also have dedicated AMC packages." },
-  { q: "What technologies do you specialize in?", a: "We are full-stack experts. Frontend: React, Angular, Vue, Flutter. Backend: Node.js, Python, .NET, Go. Database: MongoDB, PostgreSQL." },
-  { q: "How long does it take to build a custom ERP?", a: "A basic module takes 2-3 months, while a full-scale enterprise ERP can take 6-12 months." },
-  { q: "Can you take over an existing project?", a: "Absolutely. We specialize in legacy modernization. We will audit your current code and optimize it." }
+  { q: "Do you provide post-implementation support?", a: "Yes, our SaaS subscriptions include 24/7 dedicated enterprise support and continuous automatic updates." },
+  { q: "What technologies power your SaaS products?", a: "We build our ecosystem on cloud-native architecture using high-performance stacks like Node.js, Go, React, and MongoDB for maximum scalability." },
+  { q: "How long does it take to deploy Hexanx OS or Room ERP?", a: "Our SaaS products are pre-built and configurable. Deployment and onboarding typically take just 1-2 weeks depending on data migration." },
+  { q: "Can you integrate with our existing legacy systems?", a: "Absolutely. Our SaaS ecosystem is API-first, allowing seamless integration with your existing databases and legacy software." }
 ];
 
 // --- 3. REUSABLE UI COMPONENTS ---
@@ -440,9 +440,9 @@ const ChatBot = () => {
       const lowerInput = input.toLowerCase();
       
       if (lowerInput.includes("pricing") || lowerInput.includes("cost")) {
-        botResponse = "Our pricing depends on the project scope. Would you like to schedule a free consultation?";
-      } else if (lowerInput.includes("service") || lowerInput.includes("web") || lowerInput.includes("app")) {
-        botResponse = "We specialize in high-end Web & App development. Check out our Services section for more details!";
+        botResponse = "Our SaaS pricing depends on the subscription plan. Would you like to schedule a free demo?";
+      } else if (lowerInput.includes("service") || lowerInput.includes("product") || lowerInput.includes("app")) {
+        botResponse = "We specialize in enterprise SaaS products like Hexanx OS, Flasto, and Room ERP. Check out our Products section!";
       } else if (lowerInput.includes("location") || lowerInput.includes("raipur")) {
         botResponse = "We are located at Santoshi Nagar, Raipur, Chhattisgarh 492001.";
       }
@@ -502,7 +502,7 @@ const ChatBot = () => {
 };
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', service: 'Web Development', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', service: 'Hexanx OS', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
@@ -537,13 +537,13 @@ const ContactForm = () => {
       })
       .then(() => {
         setStatus('success');
-        setFormData({ name: '', email: '', service: 'Web Development', message: '' });
+        setFormData({ name: '', email: '', service: 'Hexanx OS', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
       })
       .catch((error) => {
         console.error('Error!', error.message);
         setStatus('success'); 
-        setFormData({ name: '', email: '', service: 'Web Development', message: '' });
+        setFormData({ name: '', email: '', service: 'Hexanx OS', message: '' });
       });
     }
   };
@@ -590,19 +590,19 @@ const ContactForm = () => {
         </div>
         
         <div className="space-y-2 input-group">
-          <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Service Interested In</label>
+          <label className="text-slate-500 text-xs font-bold uppercase tracking-wider ml-1">Product Interested In</label>
           <select 
-            name="Service"
+            name="Product"
             value={formData.service}
             onChange={(e) => setFormData({...formData, service: e.target.value})}
             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-900 focus:outline-none focus:bg-white transition-all appearance-none cursor-pointer shadow-sm"
           >
-            <option>Web Development</option>
-            <option>App Development</option>
-            <option>Power BI Dashboard</option>
-            <option>ERP / HRMS Software</option>
-            <option>Legacy Modernization</option>
-            <option>DevOps & Cloud</option>
+            <option>Hexanx OS</option>
+            <option>Flasto Restaurant OS</option>
+            <option>Room ERP Ecosystem</option>
+            <option>Hexanx HRMS</option>
+            <option>Enterprise Customization</option>
+            <option>Other SaaS Product</option>
           </select>
         </div>
 
@@ -671,12 +671,12 @@ const About = () => (
         <div className="relative">
            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] blur-2xl opacity-20"></div>
            <div className="relative glass-card p-10 rounded-[2rem] border border-white/50">
-              <h3 className="text-3xl font-bold text-slate-900 mb-6">Innovating from Raipur for the World</h3>
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">Pioneering SaaS from Raipur for the World</h3>
               <p className="text-slate-600 leading-relaxed mb-6 text-lg">
-                Founded in the heart of Chhattisgarh, Hexanx has grown from a small team of passionate coders to a premier IT consultancy serving enterprise clients across India and beyond.
+                Founded in the heart of Chhattisgarh, Hexanx is a leading Software-as-a-Service (SaaS) provider. We build and operate powerful, scalable enterprise ecosystems for businesses globally.
               </p>
               <p className="text-slate-600 leading-relaxed text-lg">
-                We believe in the power of technology to transform businesses. Whether it's a complex ERP system or a high-performance mobile app, we bring the same level of dedication and engineering excellence to every project.
+                Our suite of products, including Hexanx OS, Flasto, and Room ERP ecosystem, are designed to seamlessly integrate into your business, offering subscription-based models that scale as you grow.
               </p>
            </div>
         </div>
@@ -711,9 +711,9 @@ const WhyChooseUs = () => (
       <SectionTitle title="Why Choose Hexanx" subtitle="Our Advantage" />
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          { title: "Local Presence, Global Quality", desc: "Based in Raipur, we deliver world-class software standards with local accessibility and trust.", icon: MapPin, color: "blue" },
-          { title: "Agile Methodology", desc: "We use iterative development to ensure you see progress every week, not just at the deadline.", icon: Zap, color: "purple" },
-          { title: "Enterprise Security", desc: "Security isn't an afterthought. We build with OWASP top 10 standards from day one.", icon: ShieldCheck, color: "green" }
+          { title: "Scalable Ecosystems", desc: "Our SaaS products are built to seamlessly integrate with your existing infrastructure and scale globally.", icon: MapPin, color: "blue" },
+          { title: "Continuous Innovation", desc: "Through automatic cloud updates, your products become smarter and faster without any manual intervention.", icon: Zap, color: "purple" },
+          { title: "Enterprise Security", desc: "Security isn't an afterthought. We employ bank-level encryption and strictly follow zero-trust architecture.", icon: ShieldCheck, color: "green" }
         ].map((item, i) => (
           <RevealOnScroll key={i} className="group p-10 rounded-[2rem] bg-white border border-slate-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
             <div className={`w-16 h-16 bg-${item.color}-50 rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300`}>
@@ -858,7 +858,7 @@ const Testimonials = () => {
 };
 
 const BookingSection = ({ showTitle = true }) => {
-  const [form, setForm] = useState({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+  const [form, setForm] = useState({ name: '', email: '', service: 'Hexanx OS', date: '', time: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
@@ -881,7 +881,7 @@ const BookingSection = ({ showTitle = true }) => {
     })
     .then(() => {
         setSubmitted(true);
-        setForm({ name: '', email: '', service: 'Web Development', date: '', time: '' });
+        setForm({ name: '', email: '', service: 'Hexanx OS', date: '', time: '' });
         setTimeout(() => setSubmitted(false), 5000);
     })
     .catch((error) => console.error('Error!', error.message));
@@ -906,22 +906,22 @@ const BookingSection = ({ showTitle = true }) => {
 
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-3xl font-bold text-slate-900 mb-4">Let's Discuss Your Idea</h3>
+              <h3 className="text-3xl font-bold text-slate-900 mb-4">Book a Product Demo</h3>
               <p className="text-slate-600 mb-8 leading-relaxed">
-                Schedule a free 30-minute consultation with our lead architects. We'll discuss your project requirements, technical feasibility, and provide a roadmap.
+                Schedule a personalized product demonstration with our SaaS implementation experts. We'll show you how Hexanx OS, Flasto, or Room ERP can transform your business operations.
               </p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3 text-slate-700 font-medium">
                   <span className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"><Lock size={16}/></span>
-                  NDA Protected Conversation
+                  Secure Data Migration Plan
                 </li>
                 <li className="flex items-center gap-3 text-slate-700 font-medium">
                   <span className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"><DollarSign size={16}/></span>
-                  Free Cost Estimation
+                  Transparent SaaS Pricing
                 </li>
                 <li className="flex items-center gap-3 text-slate-700 font-medium">
                   <span className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"><Code size={16}/></span>
-                  Technical Roadmap Included
+                  Seamless API Integrations
                 </li>
               </ul>
             </div>
@@ -932,12 +932,12 @@ const BookingSection = ({ showTitle = true }) => {
                 <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" placeholder="Your Name" value={form.name} onChange={e=>setForm({...form, name: e.target.value})} />
               </div>
               <div className="space-y-2 input-group">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Service Required</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Product Demo</label>
                 <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none" value={form.service} onChange={e=>setForm({...form, service: e.target.value})}>
-                   <option>Web Development</option>
-                   <option>Mobile App</option>
-                   <option>ERP / SaaS</option>
-                   <option>Digital Marketing / SEO</option>
+                   <option>Hexanx OS</option>
+                   <option>Flasto Restaurant OS</option>
+                   <option>Room ERP Ecosystem</option>
+                   <option>Hexanx HRMS</option>
                 </select>
               </div>
               
@@ -1013,8 +1013,8 @@ const CTABanner = () => {
 
 const InternshipPage = () => {
   const tracks = [
-    { title: "MERN Stack", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "E-commerce, Social Media App" },
-    { title: "App Development", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "Delivery App, Chat App" },
+    { title: "Full-Stack SaaS", icon: Code, desc: "Master MongoDB, Express, React, Node.js.", projects: "Multi-tenant Dashboard, API Gateway" },
+    { title: "Mobile SaaS Engineering", icon: Smartphone, desc: "Build cross-platform apps using Flutter/React Native.", projects: "POS App, Delivery Tracker" },
     { title: "UI/UX Design", icon: LayoutDashboard, desc: "Learn Figma, prototyping, and user research.", projects: "Website Redesign, Mobile UI" },
     { title: "Data Analytics", icon: BarChart3, desc: "Python, SQL, and Power BI visualization.", projects: "Sales Dashboard, Stock Predictor" }
   ];
@@ -1123,8 +1123,8 @@ const TermsPage = () => (
         <div className="container mx-auto px-6 max-w-4xl bg-white p-10 rounded-[2rem] border border-slate-100 shadow-sm -mt-16 relative z-10 text-slate-600 space-y-6">
             <h3 className="text-2xl font-bold text-slate-900">1. Introduction</h3>
             <p>Welcome to Hexanx. By accessing our website and using our services, you agree to comply with these terms.</p>
-            <h3 className="text-2xl font-bold text-slate-900">2. Services</h3>
-            <p>We provide software development, consultancy, and IT services. All project scope and deliverables are defined in separate contracts.</p>
+            <h3 className="text-2xl font-bold text-slate-900">2. SaaS Products</h3>
+            <p>We provide software-as-a-service products and subscriptions. All product usage and SLA deliverables are defined in your specific subscription plan.</p>
             <h3 className="text-2xl font-bold text-slate-900">3. Intellectual Property</h3>
             <p>Unless otherwise stated, Hexanx owns the intellectual property rights for all material on Hexanx. All intellectual property rights are reserved.</p>
             <p className="text-sm text-slate-400 italic">Last updated: December 2025</p>
@@ -1221,30 +1221,30 @@ const DemoPage = () => {
           
           <div className="max-w-5xl mx-auto">
               <div className="text-center mb-16">
-                <h3 className="text-3xl md:text-5xl font-bold mb-4">Development Lifecycle</h3>
-                <p className="text-slate-400 text-lg">How we bring your idea to life</p>
+                <h3 className="text-3xl md:text-5xl font-bold mb-4">Product Implementation</h3>
+                <p className="text-slate-400 text-lg">How we onboard your business to our ecosystem</p>
               </div>
               
               <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
                  {[
                    { 
-                     step: "01", title: "Architecture & RBAC", 
-                     desc: "We start by setting up a secure Project Structure. We implement Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have strictly separated permissions.",
+                     step: "01", title: "Environment Setup & RBAC", 
+                     desc: "We start by setting up your secure tenant environment. We configure Role-Based Access Control (RBAC) to ensure Admins, Users, and Managers have appropriate permissions.",
                      icon: Lock 
                    },
                    { 
-                     step: "02", title: "Embedded Development", 
-                     desc: "Core feature development using high-performance component architecture. We ensure all external APIs and microservices are deeply embedded for speed.",
+                     step: "02", title: "Core Integration", 
+                     desc: "We seamlessly connect our SaaS products to your existing workflows. We ensure all external APIs and microservices are deeply embedded for immediate productivity.",
                      icon: Cpu 
                    },
                    { 
-                     step: "03", title: "SEO & Monetization", 
-                     desc: "Post-development, we handle the technical SEO Setup (Meta tags, Sitemap, SSR) and integrate AdSense Management for revenue generation immediately after launch.",
+                     step: "03", title: "Data Migration", 
+                     desc: "We handle the secure migration of your existing data to our cloud infrastructure, ensuring zero downtime and complete data integrity.",
                      icon: DollarSign 
                    },
                    { 
-                     step: "04", title: "Launch & Support", 
-                     desc: "After deployment, we provide 1 Month of Free Maintenance for all new customers to ensure a bug-free experience and smooth handover.",
+                     step: "04", title: "Launch & Ongoing Support", 
+                     desc: "After onboarding, our enterprise support team monitors your systems 24/7. You receive continuous free updates and feature enhancements.",
                      icon: HeartHandshake 
                    }
                  ].map((phase, i) => (
@@ -1364,8 +1364,7 @@ const Footer = () => (
       <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
       
       <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
-        <p>Customised Software Development | Enterprise Software Development | Custom Software Development | Cloud Software Development | Desktop Software Development | Inventory Software Development | Hospital Management Software Development | Billing Software Development | Accounting Software Development | Gym Software | Gym Management Software | Transport Management Software | Truck Management Software | Restaurant Management Software | Real Estate Software Development | Lead Software Development | HRM Development | School Management Software | Raipur Chhattisgarh</p>
-        <p className="mt-2">Customised Website Development | Enterprise Website Development | Custom Website Development | Corporate Website Development | CryptoCurrency Website Development | Dental Website Development | Hospital Website Development | Magento E-commmerce Website Development | Shopify Website Development | Ecommerce Website Development | Custom Ecommerce Website Development | Real Estate Website Development | Raipur Website Development | Restaurant Website Development | School Website Development | Steel Website Development | Responsive Website Development | Affordable Website Development | AWS Development | CakePHP | CodeIgniter Development | WordPress Development | WooCommerce Development | WooCommerce Developers | OpenCart Developers | Python Development | Raipur Chhattisgarh</p>
+        <p>Software as a Service | Enterprise SaaS Provider | Hexanx OS | Flasto Restaurant OS | Hexanx HRMS | Cloud Software Products | Inventory SaaS Ecosystem | Hospital Management SaaS | Billing SaaS Platform | Accounting SaaS Product | Real Estate Management System SaaS | CRM & Workflow Automation SaaS | Enterprise Ecosystem Products | Raipur Chhattisgarh</p>
       </div>
 
       <div className="flex gap-8 mt-4 md:mt-0">
@@ -1391,17 +1390,17 @@ const Hero = ({ navigateTo }) => (
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Accepting Projects in India</span>
+            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Serving Enterprises Globally</span>
         </div>
         
         <h1 className="text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-tighter">
-          BUILDING <br/>
-          DIGITAL <br/>
+          SCALING <br/>
+          BUSINESS <br/>
           <TextRotator />
         </h1>
         
         <p className="text-2xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-8">
-          We are <strong>Hexanx</strong>. Raipur's premier IT consultancy. We architect enterprise software & scalable digital ecosystems.
+          We are <strong>Hexanx</strong>. A product-led software company building scalable enterprise SaaS ecosystems like Hexanx OS, Flasto, and HRMS.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6">
@@ -1588,7 +1587,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={
-            <PageSEO title="Home" description="Hexanx is Raipur's premier IT consultancy for Enterprise Software and Web Development.">
+            <PageSEO title="Home" description="Hexanx is an enterprise SaaS company providing scalable ecosystems like Hexanx OS and Flasto.">
               <Hero navigateTo={(path) => navigate('/' + path)} />
               
               <About />
@@ -1611,7 +1610,7 @@ export default function App() {
           } />
 
           <Route path="/services" element={
-            <PageSEO title="Services" description="Web Development, App Development, and ERP Solutions in Raipur.">
+            <PageSEO title="Services" description="Enterprise SaaS Implementation, Automation, and Ecosystem Products.">
               <PageHeader title="What We Do" subtitle="Our Services" />
               <GlobalITServices showTitle={false} />
               <CTABanner />
@@ -1651,7 +1650,7 @@ export default function App() {
           } />
 
           <Route path="/contact" element={
-            <PageSEO title="Contact Us" description="Get a quote for your project. Visit us at Santoshi Nagar, Raipur.">
+            <PageSEO title="Contact Us" description="Book a product demo or consultation for our SaaS solutions.">
               <PageHeader title="Get In Touch" subtitle="Contact Us" />
                <section className="pt-20 pb-20 bg-slate-50">
                   <div className="container mx-auto px-6">
