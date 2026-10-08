@@ -6,7 +6,7 @@ import {
   Briefcase, Users, MessageSquare, Star, ChevronLeft, ChevronDown,
   Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Instagram,
-  TrendingUp, Target, Youtube, Bell, Lock, DollarSign,
+  TrendingUp, Target, Youtube, Bell, Lock, IndianRupee,
   HeartHandshake, FileText, Wifi
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -911,7 +911,7 @@ const BookingSection = ({ showTitle = true }) => {
                   Secure Data Migration Plan
                 </li>
                 <li className="flex items-center gap-3 text-slate-700 font-medium">
-                  <span className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"><DollarSign size={16}/></span>
+                  <span className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"><IndianRupee size={16}/></span>
                   Transparent SaaS Pricing
                 </li>
                 <li className="flex items-center gap-3 text-slate-700 font-medium">
@@ -1261,7 +1261,7 @@ const Hero = ({ navigateTo }) => (
                    
                    <div className="col-span-2 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
                       <div className="flex justify-between items-center mb-6">
-                         <div><h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Total Revenue</h5><h3 className="text-3xl font-bold text-slate-900">$2,450,900</h3></div>
+                         <div><h5 className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Total Revenue</h5><h3 className="text-3xl font-bold text-slate-900">₹2,450,900</h3></div>
                          <div className="p-4 bg-green-50 rounded-2xl"><TrendingUp className="text-green-600 w-6 h-6"/></div>
                       </div>
                       <div className="h-24 w-full bg-gradient-to-t from-blue-50 to-transparent rounded-xl border-b border-blue-100 relative overflow-hidden">
