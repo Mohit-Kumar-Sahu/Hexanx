@@ -156,8 +156,7 @@ const MOCK_PROJECTS = [
     id: 1,
     title: "Hexanx OS",
     category: "enterprise",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/hexanx-os.webm",
+    image: "/logos/hexanx-os.webm",
     client: "Enterprise Workspace",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"],
     description: "Hexanx OS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department. Empower your workforce with our self-service mobile app and real-time analytics.",
@@ -167,8 +166,7 @@ const MOCK_PROJECTS = [
     id: 2,
     title: "Flasto",
     category: "restaurant",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/flasto.webm",
+    image: "/logos/flasto.webm",
     client: "F&B Chains",
     tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"],
     description: "Flasto is an Omnichannel Restaurant OS built for scale. Unifying your entire F&B operation, it provides a lightning-fast Cloud POS, contactless QR digital menus, a real-time Kitchen Display System (KDS), and predictive inventory management with recipe costing. Seamlessly aggregates Swiggy, Zomato, and direct delivery orders into a single dashboard.",
@@ -178,8 +176,7 @@ const MOCK_PROJECTS = [
     id: 3,
     title: "Room Yes",
     category: "hospitality",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/room-yes.webm",
+    image: "/logos/room-yes.webm",
     client: "Global Hospitality",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"],
     description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management to maximize RevPAR across OTAs.",
@@ -189,8 +186,7 @@ const MOCK_PROJECTS = [
     id: 4,
     title: "Ayra AI",
     category: "artificial intelligence",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/ayra-ai.webm",
+    image: "/logos/ayra-ai.webm",
     client: "Agentic Intelligence Engine",
     tags: ["LLM", "RAG", "Text-to-Speech", "Dynamic Registry"],
     description: "Ayra AI is a full agentic loop system embedded within the Hexanx ecosystem. Powered by DeepSeek LLM, it features real-time SSE streaming, pgvector similarity search, and a dynamic tool registry. Ingest complex PDF documents and interact via Microsoft Edge TTS integration for next-gen automation.",
@@ -754,15 +750,14 @@ const ProductsShowcase = ({ showTitle = true }) => {
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
                   <div className="relative bg-white p-4 rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
                       <div className="rounded-[2.5rem] overflow-hidden relative aspect-video">
-                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                          {product.image.endsWith('.webm') ? (
+                              <video src={product.image} autoPlay loop muted playsInline className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                          ) : (
+                              <img src={product.image} alt={product.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
                           <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                               <div className="flex items-center gap-4">
-                                  {product.logo && (
-                                      <div className="w-12 h-12 bg-white rounded-xl shadow-lg overflow-hidden flex-shrink-0">
-                                          <video src={product.logo} autoPlay loop muted playsInline className="w-full h-full object-cover" />
-                                      </div>
-                                  )}
                                   <span className="px-5 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
                               </div>
                           </div>
