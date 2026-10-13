@@ -4,8 +4,7 @@ import { HeartHandshake, ShieldCheck, Sparkles } from 'lucide-react';
 
 export default function BrandPhilosophyBanner() {
   return (
-    <section className="w-full relative overflow-hidden">
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden">
+    <section className="w-full max-w-none m-0 relative flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-20 md:py-28 overflow-hidden">
         {/* Background Team Image */}
         <img
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2850&q=80"
@@ -59,7 +58,6 @@ export default function BrandPhilosophyBanner() {
             </div>
           </div>
         </motion.div>
-      </div>
     </section>
   );
 }

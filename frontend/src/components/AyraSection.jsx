@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 export default function AyraSection() {
   return (
-    <section className="w-full bg-slate-950 text-white py-20 md:py-24 rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-800/80" id="ayra">
+    <section className="w-[96%] max-w-[1600px] mx-auto bg-slate-950 text-white rounded-[3rem] shadow-2xl overflow-hidden py-24 relative border border-slate-800/80" id="ayra">
       {/* Ambient Lighting Orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-8 md:px-16 relative z-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center px-8 md:px-16 lg:px-24 relative z-10">
         
         {/* Left Column: Avatar, Typography & Dark Glassmorphism Pills */}
         <motion.div

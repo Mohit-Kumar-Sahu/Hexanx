@@ -41,7 +41,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full min-h-[85vh] flex items-center pt-32 pb-16 overflow-hidden bg-transparent">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         
         {/* Left Column: Typography & CTAs */}
         <div className="space-y-8 sm:space-y-12">

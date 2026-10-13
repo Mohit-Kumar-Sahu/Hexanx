@@ -58,13 +58,13 @@ export default function LandingPage() {
       {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* 2. Centered Constrained Container for Ecosystem Showcase & Ayra Section */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col gap-24 md:gap-32">
-        <LayeredEcosystemShowcase />
-        <AyraSection />
-      </div>
+      {/* 2. Expansive Ecosystem Showcase */}
+      <LayeredEcosystemShowcase />
 
-      {/* 3. Full-width Brand Philosophy Banner (No max-w constraint) */}
+      {/* 3. Ultra-Wide Floating Ayra Section */}
+      <AyraSection />
+
+      {/* 4. True Edge-to-Edge Brand Philosophy Banner */}
       <BrandPhilosophyBanner />
     </main>
   );
