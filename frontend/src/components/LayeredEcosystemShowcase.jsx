@@ -66,30 +66,31 @@ export default function LayeredEcosystemShowcase() {
                 idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              {/* Product Visual - Contextual Background Image + Glassy Overlay + Centered Logo */}
+              {/* Product Visual - Physical Contextual Image Tag + Dark Overlay + Centered Logo Capsule */}
               <div className="w-full lg:w-1/2 relative group">
-                <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 aspect-video relative flex items-center justify-center">
-                  {/* Contextual Unsplash Background */}
+                <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80">
+                  {/* Background Image */}
                   <img
                     src={product.bgImage}
-                    alt={`${product.title} contextual environment`}
-                    className="object-cover w-full h-full rounded-3xl absolute inset-0 select-none group-hover:scale-105 transition-transform duration-700"
+                    alt={`${product.title} Dashboard`}
+                    className="absolute inset-0 w-full h-full object-cover z-0 select-none group-hover:scale-105 transition-transform duration-700"
                   />
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-slate-900/60 z-10 backdrop-blur-[2px]"></div>
 
-                  {/* Dark Glassy Overlay */}
-                  <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] rounded-3xl" />
-
-                  {/* Centered High-Visibility Official Logo Capsule */}
-                  <div className="relative z-10 bg-white/95 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-2xl border border-white/80 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                    <img
-                      src={product.logo}
-                      alt={product.title}
-                      className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
-                    />
+                  {/* Centered Logo Capsule */}
+                  <div className="relative z-20 flex items-center justify-center h-full">
+                    <div className="bg-white/95 px-8 py-4 rounded-2xl shadow-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <img
+                        src={product.logo}
+                        className="h-12 sm:h-14 w-auto mix-blend-multiply"
+                        alt={product.title}
+                      />
+                    </div>
                   </div>
 
                   {/* Category Pill */}
-                  <div className="absolute top-4 left-4 z-20 bg-slate-900/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-mono font-semibold border border-white/10 shadow-md">
+                  <div className="absolute top-4 left-4 z-30 bg-slate-900/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-mono font-semibold border border-white/10 shadow-md">
                     {product.category}
                   </div>
 
@@ -97,7 +98,7 @@ export default function LayeredEcosystemShowcase() {
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-4 right-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-slate-800 text-xs font-mono font-bold shadow-xl border border-white/80 flex items-center gap-1.5"
+                    className="absolute bottom-4 right-4 z-30 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-slate-800 text-xs font-mono font-bold shadow-xl border border-white/80 flex items-center gap-1.5"
                   >
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span>{product.statBadge}</span>

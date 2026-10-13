@@ -17,6 +17,9 @@ import Blog from './pages/Blog';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import LandingPage from './pages/LandingPage';
+import LayeredEcosystemShowcase from './components/LayeredEcosystemShowcase';
+import BrandPhilosophyBanner from './components/BrandPhilosophyBanner';
+import AyraSection from './components/AyraSection';
 import Footer from './components/Footer';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
@@ -165,6 +168,7 @@ const MOCK_PROJECTS = [
     category: "enterprise",
     image: "/logos/hexanxos.png",
     logo: "/logos/hexanxos.png",
+    bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     client: "Enterprise Workspace",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"],
     description: "Hexanx OS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department. Empower your workforce with our self-service mobile app and real-time analytics.",
@@ -176,6 +180,7 @@ const MOCK_PROJECTS = [
     category: "restaurant",
     image: "/logos/flasto.png",
     logo: "/logos/flasto.png",
+    bgImage: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
     client: "F&B Chains",
     tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"],
     description: "Flasto is an Omnichannel Restaurant OS built for scale. Unifying your entire F&B operation, it provides a lightning-fast Cloud POS, contactless QR digital menus, a real-time Kitchen Display System (KDS), and predictive inventory management with recipe costing. Seamlessly aggregates Swiggy, Zomato, and direct delivery orders into a single dashboard.",
@@ -187,6 +192,7 @@ const MOCK_PROJECTS = [
     category: "hospitality",
     image: "/logos/roomyes.png",
     logo: "/logos/roomyes.png",
+    bgImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
     client: "Global Hospitality",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"],
     description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management to maximize RevPAR across OTAs.",
@@ -198,6 +204,7 @@ const MOCK_PROJECTS = [
     category: "artificial intelligence",
     image: "/logos/ayra-ai.png",
     logo: "/logos/ayra-ai.png",
+    bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
     client: "Agentic Intelligence Engine",
     tags: ["LLM", "RAG", "Text-to-Speech", "Dynamic Registry"],
     description: "Ayra AI is a full agentic loop system embedded within the Hexanx ecosystem. Powered by DeepSeek LLM, it features real-time SSE streaming, pgvector similarity search, and a dynamic tool registry. Ingest complex PDF documents and interact via Microsoft Edge TTS integration for next-gen automation.",
@@ -789,21 +796,36 @@ const ProductsShowcase = ({ showTitle = true }) => {
                {/* Image Side */}
                <div className="w-full lg:w-1/2 relative group perspective-1000">
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] sm:rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-                  <div className="relative bg-white p-3 sm:p-4 rounded-[2rem] sm:rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
-                      <div className="rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden relative aspect-video flex items-center justify-center p-8 sm:p-14 bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
-                          <img
-                            src={product.logo}
-                            alt={product.title}
-                            className={
-                              product.title === "Ayra AI"
-                                ? "h-14 sm:h-16 md:h-20 w-14 sm:w-16 md:w-20 rounded-full aspect-square object-cover shadow-lg border-2 border-slate-100 transform group-hover:scale-105 transition-transform duration-700"
-                                : "h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply transform group-hover:scale-105 transition-transform duration-700"
-                            }
-                          />
-                          <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex justify-between items-end">
-                              <span className="px-4 sm:px-5 py-1.5 sm:py-2 bg-slate-900/80 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
+                  <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80">
+                      {/* Background Image */}
+                      <img 
+                          src={product.bgImage} 
+                          alt={`${product.title} Dashboard`} 
+                          className="absolute inset-0 w-full h-full object-cover z-0 select-none group-hover:scale-105 transition-transform duration-700" 
+                      />
+                      {/* Dark Overlay */}
+                      <div className="absolute inset-0 bg-slate-900/60 z-10 backdrop-blur-[2px]"></div>
+                      
+                      {/* Centered Logo Capsule */}
+                      <div className="relative z-20 flex items-center justify-center h-full">
+                          <div className="bg-white/95 px-8 py-4 rounded-2xl shadow-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                              <img 
+                                src={product.logo} 
+                                className={
+                                  product.title === "Ayra AI"
+                                    ? "h-14 sm:h-16 md:h-18 w-14 sm:w-16 md:w-18 rounded-full aspect-square object-cover shadow-md border-2 border-slate-100"
+                                    : "h-12 sm:h-14 w-auto mix-blend-multiply"
+                                } 
+                                alt={product.title} 
+                              />
                           </div>
                       </div>
+
+                      {/* Category Pill */}
+                      <div className="absolute top-4 left-4 z-30">
+                          <span className="px-4 py-1.5 bg-slate-900/80 backdrop-blur-md rounded-full text-white text-xs font-mono font-bold uppercase tracking-widest border border-white/10 shadow-md">{product.category}</span>
+                      </div>
+                  </div>
                       
                       {/* Floating Stats (Hidden on small mobile to eliminate horizontal scroll) */}
                       <div className="hidden sm:block absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 glass-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i}s`}}>
@@ -819,7 +841,6 @@ const ProductsShowcase = ({ showTitle = true }) => {
                          </div>
                       </div>
                   </div>
-               </div>
                
                {/* Content Side */}
                <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8">
@@ -1401,7 +1422,9 @@ export default function App() {
               
               <About />
               <WhyChooseUs />
-              <ProductsShowcase />
+              <LayeredEcosystemShowcase />
+              <BrandPhilosophyBanner />
+              <AyraSection />
               <BookingSection />
               <Testimonials />
               <CTABanner />
@@ -1415,7 +1438,7 @@ export default function App() {
           <Route path="/products" element={
             <PageSEO title="Products" description="Enterprise SaaS Implementation, Automation, and Ecosystem Products.">
               <PageHeader title="Our Products" subtitle="SaaS Solutions" />
-              <ProductsShowcase showTitle={false} />
+              <LayeredEcosystemShowcase />
             </PageSEO>
           } />
 
