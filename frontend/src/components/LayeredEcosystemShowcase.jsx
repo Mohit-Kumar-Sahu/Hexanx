@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Star, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Star, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
 const ECOSYSTEM_PRODUCTS = [
   {
@@ -8,6 +9,8 @@ const ECOSYSTEM_PRODUCTS = [
     client: "Enterprise Workspace",
     logo: "/logos/hexanxos.png",
     link: "https://os.hexanx.in",
+    bgImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    statBadge: "AES-256",
     description: "Hexanx OS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department.",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"]
   },
@@ -17,6 +20,8 @@ const ECOSYSTEM_PRODUCTS = [
     client: "F&B Chains",
     logo: "/logos/flasto.png",
     link: "https://flasto.in",
+    bgImage: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+    statBadge: "<50ms Sync",
     description: "Flasto is an Omnichannel Restaurant OS built for scale. Unifying your entire F&B operation, it provides a lightning-fast Cloud POS, contactless QR digital menus, a real-time Kitchen Display System (KDS), and predictive inventory management with recipe costing.",
     tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"]
   },
@@ -26,6 +31,8 @@ const ECOSYSTEM_PRODUCTS = [
     client: "Global Hospitality",
     logo: "/logos/roomyes.png",
     link: "https://roomyes.hexanx.in",
+    bgImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    statBadge: "99.99% Uptime",
     description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management.",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"]
   }
@@ -33,7 +40,7 @@ const ECOSYSTEM_PRODUCTS = [
 
 export default function LayeredEcosystemShowcase() {
   return (
-    <section className="py-24 sm:py-32 bg-slate-50 relative overflow-hidden w-full" id="ecosystem">
+    <section className="py-24 sm:py-32 bg-transparent relative overflow-hidden w-full" id="ecosystem">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-6xl">
         <div className="text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4">
@@ -49,23 +56,52 @@ export default function LayeredEcosystemShowcase() {
 
         <div className="space-y-16 sm:space-y-24">
           {ECOSYSTEM_PRODUCTS.map((product, idx) => (
-            <div
+            <motion.div
               key={product.title}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${
                 idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              {/* Product Visual - Official Logo Presentation */}
+              {/* Product Visual - Contextual Background Image + Glassy Overlay + Centered Logo */}
               <div className="w-full lg:w-1/2 relative group">
-                <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-white aspect-video relative flex items-center justify-center p-8 sm:p-14 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+                <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 aspect-video relative flex items-center justify-center">
+                  {/* Contextual Unsplash Background */}
                   <img
-                    src={product.logo}
-                    alt={product.title}
-                    className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                    src={product.bgImage}
+                    alt={`${product.title} contextual environment`}
+                    className="object-cover w-full h-full rounded-3xl absolute inset-0 select-none group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-mono font-semibold">
+
+                  {/* Dark Glassy Overlay */}
+                  <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] rounded-3xl" />
+
+                  {/* Centered High-Visibility Official Logo Capsule */}
+                  <div className="relative z-10 bg-white/95 backdrop-blur-md px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-2xl border border-white/80 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <img
+                      src={product.logo}
+                      alt={product.title}
+                      className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                    />
+                  </div>
+
+                  {/* Category Pill */}
+                  <div className="absolute top-4 left-4 z-20 bg-slate-900/85 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-mono font-semibold border border-white/10 shadow-md">
                     {product.category}
                   </div>
+
+                  {/* Levitating Badges */}
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-4 right-4 z-20 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full text-slate-800 text-xs font-mono font-bold shadow-xl border border-white/80 flex items-center gap-1.5"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>{product.statBadge}</span>
+                  </motion.div>
                 </div>
               </div>
 
@@ -115,7 +151,7 @@ export default function LayeredEcosystemShowcase() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

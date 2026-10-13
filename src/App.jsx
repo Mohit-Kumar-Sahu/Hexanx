@@ -16,6 +16,7 @@ import AboutUs from './pages/AboutUs';
 import Blog from './pages/Blog';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import LandingPage from './pages/LandingPage';
 import Footer from './components/Footer';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
@@ -1453,6 +1454,7 @@ export default function App() {
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/sitemap" element={<Sitemap />} />
+          <Route path="/landing" element={<LandingPage />} />
 
         </Routes>
       </main>
