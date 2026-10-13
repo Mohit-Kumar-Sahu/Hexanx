@@ -12,7 +12,7 @@ export default function Footer() {
             Hexanx
           </h2>
           <p className="max-w-md text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 text-slate-500 font-light">
-            Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
+            A unified B2B SaaS ecosystem powering Indian enterprises — Hexanx OS for HR & Finance, Flasto for Restaurants, and Roomyes for Hotels. All connected by Ayra AI.
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4">
              {[
@@ -34,6 +34,7 @@ export default function Footer() {
           <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
             {[
                { name: "Products", path: "/products"}, 
+               { name: "Blog", path: "/blog"},
                { name: "Book Call", path: "/booking"}, 
                { name: "Careers", path: "/careers"}, 
                { name: "About Us", path: "/about"},

@@ -12,6 +12,8 @@ import {
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Sitemap from './pages/Sitemap';
+import AboutUs from './pages/AboutUs';
+import Blog from './pages/Blog';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
 const styles = `
@@ -1433,6 +1435,8 @@ export default function App() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/products', label: 'Products' },
+    { path: '/about', label: 'About Us' },
+    { path: '/blog', label: 'Blog' },
     { path: '/internships', label: 'Internships' },
     { path: '/careers', label: 'Careers' },
     { path: '/booking', label: 'Book Call' },
@@ -1501,13 +1505,9 @@ export default function App() {
             </PageSEO>
           } />
 
-          <Route path="/about" element={
-            <PageSEO title="About Us" description="Learn about Hexanx's mission to transform businesses in Chhattisgarh and beyond.">
-              <PageHeader title="Who We Are" subtitle="About Us" />
-              <About />
-              <WhyChooseUs />
-            </PageSEO>
-          } />
+          <Route path="/about" element={<AboutUs />} />
+
+          <Route path="/blog" element={<Blog />} />
 
           <Route path="/products" element={
             <PageSEO title="Products" description="Enterprise SaaS Implementation, Automation, and Ecosystem Products.">
