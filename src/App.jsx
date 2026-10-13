@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Sitemap from './pages/Sitemap';
 
 // --- 1. GLOBAL STYLES & ANIMATIONS ---
 const styles = `
@@ -464,27 +465,51 @@ const ChatBot = () => {
     <>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300"
+        aria-label="Open Ayra AI Assistant"
+        className="fixed bottom-6 right-6 z-50 p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300 flex items-center justify-center group"
       >
-        {isOpen ? <X /> : <MessageCircle />}
+        {isOpen ? (
+          <X className="w-6 h-6 m-1.5" />
+        ) : (
+          <div className="relative flex items-center justify-center">
+            <img 
+              src="/logos/ayra-ai.png" 
+              alt="Ayra AI Assistant" 
+              className="w-9 h-9 rounded-full aspect-square object-cover shadow-lg border-2 border-white/80" 
+            />
+            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></span>
+          </div>
+        )}
       </button>
 
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[500px] animate-slide-in">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center gap-3 text-white">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <MessageSquare size={20} />
-            </div>
+            <img 
+              src="/logos/ayra-ai.png" 
+              alt="Ayra AI" 
+              className="w-10 h-10 rounded-full aspect-square object-cover shadow-lg border-2 border-slate-100" 
+            />
             <div>
-              <h4 className="font-bold text-base">Hexanx Support</h4>
+              <h4 className="font-bold text-base flex items-center gap-2">
+                Ayra AI
+                <span className="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-semibold uppercase tracking-wider">Hexanx Agent</span>
+              </h4>
               <p className="text-[10px] text-blue-100 flex items-center gap-1">
-                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Online
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Online • Intelligent Assistant
               </p>
             </div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto bg-slate-50 space-y-3">
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
+              <div key={msg.id} className={`flex items-end gap-2 ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
+                {msg.isBot && (
+                  <img
+                    src="/logos/ayra-ai.png"
+                    alt="Ayra AI"
+                    className="w-6 h-6 rounded-full aspect-square object-cover shadow-xs border border-slate-200 shrink-0 mb-1"
+                  />
+                )}
                 <div className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${msg.isBot ? 'bg-white border border-slate-200 text-slate-700 rounded-tl-none' : 'bg-blue-600 text-white rounded-tr-none'}`}>
                   {msg.text}
                 </div>
@@ -790,7 +815,11 @@ const ProductsShowcase = ({ showTitle = true }) => {
                           <img
                             src={product.logo}
                             alt={`${product.title} logo`}
-                            className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                            className={
+                              product.title === "Ayra AI"
+                                ? "h-14 sm:h-16 md:h-20 w-14 sm:w-16 md:w-20 rounded-full aspect-square object-cover shadow-lg border-2 border-slate-100"
+                                : "h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                            }
                           />
                       </div>
                   )}
@@ -1179,7 +1208,8 @@ const Footer = () => (
              { name: "Products", path: "/products"}, 
              { name: "Book Call", path: "/booking"}, 
              { name: "Careers", path: "/careers"}, 
-             { name: "About Us", path: "/about"}
+             { name: "About Us", path: "/about"},
+             { name: "Sitemap", path: "/sitemap"}
           ].map(item => (
              <li key={item.name} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
                 <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> 
@@ -1214,7 +1244,7 @@ const Footer = () => (
       <div className="flex gap-8 mt-4 md:mt-0">
          <Link to="/privacy" className="hover:text-white cursor-pointer transition-colors">Privacy Policy</Link>
          <Link to="/terms" className="hover:text-white cursor-pointer transition-colors">Terms of Service</Link>
-         <span className="hover:text-white cursor-pointer transition-colors">Sitemap</span>
+         <Link to="/sitemap" className="hover:text-white cursor-pointer transition-colors">Sitemap</Link>
       </div>
     </div>
   </footer>
@@ -1490,6 +1520,7 @@ export default function App() {
 
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/sitemap" element={<Sitemap />} />
 
         </Routes>
       </main>
