@@ -42,7 +42,7 @@ export default function ChatbotWidget() {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Open Ayra AI Assistant"
-        className="fixed bottom-6 right-6 z-50 p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-4 sm:right-6 z-50 p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300 flex items-center justify-center group"
       >
         {isOpen ? (
           <X className="w-6 h-6 m-1.5" />
@@ -59,7 +59,7 @@ export default function ChatbotWidget() {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[500px] animate-slide-in">
+        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[75vh] sm:max-h-[500px] animate-slide-in">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center gap-3 text-white">
             <img 
               src="/logos/ayra-ai.png" 

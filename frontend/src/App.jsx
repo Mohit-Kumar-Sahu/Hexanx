@@ -205,7 +205,13 @@ const TESTIMONIALS = [
   { id: 3, name: "Rohan Mehta", role: "Director, Mehta Transport, Indore", content: "Managing our fleet was a headache until Hexanx built our logistics dashboard. Now we track everything in real-time. Excellent service.", avatar: "RM" }
 ];
 
-// FAQs have been removed
+// Product External Platform Links
+const PRODUCT_EXTERNAL_LINKS = {
+  "Hexanx OS": "https://os.hexanx.in",
+  "Flasto": "https://flasto.in",
+  "Room Yes": "https://roomyes.hexanx.in",
+  "Roomyes": "https://roomyes.hexanx.in"
+};
 
 // --- 3. REUSABLE UI COMPONENTS ---
 
@@ -229,34 +235,34 @@ const Button = ({ children, primary = false, onClick, className = "", type = "bu
 );
 
 const SectionTitle = ({ title, subtitle, center = true, dark = false }) => (
-  <RevealOnScroll className={`mb-20 ${center ? 'text-center' : 'text-left'}`}>
-    <div className={`inline-flex items-center px-4 py-2 rounded-full ${dark ? 'bg-slate-800 border-slate-700 text-blue-400' : 'bg-white border-blue-100 text-blue-600'} border text-xs font-bold uppercase tracking-widest mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
+  <RevealOnScroll className={`mb-12 sm:mb-20 ${center ? 'text-center' : 'text-left'}`}>
+    <div className={`inline-flex items-center px-4 py-2 rounded-full ${dark ? 'bg-slate-800 border-slate-700 text-blue-400' : 'bg-white border-blue-100 text-blue-600'} border text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 shadow-md ${center ? 'mx-auto' : ''}`}>
       <span className={`w-2 h-2 rounded-full ${dark ? 'bg-blue-400' : 'bg-blue-600'} mr-2 animate-pulse`}></span>
       {subtitle}
     </div>
-    <h2 className={`text-5xl md:text-7xl font-extrabold tracking-tight leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>
+    <h2 className={`text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-tight ${dark ? 'text-white' : 'text-slate-900'}`}>
       {title.split(" ").map((word, i) => (
         <span key={i} className={i === 1 ? "gradient-text" : ""}>
           {word} 
         </span>
       ))}
     </h2>
-    <div className={`h-2 w-24 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-8 ${center ? 'mx-auto' : ''}`}></div>
+    <div className={`h-2 w-20 sm:w-24 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mt-6 sm:mt-8 ${center ? 'mx-auto' : ''}`}></div>
   </RevealOnScroll>
 );
 
 const PageHeader = ({ title, subtitle }) => (
-  <div className="relative pt-48 pb-24 overflow-hidden mesh-gradient">
+  <div className="relative pt-40 sm:pt-48 pb-16 sm:pb-24 overflow-hidden mesh-gradient">
     <div className="absolute inset-0 bg-grid opacity-60"></div>
     <div className="absolute top-20 right-20 w-72 h-72 bg-blue-400/20 rounded-full blur-[80px] animate-float"></div>
     <div className="absolute bottom-10 left-20 w-64 h-64 bg-purple-400/20 rounded-full blur-[80px] animate-float" style={{animationDelay: "2s"}}></div>
     
-    <div className="container mx-auto px-6 relative z-10 text-center animate-slide-in">
+    <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center animate-slide-in">
       <div className="inline-block px-4 py-1.5 rounded-full border border-slate-200 bg-white/50 backdrop-blur mb-6 shadow-sm">
         <span className="text-xs font-bold uppercase tracking-widest text-slate-600">{subtitle}</span>
       </div>
-      <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight">{title}</h1>
-      <div className="w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+      <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-slate-900 mb-6 tracking-tight">{title}</h1>
+      <div className="w-20 sm:w-24 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
     </div>
   </div>
 );
@@ -466,7 +472,7 @@ const ChatBot = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Open Ayra AI Assistant"
-        className="fixed bottom-6 right-6 z-50 p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-4 sm:right-6 z-50 p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:scale-110 active:scale-95 animate-pulse-glow transition-all duration-300 flex items-center justify-center group"
       >
         {isOpen ? (
           <X className="w-6 h-6 m-1.5" />
@@ -483,7 +489,7 @@ const ChatBot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[500px] animate-slide-in">
+        <div className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[75vh] sm:max-h-[500px] animate-slide-in">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center gap-3 text-white">
             <img 
               src="/logos/ayra-ai.png" 
@@ -768,36 +774,36 @@ const ProductsShowcase = ({ showTitle = true }) => {
     <section className="py-32 bg-slate-50 relative overflow-hidden" id="products">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
       <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-purple-100 rounded-full blur-[150px] -z-10 opacity-60"></div>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         {showTitle && <SectionTitle title="Our Products" subtitle="Enterprise USPs" />}
         
-        <div className="space-y-32 mt-16">
+        <div className="space-y-20 sm:space-y-32 mt-12 sm:mt-16">
           {MOCK_PROJECTS.map((product, i) => (
-            <div key={product.id} className={`flex flex-col lg:flex-row gap-16 items-center ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+            <div key={product.id} className={`flex flex-col lg:flex-row gap-8 lg:gap-16 items-center ${i % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
                {/* Image Side */}
                <div className="w-full lg:w-1/2 relative group perspective-1000">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-                  <div className="relative bg-white p-4 rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
-                      <div className="rounded-[2.5rem] overflow-hidden relative aspect-video">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] sm:rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+                  <div className="relative bg-white p-3 sm:p-4 rounded-[2rem] sm:rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
+                      <div className="rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden relative aspect-video">
                           <img src={product.image} alt={product.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
-                          <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex justify-between items-end">
                               <div className="flex items-center gap-4">
-                                  <span className="px-5 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
+                                  <span className="px-4 sm:px-5 py-1.5 sm:py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
                               </div>
                           </div>
                       </div>
                       
-                      {/* Floating Stats */}
-                      <div className="absolute -bottom-8 -right-8 glass-card p-6 rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i}s`}}>
+                      {/* Floating Stats (Hidden on small mobile to eliminate horizontal scroll) */}
+                      <div className="hidden sm:block absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 glass-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i}s`}}>
                          <div className="flex flex-col gap-1 text-center">
-                            <span className="text-3xl font-black text-slate-900">{Object.values(product.stats)[0]}</span>
+                            <span className="text-2xl sm:text-3xl font-black text-slate-900">{Object.values(product.stats)[0]}</span>
                             <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{Object.keys(product.stats)[0]}</span>
                          </div>
                       </div>
-                      <div className="absolute -top-8 -left-8 glass-card p-6 rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i + 1}s`}}>
+                      <div className="hidden sm:block absolute -top-6 -left-6 md:-top-8 md:-left-8 glass-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-xl border border-white/80 animate-float" style={{animationDelay: `${i + 1}s`}}>
                          <div className="flex flex-col gap-1 text-center">
-                            <span className="text-2xl font-black text-blue-600">{Object.values(product.stats)[1]}</span>
+                            <span className="text-xl sm:text-2xl font-black text-blue-600">{Object.values(product.stats)[1]}</span>
                             <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{Object.keys(product.stats)[1]}</span>
                          </div>
                       </div>
@@ -805,7 +811,7 @@ const ProductsShowcase = ({ showTitle = true }) => {
                </div>
                
                {/* Content Side */}
-               <div className="w-full lg:w-1/2 space-y-8">
+               <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8">
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full border border-blue-100">
                       <Star className="w-4 h-4 text-blue-600 fill-current" />
                       <span className="text-xs font-bold tracking-widest text-blue-600 uppercase">Featured USP: {product.client}</span>
@@ -818,27 +824,51 @@ const ProductsShowcase = ({ showTitle = true }) => {
                             className={
                               product.title === "Ayra AI"
                                 ? "h-14 sm:h-16 md:h-20 w-14 sm:w-16 md:w-20 rounded-full aspect-square object-cover shadow-lg border-2 border-slate-100"
-                                : "h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                                : "h-9 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
                             }
                           />
                       </div>
                   )}
-                  <p className="text-xl text-slate-600 leading-relaxed">{product.description}</p>
+                  <p className="text-base sm:text-xl text-slate-600 leading-relaxed font-normal">{product.description}</p>
                   
-                  <div className="grid grid-cols-2 gap-6 pt-6">
+                  {/* Direct "Get Started ➔" Button (Apple-Grade) */}
+                  {PRODUCT_EXTERNAL_LINKS[product.title] && (
+                    <div>
+                      <a
+                        href={PRODUCT_EXTERNAL_LINKS[product.title]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-2.5 mt-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-medium transition-all shadow-md hover:shadow-lg gap-2 group text-sm"
+                      >
+                        Get Started <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 pt-4">
                      {product.tags.map(tag => (
-                        <div key={tag} className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                           <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                              <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                        <div key={tag} className="flex items-center gap-3 sm:gap-4 bg-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-xs border border-slate-100 hover:shadow-md transition-shadow">
+                           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                            </div>
-                           <span className="font-bold text-slate-700">{tag}</span>
+                           <span className="font-bold text-slate-700 text-xs sm:text-sm">{tag}</span>
                         </div>
                      ))}
                   </div>
                   
-                  <div className="pt-10 flex gap-4">
-                     <Button primary onClick={() => navigate('/booking')} className="px-10 py-5 text-sm">
-                        Request Demo <ArrowRight className="ml-2 w-5 h-5" />
+                  <div className="pt-6 sm:pt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                     {PRODUCT_EXTERNAL_LINKS[product.title] && (
+                       <a
+                         href={PRODUCT_EXTERNAL_LINKS[product.title]}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold transition-all shadow-md hover:shadow-lg gap-2 group text-sm text-center"
+                       >
+                         Open Platform <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                       </a>
+                     )}
+                     <Button primary onClick={() => navigate('/booking')} className="px-8 py-4 text-sm w-full sm:w-auto">
+                        Request Demo <ArrowRight className="ml-2 w-4 h-4" />
                      </Button>
                   </div>
                </div>
@@ -1020,14 +1050,14 @@ const CTABanner = () => {
             <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-black/10 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
 
-            <div className="container mx-auto px-6 relative z-10 text-center text-white">
-            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tight">Ready to Scale?</h2>
-            <p className="text-2xl text-blue-100 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+            <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 text-center text-white">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black mb-6 sm:mb-8 tracking-tight">Ready to Scale?</h2>
+            <p className="text-lg sm:text-2xl text-blue-100 mb-8 sm:mb-12 max-w-3xl mx-auto font-light leading-relaxed">
                 Join 50+ enterprise clients who trust <span className="font-bold text-white">Hexanx</span> for their digital transformation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <button onClick={() => navigate('/contact')} className="px-12 py-5 bg-white text-blue-600 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
-                <button onClick={() => navigate('/booking')} className="px-12 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all">Schedule Call</button>
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                <button onClick={() => navigate('/contact')} className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-white text-blue-600 rounded-full font-bold text-base sm:text-lg hover:shadow-2xl hover:scale-105 transition-all shadow-blue-900/20">Get Started Now</button>
+                <button onClick={() => navigate('/booking')} className="w-full sm:w-auto px-8 sm:px-12 py-4 sm:py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition-all">Schedule Call</button>
             </div>
             </div>
         </section>
@@ -1177,33 +1207,33 @@ const PrivacyPage = () => (
 
 
 const Footer = () => (
-  <footer className="bg-slate-950 text-slate-400 pt-32 pb-10 relative z-10 border-t border-slate-900">
-    <div className="container mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20">
-      <div className="col-span-1 md:col-span-2">
-        <h2 className="text-4xl font-bold text-white mb-8 flex items-center">
-          <img src="/logo.png" alt="Hexanx Logo" className="w-12 h-12 object-contain mr-4 bg-white rounded-xl p-1" />
+  <footer className="bg-slate-950 text-slate-400 pt-24 sm:pt-32 pb-10 relative z-10 border-t border-slate-900 overflow-x-hidden w-full">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16 sm:mb-20">
+      <div className="col-span-1 sm:col-span-2">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8 flex items-center">
+          <img src="/logo.png" alt="Hexanx Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain mr-4 bg-white rounded-xl p-1" />
           Hexanx
         </h2>
-        <p className="max-w-md text-lg leading-relaxed mb-10 text-slate-500 font-light">
+        <p className="max-w-md text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 text-slate-500 font-light">
           Transforming businesses through innovative IT solutions. Based in Raipur, serving the world. We build the digital infrastructure that powers the future economy.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
            {[{ Icon: Globe, link: "https://www.hexanx.in/" }, 
              { Icon: Mail, link: "mailto:contact@hexanx.in" }, 
              { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
              { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
              { Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" }
             ].map((social, i) => (
-             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
-               <social.Icon size={20}/>
+             <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
+               <social.Icon size={18}/>
              </a>
            ))}
         </div>
       </div>
       
       <div>
-        <h3 className="text-white font-bold mb-8 text-xl">Quick Links</h3>
-        <ul className="space-y-4 text-base">
+        <h3 className="text-white font-bold mb-6 sm:mb-8 text-lg sm:text-xl">Quick Links</h3>
+        <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
           {[
              { name: "Products", path: "/products"}, 
              { name: "Book Call", path: "/booking"}, 
@@ -1212,7 +1242,7 @@ const Footer = () => (
              { name: "Sitemap", path: "/sitemap"}
           ].map(item => (
              <li key={item.name} className="hover:text-blue-400 cursor-pointer transition-colors flex items-center group">
-                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors"/> 
+                <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors shrink-0"/> 
                 <Link to={item.path}>{item.name}</Link>
              </li>
           ))}
@@ -1220,28 +1250,28 @@ const Footer = () => (
       </div>
 
       <div>
-        <h3 className="text-white font-bold mb-8 text-xl">Contact</h3>
-        <ul className="space-y-6 text-base">
-          <li className="flex items-start gap-4">
-             <MapPin className="shrink-0 text-blue-500 mt-1" size={20}/>
+        <h3 className="text-white font-bold mb-6 sm:mb-8 text-lg sm:text-xl">Contact</h3>
+        <ul className="space-y-4 sm:space-y-6 text-sm sm:text-base">
+          <li className="flex items-start gap-3 sm:gap-4">
+             <MapPin className="shrink-0 text-blue-500 mt-1" size={18}/>
              <span>Santoshi Nagar, Raipur,<br/>Chhattisgarh 492001</span>
           </li>
-          <li className="flex items-center gap-4">
-             <Mail className="shrink-0 text-blue-500" size={20}/>
-             <a href="mailto:contact@hexanx.in" className="hover:text-white transition-colors">contact@hexanx.in</a>
+          <li className="flex items-center gap-3 sm:gap-4">
+             <Mail className="shrink-0 text-blue-500" size={18}/>
+             <a href="mailto:contact@hexanx.in" className="hover:text-white transition-colors break-all">contact@hexanx.in</a>
           </li>
         </ul>
       </div>
     </div>
     
-    <div className="container mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-xs sm:text-sm text-slate-600 gap-4 md:gap-0 text-center md:text-left">
       <p>&copy; {new Date().getFullYear()} Hexanx IT Solutions. All rights reserved.</p>
       
-      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-4 md:my-0">
+      <div className="max-w-2xl text-[10px] text-slate-600 leading-relaxed my-2 md:my-0">
         <p>Software as a Service | Enterprise SaaS Provider | Hexanx OS | Flasto Restaurant OS | Ayra AI Engine | Cloud Software Products | Inventory SaaS Ecosystem | Hospital Management SaaS | Billing SaaS Platform | Accounting SaaS Product | Real Estate Management System SaaS | CRM & Workflow Automation SaaS | Enterprise Ecosystem Products | Raipur Chhattisgarh</p>
       </div>
 
-      <div className="flex gap-8 mt-4 md:mt-0">
+      <div className="flex flex-wrap gap-4 sm:gap-8 mt-2 md:mt-0 justify-center md:justify-end">
          <Link to="/privacy" className="hover:text-white cursor-pointer transition-colors">Privacy Policy</Link>
          <Link to="/terms" className="hover:text-white cursor-pointer transition-colors">Terms of Service</Link>
          <Link to="/sitemap" className="hover:text-white cursor-pointer transition-colors">Sitemap</Link>
@@ -1257,8 +1287,8 @@ const Hero = ({ navigateTo }) => (
       <div className="absolute inset-0 bg-grid opacity-60"></div>
     </div>
 
-    <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-20 items-center">
-      <div className="space-y-12 animate-slide-in">
+    <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="space-y-8 sm:space-y-12 animate-slide-in">
         <div className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-blue-100 shadow-sm hover:shadow-md transition-shadow cursor-default">
            <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -1267,37 +1297,37 @@ const Hero = ({ navigateTo }) => (
             <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Serving Enterprises Globally</span>
         </div>
         
-        <h1 className="text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-tighter">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[1] tracking-tighter">
           SCALING <br/>
           BUSINESS <br/>
           <TextRotator />
         </h1>
         
-        <p className="text-2xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-8">
+        <p className="text-lg sm:text-2xl text-slate-600 max-w-xl leading-relaxed font-light border-l-4 border-blue-600 pl-4 sm:pl-8">
           <strong>Empowering India's MSME sector with the next-gen SaaS products.</strong> We build scalable enterprise ecosystems like Hexanx OS, Flasto, Room Yes, and our advanced AI engine, <strong>Ayra AI</strong>.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-6">
-          <Button primary onClick={() => navigateTo('contact')} className="h-16 px-10 text-lg">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+          <Button primary onClick={() => navigateTo('contact')} className="h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg w-full sm:w-auto">
             Start Journey <Rocket className="ml-3 w-5 h-5" />
           </Button>
-          <Button onClick={() => navigateTo('work')} className="h-16 px-10 text-lg">
+          <Button onClick={() => navigateTo('work')} className="h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg w-full sm:w-auto">
               View Case Studies
           </Button>
         </div>
         
-        <div className="grid grid-cols-3 gap-12 pt-10 border-t border-slate-200/60">
+        <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-12 pt-8 sm:pt-10 border-t border-slate-200/60">
           {[
              { num: 50, label: "Clients", icon: Users },
              { num: 99, label: "Success", icon: ShieldCheck },
              { num: 24, label: "Support", icon: Clock }
           ].map((stat, i) => (
              <div key={i}>
-                <h4 className="text-4xl font-black text-slate-900 mb-1 flex items-baseline">
+                <h4 className="text-2xl sm:text-4xl font-black text-slate-900 mb-1 flex items-baseline">
                    <CountUp end={stat.num} />
-                   <span className="text-blue-600 text-2xl ml-1">+</span>
+                   <span className="text-blue-600 text-xl sm:text-2xl ml-0.5 sm:ml-1">+</span>
                 </h4>
-                <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
+                <p className="text-slate-500 text-xs sm:text-sm font-bold uppercase tracking-wider">{stat.label}</p>
              </div>
           ))}
         </div>
@@ -1410,11 +1440,11 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white overflow-x-hidden w-full relative">
       
 
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'nav-scrolled py-3' : 'bg-transparent py-5'} top-0`}>
-        <div className="container mx-auto px-6 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
           
           <Link to="/" className="text-2xl font-bold flex items-center group">
             <div className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
@@ -1456,7 +1486,7 @@ export default function App() {
 
       <style>{styles}</style>
 
-      <main>
+      <main className="overflow-x-hidden w-full">
         <Routes>
           <Route path="/" element={
             <PageSEO title="Home" description="Hexanx is an enterprise SaaS company providing scalable ecosystems like Hexanx OS and Flasto.">
