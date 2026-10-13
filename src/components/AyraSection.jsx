@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function AyraSection() {
   return (
-    <section className="bg-slate-950 text-white py-24 rounded-[3rem] mx-4 md:mx-8 my-12 overflow-hidden shadow-2xl relative border border-slate-800/80" id="ayra">
+    <section className="w-full bg-slate-950 text-white py-20 md:py-24 rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-800/80" id="ayra">
       {/* Ambient Lighting Orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
@@ -39,7 +39,7 @@ export default function AyraSection() {
                 <Sparkles className="w-3.5 h-3.5 text-purple-400" />
                 <span>Agentic AI Workforce Layer</span>
               </div>
-              <p className="text-xs text-slate-400 mt-1 font-mono">DeepSeek LLM • pgvector Memory • Sub-50ms RAG</p>
+              <p className="text-xs text-slate-400 mt-1 font-mono">Ayra Proprietary Neural Engine • Enterprise-Grade Secure Memory • Zero-Latency Intelligence</p>
             </div>
           </div>
 

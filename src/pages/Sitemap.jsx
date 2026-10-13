@@ -146,7 +146,7 @@ export default function Sitemap() {
           icon: Sparkles,
           logo: '/logos/ayra-ai.png',
           isAvatar: true,
-          description: 'Embedded agentic loop powered by DeepSeek LLM, pgvector similarity search, and real-time SSE streaming.',
+          description: 'Embedded agentic loop powered by Ayra Proprietary Neural Engine, Enterprise-Grade Secure Memory, and Zero-Latency Intelligence.',
           tag: 'Agent Core'
         }
       ]

@@ -86,7 +86,7 @@ const TIMELINE = [
   {
     year: '2024',
     title: 'Ayra AI — Agentic Intelligence Layer',
-    desc: 'Launched Ayra AI as the unified intelligence backbone powering autonomous workflows, LLM-driven copilots, and RAG-based knowledge engines across all products.'
+    desc: 'Launched Ayra AI as the unified intelligence backbone powering autonomous workflows, neural copilots, and zero-latency knowledge engines across all products.'
   },
   {
     year: '2025 →',
@@ -141,7 +141,7 @@ const PRODUCTS = [
   {
     name: 'Ayra AI',
     tagline: 'Agentic Intelligence Engine',
-    description: 'A full agentic-loop AI system with DeepSeek LLM, pgvector RAG search, real-time SSE streaming, Edge TTS, and a dynamic tool registry.',
+    description: 'A full agentic-loop AI system with Ayra Proprietary Neural Engine, Enterprise-Grade Secure Memory, Zero-Latency Intelligence, and a dynamic tool registry.',
     icon: Cpu,
     logo: '/logos/ayra-ai.png',
     accent: 'au-product-accent-ayra',

@@ -206,8 +206,8 @@ const MOCK_PROJECTS = [
     logo: "/logos/ayra-ai.png",
     bgImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
     client: "Agentic Intelligence Engine",
-    tags: ["LLM", "RAG", "Text-to-Speech", "Dynamic Registry"],
-    description: "Ayra AI is a full agentic loop system embedded within the Hexanx ecosystem. Powered by DeepSeek LLM, it features real-time SSE streaming, pgvector similarity search, and a dynamic tool registry. Ingest complex PDF documents and interact via Microsoft Edge TTS integration for next-gen automation.",
+    tags: ["Neural Engine", "Secure Memory", "Voice Synthesis", "Dynamic Registry"],
+    description: "Ayra AI is a full agentic loop system embedded within the Hexanx ecosystem. Powered by the Ayra Proprietary Neural Engine, it features Enterprise-Grade Secure Memory, Zero-Latency Intelligence, real-time SSE streaming, and a dynamic tool registry for enterprise automation.",
     stats: { loop: "10-step", registry: "Dynamic", latency: "Real-time" }
   }
 ];
@@ -1416,20 +1416,7 @@ export default function App() {
 
       <main className="overflow-x-hidden w-full">
         <Routes>
-          <Route path="/" element={
-            <PageSEO title="Home" description="Hexanx is an enterprise SaaS company providing scalable ecosystems like Hexanx OS and Flasto.">
-              <Hero navigateTo={(path) => navigate('/' + path)} />
-              
-              <About />
-              <WhyChooseUs />
-              <LayeredEcosystemShowcase />
-              <BrandPhilosophyBanner />
-              <AyraSection />
-              <BookingSection />
-              <Testimonials />
-              <CTABanner />
-            </PageSEO>
-          } />
+          <Route path="/" element={<LandingPage />} />
 
           <Route path="/about" element={<AboutUs />} />
 

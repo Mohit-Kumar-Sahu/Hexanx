@@ -121,7 +121,7 @@ const BLOG_POSTS = [
     readingTime: '9 min read',
     views: '6.4k reads',
     featured: false,
-    tags: ['Agentic AI', 'DeepSeek LLM', 'Vector RAG'],
+    tags: ['Agentic AI', 'Neural Engine', 'Secure Memory'],
     keyMetrics: [
       '10-Step Autonomous Loop',
       'Zero Privilege Escalation',

@@ -1,17 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import HeroSection from '../components/HeroSection';
 import LayeredEcosystemShowcase from '../components/LayeredEcosystemShowcase';
-import BrandPhilosophyBanner from '../components/BrandPhilosophyBanner';
 import AyraSection from '../components/AyraSection';
+import BrandPhilosophyBanner from '../components/BrandPhilosophyBanner';
 
 export default function LandingPage() {
   return (
-    <div className="landing-page min-h-screen bg-slate-50 text-slate-800 relative w-full overflow-x-hidden selection:bg-blue-500 selection:text-white">
+    <main className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
       <Helmet>
         <title>Hexanx | Enterprise B2B SaaS Ecosystem &amp; AI Platform</title>
         <meta
           name="description"
-          content="Hexanx is a unified B2B SaaS ecosystem offering Hexanx OS (HR &amp; Finance), Flasto (Restaurant OS), and Roomyes (Hotel PMS) powered by Ayra AI."
+          content="Hexanx is a unified B2B SaaS ecosystem offering Hexanx OS (HR &amp; Finance), Flasto (Restaurant OS), and Roomyes (Hotel PMS) powered by the proprietary Ayra AI neural engine."
         />
         <link rel="canonical" href="https://www.hexanx.in/" />
       </Helmet>
@@ -54,14 +55,17 @@ export default function LandingPage() {
         </svg>
       </div>
 
-      {/* 1. Core Product Ecosystem Showcase (Heavenly Animations, Contextual Backgrounds) */}
-      <LayeredEcosystemShowcase />
+      {/* 1. Hero Section */}
+      <HeroSection />
 
-      {/* 2. Brand Philosophy Banner ("We don't sell. We serve.") */}
+      {/* 2. Centered Constrained Container for Ecosystem Showcase & Ayra Section */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col gap-24 md:gap-32">
+        <LayeredEcosystemShowcase />
+        <AyraSection />
+      </div>
+
+      {/* 3. Full-width Brand Philosophy Banner (No max-w constraint) */}
       <BrandPhilosophyBanner />
-
-      {/* 3. Dark "Meet Ayra" Intelligent HR Partner Section */}
-      <AyraSection />
-    </div>
+    </main>
   );
 }

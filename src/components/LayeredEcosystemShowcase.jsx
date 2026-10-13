@@ -40,8 +40,8 @@ const ECOSYSTEM_PRODUCTS = [
 
 export default function LayeredEcosystemShowcase() {
   return (
-    <section className="py-24 sm:py-32 bg-transparent relative overflow-hidden w-full" id="ecosystem">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-6xl">
+    <section className="w-full bg-transparent relative overflow-hidden" id="ecosystem">
+      <div className="w-full">
         <div className="text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold uppercase tracking-widest mb-4">
             Live Cloud Platforms
