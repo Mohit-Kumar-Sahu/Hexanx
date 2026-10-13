@@ -27,7 +27,7 @@
 - **Effective Date:** August 14, 2026
 - **Company Name:** Hexanx Pvt Ltd
 - **Registered Address:** Santoshi Nagar, Raipur, Chhattisgarh, PIN - 492001, India.
-- **Contact Email:** `contact@hexanx.in`
+- **Contact Email:** `compliances@hexanx.in`
 - **Official Portal:** `https://os.hexanx.in`
 
 ### 1. Introduction and Scope
@@ -55,7 +55,7 @@ To operate our enterprise infrastructure, we utilize the following authorized an
 ### 5. Data Retention, Archiving, and Deletion Workflow
 We practice strict data minimization:
 - **Active Accounts:** Data is retained as long as the organization's account is active.
-- **Account Deletion (DSAR - Data Subject Access Request):** Upon receiving a deletion request at `contact@hexanx.in`, we initiate our **"Verified Purge Workflow"**:
+- **Account Deletion (DSAR - Data Subject Access Request):** Upon receiving a deletion request at `compliances@hexanx.in`, we initiate our **"Verified Purge Workflow"**:
   1. We send an initial confirmation email acknowledging the deletion request and starting the mandatory 30-day grace period.
   2. After 30 days, all associated Personally Identifiable Information (PII) is permanently and cryptographically scrubbed from our active databases and backup logs.
   3. A final confirmation email of successful data destruction is dispatched to the user.
@@ -143,7 +143,7 @@ The Service operates on a deterministic, automated billing cycle powered by our 
 - **Enterprise (Custom Pricing):** Unlimited Admins & Roles, Dedicated Account Manager, Custom API Access, White-labeling Options, 24/7 Phone Support, Custom SLA.
 
 ### 2.5 Intellectual Property Rights (IPR) Complaints
-Hexanx respects the Intellectual Property Rights (IPR) of others and expects our tenants to do the same. If you believe your copyrighted material has been hosted on our platform without authorization by a third-party tenant, you must submit a formal DMCA takedown notice to our designated legal representative (`contact@hexanx.in`).
+Hexanx respects the Intellectual Property Rights (IPR) of others and expects our tenants to do the same. If you believe your copyrighted material has been hosted on our platform without authorization by a third-party tenant, you must submit a formal DMCA takedown notice to our designated legal representative (`compliances@hexanx.in`).
 
 Notices must include exact cryptographic hashes or URLs of the infringing material, alongside a sworn declaration of unauthorized use. Hexanx reserves the sovereign right to suspend any tenant found to be repeatedly infringing on IPR.
 

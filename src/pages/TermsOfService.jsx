@@ -101,8 +101,8 @@ export default function TermsOfService() {
               </div>
               <div className="bg-white/80 backdrop-blur rounded-2xl p-4 border border-slate-200/60 shadow-xs">
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Legal Support</span>
-                <a href="mailto:contact@hexanx.in" className="text-sm font-extrabold text-blue-600 hover:underline">
-                  contact@hexanx.in
+                <a href="mailto:compliances@hexanx.in" className="text-sm font-extrabold text-blue-600 hover:underline">
+                  compliances@hexanx.in
                 </a>
               </div>
             </div>
@@ -355,7 +355,7 @@ export default function TermsOfService() {
                     <li className="flex items-center gap-2"><Check size={14} className="text-purple-600" /> 24/7 Phone Support with 99.9% SLA</li>
                   </ul>
                 </div>
-                <a href="mailto:contact@hexanx.in" className="text-xs text-blue-600 font-bold hover:underline">
+                <a href="mailto:compliances@hexanx.in" className="text-xs text-blue-600 font-bold hover:underline">
                   Inquire for Custom Quote &rarr;
                 </a>
               </div>
@@ -382,7 +382,7 @@ export default function TermsOfService() {
               </p>
               <h4 className="font-bold text-slate-900 text-base pt-2">Formal DMCA Takedown Notices</h4>
               <p className="text-sm">
-                If you believe copyrighted material is hosted on our platform without authorization, submit a formal DMCA notice to our designated legal desk at <a href="mailto:contact@hexanx.in" className="text-blue-600 font-semibold hover:underline">contact@hexanx.in</a> containing:
+                If you believe copyrighted material is hosted on our platform without authorization, submit a formal DMCA notice to our designated legal desk at <a href="mailto:compliances@hexanx.in" className="text-blue-600 font-semibold hover:underline">compliances@hexanx.in</a> containing:
               </p>
               <ul className="text-xs sm:text-sm space-y-2 list-disc list-inside bg-slate-50 p-5 rounded-2xl border border-slate-200">
                 <li>Exact cryptographic hashes, URLs, or repository references of the infringing content.</li>
@@ -545,10 +545,10 @@ export default function TermsOfService() {
                 </p>
               </div>
               <a
-                href="mailto:contact@hexanx.in"
+                href="mailto:compliances@hexanx.in"
                 className="px-6 py-3 rounded-full font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-sm shrink-0"
               >
-                <Mail size={16} /> contact@hexanx.in
+                <Mail size={16} /> compliances@hexanx.in
               </a>
             </div>
 

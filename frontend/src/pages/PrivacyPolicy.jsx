@@ -114,8 +114,8 @@ export default function PrivacyPolicy() {
               </div>
               <div className="bg-white/80 backdrop-blur rounded-2xl p-4 border border-slate-200/60 shadow-xs">
                 <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">DPO Contact</span>
-                <a href="mailto:contact@hexanx.in" className="text-sm font-extrabold text-blue-600 hover:underline">
-                  contact@hexanx.in
+                <a href="mailto:compliances@hexanx.in" className="text-sm font-extrabold text-blue-600 hover:underline">
+                  compliances@hexanx.in
                 </a>
               </div>
             </div>
@@ -416,7 +416,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              We practice strict data minimization. Active organization data is preserved as long as the tenant workspace remains subscribed. Upon receiving a formal Data Subject Access Request (DSAR) or Account Deletion request at <a href="mailto:contact@hexanx.in" className="text-blue-600 font-semibold hover:underline">contact@hexanx.in</a>, we trigger our immutable <strong className="text-slate-900">&quot;Verified Purge Workflow&quot;</strong>:
+              We practice strict data minimization. Active organization data is preserved as long as the tenant workspace remains subscribed. Upon receiving a formal Data Subject Access Request (DSAR) or Account Deletion request at <a href="mailto:compliances@hexanx.in" className="text-blue-600 font-semibold hover:underline">compliances@hexanx.in</a>, we trigger our immutable <strong className="text-slate-900">&quot;Verified Purge Workflow&quot;</strong>:
             </p>
 
             <div className="space-y-4">
@@ -709,10 +709,10 @@ CREATE TABLE public.user_consents (
                 </p>
               </div>
               <a
-                href="mailto:contact@hexanx.in"
+                href="mailto:compliances@hexanx.in"
                 className="px-6 py-3 rounded-full font-bold bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-sm shrink-0"
               >
-                <Mail size={16} /> contact@hexanx.in
+                <Mail size={16} /> compliances@hexanx.in
               </a>
             </div>
 
