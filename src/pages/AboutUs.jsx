@@ -101,6 +101,7 @@ const PRODUCTS = [
     tagline: 'Enterprise HR & Finance',
     description: 'Complete workforce management — attendance via facial recognition, one-click payroll compliance (PF, ESI, TDS), leave & shift management, and asset tracking.',
     icon: Building2,
+    logo: '/logos/hexanxos.png',
     accent: 'au-product-accent-os',
     iconColor: 'text-blue-600',
     bgIcon: 'bg-blue-50',
@@ -114,6 +115,7 @@ const PRODUCTS = [
     tagline: 'Omnichannel Restaurant OS',
     description: 'Lightning-fast Cloud POS, contactless QR menus, real-time KDS sync, predictive inventory, and a unified Swiggy / Zomato aggregator dashboard.',
     icon: Zap,
+    logo: '/logos/flasto.png',
     accent: 'au-product-accent-flasto',
     iconColor: 'text-amber-600',
     bgIcon: 'bg-amber-50',
@@ -127,6 +129,7 @@ const PRODUCTS = [
     tagline: 'Smart Hotel PMS',
     description: 'Next-gen Property Management with web check-in, dynamic pricing engines, automated housekeeping workflows, and multi-OTA channel management.',
     icon: Star,
+    logo: '/logos/roomyes.png',
     accent: 'au-product-accent-roomyes',
     iconColor: 'text-emerald-600',
     bgIcon: 'bg-emerald-50',
@@ -140,6 +143,7 @@ const PRODUCTS = [
     tagline: 'Agentic Intelligence Engine',
     description: 'A full agentic-loop AI system with DeepSeek LLM, pgvector RAG search, real-time SSE streaming, Edge TTS, and a dynamic tool registry.',
     icon: Cpu,
+    logo: '/logos/ayra-ai.png',
     accent: 'au-product-accent-ayra',
     iconColor: 'text-purple-600',
     bgIcon: 'bg-purple-50',
@@ -302,7 +306,7 @@ export default function AboutUs() {
                 <RevealBlock key={p.name} delay={`${i * 80}ms`}>
                   <div className="au-card group h-full flex flex-col">
                     {/* Accent header strip */}
-                    <div className={`p-6 pb-5 ${p.accent} border-b`}>
+                    <div className={`p-6 pb-5 ${p.accent} border-b flex items-center justify-between`}>
                       <div className="flex items-center gap-4">
                         <div className={`w-14 h-14 rounded-2xl ${p.bgIcon} flex items-center justify-center shadow-sm`}>
                           <p.icon size={26} className={p.iconColor} />
@@ -314,6 +318,17 @@ export default function AboutUs() {
                           </div>
                           <p className="text-slate-500 text-sm font-medium">{p.tagline}</p>
                         </div>
+                      </div>
+                      <div className="hidden sm:flex items-center">
+                        <img
+                          src={p.logo}
+                          alt={p.name}
+                          className={
+                            p.name === 'Ayra AI'
+                              ? 'h-10 w-10 rounded-full object-cover shadow-xs border border-slate-100'
+                              : 'h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply'
+                          }
+                        />
                       </div>
                     </div>
 

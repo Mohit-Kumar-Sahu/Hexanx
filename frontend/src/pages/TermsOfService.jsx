@@ -411,7 +411,7 @@ export default function TermsOfService() {
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-4">
-              The Hexanx brand name, logomark, distinct wavy topographic design patterns, product names (<strong className="text-slate-900">Hexanx OS</strong>, <strong className="text-slate-900">Flasto</strong>, <strong className="text-slate-900">Roomyes</strong>), and the <strong className="text-slate-900">Ayra AI</strong> identity are registered trademarks of Hexanx IT Solutions.
+              The Hexanx brand name, logomark, distinct wavy topographic design patterns, product names (<strong className="text-slate-900">Hexanx OS</strong>, <strong className="text-slate-900">Flasto</strong>, <strong className="text-slate-900">Roomyes</strong>), and the <strong className="text-slate-900">Ayra AI</strong> identity are registered trademarks of Hexanx Pvt Ltd.
             </p>
             <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-sm space-y-2 text-slate-600">
               <p>
@@ -538,7 +538,7 @@ export default function TermsOfService() {
               <div>
                 <h4 className="font-bold text-slate-900 text-base mb-1">Corporate Legal &amp; Contracts Desk</h4>
                 <p className="text-sm text-slate-500">
-                  Hexanx Pvt Ltd (Hexanx IT Solutions) • Santoshi Nagar, Raipur, Chhattisgarh 492001
+                  Hexanx Pvt Ltd • Santoshi Nagar, Raipur, Chhattisgarh 492001
                 </p>
                 <p className="text-xs text-slate-400 mt-1">
                   For customized enterprise MSAs, BAAs, or SLA negotiations

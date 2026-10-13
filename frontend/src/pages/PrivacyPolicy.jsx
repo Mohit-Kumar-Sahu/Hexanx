@@ -166,7 +166,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Hexanx IT Solutions operates on a foundation of absolute transparency and unyielding security. We recognize that human resources management systems, hospitality platforms, and transactional engines govern the most critical data vectors within your enterprise. Our commitment to <strong className="text-slate-900">Data Sovereignty</strong> guarantees that you always remain the master of your records. Hexanx functions strictly as a computational engine and structural repository.
+              Hexanx operates on a foundation of absolute transparency and unyielding security. We recognize that human resources management systems, hospitality platforms, and transactional engines govern the most critical data vectors within your enterprise. Our commitment to <strong className="text-slate-900">Data Sovereignty</strong> guarantees that you always remain the master of your records. Hexanx functions strictly as a computational engine and structural repository.
             </p>
 
             <div className="overflow-x-auto rounded-2xl border border-slate-200">
@@ -702,7 +702,7 @@ CREATE TABLE public.user_consents (
               <div>
                 <h4 className="font-bold text-slate-900 text-base mb-1">Corporate &amp; Grievance Redressal Desk</h4>
                 <p className="text-sm text-slate-500">
-                  Hexanx Pvt Ltd (Hexanx IT Solutions) • Santoshi Nagar, Raipur, Chhattisgarh 492001
+                  Hexanx Pvt Ltd • Santoshi Nagar, Raipur, Chhattisgarh 492001
                 </p>
                 <p className="text-xs text-slate-400 mt-1">
                   Designated Grievance &amp; Data Protection Officer Contact

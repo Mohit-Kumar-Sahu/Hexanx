@@ -8,7 +8,6 @@ const ECOSYSTEM_PRODUCTS = [
     client: "Enterprise Workspace",
     logo: "/logos/hexanxos.png",
     link: "https://os.hexanx.in",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Hexanx OS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department.",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"]
   },
@@ -18,7 +17,6 @@ const ECOSYSTEM_PRODUCTS = [
     client: "F&B Chains",
     logo: "/logos/flasto.png",
     link: "https://flasto.in",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Flasto is an Omnichannel Restaurant OS built for scale. Unifying your entire F&B operation, it provides a lightning-fast Cloud POS, contactless QR digital menus, a real-time Kitchen Display System (KDS), and predictive inventory management with recipe costing.",
     tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"]
   },
@@ -28,7 +26,6 @@ const ECOSYSTEM_PRODUCTS = [
     client: "Global Hospitality",
     logo: "/logos/roomyes.png",
     link: "https://roomyes.hexanx.in",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management.",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"]
   }
@@ -58,13 +55,13 @@ export default function LayeredEcosystemShowcase() {
                 idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''
               }`}
             >
-              {/* Product Visual */}
+              {/* Product Visual - Official Logo Presentation */}
               <div className="w-full lg:w-1/2 relative group">
-                <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-white aspect-video relative">
+                <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-white aspect-video relative flex items-center justify-center p-8 sm:p-14 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
                   <img
-                    src={product.image}
+                    src={product.logo}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-mono font-semibold">
                     {product.category}
@@ -85,7 +82,7 @@ export default function LayeredEcosystemShowcase() {
                   <img
                     src={product.logo}
                     alt={`${product.title} logo`}
-                    className="h-9 sm:h-11 w-auto object-contain mix-blend-multiply"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
                   />
                 </div>
 

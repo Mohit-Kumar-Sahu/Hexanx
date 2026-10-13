@@ -162,7 +162,7 @@ const MOCK_PROJECTS = [
     id: 1,
     title: "Hexanx OS",
     category: "enterprise",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/logos/hexanxos.png",
     logo: "/logos/hexanxos.png",
     client: "Enterprise Workspace",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"],
@@ -173,7 +173,7 @@ const MOCK_PROJECTS = [
     id: 2,
     title: "Flasto",
     category: "restaurant",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/logos/flasto.png",
     logo: "/logos/flasto.png",
     client: "F&B Chains",
     tags: ["Cloud POS", "QR Ordering", "Inventory Control", "KDS Sync"],
@@ -182,9 +182,9 @@ const MOCK_PROJECTS = [
   },
   {
     id: 3,
-    title: "Room Yes",
+    title: "Roomyes",
     category: "hospitality",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/logos/roomyes.png",
     logo: "/logos/roomyes.png",
     client: "Global Hospitality",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"],
@@ -195,7 +195,7 @@ const MOCK_PROJECTS = [
     id: 4,
     title: "Ayra AI",
     category: "artificial intelligence",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/logos/ayra-ai.png",
     logo: "/logos/ayra-ai.png",
     client: "Agentic Intelligence Engine",
     tags: ["LLM", "RAG", "Text-to-Speech", "Dynamic Registry"],
@@ -789,13 +789,18 @@ const ProductsShowcase = ({ showTitle = true }) => {
                <div className="w-full lg:w-1/2 relative group perspective-1000">
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] sm:rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
                   <div className="relative bg-white p-3 sm:p-4 rounded-[2rem] sm:rounded-[3rem] border border-white shadow-2xl rotate-y-2 hover:rotate-y-0 transition-transform duration-700">
-                      <div className="rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden relative aspect-video">
-                          <img src={product.image} alt={product.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
-                          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex justify-between items-end">
-                              <div className="flex items-center gap-4">
-                                  <span className="px-4 sm:px-5 py-1.5 sm:py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
-                              </div>
+                      <div className="rounded-[1.75rem] sm:rounded-[2.5rem] overflow-hidden relative aspect-video flex items-center justify-center p-8 sm:p-14 bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
+                          <img
+                            src={product.logo}
+                            alt={product.title}
+                            className={
+                              product.title === "Ayra AI"
+                                ? "h-14 sm:h-16 md:h-20 w-14 sm:w-16 md:w-20 rounded-full aspect-square object-cover shadow-lg border-2 border-slate-100 transform group-hover:scale-105 transition-transform duration-700"
+                                : "h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply transform group-hover:scale-105 transition-transform duration-700"
+                            }
+                          />
+                          <div className="absolute top-4 sm:top-6 left-4 sm:left-6 flex justify-between items-end">
+                              <span className="px-4 sm:px-5 py-1.5 sm:py-2 bg-slate-900/80 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest">{product.category}</span>
                           </div>
                       </div>
                       
@@ -1302,7 +1307,7 @@ const Hero = ({ navigateTo }) => (
 const PageSEO = ({ title, description, children }) => (
   <>
     <Helmet>
-      <title>{title} | Hexanx IT Solutions</title>
+      <title>{title} | Hexanx</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={window.location.href} />
     </Helmet>

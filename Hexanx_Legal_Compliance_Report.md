@@ -3,7 +3,7 @@
 > **Document Type:** Legal, Regulatory & Compliance Consolidation Master Report  
 > **Target Audience:** Public B2B SaaS Website, Enterprise Tenants, Legal & Security Audits  
 > **Jurisdiction:** Republic of India (Primary), European Union (GDPR), State of California (CCPA)  
-> **Governing Entity:** Hexanx IT Solutions / Hexanx Pvt Ltd  
+> **Governing Entity:** Hexanx Pvt Ltd  
 > **Extraction Source:** Frontend Route Components (`PrivacyPolicy.jsx`, `TermsOfService.jsx`), Backend Database Seeders (`PRIVACY_POLICY.md`, `migrate_compliance.js`, `seed_policy.js`), Production SQL Schema Dumps (`live_backup_before_audit.sql`, `live_schema.sql`), and Enterprise Audit Artifacts.
 
 ---
@@ -25,7 +25,7 @@
 *Extracted from Root Legal Policy Repository (`PRIVACY_POLICY.md`) and Production Database Policy Engine (`policies` Table — Seed ID: 2)*
 
 - **Effective Date:** August 14, 2026
-- **Company Name:** Hexanx Pvt Ltd (Hexanx IT Solutions)
+- **Company Name:** Hexanx Pvt Ltd
 - **Registered Address:** Santoshi Nagar, Raipur, Chhattisgarh, PIN - 492001, India.
 - **Contact Email:** `contact@hexanx.in`
 - **Official Portal:** `https://os.hexanx.in`
@@ -79,7 +79,7 @@ This Privacy Policy shall be governed by and construed in accordance with the la
 *Extracted from Public Application Frontend (`frontend/src/pages/PrivacyPolicy.jsx` & `RegisterCompany.jsx`)*
 
 ### Overview & Data Sovereignty
-Hexanx IT Solutions operates on a foundation of absolute transparency and unyielding security. We recognize that human resources management systems govern the most critical and sensitive data vectors within your enterprise. Our commitment to **Data Sovereignty** guarantees that you always remain the master of your records. Hexanx functions strictly as a computational engine and structural repository.
+Hexanx operates on a foundation of absolute transparency and unyielding security. We recognize that human resources management systems govern the most critical and sensitive data vectors within your enterprise. Our commitment to **Data Sovereignty** guarantees that you always remain the master of your records. Hexanx functions strictly as a computational engine and structural repository.
 
 ### Privacy Methodology & Data Vectors
 At Hexanx, we employ a minimal data collection methodology while ensuring absolute operational efficiency. We process Personally Identifiable Information (PII) strictly necessary for identity verification, access management, and immutable audit logging.
@@ -117,7 +117,7 @@ Our automated dispatch infrastructure (utilized for OTPs, payroll alerts, and in
 
 - **Agreement Classification:** Master Subscription Agreement (MSA) / SaaS Terms of Service
 - **Last Updated:** September 2026
-- **Governing Body:** Hexanx IT Solutions / Hexanx Pvt Ltd
+- **Governing Body:** Hexanx Pvt Ltd
 
 ### 2.1 Acceptance of Terms
 By accessing, subscribing to, or integrating with the Hexanx Human Resources Management System, Flasto Restaurant OS, or Roomyes PMS ("the Service"), your organization mathematically bounds itself to this Master Subscription Agreement. If you are accepting on behalf of an enterprise, you warrant that you possess the legal authority to bind that corporate entity to these provisions.
@@ -148,7 +148,7 @@ Hexanx respects the Intellectual Property Rights (IPR) of others and expects our
 Notices must include exact cryptographic hashes or URLs of the infringing material, alongside a sworn declaration of unauthorized use. Hexanx reserves the sovereign right to suspend any tenant found to be repeatedly infringing on IPR.
 
 ### 2.6 Trademark Policy
-The Hexanx name, logo, distinct wavy topographic textures, iconography, and Ayra AI identity are registered trademarks of Hexanx IT Solutions. You are granted no right or license to use these marks for external promotional purposes without explicit written consent.
+The Hexanx name, logo, distinct wavy topographic textures, iconography, and Ayra AI identity are registered trademarks of Hexanx Pvt Ltd. You are granted no right or license to use these marks for external promotional purposes without explicit written consent.
 
 Tenants may use the *"Powered by Hexanx"* badge provided in the media kit strictly in unmodified form to indicate infrastructure origin.
 
