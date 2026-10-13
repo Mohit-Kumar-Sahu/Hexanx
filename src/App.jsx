@@ -7,7 +7,7 @@ import {
   Clock, Award, ShieldCheck, Search, Send, 
   MessageCircle, Linkedin, Instagram,
   TrendingUp, Target, Youtube, Bell, Lock, IndianRupee,
-  HeartHandshake, FileText, Wifi
+  HeartHandshake, FileText, Wifi, ArrowUpRight
 } from 'lucide-react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
