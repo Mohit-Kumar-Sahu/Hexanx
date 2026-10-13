@@ -157,7 +157,7 @@ const MOCK_PROJECTS = [
     title: "Hexanx OS",
     category: "enterprise",
     image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/hexanx-os.png",
+    logo: "/logos/hexanxos.png",
     client: "Enterprise Workspace",
     tags: ["Attendance System", "Payroll Automation", "Asset Management", "Leave Tracking"],
     description: "Hexanx OS is a complete Enterprise Workspace ecosystem. It features smart attendance with facial recognition & geolocation tracking, one-click automated payroll compliance (PF, ESI, TDS), advanced leave & shift management modules, and a dedicated asset tracking system for the IT department. Empower your workforce with our self-service mobile app and real-time analytics.",
@@ -179,7 +179,7 @@ const MOCK_PROJECTS = [
     title: "Room Yes",
     category: "hospitality",
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    logo: "/logos/room-yes.png",
+    logo: "/logos/roomyes.png",
     client: "Global Hospitality",
     tags: ["Smart Concierge", "Dynamic Pricing", "Housekeeping Module", "Web Check-In"],
     description: "Room Yes is a next-gen Smart Hotel Concierge & Property Management System (PMS). Elevate guest experiences with seamless Web Check-In, QR-based in-room dining, and one-tap service requests. On the backend, hoteliers get dynamic pricing engines, automated housekeeping workflows, and channel management to maximize RevPAR across OTAs.",
@@ -785,12 +785,14 @@ const ProductsShowcase = ({ showTitle = true }) => {
                       <Star className="w-4 h-4 text-blue-600 fill-current" />
                       <span className="text-xs font-bold tracking-widest text-blue-600 uppercase">Featured USP: {product.client}</span>
                   </div>
-                  {product.logo ? (
-                      <div className="h-16 md:h-24 flex justify-start items-center">
-                          <img src={product.logo} alt={`${product.title} logo`} className="h-full w-auto object-contain" />
+                  {product.logo && (
+                      <div className="flex justify-start items-center">
+                          <img
+                            src={product.logo}
+                            alt={`${product.title} logo`}
+                            className="h-10 sm:h-12 md:h-14 w-auto object-contain mix-blend-multiply"
+                          />
                       </div>
-                  ) : (
-                      <h3 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">{product.title}</h3>
                   )}
                   <p className="text-xl text-slate-600 leading-relaxed">{product.description}</p>
                   
