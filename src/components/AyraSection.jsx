@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, MessageSquareCode, TrendingDown, Users, CheckCircle2, Cpu } from 'lucide-react';
+import { ArrowRight, MessageSquareCode, TrendingDown, Users, CheckCircle2, Cpu } from 'lucide-react';
 
 const AYRA_FEATURES = [
   {
@@ -148,19 +148,28 @@ export default function AyraSection() {
             </div>
           </div>
 
-          {/* Glassmorphic Telemetry Card: Clean docked mobile positioning */}
+          {/* Glassmorphic Live Voice & Chat Interface Card */}
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-auto md:-bottom-6 md:left-4 lg:-bottom-6 lg:-left-6 max-w-sm backdrop-blur-2xl bg-slate-900/95 sm:bg-slate-900/90 border border-white/20 p-4 sm:p-5 rounded-2xl shadow-2xl text-white z-20"
+            className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-auto md:-bottom-6 md:left-4 lg:-bottom-6 lg:-left-6 max-w-sm backdrop-blur-2xl bg-slate-900/95 sm:bg-slate-900/90 border border-white/20 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-2xl shadow-purple-950/50 text-white z-20"
           >
-            <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-white/10 mb-2.5">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-purple-500/25 flex items-center justify-center text-purple-300">
-                  <Sparkles size={14} />
+            {/* Header: Official Ayra Logo, Name & Status Pill */}
+            <div className="flex items-center justify-between gap-3 pb-3 border-b border-white/10 mb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="relative shrink-0">
+                  <img
+                    src="/logos/ayra-ai.png"
+                    alt="Ayra"
+                    className="w-8 h-8 rounded-full border border-purple-500/30 object-cover shadow-sm"
+                  />
+                  <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-slate-900" />
+                  </span>
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-white block">Ayra Intelligence</span>
+                  <span className="text-xs font-bold text-white block leading-tight">Ayra Intelligence</span>
                   <span className="text-[10px] text-slate-400 font-mono block">Autonomous Agent</span>
                 </div>
               </div>
@@ -169,16 +178,47 @@ export default function AyraSection() {
               </span>
             </div>
 
-            <p className="text-xs font-semibold text-slate-100">
-              Pipeline Alert: Senior Full-Stack Engineer
-            </p>
-            <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
-              14 candidates screened. 3 recommendations forwarded to HR desk.
-            </p>
+            {/* Live Voice Mode Waveform Indicator */}
+            <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-purple-500/10 rounded-full border border-purple-500/20 w-fit">
+                <div className="flex items-center gap-0.5 h-3">
+                  {/* 4 Animated Bars to simulate voice frequency */}
+                  {[1, 2, 3, 4].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="w-0.5 bg-purple-400 rounded-full"
+                      animate={{ height: ["40%", "100%", "40%"] }}
+                      transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                    />
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono text-purple-300 uppercase tracking-wider font-semibold">
+                  Voice Mode Active
+                </span>
+              </div>
+              <span className="text-[9px] font-mono text-slate-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live Feed
+              </span>
+            </div>
 
-            <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center gap-1.5 text-[10px] font-mono text-purple-300">
-              <CheckCircle2 size={12} className="text-emerald-400 shrink-0" />
-              <span>Zero statutory bias verification</span>
+            {/* Dynamic Chat & Speech Output */}
+            <div className="p-3 bg-white/[0.04] border border-white/10 rounded-xl space-y-1.5 backdrop-blur-sm">
+              <p className="text-sm font-medium text-white leading-snug">
+                &ldquo;I&apos;ve screened the 14 candidates for the Senior Engineer role.&rdquo;
+              </p>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                &ldquo;3 highly matched recommendations have been forwarded to your HR desk for review.&rdquo;
+              </p>
+            </div>
+
+            {/* Sleek System Tag */}
+            <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-purple-300">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 size={12} className="text-emerald-400 shrink-0" />
+                <span>Zero statutory bias verification</span>
+              </div>
+              <span className="text-[9px] text-slate-400 font-mono">v2.4-neural</span>
             </div>
           </motion.div>
         </motion.div>
