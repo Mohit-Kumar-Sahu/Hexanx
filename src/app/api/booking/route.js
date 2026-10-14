@@ -98,12 +98,11 @@ export async function POST(request) {
       referenceId,
     });
 
-    const fromAddress = process.env.RESEND_FROM_EMAIL || 'Hexanx <onboarding@resend.dev>';
     const replyToAddress = process.env.RESEND_REPLY_TO || 'contact@hexanx.in';
 
     // Dispatch email to the user
     const { data, error } = await resend.emails.send({
-      from: fromAddress,
+      from: 'Hexanx <noreply@updates.hexanx.in>',
       to: [trimmedEmail],
       replyTo: replyToAddress,
       subject: `Confirmed: Your Strategy Call Request with Hexanx [Ref: ${referenceId}]`,
