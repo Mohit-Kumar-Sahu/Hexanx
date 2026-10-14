@@ -45,8 +45,8 @@ export default function HeroSection() {
   const router = useRouter();
 
   return (
-    <section className="relative w-full min-h-[85vh] flex items-center overflow-x-hidden bg-transparent">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col lg:grid lg:grid-cols-2 items-center gap-12 lg:gap-8 pt-32 pb-16 relative z-10">
+    <section className="relative w-full min-h-[85vh] flex items-center pt-28 sm:pt-32 pb-16 overflow-x-hidden bg-transparent">
+      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[80vh] relative z-10">
         
         {/* Left Column: Typography & CTAs */}
         <div className="space-y-8 sm:space-y-12 w-full">
@@ -101,21 +101,27 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Clean, Transparent 3D Ecosystem Artwork (Vertically Centered & Lifted) */}
-        <div className="relative w-full h-full flex justify-center items-center z-10">
-          <motion.div 
-            animate={{ y: [-15, -35, -15] }} 
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full max-w-[120%] lg:max-w-[130%] h-auto drop-shadow-2xl flex justify-center items-center"
+        {/* Right Column: Apple-Grade Curvy Glass Card (Strictly Centered & Seamlessly Framed) */}
+        <div className="w-full flex items-center justify-center">
+          <motion.div
+            animate={{ y: [-12, 12, -12] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full max-w-[800px] mx-auto p-4 sm:p-6 lg:p-8 bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_30px_80px_-15px_rgba(0,0,0,0.12)] rounded-[2.5rem] lg:rounded-[3.5rem] z-10"
           >
-            <Image 
-              src="/logos/hero.png" 
-              alt="Hexanx Enterprise Ecosystem" 
-              width={1400} 
-              height={1000} 
-              priority 
-              className="w-full h-auto object-contain transform scale-110"
-            />
+            {/* Ambient Glow behind card */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-blue-500/20 via-purple-500/10 to-transparent blur-3xl rounded-[4rem] scale-105 pointer-events-none" />
+
+            {/* Inner Image Container clipping edges gracefully */}
+            <div className="relative w-full overflow-hidden rounded-[1.5rem] lg:rounded-[2.5rem] shadow-inner bg-slate-900/5">
+              <Image
+                src="/logos/hero.png"
+                alt="Hexanx Ecosystem"
+                width={1200}
+                height={800}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
           </motion.div>
         </div>
 
