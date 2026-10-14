@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Link from 'next/link';
 import {
   ShieldCheck, Lock, Eye, FileText, Database, Server, Cpu, CheckCircle2,
   AlertTriangle, ArrowRight, ChevronRight, UserCheck, Key, RefreshCw,
@@ -54,19 +55,6 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-      <Helmet>
-        <title>Privacy Policy &amp; Enterprise Data Sovereignty | Hexanx</title>
-        <meta
-          name="description"
-          content="Exhaustive Privacy Policy, Enterprise Data Processing Agreement (DPA), Zero-Trust security architecture, and DPDP / GDPR statutory compliance declarations for Hexanx OS, Flasto, Roomyes, and Ayra AI."
-        />
-        <meta
-          name="keywords"
-          content="Hexanx Privacy Policy, Data Sovereignty, Enterprise DPA, DPDP Act 2023, GDPR Compliance, Zero-Trust Architecture, HRMS Privacy, Ayra AI Security, Sub-processors"
-        />
-        <link rel="canonical" href="https://www.hexanx.in/privacy" />
-      </Helmet>
-
       <style>{pageStyles}</style>
 
       <div className="min-h-screen bg-slate-50 text-slate-700 overflow-x-hidden legal-page-transition">
@@ -79,7 +67,7 @@ export default function PrivacyPolicy() {
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider">
-              <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
+              <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
               <ChevronRight size={14} />
               <span className="text-blue-600">Legal &amp; Compliance</span>
             </div>
@@ -718,7 +706,7 @@ CREATE TABLE public.user_consents (
 
             <div className="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
               <p>Attestation Hash: 0x98AF...C701 • Verified against active production database policies.</p>
-              <Link to="/terms" className="text-blue-600 font-bold hover:underline flex items-center gap-1">
+              <Link href="/terms" className="text-blue-600 font-bold hover:underline flex items-center gap-1">
                 View Master Subscription Agreement <ArrowRight size={14} />
               </Link>
             </div>

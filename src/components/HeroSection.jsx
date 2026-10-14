@@ -1,15 +1,18 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Rocket, Users, ShieldCheck, Clock, TrendingUp, Zap, Server, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+
+const ROTATING_WORDS = ["Empires", "Solutions", "Future", "Dreams"];
 
 const TextRotator = () => {
-  const words = ["Empires", "Solutions", "Future", "Dreams"];
   const [index, setIndex] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => setIndex(i => (i + 1) % words.length), 2500);
+    const interval = setInterval(() => setIndex(i => (i + 1) % ROTATING_WORDS.length), 2500);
     return () => clearInterval(interval);
   }, []);
-  return <span className="gradient-text transition-all duration-500 inline-block min-w-[200px]">{words[index]}</span>;
+  return <span className="gradient-text transition-all duration-500 inline-block min-w-[200px]">{ROTATING_WORDS[index]}</span>;
 };
 
 const CountUp = ({ end, duration = 2000 }) => {
@@ -37,7 +40,7 @@ const CountUp = ({ end, duration = 2000 }) => {
 };
 
 export default function HeroSection() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <section className="relative w-full min-h-[85vh] flex items-center pt-32 pb-16 overflow-hidden bg-transparent">
@@ -65,7 +68,7 @@ export default function HeroSection() {
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
             <button
-              onClick={() => navigate('/booking')}
+              onClick={() => router.push('/booking')}
               className="px-8 sm:px-10 h-14 sm:h-16 rounded-full font-bold tracking-wide bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-3 text-base sm:text-lg group"
             >
               <span>Start Journey</span>

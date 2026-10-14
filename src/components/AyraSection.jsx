@@ -1,7 +1,9 @@
+"use client";
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, MessageSquareCode, TrendingDown, Users, CheckCircle2, Cpu } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export default function AyraSection() {
   return (
@@ -107,13 +109,13 @@ export default function AyraSection() {
           {/* Action CTAs */}
           <div className="pt-4 flex flex-wrap items-center gap-4">
             <Link
-              to="/booking"
+              href="/booking"
               className="px-7 py-3.5 rounded-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-xl shadow-purple-600/30 group"
             >
               Deploy Ayra AI <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              to="/products"
+              href="/products"
               className="px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all border border-white/15 backdrop-blur-md"
             >
               Explore Agentic Core

@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Link from 'next/link';
 import {
   ArrowRight, Clock, Tag, TrendingUp, BarChart3, Cpu, Star,
   ChevronRight, BookOpen, Search, Eye, Sparkles, Building2,
@@ -206,19 +207,6 @@ export default function Blog() {
 
   return (
     <>
-      <Helmet>
-        <title>Enterprise Resource Center &amp; Engineering Blog | Hexanx</title>
-        <meta
-          name="description"
-          content="Authoritative engineering deep dives, B2B SaaS architecture, revenue management, and AI agent benchmarks from the teams building Hexanx OS, Flasto, Roomyes, and Ayra AI."
-        />
-        <meta
-          name="keywords"
-          content="Hexanx Blog, B2B SaaS Resource Center, Hotel PMS Whitepapers, Restaurant POS Architecture, HRMS Automation, Ayra AI Benchmarks, Flasto, Roomyes"
-        />
-        <link rel="canonical" href="https://www.hexanx.in/blog" />
-      </Helmet>
-
       <style>{pageStyles}</style>
 
       <div className="min-h-screen bg-slate-50 text-slate-700 overflow-x-hidden blog-transition">
@@ -231,7 +219,7 @@ export default function Blog() {
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
             {/* Breadcrumb */}
             <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider">
-              <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
+              <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
               <ChevronRight size={14} />
               <span className="text-blue-600">Resource Center</span>
             </div>

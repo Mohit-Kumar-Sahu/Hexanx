@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Globe, Mail, Linkedin, Youtube, Instagram, ChevronRight, MapPin, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
@@ -48,7 +48,7 @@ export default function Footer() {
                     {item.name} <ArrowUpRight size={12} className="opacity-60" />
                   </a>
                 ) : (
-                  <Link to={item.path} className="whitespace-nowrap text-slate-400 group-hover:text-blue-400 transition-colors">
+                  <Link href={item.path} className="whitespace-nowrap text-slate-400 group-hover:text-blue-400 transition-colors">
                     {item.name}
                   </Link>
                 )}
@@ -71,7 +71,7 @@ export default function Footer() {
             ].map(item => (
                <li key={item.name} className="flex items-center group">
                   <ChevronRight size={16} className="mr-2 text-slate-700 group-hover:text-blue-500 transition-colors shrink-0"/> 
-                  <Link to={item.path} className="whitespace-nowrap text-slate-400 group-hover:text-blue-400 transition-colors">
+                  <Link href={item.path} className="whitespace-nowrap text-slate-400 group-hover:text-blue-400 transition-colors">
                     {item.name}
                   </Link>
                </li>
@@ -104,9 +104,9 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-4 sm:gap-6 justify-center lg:justify-end shrink-0 whitespace-nowrap">
-           <Link to="/privacy" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Privacy Policy</Link>
-           <Link to="/terms" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Terms of Service</Link>
-           <Link to="/sitemap" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Sitemap</Link>
+           <Link href="/privacy" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Privacy Policy</Link>
+           <Link href="/terms" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Terms of Service</Link>
+           <Link href="/sitemap" className="hover:text-white cursor-pointer transition-colors whitespace-nowrap">Sitemap</Link>
         </div>
       </div>
     </footer>

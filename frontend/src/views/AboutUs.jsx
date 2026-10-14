@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Link from 'next/link';
 import {
   ArrowRight, Rocket, Users, Globe, ShieldCheck, Cpu, Star, TrendingUp,
   BarChart3, HeartHandshake, Award, ChevronRight, Building2, Zap
@@ -189,12 +190,6 @@ const RevealBlock = ({ children, className = '', delay = '0ms' }) => {
 export default function AboutUs() {
   return (
     <>
-      <Helmet>
-        <title>About Us | Hexanx — Building the OS for Indian Enterprises</title>
-        <meta name="description" content="From a services studio to a full-stack B2B SaaS ecosystem. Learn how Hexanx is building Hexanx OS, Flasto, Roomyes & Ayra AI to power Indian enterprises." />
-        <meta name="keywords" content="Hexanx About, B2B SaaS India, Enterprise Software Company, Hexanx OS, Flasto, Roomyes, Ayra AI, Raipur SaaS Startup" />
-      </Helmet>
-
       <style>{pageStyles}</style>
 
       <div className="min-h-screen bg-slate-50 overflow-x-hidden">
@@ -222,10 +217,10 @@ export default function AboutUs() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 mt-12 au-fade-up" style={{ animationDelay: '0.35s' }}>
-              <Link to="/products" className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 transition-all flex items-center gap-2">
+              <Link href="/products" className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 transition-all flex items-center gap-2">
                 Explore Products <ArrowRight size={18} />
               </Link>
-              <Link to="/booking" className="px-8 py-4 rounded-full font-bold bg-white border border-slate-200 text-slate-800 hover:border-blue-400 hover:text-blue-600 hover:-translate-y-1 transition-all shadow-md flex items-center gap-2">
+              <Link href="/booking" className="px-8 py-4 rounded-full font-bold bg-white border border-slate-200 text-slate-800 hover:border-blue-400 hover:text-blue-600 hover:-translate-y-1 transition-all shadow-md flex items-center gap-2">
                 Book a Demo <ChevronRight size={18} />
               </Link>
             </div>
@@ -407,10 +402,10 @@ export default function AboutUs() {
                 We're a small team with an outsized ambition. If you love building products that actually change how businesses operate, you'll fit right in.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
-                <Link to="/careers" className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-xl hover:-translate-y-1 hover:shadow-blue-500/40 transition-all flex items-center gap-2">
+                <Link href="/careers" className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-xl hover:-translate-y-1 hover:shadow-blue-500/40 transition-all flex items-center gap-2">
                   View Open Roles <ArrowRight size={18} />
                 </Link>
-                <Link to="/contact" className="px-8 py-4 rounded-full font-bold bg-slate-800 border border-slate-700 text-white hover:bg-slate-700 hover:-translate-y-1 transition-all flex items-center gap-2">
+                <Link href="/contact" className="px-8 py-4 rounded-full font-bold bg-slate-800 border border-slate-700 text-white hover:bg-slate-700 hover:-translate-y-1 transition-all flex items-center gap-2">
                   Get In Touch <ChevronRight size={18} />
                 </Link>
               </div>

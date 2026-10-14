@@ -1,30 +1,21 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/HeroSection';
 import LayeredEcosystemShowcase from '../components/LayeredEcosystemShowcase';
 import AyraSection from '../components/AyraSection';
 import BrandPhilosophyBanner from '../components/BrandPhilosophyBanner';
 
-export default function LandingPage() {
-  return (
-    <main className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
-      <Helmet>
-        <title>Hexanx | Enterprise B2B SaaS Ecosystem &amp; AI Platform</title>
-        <meta
-          name="description"
-          content="Hexanx is a unified B2B SaaS ecosystem offering Hexanx OS (HR &amp; Finance), Flasto (Restaurant OS), and Roomyes (Hotel PMS) powered by the proprietary Ayra AI neural engine."
-        />
-        <link rel="canonical" href="https://www.hexanx.in/" />
-      </Helmet>
+export const metadata = {
+  title: 'Hexanx | Enterprise B2B SaaS Ecosystem & AI Platform',
+  description:
+    'Hexanx is a unified B2B SaaS ecosystem offering Hexanx OS (HR & Finance), Flasto (Restaurant OS), and Roomyes (Hotel PMS) powered by the proprietary Ayra AI neural engine.',
+  alternates: { canonical: 'https://www.hexanx.in/' },
+};
 
-      {/* ── Architecture Bible Law 1: Inline SVG Topographic Contour Background Overlay ── */}
+export default function HomePage() {
+  return (
+    <div className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
+      {/* SVG Topographic Contour Background Overlay */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden opacity-35">
-        <svg
-          className="w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100%"
-        >
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
           <defs>
             <pattern id="landing-topo-contours" width="120" height="120" patternUnits="userSpaceOnUse">
               <path
@@ -55,17 +46,10 @@ export default function LandingPage() {
         </svg>
       </div>
 
-      {/* 1. Hero Section */}
       <HeroSection />
-
-      {/* 2. Expansive Ecosystem Showcase */}
       <LayeredEcosystemShowcase />
-
-      {/* 3. Ultra-Wide Floating Ayra Section */}
       <AyraSection />
-
-      {/* 4. True Edge-to-Edge Brand Philosophy Banner */}
       <BrandPhilosophyBanner />
-    </main>
+    </div>
   );
 }

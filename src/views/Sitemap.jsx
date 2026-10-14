@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Link from 'next/link';
 import {
   Home,
   Layers,
@@ -230,15 +231,6 @@ export default function Sitemap() {
 
   return (
     <div className="min-h-screen bg-slate-50 relative overflow-x-hidden w-full font-sans selection:bg-blue-500 selection:text-white">
-      <Helmet>
-        <title>Sitemap | Hexanx Architecture & Directory</title>
-        <meta
-          name="description"
-          content="Explore the complete human-readable directory of Hexanx pages, enterprise SaaS products (Hexanx OS, Flasto, Roomyes), and legal resources."
-        />
-        <link rel="canonical" href="https://www.hexanx.in/sitemap" />
-      </Helmet>
-
       {/* --- Topographic / Mesh SVG Background Overlay --- */}
       <div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
         <svg
@@ -457,7 +449,7 @@ export default function Sitemap() {
                       }
 
                       return (
-                        <Link key={link.name} to={link.path} className="block h-full">
+                        <Link key={link.name} href={link.path} className="block h-full">
                           {CardContent}
                         </Link>
                       );
@@ -488,7 +480,7 @@ export default function Sitemap() {
                   View sitemap.xml <ArrowUpRight className="w-4 h-4" />
                 </a>
                 <Link
-                  to="/"
+                  href="/"
                   className="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm transition-all border border-slate-700 text-center"
                 >
                   Back to Home

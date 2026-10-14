@@ -1,6 +1,7 @@
+"use client";
+
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Link from 'next/link';
 import {
   FileText, ShieldCheck, Scale, CheckCircle2, AlertTriangle, ArrowRight,
   ChevronRight, Building2, CreditCard, Lock, Sparkles, Ban, RefreshCw,
@@ -41,19 +42,6 @@ export default function TermsOfService() {
 
   return (
     <>
-      <Helmet>
-        <title>Master Subscription Agreement &amp; Terms of Service | Hexanx</title>
-        <meta
-          name="description"
-          content="Master Subscription Agreement (MSA), Enterprise SaaS Licensing, commercial billing schedules, strict no-refund terms, IPR protections, and acceptable use mandates for Hexanx OS, Flasto, and Roomyes."
-        />
-        <meta
-          name="keywords"
-          content="Hexanx Terms of Service, Master Subscription Agreement, SaaS Agreement, Enterprise SaaS Terms, Flasto POS Terms, Roomyes PMS Terms, Software Licensing India, No-Refund Policy"
-        />
-        <link rel="canonical" href="https://www.hexanx.in/terms" />
-      </Helmet>
-
       <style>{pageStyles}</style>
 
       <div className="min-h-screen bg-slate-50 text-slate-700 overflow-x-hidden legal-page-transition">
@@ -66,7 +54,7 @@ export default function TermsOfService() {
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6 uppercase tracking-wider">
-              <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
+              <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
               <ChevronRight size={14} />
               <span className="text-blue-600">Legal &amp; Compliance</span>
             </div>
@@ -554,7 +542,7 @@ export default function TermsOfService() {
 
             <div className="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
               <p>Contract Revision: MSA-2026.09-v2 • Registered with the Hexanx Corporate Legal Registry.</p>
-              <Link to="/privacy" className="text-blue-600 font-bold hover:underline flex items-center gap-1">
+              <Link href="/privacy" className="text-blue-600 font-bold hover:underline flex items-center gap-1">
                 View Privacy Policy &amp; DPA <ArrowRight size={14} />
               </Link>
             </div>
