@@ -45,8 +45,8 @@ export default function HeroSection() {
   const router = useRouter();
 
   return (
-    <section className="relative w-full min-h-[85vh] flex items-center pt-28 sm:pt-32 pb-16 overflow-x-hidden bg-transparent">
-      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 relative z-10 flex flex-col lg:grid lg:grid-cols-2 items-center gap-12 lg:gap-8">
+    <section className="relative w-full min-h-[85vh] flex items-center overflow-x-hidden bg-transparent">
+      <div className="container mx-auto px-4 md:px-6 flex flex-col lg:grid lg:grid-cols-2 items-center gap-12 lg:gap-8 pt-32 pb-16 relative z-10">
         
         {/* Left Column: Typography & CTAs */}
         <div className="space-y-8 sm:space-y-12 w-full">
@@ -101,17 +101,12 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Massive, Borderless 3D Ecosystem Artwork */}
-        <div className="relative w-full max-w-[700px] lg:max-w-[850px] xl:max-w-[1050px] mx-auto z-10 overflow-visible flex items-center justify-center select-none mt-6 lg:mt-0">
-          {/* Backlight Ambient Physics Glow (Completely transparent backdrop) */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/15 via-purple-500/15 to-pink-500/10 blur-[100px] rounded-full scale-95 -z-10 pointer-events-none opacity-80" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-indigo-500/15 rounded-full blur-[90px] -z-10 pointer-events-none" />
-
-          {/* Organic Floating Motion Loop */}
+        {/* Right Column: Clean, Transparent 3D Ecosystem Artwork (Vertically Centered & Lifted) */}
+        <div className="relative w-full h-full flex justify-center items-center z-10">
           <motion.div 
-            animate={{ y: [0, -20, 0] }} 
+            animate={{ y: [-15, -35, -15] }} 
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full h-auto flex justify-center items-center overflow-visible"
+            className="relative w-full max-w-[120%] lg:max-w-[130%] h-auto drop-shadow-2xl flex justify-center items-center"
           >
             <Image 
               src="/logos/hero.png" 
@@ -119,7 +114,7 @@ export default function HeroSection() {
               width={1400} 
               height={1000} 
               priority 
-              className="w-[110%] max-w-none md:w-full h-auto object-contain drop-shadow-2xl transform scale-110 lg:scale-125 origin-center"
+              className="w-full h-auto object-contain transform scale-110"
             />
           </motion.div>
         </div>
