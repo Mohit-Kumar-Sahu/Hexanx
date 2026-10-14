@@ -45,11 +45,11 @@ export default function HeroSection() {
   const router = useRouter();
 
   return (
-    <section className="relative w-full min-h-[85vh] flex items-center pt-32 pb-16 overflow-hidden bg-transparent">
-      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section className="relative w-full min-h-[85vh] flex items-center pt-28 sm:pt-32 pb-16 overflow-x-hidden bg-transparent">
+      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 relative z-10 flex flex-col lg:grid lg:grid-cols-2 items-center gap-12 lg:gap-8">
         
         {/* Left Column: Typography & CTAs */}
-        <div className="space-y-8 sm:space-y-12">
+        <div className="space-y-8 sm:space-y-12 w-full">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full border border-blue-100 shadow-xs hover:shadow-sm transition-shadow cursor-default">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -101,34 +101,26 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Column: Master 3D Ecosystem Artwork Centerpiece */}
-        <div className="w-full flex items-center justify-center my-auto">
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full max-w-[640px] xl:max-w-[760px] aspect-[16/9] lg:aspect-[4/3] flex items-center justify-center p-2 sm:p-4 my-auto select-none mx-auto"
-          >
-            {/* Backlight Ambient Physics Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/10 to-orange-500/10 blur-[100px] rounded-full scale-90 -z-10 pointer-events-none opacity-80" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-indigo-500/10 rounded-full blur-[80px] -z-10 pointer-events-none" />
+        {/* Right Column: Massive, Borderless 3D Ecosystem Artwork */}
+        <div className="relative w-full max-w-[700px] lg:max-w-[850px] xl:max-w-[1050px] mx-auto z-10 overflow-visible flex items-center justify-center select-none mt-6 lg:mt-0">
+          {/* Backlight Ambient Physics Glow (Completely transparent backdrop) */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/15 via-purple-500/15 to-pink-500/10 blur-[100px] rounded-full scale-95 -z-10 pointer-events-none opacity-80" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 bg-indigo-500/15 rounded-full blur-[90px] -z-10 pointer-events-none" />
 
-            {/* Official Perspective-Rich Hero Asset */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -8, scale: 1.01 }}
-              className="relative w-full h-full drop-shadow-[0_20px_50px_rgba(8,112,184,0.12)] hover:drop-shadow-[0_25px_60px_rgba(147,51,234,0.18)] transition-all duration-500 ease-out"
-            >
-              <Image 
-                src="/logos/hero.png"
-                alt="Hexanx Enterprise Ecosystem" 
-                fill 
-                priority 
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                className="object-contain object-center scale-100 transform" 
-              />
-            </motion.div>
+          {/* Organic Floating Motion Loop */}
+          <motion.div 
+            animate={{ y: [0, -20, 0] }} 
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full h-auto flex justify-center items-center overflow-visible"
+          >
+            <Image 
+              src="/logos/hero.png" 
+              alt="Hexanx Enterprise Ecosystem" 
+              width={1400} 
+              height={1000} 
+              priority 
+              className="w-[110%] max-w-none md:w-full h-auto object-contain drop-shadow-2xl transform scale-110 lg:scale-125 origin-center"
+            />
           </motion.div>
         </div>
 
