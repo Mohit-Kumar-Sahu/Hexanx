@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <div className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
+    <div className="relative w-full overflow-x-hidden flex flex-col gap-14 sm:gap-20 md:gap-28 pb-16 sm:pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
       {/* SVG Topographic Contour Background Overlay */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden opacity-35">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">

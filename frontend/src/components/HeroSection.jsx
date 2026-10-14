@@ -56,7 +56,7 @@ export default function HeroSection() {
             <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Serving Enterprises Globally</span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[5.5rem] font-black text-slate-900 leading-[1] tracking-tighter">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.05] tracking-tight">
             SCALING <br />
             BUSINESS <br />
             <TextRotator />
