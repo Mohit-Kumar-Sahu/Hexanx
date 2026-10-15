@@ -9,14 +9,16 @@ import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, CheckCircle2 } from 'l
 const ECOSYSTEM_TABS = [
   {
     id: 'hexanx',
+    name: 'Hexanx OS',
     label: 'Hexanx OS',
     title: 'Hexanx OS',
+    slug: 'os',
     subtitle: 'Enterprise Workspace & ERP',
     category: 'Enterprise ERP',
     client: 'Enterprise Workspace',
     logo: '/logos/hexanxos.png',
     link: 'https://os.hexanx.in',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=3840&q=100',
+    image: '/hexanxosR.png',
     statBadge: 'AES-256 Encryption',
     secondaryBadge: 'Facial & Geo Attendance',
     description: 'Enterprise workspace ecosystem with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset tracking.',
@@ -24,14 +26,16 @@ const ECOSYSTEM_TABS = [
   },
   {
     id: 'flasto',
+    name: 'Flasto',
     label: 'Flasto',
     title: 'Flasto',
+    slug: 'flasto',
     subtitle: 'Omnichannel Restaurant OS',
     category: 'Restaurant OS',
     client: 'F&B Chains & QSRs',
     logo: '/logos/flasto.png',
     link: 'https://flasto.in',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=3840&q=100',
+    image: '/flastoR.png',
     statBadge: '<50ms POS Sync',
     secondaryBadge: 'Omnichannel KDS Engine',
     description: 'High-throughput restaurant OS unifying cloud POS, contactless QR dining, real-time KDS coordination, and live recipe costing.',
@@ -39,14 +43,16 @@ const ECOSYSTEM_TABS = [
   },
   {
     id: 'roomyes',
+    name: 'Roomyes',
     label: 'Roomyes',
     title: 'Roomyes',
+    slug: 'roomyes',
     subtitle: 'Smart Hotel Concierge & PMS',
     category: 'Hospitality PMS',
     client: 'Boutique & Luxury Hospitality',
     logo: '/logos/roomyes.png',
     link: 'https://roomyes.hexanx.in',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=3840&q=100',
+    image: '/roomyesR.png',
     statBadge: '99.99% Cloud Uptime',
     secondaryBadge: 'Contactless Concierge',
     description: 'Next-generation hotel management with mobile web check-in, in-room digital concierge, dynamic rate pricing, and automated housekeeping.',
@@ -55,9 +61,9 @@ const ECOSYSTEM_TABS = [
 ];
 
 const cinematicVariants = {
-  enter: { opacity: 0, x: 30, scale: 0.98, filter: "blur(12px)" },
+  enter: { opacity: 0, x: 20, scale: 0.99, filter: "blur(8px)" },
   center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, x: -30, scale: 0.98, filter: "blur(12px)" }
+  exit: { opacity: 0, x: -20, scale: 0.99, filter: "blur(8px)" }
 };
 
 export default function LayeredEcosystemShowcase() {
@@ -118,8 +124,8 @@ export default function LayeredEcosystemShowcase() {
           </div>
         </div>
 
-        {/* Main Display: Fluid Mobile Heights */}
-        <div className="relative w-full h-[550px] md:h-[650px] lg:h-[750px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-slate-200/70 bg-slate-950">
+        {/* Enterprise Showcase Card Container */}
+        <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)] p-6 sm:p-8 lg:p-12 transition-all">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -127,90 +133,70 @@ export default function LayeredEcosystemShowcase() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full h-full overflow-hidden"
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* Background 4K Image: object-cover object-center to prevent warping */}
-              <Image
-                src={currentProduct.image}
-                alt={`${currentProduct.title} 4K Architecture Display`}
-                fill
-                priority
-                sizes="(max-width: 1400px) 100vw, 1400px"
-                className="object-cover object-center select-none"
-              />
-
-              {/* Cinematic Vignette & Ambient Gradient Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/30 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/20 pointer-events-none" />
-
-              {/* Top Floating Status Badges: Positioned safely at top */}
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-8 z-20 flex flex-wrap items-center gap-2.5">
-                <div className="bg-black/60 backdrop-blur-xl px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-white text-[11px] sm:text-xs font-mono font-semibold border border-white/20 shadow-xl flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                  <span>{currentProduct.category}</span>
-                </div>
-
-                <div className="hidden sm:flex items-center gap-2 bg-black/40 backdrop-blur-xl px-3.5 py-1.5 rounded-full text-slate-200 text-xs font-mono border border-white/15 shadow-xl">
-                  <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
-                  <span>{currentProduct.secondaryBadge}</span>
-                </div>
-              </div>
-
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 z-20 bg-white/95 backdrop-blur-xl px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-900 text-[11px] sm:text-xs font-mono font-bold shadow-2xl border border-white/80 flex items-center gap-2"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{currentProduct.statBadge}</span>
-              </motion.div>
-
-              {/* The "Docked" Glass Card (Mobile-First): Full-width bottom dock on mobile, floating on desktop */}
-              <div className="absolute bottom-0 left-0 w-full md:w-auto md:bottom-8 md:left-8 md:max-w-md bg-black/50 backdrop-blur-2xl border-t border-white/20 md:border md:rounded-3xl p-6 sm:p-8 md:shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col justify-end z-20 text-white space-y-4">
-                {/* Product Logo Capsule & Client Tag */}
-                <div className="flex items-center justify-between gap-3">
-                  <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/60 flex items-center justify-center">
+              {/* Product Information Column (Left) */}
+              <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
+                {/* Logo Capsule & Category Badges */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
                     <img
                       src={currentProduct.logo}
-                      alt={`${currentProduct.title} Logo`}
-                      className="h-7 sm:h-8 w-auto object-contain mix-blend-multiply select-none"
+                      alt={`${currentProduct.name} Logo`}
+                      className="h-7 w-auto object-contain mix-blend-multiply select-none"
                     />
                   </div>
-
-                  <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-blue-300 text-[11px] sm:text-xs font-medium uppercase tracking-wider">
+                  <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
+                    {currentProduct.category}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
                     {currentProduct.client}
                   </span>
                 </div>
 
-                {/* Title & Description: Minimal & Punchy */}
-                <div className="space-y-1">
-                  <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                    {currentProduct.title}
+                {/* Title, Subtitle & Stat Badges */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-xs font-mono font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
+                      {currentProduct.statBadge}
+                    </span>
+                    <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/70">
+                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
+                      <span>{currentProduct.secondaryBadge}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                    {currentProduct.name}
                   </h3>
-                  <p className="text-slate-200 text-xs sm:text-sm leading-relaxed font-light line-clamp-2 sm:line-clamp-3">
+                  <p className="text-sm sm:text-base font-semibold text-blue-600">
+                    {currentProduct.subtitle}
+                  </p>
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* Feature Tags: Compact 2-column on mobile */}
-                <div className="grid grid-cols-2 gap-1.5 pt-1">
+                {/* Feature Tags */}
+                <div className="grid grid-cols-2 gap-2 pt-1">
                   {currentProduct.tags.map((tag) => (
                     <div
                       key={tag}
-                      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs text-slate-100 font-medium"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50/80 border border-slate-200/70 text-xs sm:text-sm text-slate-700 font-medium"
                     >
-                      <CheckCircle2 className="w-3 h-3 text-blue-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
                       <span className="truncate">{tag}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Action CTAs: Full-width on mobile, side-by-side on sm+ */}
-                <div className="pt-1 flex items-center gap-2.5">
+                {/* Action CTAs */}
+                <div className="pt-2 flex flex-wrap items-center gap-3">
                   <Link
                     href="/booking"
-                    className="flex-1 inline-flex items-center justify-center px-5 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-500 hover:to-pink-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 hover:scale-[1.02] transition-all gap-2 group text-center"
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 hover:scale-[1.02] transition-all gap-2 group"
                   >
                     <span>Get Started</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -220,11 +206,38 @@ export default function LayeredEcosystemShowcase() {
                     href={currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center px-4 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs uppercase tracking-wider transition-all gap-1.5 text-center"
+                    className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-800 font-semibold text-xs uppercase tracking-wider transition-all gap-2"
                   >
                     <span>Live Platform</span>
-                    <ExternalLink className="w-3 h-3 opacity-80" />
+                    <ExternalLink className="w-3.5 h-3.5 opacity-70" />
                   </a>
+                </div>
+              </div>
+
+              {/* Apple-Grade Mockup Frame Container (Right) */}
+              <div className="lg:col-span-7 w-full">
+                <div className="relative w-full aspect-[16/10] rounded-2xl md:rounded-3xl bg-slate-900/5 dark:bg-slate-950/40 p-2 sm:p-3 border border-slate-200/80 dark:border-white/10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden">
+                  {/* Window Header Bar */}
+                  <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-100/80 dark:bg-slate-900/80 rounded-t-xl border-b border-slate-200/60 dark:border-white/5 mb-1">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+                    <span className="ml-2 text-[11px] font-mono text-slate-400 truncate">
+                      {currentProduct.slug || 'app'}.hexanx.in
+                    </span>
+                  </div>
+
+                  {/* Image Viewport Container */}
+                  <div className="relative w-full h-[calc(100%-2rem)] rounded-b-xl overflow-hidden bg-slate-950">
+                    <Image
+                      src={currentProduct.image}
+                      alt={`${currentProduct.name} Production Interface`}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 55vw"
+                      className="object-cover object-top hover:scale-[1.02] transition-transform duration-500 ease-out"
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
