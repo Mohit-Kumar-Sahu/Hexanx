@@ -93,6 +93,24 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "itemListElement": [
+                { "@type": "SiteNavigationElement", "position": 1, "name": "Products", "url": "https://www.hexanx.in/products" },
+                { "@type": "SiteNavigationElement", "position": 2, "name": "Book Call", "url": "https://www.hexanx.in/booking" },
+                { "@type": "SiteNavigationElement", "position": 3, "name": "Contact", "url": "https://www.hexanx.in/contact" },
+                { "@type": "SiteNavigationElement", "position": 4, "name": "About Us", "url": "https://www.hexanx.in/about" },
+                { "@type": "SiteNavigationElement", "position": 5, "name": "Careers", "url": "https://www.hexanx.in/careers" },
+                { "@type": "SiteNavigationElement", "position": 6, "name": "Internships", "url": "https://www.hexanx.in/internships" },
+                { "@type": "SiteNavigationElement", "position": 7, "name": "Blog", "url": "https://www.hexanx.in/blog" }
+              ]
+            }),
+          }}
+        />
       </head>
       <body className="min-h-screen bg-white font-sans selection:bg-blue-500 selection:text-white overflow-x-hidden w-full relative">
         <Navbar />
