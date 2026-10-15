@@ -97,7 +97,12 @@ export default function Footer() {
       
       {/* Bottom Sub-Footer Bar */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 pt-8 border-t border-slate-900 flex flex-col lg:flex-row justify-between items-center text-xs sm:text-sm text-slate-600 gap-4 lg:gap-6 text-center lg:text-left">
-        <p className="whitespace-nowrap">&copy; {new Date().getFullYear()} Hexanx Pvt Ltd. All rights reserved.</p>
+        <div>
+          <p className="whitespace-nowrap">&copy; {new Date().getFullYear()} Hexanx Pvt Ltd. All rights reserved.</p>
+          <p className="text-xs text-slate-500/80 font-medium tracking-wide mt-1">
+            Engineered with precision in Raipur, Central India.
+          </p>
+        </div>
         
         <div className="max-w-xl text-[10px] text-slate-600 leading-relaxed my-2 lg:my-0 text-center lg:text-left">
           <p>Software as a Service | Enterprise SaaS Provider | Hexanx OS | Flasto Restaurant OS | Roomyes Hotel PMS | Ayra AI Engine | Cloud Software Products | Raipur Chhattisgarh</p>

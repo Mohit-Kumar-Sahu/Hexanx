@@ -52,30 +52,44 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Hexanx",
-              description:
-                "Enterprise B2B SaaS Ecosystem offering Hexanx OS, Flasto Restaurant OS, and Roomyes Hotel PMS powered by Ayra AI.",
-              url: "https://www.hexanx.in",
-              logo: "https://www.hexanx.in/android-chrome-512x512.png",
-              foundingDate: "2023",
-              foundingLocation: "Raipur, Chhattisgarh, India",
-              areaServed: "IN",
-              knowsAbout: ["HRMS", "Restaurant POS", "Hotel PMS", "Enterprise AI", "B2B SaaS"],
-              hasOfferCatalog: {
+              "@type": ["Organization", "LocalBusiness", "SoftwareApplication"],
+              "name": "Hexanx",
+              "description":
+                "Enterprise B2B SaaS, Restaurant POS (Flasto), and Hotel PMS (Roomyes). Top IT Company in Raipur.",
+              "url": "https://hexanx.in",
+              "logo": "https://hexanx.in/logos/hero.png",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Santoshi Nagar",
+                "addressLocality": "Raipur",
+                "addressRegion": "Chhattisgarh",
+                "postalCode": "492001",
+                "addressCountry": "IN"
+              },
+              "areaServed": "IN",
+              "knowsAbout": [
+                "Enterprise B2B SaaS",
+                "HRMS & Payroll Automation",
+                "Restaurant POS (Flasto)",
+                "Hotel PMS (Roomyes)",
+                "Ayra AI Neural Engine",
+                "IT Company in Raipur"
+              ],
+              "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                name: "Hexanx SaaS Products",
-                itemListElement: [
-                  { "@type": "SoftwareApplication", name: "Hexanx OS", applicationCategory: "BusinessApplication" },
-                  { "@type": "SoftwareApplication", name: "Flasto", applicationCategory: "BusinessApplication" },
-                  { "@type": "SoftwareApplication", name: "Roomyes", applicationCategory: "BusinessApplication" },
+                "name": "Hexanx SaaS Products",
+                "itemListElement": [
+                  { "@type": "SoftwareApplication", "name": "Hexanx OS", "applicationCategory": "BusinessApplication" },
+                  { "@type": "SoftwareApplication", "name": "Flasto", "applicationCategory": "BusinessApplication" },
+                  { "@type": "SoftwareApplication", "name": "Roomyes", "applicationCategory": "BusinessApplication" },
+                  { "@type": "SoftwareApplication", "name": "Ayra AI Engine", "applicationCategory": "BusinessApplication" }
                 ],
               },
-              sameAs: [
-                "https://www.instagram.com/hexanx.in/",
+              "sameAs": [
                 "https://www.linkedin.com/company/hexanex/",
                 "https://www.youtube.com/@Hexanx1",
-              ],
+                "https://www.instagram.com/hexanx.in/"
+              ]
             }),
           }}
         />
