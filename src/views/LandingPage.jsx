@@ -6,7 +6,7 @@ import BrandPhilosophyBanner from '../components/BrandPhilosophyBanner';
 
 export default function LandingPage() {
   return (
-    <main className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
+    <div className="relative w-full overflow-x-hidden flex flex-col gap-24 md:gap-32 pb-24 min-h-screen bg-slate-50 text-slate-800 selection:bg-blue-500 selection:text-white">
       {/* ── Architecture Bible Law 1: Inline SVG Topographic Contour Background Overlay ── */}
       <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden opacity-35">
         <svg
@@ -49,6 +49,6 @@ export default function LandingPage() {
       <LayeredEcosystemShowcase />
       <AyraSection />
       <BrandPhilosophyBanner />
-    </main>
+    </div>
   );
 }

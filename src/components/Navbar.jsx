@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -20,7 +20,6 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -44,7 +43,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold flex items-center group">
           <div className="w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
-            <img src="/logo.png" alt="Hexanx" className="w-8 h-8 object-contain" />
+            <img src="/logo.png" alt="Hexanx" width={32} height={32} className="w-8 h-8 object-contain" />
           </div>
           <span className="tracking-tight text-slate-900 font-extrabold text-xl">Hexanx</span>
         </Link>
@@ -70,12 +69,12 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <button
-            onClick={() => router.push('/booking')}
-            className="px-6 py-3 text-sm font-bold rounded-full shadow-xl hover:shadow-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white hover:shadow-blue-500/40 transition-all"
+          <Link
+            href="/booking"
+            className="px-6 py-3 text-sm font-bold rounded-full shadow-xl hover:shadow-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white hover:shadow-blue-500/40 transition-all inline-block text-center"
           >
             Book Meeting
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Hamburger */}

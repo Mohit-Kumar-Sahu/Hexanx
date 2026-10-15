@@ -127,7 +127,7 @@ export default function TermsOfService() {
         </div>
 
         {/* ── MAIN CONTENT CONTAINER ── */}
-        <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12">
+        <section aria-label="Policy Content" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12">
 
           {/* SECTION 1: Acceptance of Terms */}
           <div id="sec-acceptance" className="legal-card p-6 sm:p-10 mb-8">
@@ -548,7 +548,7 @@ export default function TermsOfService() {
             </div>
           </div>
 
-        </main>
+        </section>
       </div>
     </>
   );

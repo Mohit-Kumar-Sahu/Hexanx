@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand & Ecosystem Overview */}
         <div className="col-span-1 sm:col-span-2 lg:col-span-2">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8 flex items-center">
-            <img src="/logo.png" alt="Hexanx Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain mr-4 bg-white rounded-xl p-1" />
+            <img src="/logo.png" alt="Hexanx Logo" width={48} height={48} className="w-10 h-10 sm:w-12 sm:h-12 object-contain mr-4 bg-white rounded-xl p-1" />
             Hexanx
           </h2>
           <p className="max-w-md text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 text-slate-500 font-light">
@@ -18,13 +18,13 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4">
              {[
-               { Icon: Globe, link: "https://www.hexanx.in/" }, 
-               { Icon: Mail, link: "mailto:contact@hexanx.in" }, 
-               { Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
-               { Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
-               { Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" }
+               { name: "Hexanx Website", Icon: Globe, link: "https://www.hexanx.in/" }, 
+               { name: "Email Hexanx", Icon: Mail, link: "mailto:contact@hexanx.in" }, 
+               { name: "Hexanx LinkedIn", Icon: Linkedin, link: "https://www.linkedin.com/company/hexanex/" }, 
+               { name: "Hexanx YouTube", Icon: Youtube, link: "https://www.youtube.com/@Hexanx1" },
+               { name: "Hexanx Instagram", Icon: Instagram, link: "https://www.instagram.com/hexanx.in/" }
               ].map((social, i) => (
-               <a key={i} href={social.link} target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
+               <a key={i} href={social.link} aria-label={social.name} target="_blank" rel="noopener noreferrer" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all cursor-pointer border border-slate-800 hover:border-blue-500">
                  <social.Icon size={18}/>
                </a>
              ))}

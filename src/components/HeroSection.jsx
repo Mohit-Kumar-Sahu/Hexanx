@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Rocket, Users, ShieldCheck, Clock } from 'lucide-react';
 
@@ -42,7 +42,6 @@ const CountUp = ({ end, duration = 2000 }) => {
 };
 
 export default function HeroSection() {
-  const router = useRouter();
 
   return (
     <section className="relative w-full min-h-[85vh] flex items-center pt-28 sm:pt-32 pb-16 overflow-x-hidden bg-transparent">
@@ -69,13 +68,13 @@ export default function HeroSection() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <button
-              onClick={() => router.push('/booking')}
+            <Link
+              href="/booking"
               className="px-8 sm:px-10 h-14 sm:h-16 rounded-full font-bold tracking-wide bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-xl hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-3 text-base sm:text-lg group cursor-pointer"
             >
               <span>Start Journey</span>
               <Rocket className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </button>
+            </Link>
             <a
               href="#ecosystem"
               className="px-8 sm:px-10 h-14 sm:h-16 rounded-full font-bold tracking-wide bg-white/90 backdrop-blur-md text-slate-800 border border-slate-200 hover:bg-slate-50 hover:border-blue-400 hover:text-blue-600 transition-all shadow-md flex items-center justify-center text-base sm:text-lg cursor-pointer"
@@ -91,10 +90,10 @@ export default function HeroSection() {
               { num: 24, label: "Support Desk", icon: Clock }
             ].map((stat, i) => (
               <div key={i}>
-                <h4 className="text-2xl sm:text-4xl font-black text-slate-900 mb-1 flex items-baseline">
+                <div className="text-2xl sm:text-4xl font-black text-slate-900 mb-1 flex items-baseline">
                   <CountUp end={stat.num} />
                   <span className="text-blue-600 text-xl sm:text-2xl ml-0.5 sm:ml-1">+</span>
-                </h4>
+                </div>
                 <p className="text-slate-500 text-xs sm:text-sm font-bold uppercase tracking-wider">{stat.label}</p>
               </div>
             ))}

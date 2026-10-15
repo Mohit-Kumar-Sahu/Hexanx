@@ -139,7 +139,7 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* ── MAIN CONTENT CONTAINER ── */}
-        <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12">
+        <section aria-label="Policy Content" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-12">
           
           {/* SECTION: Ecosystem Scope */}
           <div id="sec-ecosystem" className="legal-card p-6 sm:p-10 mb-8">
@@ -712,7 +712,7 @@ CREATE TABLE public.user_consents (
             </div>
           </div>
 
-        </main>
+        </section>
       </div>
     </>
   );

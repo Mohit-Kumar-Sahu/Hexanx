@@ -3,7 +3,15 @@ import PageHeader from '../../components/PageHeader';
 
 export const metadata = {
   title: 'Products',
-  description: 'Enterprise SaaS Implementation, Automation, and Ecosystem Products — Hexanx OS, Flasto, Roomyes.',
+  description: 'Enterprise B2B SaaS Ecosystem: Hexanx OS, Flasto POS, Roomyes PMS, and Ayra AI.',
+  alternates: {
+    canonical: 'https://www.hexanx.in/products',
+  },
+  openGraph: {
+    title: 'Products | Hexanx',
+    description: 'Enterprise B2B SaaS Ecosystem: Hexanx OS, Flasto POS, Roomyes PMS, and Ayra AI.',
+    url: 'https://www.hexanx.in/products',
+  },
 };
 
 export default function ProductsPage() {

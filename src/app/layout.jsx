@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import ChatbotWidget from '../components/ChatbotWidget';
 
 export const metadata = {
+  metadataBase: new URL('https://www.hexanx.in'),
   title: {
     default: 'Hexanx | Enterprise B2B SaaS Ecosystem & AI Platform',
     template: '%s | Hexanx',
@@ -56,8 +57,8 @@ export default function RootLayout({ children }) {
               "name": "Hexanx",
               "description":
                 "Enterprise B2B SaaS, Restaurant POS (Flasto), and Hotel PMS (Roomyes). Top IT Company in Raipur.",
-              "url": "https://hexanx.in",
-              "logo": "https://hexanx.in/logos/hero.png",
+              "url": "https://www.hexanx.in",
+              "logo": "https://www.hexanx.in/logos/hero.png",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "Santoshi Nagar",

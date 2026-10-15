@@ -20,7 +20,7 @@ export default function InternshipsClient() {
       <div className="container mx-auto px-6 -mt-16 relative z-10">
         <div className="glass-card p-12 rounded-[3rem] mb-20 text-center relative overflow-hidden border border-white/50 bg-white/90 shadow-xl">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-          <h3 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h3>
+          <h2 className="text-4xl font-bold text-slate-900 mb-6">6 Months Industrial Training + Internship</h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             Work on live projects, get mentorship from senior engineers, and earn a{' '}
             <span className="font-bold text-blue-600">Professional Experience Certificate</span>.

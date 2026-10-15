@@ -108,7 +108,7 @@ export default function BookingClient({ showHeader = true }) {
 
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-3xl font-bold text-slate-900 mb-4">Book a Product Demo</h3>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">Book a Product Demo</h2>
                 <p className="text-slate-600 mb-8 leading-relaxed">
                   Schedule a personalized product demonstration with our SaaS implementation experts. We will show you how Hexanx OS, Flasto, or Roomyes can transform your business operations.
                 </p>
