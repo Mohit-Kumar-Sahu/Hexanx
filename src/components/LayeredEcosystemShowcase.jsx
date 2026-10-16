@@ -263,7 +263,7 @@ export default function LayeredEcosystemShowcase() {
 
                       {/* HOVER REDIRECTION OVERLAY */}
                       <a 
-                        href={currentProduct.url || currentProduct.link} 
+                        href={currentProduct.url} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/70 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
