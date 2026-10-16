@@ -1,26 +1,25 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageSquareCode, TrendingDown, Users, CheckCircle2, Cpu } from 'lucide-react';
+import { ArrowRight, Terminal, Zap, ShieldCheck, Cpu } from 'lucide-react';
 
 const AYRA_FEATURES = [
   {
-    icon: MessageSquareCode,
-    title: 'Conversational Data Queries',
-    desc: 'Instant audited payroll, leave, and headcount answers in plain language.'
+    icon: Terminal,
+    title: 'Zero-Maintenance God-Mode',
+    desc: 'Self-discovering endpoint catalog that explores database schemas and mutates state dynamically without bespoke glue code.'
   },
   {
-    icon: TrendingDown,
-    title: 'Predictive Churn Analytics',
-    desc: 'Real-time flight-risk signals with zero subjective bias.'
+    icon: Zap,
+    title: 'Universal API Orchestration',
+    desc: 'Autonomous multi-step execution across payroll, biometric attendance, restaurant POS, and hotel PMS microservices.'
   },
   {
-    icon: Users,
-    title: 'Automated Resume Shortlisting',
-    desc: 'Semantic vector scoring mapped directly to team role requirements.'
+    icon: ShieldCheck,
+    title: 'Loopback Authentication',
+    desc: 'Intercepts and verifies user bearer tokens with cryptographic tenant boundary isolation and immutable audit trails.'
   }
 ];
 
@@ -62,22 +61,22 @@ export default function AyraSection() {
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.25)]">
                 <Cpu size={13} className="text-purple-400" />
                 <span className="text-xs font-mono text-purple-200 tracking-wide font-medium">
-                  Ayra Proprietary Neural Engine
+                  Universal API Orchestration
                 </span>
               </div>
             </div>
 
             {/* 2. Massive Headline */}
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08]">
-              Meet Ayra. Your Intelligent{' '}
+              Meet Ayra.{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
-                HR Partner.
+                Zero-Maintenance God-Mode.
               </span>
             </h2>
 
             {/* 3. Concise One-liner Subheadline */}
             <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-light">
-              Autonomous multi-step reasoning built directly into Hexanx OS.
+              Universal API Orchestration with autonomous multi-step reasoning and Loopback Authentication built directly into Hexanx OS.
             </p>
           </div>
 
@@ -122,7 +121,7 @@ export default function AyraSection() {
           </div>
         </motion.div>
 
-        {/* Right Column: Visual Container with Integrated Mobile-Friendly Telemetry Card */}
+        {/* Right Column: Visual Container with Neural Terminal Mockup */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -130,97 +129,47 @@ export default function AyraSection() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="relative flex items-center justify-center w-full"
         >
-          {/* Main Visual Mask */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-square lg:aspect-[4/3.8] rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-white/15 shadow-2xl shadow-purple-950/40 group">
-            <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
-              alt="Ayra AI Enterprise HR Intelligence"
-              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 select-none"
-            />
+          {/* Subtle Ambient Glow behind Terminal */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-purple-600/20 via-indigo-600/15 to-blue-600/20 rounded-3xl blur-2xl opacity-60 pointer-events-none" />
 
-            {/* Subtle Gradient Vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f]/90 via-[#0a0a0f]/20 to-transparent pointer-events-none" />
-
-            {/* Top Right Live Telemetry Badge */}
-            <div className="absolute top-4 right-4 sm:top-5 sm:right-5 flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs font-mono text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Telemetry Active</span>
+          {/* AYRA NEURAL TERMINAL MOCKUP */}
+          <div className="relative w-full rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm">
+            {/* Terminal Header */}
+            <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+              </div>
+              <div className="text-xs text-slate-500">ayra-orchestrator.ts</div>
+              <div className="w-10" />
             </div>
+
+            {/* Terminal Body */}
+            <div className="p-5 space-y-4 text-slate-300">
+              <div className="flex gap-3">
+                <span className="text-emerald-400 font-bold opacity-80">User:</span>
+                <span className="text-slate-100">Approve John&apos;s pending leave.</span>
+              </div>
+
+              <div className="flex gap-3 opacity-70">
+                <span className="text-blue-400 font-bold">Ayra:</span>
+                <div className="space-y-1">
+                  <p className="text-slate-400">► Exploring DB Schema: <span className="text-amber-300">leave_requests</span></p>
+                  <p className="text-slate-400">► Intercepting Bearer Token: <span className="text-purple-400">[Loopback Auth Verified]</span></p>
+                  <p className="text-slate-400">► Executing: <span className="text-rose-400">PATCH /api/leaves/42/status</span></p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2 border-t border-slate-800/50">
+                <span className="text-blue-400 font-bold opacity-80">Ayra:</span>
+                <span className="text-emerald-300 font-medium">John&apos;s leave request (#42) has been successfully approved.</span>
+              </div>
+            </div>
+
+            {/* Subtle Glow */}
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
           </div>
-
-          {/* Glassmorphic Live Voice & Chat Interface Card */}
-          <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-auto md:-bottom-6 md:left-4 lg:-bottom-6 lg:-left-6 max-w-sm backdrop-blur-2xl bg-slate-900/95 sm:bg-slate-900/90 border border-white/20 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-2xl shadow-purple-950/50 text-white z-20"
-          >
-            {/* Header: Official Ayra Logo, Name & Status Pill */}
-            <div className="flex items-center justify-between gap-3 pb-3 border-b border-white/10 mb-3">
-              <div className="flex items-center gap-2.5">
-                <div className="relative shrink-0">
-                  <img
-                    src="/logos/ayra-ai.png"
-                    alt="Ayra"
-                    className="w-8 h-8 rounded-full border border-purple-500/30 object-cover shadow-sm"
-                  />
-                  <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-slate-900" />
-                  </span>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-white block leading-tight">Ayra Intelligence</span>
-                  <span className="text-[10px] text-slate-400 font-mono block">Autonomous Agent</span>
-                </div>
-              </div>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono font-bold shrink-0">
-                96% Match
-              </span>
-            </div>
-
-            {/* Live Voice Mode Waveform Indicator */}
-            <div className="flex items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-purple-500/10 rounded-full border border-purple-500/20 w-fit">
-                <div className="flex items-center gap-0.5 h-3">
-                  {/* 4 Animated Bars to simulate voice frequency */}
-                  {[1, 2, 3, 4].map((i) => (
-                    <motion.div
-                      key={i}
-                      className="w-0.5 bg-purple-400 rounded-full"
-                      animate={{ height: ["40%", "100%", "40%"] }}
-                      transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
-                    />
-                  ))}
-                </div>
-                <span className="text-[10px] font-mono text-purple-300 uppercase tracking-wider font-semibold">
-                  Voice Mode Active
-                </span>
-              </div>
-              <span className="text-[9px] font-mono text-slate-400 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Live Feed
-              </span>
-            </div>
-
-            {/* Dynamic Chat & Speech Output */}
-            <div className="p-3 bg-white/[0.04] border border-white/10 rounded-xl space-y-1.5 backdrop-blur-sm">
-              <p className="text-sm font-medium text-white leading-snug">
-                &ldquo;I&apos;ve screened the 14 candidates for the Senior Engineer role.&rdquo;
-              </p>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                &ldquo;3 highly matched recommendations have been forwarded to your HR desk for review.&rdquo;
-              </p>
-            </div>
-
-            {/* Sleek System Tag */}
-            <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-purple-300">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={12} className="text-emerald-400 shrink-0" />
-                <span>Zero statutory bias verification</span>
-              </div>
-              <span className="text-[9px] text-slate-400 font-mono">v2.4-neural</span>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

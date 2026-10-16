@@ -18,6 +18,7 @@ const ECOSYSTEM_TABS = [
     client: 'Enterprise Workspace',
     logo: '/logos/hexanxos.png',
     link: 'https://os.hexanx.in',
+    url: 'https://os.hexanx.in',
     image: '/hexanxosR.png',
     statBadge: 'AES-256 Encryption',
     secondaryBadge: 'Facial & Geo Attendance',
@@ -35,6 +36,7 @@ const ECOSYSTEM_TABS = [
     client: 'F&B Chains & QSRs',
     logo: '/logos/flasto.png',
     link: 'https://flasto.in',
+    url: 'https://flasto.in',
     image: '/flastoR.png',
     statBadge: '<50ms POS Sync',
     secondaryBadge: 'Omnichannel KDS Engine',
@@ -52,6 +54,7 @@ const ECOSYSTEM_TABS = [
     client: 'Boutique & Luxury Hospitality',
     logo: '/logos/roomyes.png',
     link: 'https://roomyes.hexanx.in',
+    url: 'https://roomyes.hexanx.in',
     image: '/roomyesR.png',
     statBadge: '99.99% Cloud Uptime',
     secondaryBadge: 'Contactless Concierge',
@@ -247,7 +250,7 @@ export default function LayeredEcosystemShowcase() {
                     </div>
 
                     {/* FULL, UNSHRUNKEN IMAGE RENDER */}
-                    <div className="relative w-full bg-slate-100 dark:bg-slate-900 flex justify-center">
+                    <div className="relative w-full bg-slate-100 dark:bg-slate-900 flex justify-center group/screen overflow-hidden">
                       <Image
                         src={currentProduct.image}
                         alt={`${currentProduct.name} Interface`}
@@ -257,6 +260,19 @@ export default function LayeredEcosystemShowcase() {
                         priority
                         className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       />
+
+                      {/* HOVER REDIRECTION OVERLAY */}
+                      <a 
+                        href={currentProduct.url || currentProduct.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/70 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
+                      >
+                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-6 py-3 bg-white/20 dark:bg-black/40 border border-white/30 text-white rounded-full font-medium hover:bg-white/30 dark:hover:bg-black/60 shadow-2xl backdrop-blur-md">
+                          <span>Visit Website</span>
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
