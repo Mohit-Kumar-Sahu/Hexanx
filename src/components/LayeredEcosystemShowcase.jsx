@@ -216,27 +216,48 @@ export default function LayeredEcosystemShowcase() {
 
               {/* Apple-Grade Mockup Frame Container (Right) */}
               <div className="lg:col-span-7 w-full">
-                <div className="relative w-full aspect-[16/10] rounded-2xl md:rounded-3xl bg-slate-900/5 dark:bg-slate-950/40 p-2 sm:p-3 border border-slate-200/80 dark:border-white/10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden">
-                  {/* Window Header Bar */}
-                  <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-100/80 dark:bg-slate-900/80 rounded-t-xl border-b border-slate-200/60 dark:border-white/5 mb-1">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-                    <span className="ml-2 text-[11px] font-mono text-slate-400 truncate">
-                      {currentProduct.slug || 'app'}.hexanx.in
-                    </span>
-                  </div>
+                {/* ULTRA-PREMIUM MACBOOK BROWSER FRAME */}
+                <div className="relative group w-full mx-auto mt-8 md:mt-12 lg:mt-0">
+                  
+                  {/* Subtle Ambient Glow Effect (Behind the card) */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 rounded-[2rem] blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700"></div>
 
-                  {/* Image Viewport Container */}
-                  <div className="relative w-full h-[calc(100%-2rem)] rounded-b-xl overflow-hidden bg-slate-950">
-                    <Image
-                      src={currentProduct.image}
-                      alt={`${currentProduct.name} Production Interface`}
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 55vw"
-                      className="object-cover object-top hover:scale-[1.02] transition-transform duration-500 ease-out"
-                    />
+                  {/* Main Card Body */}
+                  <div className="relative rounded-2xl md:rounded-[1.5rem] bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1">
+                    
+                    {/* Authentic macOS Window Header */}
+                    <div className="flex items-center justify-between px-4 py-3 bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md">
+                      {/* Traffic Lights */}
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner border border-black/10"></div>
+                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-inner border border-black/10"></div>
+                        <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-inner border border-black/10"></div>
+                      </div>
+                      
+                      {/* URL Bar (Glassmorphic) */}
+                      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+                        <div className="px-6 py-1.5 bg-white dark:bg-slate-950 rounded-md shadow-sm border border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs font-medium font-mono text-slate-500 dark:text-slate-400 tracking-wide flex items-center gap-2">
+                          <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"></path></svg>
+                          {currentProduct.slug || 'app'}.hexanx.in
+                        </div>
+                      </div>
+                      
+                      {/* Empty div for flex-between balance */}
+                      <div className="w-10"></div>
+                    </div>
+
+                    {/* FULL, UNSHRUNKEN IMAGE RENDER */}
+                    <div className="relative w-full bg-slate-100 dark:bg-slate-900 flex justify-center">
+                      <Image
+                        src={currentProduct.image}
+                        alt={`${currentProduct.name} Interface`}
+                        width={2880}
+                        height={1620}
+                        quality={100}
+                        priority
+                        className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
