@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { X, Send, Mic, Volume2 } from 'lucide-react';
+import { X, Send, Mic, Volume2, VolumeX } from 'lucide-react';
 
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +16,17 @@ export default function ChatbotWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [voiceMode, setVoiceMode] = useState(false);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const abortControllerRef = useRef(null);
   const audioRef = useRef(null);
+  const voiceModeRef = useRef(voiceMode);
+
+  useEffect(() => {
+    voiceModeRef.current = voiceMode;
+  }, [voiceMode]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -86,8 +92,13 @@ export default function ChatbotWidget() {
 
   // Neural TTS (Audio Playback)
   const playTTS = async (text) => {
-    if (isPlaying) return; // Prevent overlapping audio
     if (!text || !text.trim()) return;
+
+    // Reset previous audio if playing
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
 
     // Strip markdown formatting for natural voice synthesis
     const cleanText = text
@@ -170,6 +181,7 @@ export default function ChatbotWidget() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder('utf-8');
       let buffer = '';
+      let fullResponseText = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -184,11 +196,16 @@ export default function ChatbotWidget() {
             const payload = line.substring(6).trim();
             if (payload === '[DONE]') {
               setIsTyping(false);
+              // CRITICAL: Auto-play if Voice Mode is ON
+              if ((voiceMode || voiceModeRef.current) && fullResponseText.trim()) {
+                playTTS(fullResponseText);
+              }
               return;
             }
             try {
               const parsed = JSON.parse(payload);
               if (parsed.text) {
+                fullResponseText += parsed.text;
                 // Safely update the last message with the new token
                 setMessages((prev) => {
                   const newMsgs = [...prev];
@@ -212,26 +229,36 @@ export default function ChatbotWidget() {
       // Check remaining buffer
       if (buffer.trim().startsWith('data: ')) {
         const payload = buffer.trim().substring(6).trim();
-        if (payload !== '[DONE]') {
-          try {
-            const parsed = JSON.parse(payload);
-            if (parsed.text) {
-              setMessages((prev) => {
-                const newMsgs = [...prev];
-                const lastIdx = newMsgs.length - 1;
-                if (lastIdx >= 0) {
-                  newMsgs[lastIdx] = {
-                    ...newMsgs[lastIdx],
-                    content: (newMsgs[lastIdx].content || '') + parsed.text
-                  };
-                }
-                return newMsgs;
-              });
-            }
-          } catch (e) {
-            // Ignore partial JSON
+        if (payload === '[DONE]') {
+          setIsTyping(false);
+          if ((voiceMode || voiceModeRef.current) && fullResponseText.trim()) {
+            playTTS(fullResponseText);
           }
+          return;
         }
+        try {
+          const parsed = JSON.parse(payload);
+          if (parsed.text) {
+            fullResponseText += parsed.text;
+            setMessages((prev) => {
+              const newMsgs = [...prev];
+              const lastIdx = newMsgs.length - 1;
+              if (lastIdx >= 0) {
+                newMsgs[lastIdx] = {
+                  ...newMsgs[lastIdx],
+                  content: (newMsgs[lastIdx].content || '') + parsed.text
+                };
+              }
+              return newMsgs;
+            });
+          }
+        } catch (e) {
+          // Ignore partial JSON
+        }
+      }
+
+      if ((voiceMode || voiceModeRef.current) && fullResponseText.trim()) {
+        playTTS(fullResponseText);
       }
     } catch (err) {
       if (err.name !== 'AbortError') {
@@ -300,13 +327,25 @@ export default function ChatbotWidget() {
                 </p>
               </div>
             </div>
-            <button 
-              onClick={() => setIsOpen(false)}
-              aria-label="Close Chat"
-              className="p-1.5 rounded-full hover:bg-white/10 transition-colors text-white/80 hover:text-white"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setVoiceMode(!voiceMode)}
+                aria-label="Toggle Voice Mode"
+                title={voiceMode ? "Voice Mode ON (Auto-play)" : "Voice Mode OFF"}
+                className={`p-1.5 rounded-full transition-colors ${voiceMode ? 'bg-white/20 text-white' : 'hover:bg-white/10 text-white/60 hover:text-white'}`}
+              >
+                {voiceMode ? <Volume2 className="w-4 h-4"/> : <VolumeX className="w-4 h-4"/>}
+              </button>
+              <button 
+                type="button"
+                onClick={() => setIsOpen(false)}
+                aria-label="Close Chat"
+                className="p-1.5 rounded-full hover:bg-white/10 transition-colors text-white/80 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages Area */}
