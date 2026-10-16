@@ -5,6 +5,7 @@ import { generateContactEmailHtml } from '../../../lib/emailTemplates';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+const HEXANX_BACKEND_URL = "https://hexanx-backend.onrender.com/api/queries/global";
 
 export async function POST(request) {
   try {
@@ -17,7 +18,7 @@ export async function POST(request) {
       );
     }
 
-    const { name, email, service, message } = body;
+    const { name, email, phone, service, message } = body;
 
     // Field Validations
     if (!name || typeof name !== 'string' || !name.trim()) {
@@ -46,6 +47,20 @@ export async function POST(request) {
     const selectedService = (service && typeof service === 'string' && service.trim()) ? service.trim() : 'Hexanx OS';
     const trimmedMessage = message.trim();
     const referenceId = `HEX-INQ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+    // Forward to Hexanx OS Central CRM (Non-blocking)
+    fetch(HEXANX_BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'contact',
+        product_source: 'hexanx', // Default to 'hexanx' or 'general'
+        name: trimmedName,
+        email: trimmedEmail,
+        phone: phone || '',
+        message_data: { original_message: trimmedMessage }
+      })
+    }).catch(err => console.error('Failed to forward contact to Hexanx OS:', err));
 
     // Forward to Google Sheet CRM asynchronously without blocking email dispatch
     if (GOOGLE_SCRIPT_URL) {

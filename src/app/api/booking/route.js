@@ -5,6 +5,7 @@ import { generateBookingEmailHtml } from '../../../lib/emailTemplates';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJvNXy6EL1CKjQ6eoKGk13-LDQ8Fo2pHzwGgTYPOPKzOq1zFniQKSbPUki6hO4AN-EaA/exec";
+const HEXANX_BACKEND_URL = "https://hexanx-backend.onrender.com/api/queries/global";
 
 export async function POST(request) {
   try {
@@ -17,7 +18,7 @@ export async function POST(request) {
       );
     }
 
-    const { name, email, service, date, time } = body;
+    const { name, email, phone, company, product, service, date, time, notes } = body;
 
     // Field Validations
     if (!name || typeof name !== 'string' || !name.trim()) {
@@ -41,7 +42,8 @@ export async function POST(request) {
       );
     }
 
-    if (!time || typeof time !== 'string' || !time.trim()) {
+    const trimmedTime = (time && typeof time === 'string') ? time.trim() : (notes ? 'Flexible / Per notes' : '');
+    if (!trimmedTime && (!notes || typeof notes !== 'string' || !notes.trim())) {
       return NextResponse.json(
         { success: false, error: 'Preferred meeting time is required.' },
         { status: 400 }
@@ -50,10 +52,38 @@ export async function POST(request) {
 
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
-    const selectedService = (service && typeof service === 'string' && service.trim()) ? service.trim() : 'Hexanx OS';
+    const selectedService = (product && typeof product === 'string' && product.trim())
+      ? product.trim()
+      : (service && typeof service === 'string' && service.trim())
+      ? service.trim()
+      : 'Hexanx OS';
     const trimmedDate = date.trim();
-    const trimmedTime = time.trim();
     const referenceId = `HEX-CAL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+    // Dynamic Product Mapping
+    const targetProduct = (product || service || '').toLowerCase();
+    const product_source = targetProduct.includes('flasto') ? 'flasto' : 
+                           targetProduct.includes('roomyes') ? 'roomyes' : 
+                           targetProduct.includes('ayra') ? 'ayra' : 'hexanx';
+
+    // Forward to Hexanx OS Central CRM (Non-blocking)
+    fetch(HEXANX_BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'booking',
+        product_source,
+        name: trimmedName,
+        email: trimmedEmail,
+        phone: phone || '',
+        company_name: company || '',
+        message_data: { 
+          requested_product: product || selectedService, 
+          requested_date: trimmedDate, 
+          notes: notes || (trimmedTime ? `Preferred Time: ${trimmedTime}` : '')
+        }
+      })
+    }).catch(err => console.error('Failed to forward booking to Hexanx OS:', err));
 
     // Forward to Google Sheet CRM asynchronously without blocking email dispatch
     if (GOOGLE_SCRIPT_URL) {
