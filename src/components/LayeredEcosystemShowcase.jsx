@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const ECOSYSTEM_TABS = [
   {
@@ -13,6 +13,7 @@ const ECOSYSTEM_TABS = [
     label: 'Hexanx OS',
     title: 'Hexanx OS',
     slug: 'os',
+    tagline: 'Enterprise Workspace & ERP',
     subtitle: 'Enterprise Workspace & ERP',
     category: 'Enterprise ERP',
     client: 'Enterprise Workspace',
@@ -23,6 +24,7 @@ const ECOSYSTEM_TABS = [
     statBadge: 'AES-256 Encryption',
     secondaryBadge: 'Facial & Geo Attendance',
     description: 'Enterprise workspace ecosystem with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset tracking.',
+    features: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow'],
     tags: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow']
   },
   {
@@ -31,6 +33,7 @@ const ECOSYSTEM_TABS = [
     label: 'Flasto',
     title: 'Flasto',
     slug: 'flasto',
+    tagline: 'Omnichannel Restaurant OS',
     subtitle: 'Omnichannel Restaurant OS',
     category: 'Restaurant OS',
     client: 'F&B Chains & QSRs',
@@ -41,6 +44,7 @@ const ECOSYSTEM_TABS = [
     statBadge: '<50ms POS Sync',
     secondaryBadge: 'Omnichannel KDS Engine',
     description: 'High-throughput restaurant OS unifying cloud POS, contactless QR dining, real-time KDS coordination, and live recipe costing.',
+    features: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS'],
     tags: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS']
   },
   {
@@ -49,6 +53,7 @@ const ECOSYSTEM_TABS = [
     label: 'Roomyes',
     title: 'Roomyes',
     slug: 'roomyes',
+    tagline: 'Smart Hotel Concierge & PMS',
     subtitle: 'Smart Hotel Concierge & PMS',
     category: 'Hospitality PMS',
     client: 'Boutique & Luxury Hospitality',
@@ -59,6 +64,7 @@ const ECOSYSTEM_TABS = [
     statBadge: '99.99% Cloud Uptime',
     secondaryBadge: 'Contactless Concierge',
     description: 'Next-generation hotel management with mobile web check-in, in-room digital concierge, dynamic rate pricing, and automated housekeeping.',
+    features: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In'],
     tags: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In']
   }
 ];
@@ -128,158 +134,107 @@ export default function LayeredEcosystemShowcase() {
         </div>
 
         {/* Enterprise Showcase Card Container */}
-        <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)] p-6 sm:p-8 lg:p-12 transition-all">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              variants={cinematicVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
-            >
-              {/* Product Information Column (Left) */}
-              <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-                {/* Logo Capsule & Category Badges */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
-                    <img
-                      src={currentProduct.logo}
-                      alt={`${currentProduct.name} Logo`}
-                      className="h-7 w-auto object-contain mix-blend-multiply select-none"
-                    />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            variants={cinematicVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* MAIN PRODUCT CARD */}
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-12 items-center bg-white dark:bg-slate-900/50 rounded-[2.5rem] p-6 sm:p-10 lg:p-12 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+              
+              {/* LEFT COLUMN: TIGHTLY GROUPED TEXT (Col Span 5) */}
+              <div className="xl:col-span-5 flex flex-col space-y-6 lg:space-y-8 relative z-10">
+                {/* Badges - Flex Wrap */}
+                <div className="flex flex-wrap gap-2 items-center">
+                  <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                    {currentProduct.name}
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
-                    {currentProduct.category}
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
-                    {currentProduct.client}
-                  </span>
+                  <div className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-full text-xs font-semibold text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/30">
+                    {currentProduct.category || "Enterprise ERP"}
+                  </div>
                 </div>
 
-                {/* Title, Subtitle & Stat Badges */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-mono font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-                      {currentProduct.statBadge}
-                    </span>
-                    <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/70">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
-                      <span>{currentProduct.secondaryBadge}</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                {/* Title & Description */}
+                <div>
+                  <h3 className="text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
                     {currentProduct.name}
                   </h3>
-                  <p className="text-sm sm:text-base font-semibold text-blue-600">
-                    {currentProduct.subtitle}
+                  <p className="text-lg text-blue-600 dark:text-blue-400 font-medium mb-4">
+                    {currentProduct.tagline}
                   </p>
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px]">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* Feature Tags */}
-                <div className="grid grid-cols-2 gap-2 pt-1">
-                  {currentProduct.tags.map((tag) => (
-                    <div
-                      key={tag}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50/80 border border-slate-200/70 text-xs sm:text-sm text-slate-700 font-medium"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span className="truncate">{tag}</span>
+                {/* Feature Pills - Tight Grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2 px-3 py-2 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-700/50">
+                      <svg className="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"></path></svg>
+                      <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Action CTAs */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <Link
-                    href="/booking"
-                    className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 hover:scale-[1.02] transition-all gap-2 group"
-                  >
-                    <span>Get Started</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 pt-2">
+                  <Link href="/booking" className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-full text-sm hover:scale-105 transition-transform flex items-center gap-2">
+                    Get Started <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </Link>
-
-                  <a
-                    href={currentProduct.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-800 font-semibold text-xs uppercase tracking-wider transition-all gap-2"
-                  >
-                    <span>Live Platform</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                  <a href={currentProduct.url} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium rounded-full text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center gap-2">
+                    Live Platform <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   </a>
                 </div>
               </div>
 
-              {/* Apple-Grade Mockup Frame Container (Right) */}
-              <div className="lg:col-span-7 w-full">
-                {/* ULTRA-PREMIUM MACBOOK BROWSER FRAME */}
-                <div className="relative group w-full mx-auto mt-8 md:mt-12 lg:mt-0">
+              {/* RIGHT COLUMN: MACBOOK FRAME WITH HOVER REDIRECT (Col Span 7) */}
+              <div className="xl:col-span-7 relative group/screen w-full">
+                {/* MacBook Frame */}
+                <div className="relative rounded-2xl md:rounded-t-[1.5rem] bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden">
                   
-                  {/* Subtle Ambient Glow Effect (Behind the card) */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 rounded-[2rem] blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700"></div>
-
-                  {/* Main Card Body */}
-                  <div className="relative rounded-2xl md:rounded-[1.5rem] bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1">
-                    
-                    {/* Authentic macOS Window Header */}
-                    <div className="flex items-center justify-between px-4 py-3 bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md">
-                      {/* Traffic Lights */}
-                      <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner border border-black/10"></div>
-                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-inner border border-black/10"></div>
-                        <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-inner border border-black/10"></div>
-                      </div>
-                      
-                      {/* URL Bar (Glassmorphic) */}
-                      <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <div className="px-6 py-1.5 bg-white dark:bg-slate-950 rounded-md shadow-sm border border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs font-medium font-mono text-slate-500 dark:text-slate-400 tracking-wide flex items-center gap-2">
-                          <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"></path></svg>
-                          {currentProduct.slug || 'app'}.hexanx.in
-                        </div>
-                      </div>
-                      
-                      {/* Empty div for flex-between balance */}
-                      <div className="w-10"></div>
+                  {/* Safari Header */}
+                  <div className="flex items-center px-4 py-3 bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200/80 dark:border-slate-800 backdrop-blur-md">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                      <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
                     </div>
-
-                    {/* FULL, UNSHRUNKEN IMAGE RENDER */}
-                    <div className="relative w-full bg-slate-100 dark:bg-slate-900 flex justify-center group/screen overflow-hidden">
-                      <Image
-                        src={currentProduct.image}
-                        alt={`${currentProduct.name} Interface`}
-                        width={2880}
-                        height={1620}
-                        quality={100}
-                        priority
-                        className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                      />
-
-                      {/* HOVER REDIRECTION OVERLAY */}
-                      <a 
-                        href={currentProduct.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/70 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
-                      >
-                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-6 py-3 bg-white/20 dark:bg-black/40 border border-white/30 text-white rounded-full font-medium hover:bg-white/30 dark:hover:bg-black/60 shadow-2xl backdrop-blur-md">
-                          <span>Visit Website</span>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </div>
-                      </a>
+                    <div className="absolute left-1/2 -translate-x-1/2 px-6 py-1 bg-white dark:bg-slate-950 rounded-md shadow-sm border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-500 flex items-center gap-2">
+                      <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"></path></svg>
+                      {currentProduct.slug || 'app'}.hexanx.in
                     </div>
                   </div>
+
+                  {/* Actual Product Image */}
+                  <div className="relative w-full bg-slate-100 dark:bg-slate-900">
+                    <Image
+                      src={currentProduct.image}
+                      alt={currentProduct.name}
+                      width={2880}
+                      height={1620}
+                      priority
+                      className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover/screen:scale-[1.03] origin-top"
+                    />
+                  </div>
+
+                  {/* HOVER OVERLAY: Visit Website */}
+                  <a href={currentProduct.url} target="_blank" rel="noopener noreferrer" className="absolute inset-0 bg-slate-900/60 dark:bg-slate-950/80 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20">
+                    <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-all duration-300 flex items-center gap-3 px-8 py-3.5 bg-white/10 border border-white/20 text-white rounded-full font-bold hover:bg-white/20 shadow-2xl backdrop-blur-md text-sm">
+                      Visit {currentProduct.name} 
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                  </a>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
