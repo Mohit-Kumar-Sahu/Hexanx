@@ -149,17 +149,17 @@ export default function LayeredEcosystemShowcase() {
               <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
                 {/* Logo Capsule & Category Badges */}
                 <div className="flex flex-wrap items-center gap-3">
-                  <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
+                  <div className="bg-white px-4 py-2 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
                     <img
                       src={currentProduct.logo}
                       alt={`${currentProduct.name} Logo`}
-                      className="h-7 w-auto object-contain select-none"
+                      className="h-9 sm:h-10 w-auto object-contain select-none"
                     />
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
+                  <span className="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
                     {currentProduct.category}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
+                  <span className="px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
                     {currentProduct.client}
                   </span>
                 </div>
