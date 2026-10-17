@@ -145,62 +145,76 @@ export default function LayeredEcosystemShowcase() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* LEFT COLUMN: SPACIOUS TYPOGRAPHY & BADGES */}
+              {/* LEFT COLUMN: BRANDING, TYPOGRAPHY & ACTIONS */}
               <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 lg:space-y-8 relative z-10 py-4">
                 
-                {/* ROW 1: Primary Category Badges (Clean, rounded, spaced) */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="px-3.5 py-1.5 bg-blue-600 dark:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-sm">
-                    {currentProduct.category || "Enterprise ERP"}
+                {/* ROW 1: Product Logo & Primary Badges */}
+                <div className="flex flex-wrap items-center gap-4">
+                  {/* Product Logo (Dynamic or Fallback) */}
+                  <div className="flex items-center gap-2.5 px-4 py-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+                    {currentProduct.logo ? (
+                      <Image
+                        src={currentProduct.logo}
+                        alt={`${currentProduct.name} Logo`}
+                        width={24}
+                        height={24}
+                        className="w-6 h-6 object-contain"
+                      />
+                    ) : (
+                      <div className="w-6 h-6 flex-shrink-0 text-slate-900 dark:text-white">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                      </div>
+                    )}
+                    <span className="font-extrabold text-slate-900 dark:text-white text-lg tracking-tight">
+                      {currentProduct.name}
+                    </span>
                   </div>
-                  <div className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
-                    {currentProduct.client || "Enterprise Workspace"}
+                  
+                  {/* Category Pill */}
+                  <div className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-widest rounded-full border border-blue-100 dark:border-blue-800/30">
+                    {currentProduct.category || "Enterprise ERP"}
                   </div>
                 </div>
 
-                {/* ROW 2: Title & Tagline (Generous line-height) */}
-                <div className="space-y-4">
-                  <h3 className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
-                    {currentProduct.name}
-                  </h3>
-                  <p className="text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-medium leading-relaxed">
+                {/* ROW 2: Main Title & Description */}
+                <div className="space-y-4 pt-2">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
                     {currentProduct.tagline || currentProduct.subtitle}
-                  </p>
+                  </h2>
                   <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px] sm:text-base max-w-lg">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* ROW 3: Tech & Security Pills (Subtle, secondary UI) */}
-                <div className="flex flex-wrap items-center gap-2.5 pt-2">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-[11px] font-bold rounded border border-emerald-200 dark:border-emerald-800/30 uppercase tracking-wide">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                {/* ROW 3: Security & Tech Pills */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold rounded border border-emerald-100 dark:border-emerald-800/30">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     {currentProduct.statBadge || "AES-256 Encryption"}
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 text-[11px] font-bold rounded border border-purple-200 dark:border-purple-800/30 uppercase tracking-wide">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-50/50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-xs font-bold rounded border border-purple-100 dark:border-purple-800/30">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     {currentProduct.secondaryBadge || "Facial & Geo Tracking"}
                   </div>
                 </div>
 
-                {/* ROW 4: Feature List (Grid with gaps) */}
-                <div className="grid grid-cols-2 gap-3 pt-4">
+                {/* ROW 4: Feature List */}
+                <div className="grid grid-cols-2 gap-4 pt-4">
                   {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                    <div key={idx} className="flex items-start gap-2.5">
+                      <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                       </div>
-                      <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">{feature}</span>
+                      <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 leading-snug">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* ROW 5: Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 pt-6">
-                  {/* Retain your existing buttons here */}
                   <Link
                     href="/booking"
-                    className="px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
+                    className="px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full text-sm hover:-translate-y-0.5 hover:shadow-lg transition-all flex items-center gap-2"
                   >
                     <span>Get Started</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -209,7 +223,7 @@ export default function LayeredEcosystemShowcase() {
                     href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-7 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-full text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm border border-slate-200 dark:border-slate-700"
+                    className="px-7 py-3.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-full text-sm hover:-translate-y-0.5 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2 shadow-sm border border-slate-200 dark:border-slate-700"
                   >
                     <span>Live Platform</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
