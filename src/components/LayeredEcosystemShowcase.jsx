@@ -147,32 +147,38 @@ export default function LayeredEcosystemShowcase() {
             >
               {/* Product Information Column (Left) */}
               <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-                {/* Logo Capsule & Category Badges */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="bg-white px-4 py-2 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
+                {/* Brand Header: Clean Logo & Typography Metadata */}
+                <div className="space-y-3">
+                  {/* Clean Logo render (no nested card/border wrapper) */}
+                  <div className="flex flex-wrap items-center gap-3.5">
                     <img
                       src={currentProduct.logo}
                       alt={`${currentProduct.name} Logo`}
-                      className="h-9 sm:h-10 w-auto object-contain select-none"
+                      className="h-8 sm:h-9 w-auto object-contain select-none"
                     />
+                    <span className="hidden sm:inline-block text-slate-300">/</span>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm">
+                      <span className="font-bold uppercase tracking-wider text-blue-600">
+                        {currentProduct.category}
+                      </span>
+                      <span className="text-slate-300">•</span>
+                      <span className="font-medium text-slate-500">
+                        {currentProduct.client}
+                      </span>
+                    </div>
                   </div>
-                  <span className="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
-                    {currentProduct.category}
-                  </span>
-                  <span className="px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
-                    {currentProduct.client}
-                  </span>
-                </div>
 
-                {/* Stat Badges */}
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-mono font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-                    {currentProduct.statBadge}
-                  </span>
-                  <div className="flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/70">
-                    <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
-                    <span>{currentProduct.secondaryBadge}</span>
+                  {/* Security & Live Telemetry Metrics (Direct Font Typography, No Buttons) */}
+                  <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1.5 text-xs sm:text-sm font-medium">
+                    <div className="flex items-center gap-1.5 text-emerald-600">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="font-mono font-semibold">{currentProduct.statBadge}</span>
+                    </div>
+                    <span className="text-slate-300">•</span>
+                    <div className="flex items-center gap-1.5 text-slate-500">
+                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                      <span>{currentProduct.secondaryBadge}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -190,11 +196,11 @@ export default function LayeredEcosystemShowcase() {
                 </div>
 
                 {/* Feature Tags */}
-                <div className="grid grid-cols-2 gap-2.5 pt-1">
+                <div className="grid grid-cols-2 gap-3 pt-1">
                   {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white border border-slate-200/80 shadow-xs text-xs sm:text-sm text-slate-700 font-medium"
+                      className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium"
                     >
                       <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
                       <span className="truncate">{feature}</span>
