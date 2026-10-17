@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const ECOSYSTEM_TABS = [
   {
@@ -14,6 +14,7 @@ const ECOSYSTEM_TABS = [
     title: 'Hexanx OS',
     slug: 'os',
     subtitle: 'Enterprise Workspace & ERP',
+    tagline: 'Enterprise Workspace & ERP',
     category: 'Enterprise ERP',
     client: 'Enterprise Workspace',
     logo: '/logos/hexanxos.png',
@@ -21,8 +22,9 @@ const ECOSYSTEM_TABS = [
     url: 'https://os.hexanx.in',
     image: '/hexanxosR.png',
     statBadge: 'AES-256 Encryption',
-    secondaryBadge: 'Facial & Geo Attendance',
+    secondaryBadge: 'Facial & Geo Tracking',
     description: 'Enterprise workspace ecosystem with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset tracking.',
+    features: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow'],
     tags: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow']
   },
   {
@@ -32,6 +34,7 @@ const ECOSYSTEM_TABS = [
     title: 'Flasto',
     slug: 'flasto',
     subtitle: 'Omnichannel Restaurant OS',
+    tagline: 'Omnichannel Restaurant OS',
     category: 'Restaurant OS',
     client: 'F&B Chains & QSRs',
     logo: '/logos/flasto.png',
@@ -41,6 +44,7 @@ const ECOSYSTEM_TABS = [
     statBadge: '<50ms POS Sync',
     secondaryBadge: 'Omnichannel KDS Engine',
     description: 'High-throughput restaurant OS unifying cloud POS, contactless QR dining, real-time KDS coordination, and live recipe costing.',
+    features: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS'],
     tags: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS']
   },
   {
@@ -50,6 +54,7 @@ const ECOSYSTEM_TABS = [
     title: 'Roomyes',
     slug: 'roomyes',
     subtitle: 'Smart Hotel Concierge & PMS',
+    tagline: 'Smart Hotel Concierge & PMS',
     category: 'Hospitality PMS',
     client: 'Boutique & Luxury Hospitality',
     logo: '/logos/roomyes.png',
@@ -59,6 +64,7 @@ const ECOSYSTEM_TABS = [
     statBadge: '99.99% Cloud Uptime',
     secondaryBadge: 'Contactless Concierge',
     description: 'Next-generation hotel management with mobile web check-in, in-room digital concierge, dynamic rate pricing, and automated housekeeping.',
+    features: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In'],
     tags: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In']
   }
 ];
@@ -139,82 +145,77 @@ export default function LayeredEcosystemShowcase() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* Product Information Column (Left) */}
-              <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-                {/* Logo Capsule & Category Badges */}
+              {/* LEFT COLUMN: SPACIOUS TYPOGRAPHY & BADGES */}
+              <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 lg:space-y-8 relative z-10 py-4">
+                
+                {/* ROW 1: Primary Category Badges (Clean, rounded, spaced) */}
                 <div className="flex flex-wrap items-center gap-3">
-                  <div className="bg-white px-3.5 py-1.5 rounded-xl shadow-xs border border-slate-200/80 flex items-center justify-center">
-                    <img
-                      src={currentProduct.logo}
-                      alt={`${currentProduct.name} Logo`}
-                      className="h-7 w-auto object-contain mix-blend-multiply select-none"
-                    />
+                  <div className="px-3.5 py-1.5 bg-blue-600 dark:bg-blue-500 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-sm">
+                    {currentProduct.category || "Enterprise ERP"}
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold uppercase tracking-wider">
-                    {currentProduct.category}
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-600 text-xs font-medium">
-                    {currentProduct.client}
-                  </span>
+                  <div className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold rounded-full border border-slate-200 dark:border-slate-700 shadow-sm">
+                    {currentProduct.client || "Enterprise Workspace"}
+                  </div>
                 </div>
 
-                {/* Title, Subtitle & Stat Badges */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-mono font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-                      {currentProduct.statBadge}
-                    </span>
-                    <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/70">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500" />
-                      <span>{currentProduct.secondaryBadge}</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                {/* ROW 2: Title & Tagline (Generous line-height) */}
+                <div className="space-y-4">
+                  <h3 className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1]">
                     {currentProduct.name}
                   </h3>
-                  <p className="text-sm sm:text-base font-semibold text-blue-600">
-                    {currentProduct.subtitle}
+                  <p className="text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-medium leading-relaxed">
+                    {currentProduct.tagline || currentProduct.subtitle}
                   </p>
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px] sm:text-base max-w-lg">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* Feature Tags */}
-                <div className="grid grid-cols-2 gap-2 pt-1">
-                  {currentProduct.tags.map((tag) => (
-                    <div
-                      key={tag}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50/80 border border-slate-200/70 text-xs sm:text-sm text-slate-700 font-medium"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span className="truncate">{tag}</span>
+                {/* ROW 3: Tech & Security Pills (Subtle, secondary UI) */}
+                <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-[11px] font-bold rounded border border-emerald-200 dark:border-emerald-800/30 uppercase tracking-wide">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    {currentProduct.statBadge || "AES-256 Encryption"}
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 text-[11px] font-bold rounded border border-purple-200 dark:border-purple-800/30 uppercase tracking-wide">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    {currentProduct.secondaryBadge || "Facial & Geo Tracking"}
+                  </div>
+                </div>
+
+                {/* ROW 4: Feature List (Grid with gaps) */}
+                <div className="grid grid-cols-2 gap-3 pt-4">
+                  {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Action CTAs */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
+                {/* ROW 5: Action Buttons */}
+                <div className="flex flex-wrap items-center gap-4 pt-6">
+                  {/* Retain your existing buttons here */}
                   <Link
                     href="/booking"
-                    className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 hover:scale-[1.02] transition-all gap-2 group"
+                    className="px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full text-sm hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
                   >
                     <span>Get Started</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </Link>
-
                   <a
-                    href={currentProduct.link}
+                    href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-800 font-semibold text-xs uppercase tracking-wider transition-all gap-2"
+                    className="px-7 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-full text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 shadow-sm border border-slate-200 dark:border-slate-700"
                   >
                     <span>Live Platform</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   </a>
                 </div>
+                
               </div>
 
               {/* Apple-Grade Mockup Frame Container (Right) */}
