@@ -4,7 +4,14 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ShieldCheck, CheckCircle2, ArrowRight, ExternalLink } from 'lucide-react';
+import { 
+  Sparkles, 
+  ShieldCheck, 
+  CheckCircle2, 
+  ArrowRight, 
+  ExternalLink, 
+  Lock
+} from 'lucide-react';
 
 const ECOSYSTEM_TABS = [
   {
@@ -16,16 +23,29 @@ const ECOSYSTEM_TABS = [
     subtitle: 'Enterprise Workspace & ERP',
     tagline: 'Enterprise Workspace & ERP',
     category: 'Enterprise ERP',
-    client: 'Enterprise Workspace',
+    client: 'Global Workforce & Ops',
     logo: '/logos/hexanxos.png',
     link: 'https://os.hexanx.in',
     url: 'https://os.hexanx.in',
     image: '/hexanxosR.png',
-    statBadge: 'AES-256 Encryption',
-    secondaryBadge: 'Facial & Geo Attendance',
-    description: 'Enterprise workspace ecosystem with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset tracking.',
-    features: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow'],
-    tags: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow']
+    statBadge: 'AES-256 Military Grade',
+    secondaryBadge: 'Facial & Geo Tracking',
+    badgeText: 'Live Enterprise ERP',
+    description: 'Enterprise workspace ecosystem engineered for autonomous multi-entity management with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset lifecycle tracking.',
+    features: ['Biometric Geo-Attendance', 'Automated Payroll & TDS', 'IT Asset Tracking Hub', 'Leave & Shift Engine'],
+    tags: ['Biometric Geo-Attendance', 'Automated Payroll & TDS', 'IT Asset Tracking Hub', 'Leave & Shift Engine'],
+    theme: {
+      accentColor: 'text-blue-600',
+      accentBg: 'bg-blue-500/10',
+      accentBorder: 'border-blue-500/20',
+      gradientText: 'from-blue-600 via-indigo-600 to-cyan-500',
+      pillBg: 'bg-blue-600',
+      dotColor: 'bg-blue-500',
+      glow: 'from-blue-600/30 via-indigo-500/20 to-cyan-400/25',
+      iconColor: 'text-blue-600',
+      buttonBg: 'bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 hover:from-blue-900 hover:to-indigo-900',
+      browserGlow: 'from-blue-500/30 via-indigo-500/25 to-cyan-400/30'
+    }
   },
   {
     id: 'flasto',
@@ -36,16 +56,29 @@ const ECOSYSTEM_TABS = [
     subtitle: 'Omnichannel Restaurant OS',
     tagline: 'Omnichannel Restaurant OS',
     category: 'Restaurant OS',
-    client: 'F&B Chains & QSRs',
+    client: 'F&B Chains & QSR Networks',
     logo: '/logos/flasto.png',
     link: 'https://flasto.in',
     url: 'https://flasto.in',
     image: '/flastoR.png',
-    statBadge: '<50ms POS Sync',
+    statBadge: '<50ms POS Sync Latency',
     secondaryBadge: 'Omnichannel KDS Engine',
-    description: 'High-throughput restaurant OS unifying cloud POS, contactless QR dining, real-time KDS coordination, and live recipe costing.',
-    features: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS'],
-    tags: ['Cloud POS', 'QR Ordering', 'Inventory Costing', 'Realtime KDS']
+    badgeText: 'Hyper-Speed F&B Engine',
+    description: 'High-throughput restaurant operating system unifying ultra-low latency cloud POS, contactless QR table dining, real-time Kitchen Display System (KDS) routing, and automated recipe costing.',
+    features: ['Ultra-Low Latency POS', 'QR Contactless Dining', 'Automated Recipe Costing', 'Kitchen Display System'],
+    tags: ['Ultra-Low Latency POS', 'QR Contactless Dining', 'Automated Recipe Costing', 'Kitchen Display System'],
+    theme: {
+      accentColor: 'text-orange-600',
+      accentBg: 'bg-orange-500/10',
+      accentBorder: 'border-orange-500/20',
+      gradientText: 'from-orange-600 via-amber-600 to-red-500',
+      pillBg: 'bg-orange-600',
+      dotColor: 'bg-orange-500',
+      glow: 'from-orange-600/30 via-amber-500/20 to-red-400/25',
+      iconColor: 'text-orange-600',
+      buttonBg: 'bg-gradient-to-r from-slate-900 via-orange-950 to-slate-900 hover:from-orange-900 hover:to-amber-900',
+      browserGlow: 'from-orange-500/30 via-amber-500/25 to-red-400/30'
+    }
   },
   {
     id: 'roomyes',
@@ -61,11 +94,24 @@ const ECOSYSTEM_TABS = [
     link: 'https://roomyes.hexanx.in',
     url: 'https://roomyes.hexanx.in',
     image: '/roomyesR.png',
-    statBadge: '99.99% Cloud Uptime',
+    statBadge: '99.99% Cloud Uptime SLA',
     secondaryBadge: 'Contactless Concierge',
-    description: 'Next-generation hotel management with mobile web check-in, in-room digital concierge, dynamic rate pricing, and automated housekeeping.',
-    features: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In'],
-    tags: ['Smart Concierge', 'Dynamic Pricing', 'Housekeeping Suite', 'Web Check-In']
+    badgeText: 'Luxury Hospitality Tech',
+    description: 'Next-generation hotel management suite with frictionless mobile web check-in, in-room conversational concierge, AI-driven dynamic rate optimization, and automated housekeeping dispatch.',
+    features: ['Mobile Web Check-In', 'AI In-Room Concierge', 'Dynamic Yield Pricing', 'Housekeeping Suite'],
+    tags: ['Mobile Web Check-In', 'AI In-Room Concierge', 'Dynamic Yield Pricing', 'Housekeeping Suite'],
+    theme: {
+      accentColor: 'text-rose-600',
+      accentBg: 'bg-rose-500/10',
+      accentBorder: 'border-rose-500/20',
+      gradientText: 'from-rose-600 via-pink-600 to-purple-500',
+      pillBg: 'bg-rose-600',
+      dotColor: 'bg-rose-500',
+      glow: 'from-rose-600/30 via-pink-500/20 to-purple-400/25',
+      iconColor: 'text-rose-600',
+      buttonBg: 'bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 hover:from-rose-900 hover:to-purple-900',
+      browserGlow: 'from-rose-500/30 via-pink-500/25 to-purple-400/30'
+    }
   }
 ];
 
@@ -81,19 +127,19 @@ export default function LayeredEcosystemShowcase() {
   const currentProduct = ECOSYSTEM_TABS.find((tab) => tab.id === activeTab) || ECOSYSTEM_TABS[0];
 
   return (
-    <section className="w-full bg-transparent relative overflow-hidden py-12 sm:py-16 lg:py-24" id="ecosystem">
-      <div className="max-w-[1400px] mx-auto w-full px-4 sm:px-6 md:px-12">
+    <section className="w-full bg-transparent relative overflow-hidden py-14 sm:py-20 lg:py-28" id="ecosystem">
+      <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-12">
         {/* Header & Apple-Style Segmented Navigation */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-14">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/80 backdrop-blur-md border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 backdrop-blur-md border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>Live Cloud Ecosystem</span>
             </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.08]">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.06]">
               The Hexanx Product Ecosystem
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-slate-600 mt-3 sm:mt-4 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-slate-600 mt-3 sm:mt-4 leading-relaxed font-light">
               Autonomous, high-throughput SaaS engines engineered for enterprise scale and zero downtime.
             </p>
           </div>
@@ -102,7 +148,7 @@ export default function LayeredEcosystemShowcase() {
           <div
             role="tablist"
             aria-label="Hexanx Product Switcher"
-            className="relative inline-flex items-center p-1 sm:p-1.5 rounded-full bg-slate-200/70 backdrop-blur-xl border border-slate-300/80 shadow-inner w-full sm:w-auto self-start lg:self-end overflow-hidden"
+            className="relative inline-flex items-center p-1.5 rounded-full bg-slate-200/70 backdrop-blur-2xl border border-slate-300/80 shadow-inner w-full sm:w-auto self-start lg:self-end overflow-hidden"
           >
             {ECOSYSTEM_TABS.map((tab) => {
               const isActive = activeTab === tab.id;
@@ -113,7 +159,7 @@ export default function LayeredEcosystemShowcase() {
                   aria-selected={isActive}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-4 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300 cursor-pointer select-none flex-1 sm:flex-initial text-center ${
+                  className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer select-none flex-1 sm:flex-initial text-center ${
                     isActive ? 'text-white' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
@@ -121,11 +167,12 @@ export default function LayeredEcosystemShowcase() {
                     <motion.div
                       layoutId="activeTabIndicator"
                       className="absolute inset-0 bg-slate-900 rounded-full shadow-lg"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {tab.label}
+                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-emerald-400 animate-pulse' : 'bg-slate-400'}`} />
+                    <span>{tab.label}</span>
                   </span>
                 </button>
               );
@@ -133,8 +180,19 @@ export default function LayeredEcosystemShowcase() {
           </div>
         </div>
 
-        {/* Enterprise Showcase Card Container */}
-        <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)] p-6 sm:p-8 lg:p-12 transition-all">
+        {/* Enterprise Showcase Card Container with Dynamic Texture & Ambient Glow */}
+        <div className="relative w-full rounded-[2.25rem] md:rounded-[3rem] bg-white/90 backdrop-blur-2xl border border-white/90 shadow-[0_30px_90px_-20px_rgba(15,23,42,0.12)] p-6 sm:p-10 lg:p-14 xl:p-16 transition-all overflow-hidden">
+          
+          {/* Multi-layered dynamic background aura */}
+          <div className={`absolute -top-40 -left-40 w-[500px] h-[500px] bg-gradient-to-br ${currentProduct.theme.glow} rounded-full blur-[120px] opacity-70 pointer-events-none transition-all duration-700`} />
+          <div className={`absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-gradient-to-tl ${currentProduct.theme.glow} rounded-full blur-[120px] opacity-50 pointer-events-none transition-all duration-700`} />
+
+          {/* Micro-dot grid texture overlay for tactile luxury glass depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none" />
+
+          {/* Top highlight luster edge */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent pointer-events-none" />
+
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -143,106 +201,118 @@ export default function LayeredEcosystemShowcase() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-center relative z-10"
             >
-              {/* Product Information Column (Left) */}
-              <div className="lg:col-span-5 flex flex-col justify-center space-y-6">
-                {/* Brand Header: Clean Logo & Typography Metadata */}
-                <div className="space-y-3">
-                  {/* Clean Logo render (no nested card/border wrapper) */}
-                  <div className="flex flex-wrap items-center gap-3.5">
-                    <img
-                      src={currentProduct.logo}
-                      alt={`${currentProduct.name} Logo`}
-                      className="h-8 sm:h-9 w-auto object-contain select-none"
-                    />
-                    <span className="hidden sm:inline-block text-slate-300">/</span>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm">
-                      <span className="font-bold uppercase tracking-wider text-blue-600">
-                        {currentProduct.category}
-                      </span>
-                      <span className="text-slate-300">•</span>
-                      <span className="font-medium text-slate-500">
-                        {currentProduct.client}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Security & Live Telemetry Metrics (Direct Font Typography, No Buttons) */}
-                  <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1.5 text-xs sm:text-sm font-medium">
-                    <div className="flex items-center gap-1.5 text-emerald-600">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="font-mono font-semibold">{currentProduct.statBadge}</span>
-                    </div>
+              {/* Product Information Column (Left) - Generous Breathing Room */}
+              <div className="lg:col-span-6 flex flex-col justify-center">
+                
+                {/* Brand Header: Clean Logo & Category Metadata */}
+                <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-5 sm:mb-6">
+                  <img
+                    src={currentProduct.logo}
+                    alt={`${currentProduct.name} Logo`}
+                    className="h-8 sm:h-9 w-auto object-contain select-none"
+                  />
+                  <span className="hidden sm:inline-block text-slate-300">/</span>
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-medium">
+                    <span className={`font-bold uppercase tracking-wider ${currentProduct.theme.accentColor}`}>
+                      {currentProduct.category}
+                    </span>
                     <span className="text-slate-300">•</span>
-                    <div className="flex items-center gap-1.5 text-slate-500">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-500 shrink-0" />
-                      <span>{currentProduct.secondaryBadge}</span>
-                    </div>
+                    <span className="text-slate-500 font-medium">
+                      {currentProduct.client}
+                    </span>
                   </div>
                 </div>
 
-                {/* Title, Subtitle & Description */}
-                <div className="space-y-2">
-                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+                {/* Futuristic Live Telemetry Capsule (Texture + Micro-Animation) */}
+                <div className="inline-flex flex-wrap items-center gap-3 sm:gap-4 px-4 py-2 rounded-xl bg-slate-100/70 backdrop-blur-md border border-slate-200/70 shadow-xs mb-6 sm:mb-8 self-start">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-semibold text-slate-800">
+                    <span className="relative flex h-2 w-2">
+                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${currentProduct.theme.dotColor} opacity-75`} />
+                      <span className={`relative inline-flex rounded-full h-2 w-2 ${currentProduct.theme.dotColor}`} />
+                    </span>
+                    <span>{currentProduct.statBadge}</span>
+                  </div>
+                  <span className="text-slate-300">•</span>
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-600 font-medium">
+                    <ShieldCheck className={`w-3.5 h-3.5 ${currentProduct.theme.iconColor} shrink-0`} />
+                    <span>{currentProduct.secondaryBadge}</span>
+                  </div>
+                </div>
+
+                {/* Title, Vibrant Tagline & Relaxed Description */}
+                <div className="mb-8 sm:mb-10">
+                  <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-slate-900 tracking-tight leading-[1.08] mb-2.5">
                     {currentProduct.name}
                   </h3>
-                  <p className="text-base sm:text-lg font-semibold text-blue-600">
+                  <p className={`text-lg sm:text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${currentProduct.theme.gradientText} mb-4`}>
                     {currentProduct.subtitle || currentProduct.tagline}
                   </p>
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-light max-w-xl">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* Feature Tags */}
-                <div className="grid grid-cols-2 gap-3 pt-1">
-                  {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium"
+                {/* Tactile Feature Tiles (Micro-Cards with Interactive Hover & Spring) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 mb-8 sm:mb-10">
+                  {currentProduct.features.map((feature, idx) => (
+                    <motion.div
+                      key={feature}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.07, duration: 0.35 }}
+                      whileHover={{ y: -2, scale: 1.01 }}
+                      className="flex items-center gap-3 p-3.5 rounded-xl bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 shadow-xs hover:shadow-md transition-all duration-300 group cursor-default"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span className="truncate">{feature}</span>
-                    </div>
+                      <div className={`w-6 h-6 rounded-lg ${currentProduct.theme.accentBg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                        <CheckCircle2 className={`w-3.5 h-3.5 ${currentProduct.theme.iconColor}`} />
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
+                        {feature}
+                      </span>
+                    </motion.div>
                   ))}
                 </div>
 
-                {/* Action CTAs */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
+                {/* Premium Action CTAs with Shimmer Animation */}
+                <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href="/booking"
-                    className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 hover:scale-[1.02] transition-all gap-2 group"
+                    className={`relative inline-flex items-center justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full ${currentProduct.theme.buttonBg} text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl shadow-slate-900/15 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2.5 group overflow-hidden`}
                   >
-                    <span>GET STARTED</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+                    <span className="relative z-10">Schedule Enterprise Demo</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                   </Link>
 
                   <a
                     href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs uppercase tracking-wider shadow-xs transition-all gap-2"
+                    className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 hover:text-slate-900 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2 group"
                   >
-                    <span>LIVE PLATFORM</span>
-                    <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+                    <span>Live Platform</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </a>
                 </div>
               </div>
 
               {/* Apple-Grade Mockup Frame Container (Right) */}
-              <div className="lg:col-span-7 w-full">
-                {/* ULTRA-PREMIUM MACBOOK BROWSER FRAME */}
-                <div className="relative group w-full mx-auto mt-8 md:mt-12 lg:mt-0">
-                  
-                  {/* Subtle Ambient Glow Effect (Behind the card) */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 rounded-[2rem] blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700"></div>
+              <div className="lg:col-span-6 w-full">
+                <motion.div
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative group w-full mx-auto"
+                >
+                  {/* Subtle Product-Colored Ambient Glow */}
+                  <div className={`absolute -inset-2 bg-gradient-to-r ${currentProduct.theme.browserGlow} rounded-[2.5rem] blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none`} />
 
-                  {/* Main Card Body */}
-                  <div className="relative rounded-2xl md:rounded-[1.5rem] bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1">
+                  {/* Main Window Body */}
+                  <div className="relative rounded-2xl md:rounded-[1.75rem] bg-white border border-slate-200/80 shadow-[0_30px_70px_-15px_rgba(15,23,42,0.2)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1">
                     
                     {/* Authentic macOS Window Header */}
-                    <div className="flex items-center justify-between px-4 py-3 bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md">
+                    <div className="flex items-center justify-between px-4 py-3 bg-slate-50/95 border-b border-slate-200/70 backdrop-blur-md">
                       {/* Traffic Lights */}
                       <div className="flex gap-2">
                         <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner border border-black/10"></div>
@@ -252,9 +322,9 @@ export default function LayeredEcosystemShowcase() {
                       
                       {/* URL Bar (Glassmorphic) */}
                       <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <div className="px-6 py-1.5 bg-white dark:bg-slate-950 rounded-md shadow-sm border border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs font-medium font-mono text-slate-500 dark:text-slate-400 tracking-wide flex items-center gap-2">
-                          <svg className="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"></path></svg>
-                          {currentProduct.slug || 'app'}.hexanx.in
+                        <div className="px-5 py-1.5 bg-white rounded-md shadow-xs border border-slate-200 text-[11px] sm:text-xs font-medium font-mono text-slate-500 tracking-wide flex items-center gap-2">
+                          <Lock className="w-3 h-3 text-emerald-500" />
+                          <span>{currentProduct.slug || 'app'}.hexanx.in</span>
                         </div>
                       </div>
                       
@@ -262,8 +332,8 @@ export default function LayeredEcosystemShowcase() {
                       <div className="w-10"></div>
                     </div>
 
-                    {/* FULL, UNSHRUNKEN IMAGE RENDER */}
-                    <div className="relative w-full bg-slate-100 dark:bg-slate-900 flex justify-center group/screen overflow-hidden">
+                    {/* FULL, CRISP IMAGE RENDER */}
+                    <div className="relative w-full bg-slate-100 flex justify-center group/screen overflow-hidden">
                       <Image
                         src={currentProduct.image}
                         alt={`${currentProduct.name} Interface`}
@@ -276,19 +346,19 @@ export default function LayeredEcosystemShowcase() {
 
                       {/* HOVER REDIRECTION OVERLAY */}
                       <a 
-                        href={currentProduct.url} 
+                        href={currentProduct.url || currentProduct.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="absolute inset-0 bg-slate-900/40 dark:bg-slate-950/70 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
+                        className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
                       >
-                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-6 py-3 bg-white/20 dark:bg-black/40 border border-white/30 text-white rounded-full font-medium hover:bg-white/30 dark:hover:bg-black/60 shadow-2xl backdrop-blur-md">
-                          <span>Visit Website</span>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-6 py-3 bg-white/20 border border-white/30 text-white rounded-full font-bold hover:bg-white/30 shadow-2xl backdrop-blur-md">
+                          <span>Visit Live Website</span>
+                          <ExternalLink className="w-4 h-4" />
                         </div>
                       </a>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </AnimatePresence>
