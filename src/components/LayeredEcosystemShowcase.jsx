@@ -145,91 +145,102 @@ export default function LayeredEcosystemShowcase() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* LEFT COLUMN: RESTORED ORIGINAL DESIGN */}
-              <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 relative z-10">
+              {/* LEFT COLUMN: BRAND-ALIGNED TYPOGRAPHY, CHIPS & ACTIONS */}
+              <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 lg:space-y-7 relative z-10">
 
-                {/* 1. TITLE & LOGO AT THE TOP (User Requested Tweak) */}
-                <div className="flex flex-col gap-4">
-                  {/* Huge Title */}
-                  <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    {currentProduct.name}
-                  </h2>
-                  
-                  {/* Badges Row (Logo + Categories) */}
+                {/* 1. TOP BADGE CLUSTER & PRODUCT TITLE */}
+                <div className="space-y-4">
+                  {/* Cohesive Top Pill Cluster */}
                   <div className="flex flex-wrap items-center gap-2.5">
-                    {/* Logo Pill */}
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
-                      <div className="w-4 h-4 text-slate-900 dark:text-white flex items-center justify-center">
+                    {/* Logo & Product Pill */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-full shadow-xs border border-slate-200/80 dark:border-slate-700">
+                      <div className="w-4 h-4 text-slate-900 dark:text-white flex items-center justify-center shrink-0">
                         {currentProduct.logo ? (
                           <img src={currentProduct.logo} alt="" className="w-4 h-4 object-contain" />
                         ) : (
                           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                         )}
                       </div>
-                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{currentProduct.name}</span>
-                    </div>
-                    
-                    {/* Category Pill */}
-                    <div className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wide rounded-full border border-blue-100 dark:border-blue-800/30">
-                      {currentProduct.category || "ENTERPRISE ERP"}
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 tracking-tight">{currentProduct.name}</span>
                     </div>
 
-                    {/* Sub-category Pill */}
-                    <div className="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full border border-slate-200 dark:border-slate-700">
+                    {/* Subtle Brand Accent Category Pill */}
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50/80 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider rounded-full border border-blue-200/80 dark:border-blue-800/40 shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                      <span>{currentProduct.category || "Enterprise ERP"}</span>
+                    </div>
+
+                    {/* Light Neutral Secondary Metadata Tag */}
+                    <div className="inline-flex items-center px-3 py-1.5 bg-slate-100/80 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full border border-slate-200/80 dark:border-slate-700 shadow-xs">
                       {currentProduct.client || "Enterprise Workspace"}
                     </div>
                   </div>
+
+                  {/* Dominant Heading (Matching Hero's Bold, High-Contrast Typography) */}
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.08]">
+                    {currentProduct.name}
+                  </h2>
                 </div>
 
-                {/* 2. SECURITY PILLS */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold rounded-full border border-emerald-200 dark:border-emerald-800/30">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-                    {currentProduct.statBadge || "AES-256 Encryption"}
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[11px] font-semibold rounded-full border border-slate-200 dark:border-slate-700">
-                    <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    {currentProduct.secondaryBadge || "Facial & Geo Attendance"}
-                  </div>
-                </div>
-
-                {/* 3. TAGLINE & DESCRIPTION */}
+                {/* 2. SUBTITLE & BODY DESCRIPTION */}
                 <div className="space-y-3">
-                  <h3 className="text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-semibold">
+                  <p className="text-base sm:text-lg lg:text-xl font-bold tracking-wide text-blue-600 dark:text-blue-400 leading-relaxed">
                     {currentProduct.tagline || currentProduct.subtitle}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px]">
+                  </p>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px] sm:text-base font-normal max-w-xl">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* 4. FEATURE GRID (Original Outlined Pills) */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
+                {/* 3. SECURITY & PERFORMANCE SPECS */}
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50/80 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold rounded-full border border-emerald-200/80 dark:border-emerald-800/40">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                    <span>{currentProduct.statBadge || "AES-256 Encryption"}</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100/80 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 text-xs font-medium rounded-full border border-slate-200/70 dark:border-slate-700">
+                    <svg className="w-3.5 h-3.5 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span>{currentProduct.secondaryBadge || "Facial & Geo Attendance"}</span>
+                  </div>
+                </div>
+
+                {/* 4. PASSIVE FEATURE CHIPS (DE-BUTTONIZED) */}
+                <div className="grid grid-cols-2 gap-2.5 pt-1">
                   {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full shadow-sm">
-                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                      <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300 truncate">{feature}</span>
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50/90 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-700/50 cursor-default select-none transition-colors"
+                    >
+                      <svg className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 truncate">
+                        {feature}
+                      </span>
                     </div>
                   ))}
                 </div>
 
-                {/* 5. ACTION BUTTONS */}
-                <div className="flex flex-wrap items-center gap-3 pt-4">
+                {/* 5. HARMONIZED ACTION BUTTONS */}
+                <div className="flex flex-wrap items-center gap-3.5 pt-3">
                   <Link
                     href="/booking"
-                    className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-full text-sm hover:scale-105 transition-transform flex items-center gap-2"
+                    className="px-8 py-3.5 rounded-full font-bold text-sm tracking-wide bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 hover:-translate-y-0.5 transition-all flex items-center gap-2 cursor-pointer group"
                   >
-                    <span>GET STARTED</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <span>Get Started</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </Link>
                   <a
                     href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-full text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 border border-slate-200 dark:border-slate-700 shadow-sm"
+                    className="px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide bg-white/90 dark:bg-slate-800/80 backdrop-blur-md text-slate-800 dark:text-slate-200 border border-slate-200 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800 hover:border-blue-400 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-sm hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
                   >
-                    <span>LIVE PLATFORM</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <span>Live Platform</span>
+                    <svg className="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   </a>
                 </div>
 
