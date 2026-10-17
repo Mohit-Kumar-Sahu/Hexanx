@@ -20,6 +20,7 @@ const ECOSYSTEM_TABS = [
     label: 'Hexanx OS',
     title: 'Hexanx OS',
     slug: 'os',
+    displayUrl: 'os.hexanx.in',
     subtitle: 'Enterprise Workspace & ERP',
     tagline: 'Enterprise Workspace & ERP',
     category: 'Enterprise ERP',
@@ -41,10 +42,10 @@ const ECOSYSTEM_TABS = [
       gradientText: 'from-blue-600 via-indigo-600 to-cyan-500',
       pillBg: 'bg-blue-600',
       dotColor: 'bg-blue-500',
-      glow: 'from-blue-600/30 via-indigo-500/20 to-cyan-400/25',
+      glow: 'from-blue-600/25 via-indigo-500/15 to-cyan-400/20',
       iconColor: 'text-blue-600',
       buttonBg: 'bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 hover:from-blue-900 hover:to-indigo-900',
-      browserGlow: 'from-blue-500/30 via-indigo-500/25 to-cyan-400/30'
+      browserGlow: 'from-blue-500/25 via-indigo-500/20 to-cyan-400/25'
     }
   },
   {
@@ -53,6 +54,7 @@ const ECOSYSTEM_TABS = [
     label: 'Flasto',
     title: 'Flasto',
     slug: 'flasto',
+    displayUrl: 'flasto.in',
     subtitle: 'Omnichannel Restaurant OS',
     tagline: 'Omnichannel Restaurant OS',
     category: 'Restaurant OS',
@@ -74,10 +76,10 @@ const ECOSYSTEM_TABS = [
       gradientText: 'from-orange-600 via-amber-600 to-red-500',
       pillBg: 'bg-orange-600',
       dotColor: 'bg-orange-500',
-      glow: 'from-orange-600/30 via-amber-500/20 to-red-400/25',
+      glow: 'from-orange-600/25 via-amber-500/15 to-red-400/20',
       iconColor: 'text-orange-600',
       buttonBg: 'bg-gradient-to-r from-slate-900 via-orange-950 to-slate-900 hover:from-orange-900 hover:to-amber-900',
-      browserGlow: 'from-orange-500/30 via-amber-500/25 to-red-400/30'
+      browserGlow: 'from-orange-500/25 via-amber-500/20 to-red-400/25'
     }
   },
   {
@@ -86,6 +88,7 @@ const ECOSYSTEM_TABS = [
     label: 'Roomyes',
     title: 'Roomyes',
     slug: 'roomyes',
+    displayUrl: 'roomyes.hexanx.in',
     subtitle: 'Smart Hotel Concierge & PMS',
     tagline: 'Smart Hotel Concierge & PMS',
     category: 'Hospitality PMS',
@@ -107,18 +110,18 @@ const ECOSYSTEM_TABS = [
       gradientText: 'from-rose-600 via-pink-600 to-purple-500',
       pillBg: 'bg-rose-600',
       dotColor: 'bg-rose-500',
-      glow: 'from-rose-600/30 via-pink-500/20 to-purple-400/25',
+      glow: 'from-rose-600/25 via-pink-500/15 to-purple-400/20',
       iconColor: 'text-rose-600',
       buttonBg: 'bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 hover:from-rose-900 hover:to-purple-900',
-      browserGlow: 'from-rose-500/30 via-pink-500/25 to-purple-400/30'
+      browserGlow: 'from-rose-500/25 via-pink-500/20 to-purple-400/25'
     }
   }
 ];
 
 const cinematicVariants = {
-  enter: { opacity: 0, x: 20, scale: 0.99, filter: "blur(8px)" },
+  enter: { opacity: 0, x: 16, scale: 0.99, filter: "blur(6px)" },
   center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, x: -20, scale: 0.99, filter: "blur(8px)" }
+  exit: { opacity: 0, x: -16, scale: 0.99, filter: "blur(6px)" }
 };
 
 export default function LayeredEcosystemShowcase() {
@@ -127,19 +130,19 @@ export default function LayeredEcosystemShowcase() {
   const currentProduct = ECOSYSTEM_TABS.find((tab) => tab.id === activeTab) || ECOSYSTEM_TABS[0];
 
   return (
-    <section className="w-full bg-transparent relative overflow-hidden py-14 sm:py-20 lg:py-28" id="ecosystem">
-      <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-12">
+    <section className="w-full bg-transparent relative overflow-hidden py-10 sm:py-14 lg:py-18" id="ecosystem">
+      <div className="max-w-[1240px] mx-auto w-full px-4 sm:px-6 md:px-8">
         {/* Header & Apple-Style Segmented Navigation */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-16">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 backdrop-blur-md border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-widest mb-3 sm:mb-4 shadow-xs">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 backdrop-blur-md border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-widest mb-3 shadow-xs">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>Live Cloud Ecosystem</span>
             </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.06]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.08]">
               The Hexanx Product Ecosystem
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 mt-3 sm:mt-4 leading-relaxed font-light">
+            <p className="text-sm sm:text-base text-slate-600 mt-2.5 leading-relaxed font-light">
               Autonomous, high-throughput SaaS engines engineered for enterprise scale and zero downtime.
             </p>
           </div>
@@ -148,7 +151,7 @@ export default function LayeredEcosystemShowcase() {
           <div
             role="tablist"
             aria-label="Hexanx Product Switcher"
-            className="relative inline-flex items-center p-1.5 rounded-full bg-slate-200/70 backdrop-blur-2xl border border-slate-300/80 shadow-inner w-full sm:w-auto self-start lg:self-end overflow-hidden"
+            className="relative inline-flex items-center p-1 sm:p-1.5 rounded-full bg-slate-200/70 backdrop-blur-2xl border border-slate-300/80 shadow-inner w-full sm:w-auto self-start lg:self-end overflow-hidden"
           >
             {ECOSYSTEM_TABS.map((tab) => {
               const isActive = activeTab === tab.id;
@@ -159,7 +162,7 @@ export default function LayeredEcosystemShowcase() {
                   aria-selected={isActive}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer select-none flex-1 sm:flex-initial text-center ${
+                  className={`relative px-5 sm:px-7 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer select-none flex-1 sm:flex-initial text-center ${
                     isActive ? 'text-white' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
@@ -180,15 +183,15 @@ export default function LayeredEcosystemShowcase() {
           </div>
         </div>
 
-        {/* Enterprise Showcase Card Container with Dynamic Texture & Ambient Glow */}
-        <div className="relative w-full rounded-[2.25rem] md:rounded-[3rem] bg-white/90 backdrop-blur-2xl border border-white/90 shadow-[0_30px_90px_-20px_rgba(15,23,42,0.12)] p-6 sm:p-10 lg:p-14 xl:p-16 transition-all overflow-hidden">
+        {/* Tailored Enterprise Showcase Card Container */}
+        <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-white/90 shadow-[0_24px_70px_-15px_rgba(15,23,42,0.1)] p-6 sm:p-8 lg:p-10 xl:p-12 transition-all overflow-hidden">
           
-          {/* Multi-layered dynamic background aura */}
-          <div className={`absolute -top-40 -left-40 w-[500px] h-[500px] bg-gradient-to-br ${currentProduct.theme.glow} rounded-full blur-[120px] opacity-70 pointer-events-none transition-all duration-700`} />
-          <div className={`absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-gradient-to-tl ${currentProduct.theme.glow} rounded-full blur-[120px] opacity-50 pointer-events-none transition-all duration-700`} />
+          {/* Dynamic background ambient aura */}
+          <div className={`absolute -top-36 -left-36 w-[450px] h-[450px] bg-gradient-to-br ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-60 pointer-events-none transition-all duration-700`} />
+          <div className={`absolute -bottom-36 -right-36 w-[450px] h-[450px] bg-gradient-to-tl ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-40 pointer-events-none transition-all duration-700`} />
 
-          {/* Micro-dot grid texture overlay for tactile luxury glass depth */}
-          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none" />
+          {/* Micro-dot grid texture */}
+          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
 
           {/* Top highlight luster edge */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent pointer-events-none" />
@@ -200,18 +203,18 @@ export default function LayeredEcosystemShowcase() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-center relative z-10"
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center relative z-10"
             >
-              {/* Product Information Column (Left) - Generous Breathing Room */}
+              {/* Product Information Column (Left) */}
               <div className="lg:col-span-6 flex flex-col justify-center">
                 
-                {/* Brand Header: Clean Logo & Category Metadata */}
-                <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-5 sm:mb-6">
+                {/* Brand Header: Transparent, Large Logo & Category Metadata */}
+                <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 mb-4 sm:mb-5">
                   <img
                     src={currentProduct.logo}
                     alt={`${currentProduct.name} Logo`}
-                    className="h-8 sm:h-9 w-auto object-contain select-none"
+                    className="h-10 sm:h-11 md:h-12 w-auto object-contain select-none"
                   />
                   <span className="hidden sm:inline-block text-slate-300">/</span>
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-medium">
@@ -225,8 +228,8 @@ export default function LayeredEcosystemShowcase() {
                   </div>
                 </div>
 
-                {/* Futuristic Live Telemetry Capsule (Texture + Micro-Animation) */}
-                <div className="inline-flex flex-wrap items-center gap-3 sm:gap-4 px-4 py-2 rounded-xl bg-slate-100/70 backdrop-blur-md border border-slate-200/70 shadow-xs mb-6 sm:mb-8 self-start">
+                {/* Futuristic Live Telemetry Capsule */}
+                <div className="inline-flex flex-wrap items-center gap-3 sm:gap-3.5 px-3.5 py-1.5 rounded-xl bg-slate-100/70 backdrop-blur-md border border-slate-200/70 shadow-xs mb-5 sm:mb-6 self-start">
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-semibold text-slate-800">
                     <span className="relative flex h-2 w-2">
                       <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${currentProduct.theme.dotColor} opacity-75`} />
@@ -241,31 +244,31 @@ export default function LayeredEcosystemShowcase() {
                   </div>
                 </div>
 
-                {/* Title, Vibrant Tagline & Relaxed Description */}
-                <div className="mb-8 sm:mb-10">
-                  <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-black text-slate-900 tracking-tight leading-[1.08] mb-2.5">
+                {/* Title, Subtitle & Description */}
+                <div className="mb-6 sm:mb-8">
+                  <h3 className="text-3xl sm:text-4xl lg:text-[40px] font-black text-slate-900 tracking-tight leading-[1.08] mb-2">
                     {currentProduct.name}
                   </h3>
-                  <p className={`text-lg sm:text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${currentProduct.theme.gradientText} mb-4`}>
+                  <p className={`text-base sm:text-lg lg:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r ${currentProduct.theme.gradientText} mb-3`}>
                     {currentProduct.subtitle || currentProduct.tagline}
                   </p>
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-light max-w-xl">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-light max-w-lg">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* Tactile Feature Tiles (Micro-Cards with Interactive Hover & Spring) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 mb-8 sm:mb-10">
+                {/* Feature Tiles */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
                   {currentProduct.features.map((feature, idx) => (
                     <motion.div
                       key={feature}
-                      initial={{ opacity: 0, y: 12 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.07, duration: 0.35 }}
+                      transition={{ delay: idx * 0.06, duration: 0.3 }}
                       whileHover={{ y: -2, scale: 1.01 }}
-                      className="flex items-center gap-3 p-3.5 rounded-xl bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 shadow-xs hover:shadow-md transition-all duration-300 group cursor-default"
+                      className="flex items-center gap-2.5 p-3 rounded-xl bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 shadow-xs hover:shadow-sm transition-all duration-300 group cursor-default"
                     >
-                      <div className={`w-6 h-6 rounded-lg ${currentProduct.theme.accentBg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                      <div className={`w-5 h-5 rounded-md ${currentProduct.theme.accentBg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
                         <CheckCircle2 className={`w-3.5 h-3.5 ${currentProduct.theme.iconColor}`} />
                       </div>
                       <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
@@ -275,22 +278,22 @@ export default function LayeredEcosystemShowcase() {
                   ))}
                 </div>
 
-                {/* Premium Action CTAs with Shimmer Animation */}
-                <div className="flex flex-wrap items-center gap-4">
+                {/* Action CTAs */}
+                <div className="flex flex-wrap items-center gap-3.5">
                   <Link
                     href="/booking"
-                    className={`relative inline-flex items-center justify-center px-7 sm:px-8 py-3.5 sm:py-4 rounded-full ${currentProduct.theme.buttonBg} text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl shadow-slate-900/15 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2.5 group overflow-hidden`}
+                    className={`relative inline-flex items-center justify-center px-6 sm:px-7 py-3 rounded-full ${currentProduct.theme.buttonBg} text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-slate-900/15 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2 group overflow-hidden`}
                   >
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
                     <span className="relative z-10">Schedule Enterprise Demo</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform relative z-10" />
                   </Link>
 
                   <a
                     href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 hover:text-slate-900 font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2 group"
+                    className="inline-flex items-center justify-center px-5 sm:px-6 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 hover:text-slate-900 font-bold text-xs uppercase tracking-wider shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 gap-2 group"
                   >
                     <span>Live Platform</span>
                     <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -301,18 +304,20 @@ export default function LayeredEcosystemShowcase() {
               {/* Apple-Grade Mockup Frame Container (Right) */}
               <div className="lg:col-span-6 w-full">
                 <motion.div
-                  animate={{ y: [-5, 5, -5] }}
+                  animate={{ y: [-4, 4, -4] }}
                   transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                   className="relative group w-full mx-auto"
                 >
-                  {/* Subtle Product-Colored Ambient Glow */}
-                  <div className={`absolute -inset-2 bg-gradient-to-r ${currentProduct.theme.browserGlow} rounded-[2.5rem] blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none`} />
+                  {/* Product-Colored Ambient Glow */}
+                  <div className={`absolute -inset-2 bg-gradient-to-r ${currentProduct.theme.browserGlow} rounded-[2rem] blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none`} />
 
-                  {/* Main Window Body */}
-                  <div className="relative rounded-2xl md:rounded-[1.75rem] bg-white border border-slate-200/80 shadow-[0_30px_70px_-15px_rgba(15,23,42,0.2)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1">
-                    
+                  {/* Main Window Body - Fully Rounded on all 4 corners */}
+                  <div 
+                    style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
+                    className="relative rounded-2xl md:rounded-[1.75rem] bg-white border border-slate-200/80 shadow-[0_24px_60px_-15px_rgba(15,23,42,0.18)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1"
+                  >
                     {/* Authentic macOS Window Header */}
-                    <div className="flex items-center justify-between px-4 py-3 bg-slate-50/95 border-b border-slate-200/70 backdrop-blur-md">
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-slate-50/95 border-b border-slate-200/70 backdrop-blur-md rounded-t-2xl md:rounded-t-[1.75rem]">
                       {/* Traffic Lights */}
                       <div className="flex gap-2">
                         <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner border border-black/10"></div>
@@ -320,20 +325,20 @@ export default function LayeredEcosystemShowcase() {
                         <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-inner border border-black/10"></div>
                       </div>
                       
-                      {/* URL Bar (Glassmorphic) */}
+                      {/* URL Bar */}
                       <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                        <div className="px-5 py-1.5 bg-white rounded-md shadow-xs border border-slate-200 text-[11px] sm:text-xs font-medium font-mono text-slate-500 tracking-wide flex items-center gap-2">
+                        <div className="px-4 py-1 bg-white rounded-md shadow-xs border border-slate-200 text-[11px] sm:text-xs font-medium font-mono text-slate-500 tracking-wide flex items-center gap-1.5">
                           <Lock className="w-3 h-3 text-emerald-500" />
-                          <span>{currentProduct.slug || 'app'}.hexanx.in</span>
+                          <span>{currentProduct.displayUrl}</span>
                         </div>
                       </div>
                       
-                      {/* Empty div for flex-between balance */}
+                      {/* Empty div for flex balance */}
                       <div className="w-10"></div>
                     </div>
 
-                    {/* FULL, CRISP IMAGE RENDER */}
-                    <div className="relative w-full bg-slate-100 flex justify-center group/screen overflow-hidden">
+                    {/* FULL, CRISP IMAGE RENDER - Curvy bottom corners */}
+                    <div className="relative w-full bg-slate-100 flex justify-center group/screen overflow-hidden rounded-b-2xl md:rounded-b-[1.75rem]">
                       <Image
                         src={currentProduct.image}
                         alt={`${currentProduct.name} Interface`}
@@ -341,7 +346,7 @@ export default function LayeredEcosystemShowcase() {
                         height={1620}
                         quality={100}
                         priority
-                        className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                        className="w-full h-auto object-contain rounded-b-2xl md:rounded-b-[1.75rem] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       />
 
                       {/* HOVER REDIRECTION OVERLAY */}
@@ -349,10 +354,10 @@ export default function LayeredEcosystemShowcase() {
                         href={currentProduct.url || currentProduct.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20"
+                        className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/screen:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-20 rounded-b-2xl md:rounded-b-[1.75rem]"
                       >
-                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-6 py-3 bg-white/20 border border-white/30 text-white rounded-full font-bold hover:bg-white/30 shadow-2xl backdrop-blur-md">
-                          <span>Visit Live Website</span>
+                        <div className="transform translate-y-4 group-hover/screen:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-5 py-2.5 bg-white/25 border border-white/30 text-white rounded-full font-bold text-xs sm:text-sm hover:bg-white/35 shadow-2xl backdrop-blur-md">
+                          <span>Visit {currentProduct.displayUrl}</span>
                           <ExternalLink className="w-4 h-4" />
                         </div>
                       </a>
