@@ -184,17 +184,28 @@ export default function LayeredEcosystemShowcase() {
         </div>
 
         {/* Tailored Enterprise Showcase Card Container */}
-        <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-white/90 shadow-[0_24px_70px_-15px_rgba(15,23,42,0.1)] p-6 sm:p-8 lg:p-10 xl:p-12 transition-all overflow-hidden">
+        <div 
+          style={{ 
+            borderRadius: '2.5rem',
+            WebkitBorderRadius: '2.5rem',
+            WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+            maskImage: 'radial-gradient(white, black)',
+            isolation: 'isolate',
+            overflow: 'hidden'
+          }}
+          className="relative w-full rounded-[2rem] md:rounded-[2.5rem] rounded-tl-[2rem] md:rounded-tl-[2.5rem] rounded-tr-[2rem] md:rounded-tr-[2.5rem] rounded-bl-[2rem] md:rounded-bl-[2.5rem] rounded-br-[2rem] md:rounded-br-[2.5rem] bg-white/90 backdrop-blur-2xl border border-white/90 shadow-[0_24px_70px_-15px_rgba(15,23,42,0.1)] p-6 sm:p-8 lg:p-10 xl:p-12 transition-all overflow-hidden"
+        >
           
-          {/* Dynamic background ambient aura */}
-          <div className={`absolute -top-36 -left-36 w-[450px] h-[450px] bg-gradient-to-br ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-60 pointer-events-none transition-all duration-700`} />
-          <div className={`absolute -bottom-36 -right-36 w-[450px] h-[450px] bg-gradient-to-tl ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-40 pointer-events-none transition-all duration-700`} />
+          {/* Dynamic background ambient auras - All corners balanced */}
+          <div className={`absolute -top-36 -left-36 w-[400px] h-[400px] bg-gradient-to-br ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-60 pointer-events-none transition-all duration-700`} />
+          <div className={`absolute -top-36 -right-36 w-[400px] h-[400px] bg-gradient-to-bl ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-50 pointer-events-none transition-all duration-700`} />
+          <div className={`absolute -bottom-36 -right-36 w-[400px] h-[400px] bg-gradient-to-tl ${currentProduct.theme.glow} rounded-full blur-[100px] opacity-40 pointer-events-none transition-all duration-700`} />
 
           {/* Micro-dot grid texture */}
-          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none rounded-[2rem] md:rounded-[2.5rem]" />
 
-          {/* Top highlight luster edge */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent pointer-events-none" />
+          {/* Top highlight luster edge - safely inset from corners */}
+          <div className="absolute inset-x-16 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent pointer-events-none" />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -204,7 +215,8 @@ export default function LayeredEcosystemShowcase() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center relative z-10"
+              style={{ borderRadius: '2.5rem' }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center relative z-10 rounded-[2rem] md:rounded-[2.5rem]"
             >
               {/* Product Information Column (Left) */}
               <div className="lg:col-span-6 flex flex-col justify-center">
@@ -313,11 +325,18 @@ export default function LayeredEcosystemShowcase() {
 
                   {/* Main Window Body - Fully Rounded on all 4 corners */}
                   <div 
-                    style={{ WebkitMaskImage: '-webkit-radial-gradient(white, black)' }}
-                    className="relative rounded-2xl md:rounded-[1.75rem] bg-white border border-slate-200/80 shadow-[0_24px_60px_-15px_rgba(15,23,42,0.18)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1"
+                    style={{ 
+                      borderRadius: '1.75rem',
+                      WebkitBorderRadius: '1.75rem',
+                      WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+                      maskImage: 'radial-gradient(white, black)',
+                      isolation: 'isolate',
+                      overflow: 'hidden'
+                    }}
+                    className="relative rounded-2xl md:rounded-[1.75rem] rounded-tl-2xl md:rounded-tl-[1.75rem] rounded-tr-2xl md:rounded-tr-[1.75rem] rounded-bl-2xl md:rounded-bl-[1.75rem] rounded-br-2xl md:rounded-br-[1.75rem] bg-white border border-slate-200/80 shadow-[0_24px_60px_-15px_rgba(15,23,42,0.18)] overflow-hidden flex flex-col transform transition-transform duration-500 hover:-translate-y-1"
                   >
                     {/* Authentic macOS Window Header */}
-                    <div className="flex items-center justify-between px-4 py-2.5 bg-slate-50/95 border-b border-slate-200/70 backdrop-blur-md rounded-t-2xl md:rounded-t-[1.75rem]">
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-slate-50/95 border-b border-slate-200/70 backdrop-blur-md rounded-t-2xl md:rounded-t-[1.75rem] rounded-tl-2xl md:rounded-tl-[1.75rem] rounded-tr-2xl md:rounded-tr-[1.75rem]">
                       {/* Traffic Lights */}
                       <div className="flex gap-2">
                         <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-inner border border-black/10"></div>
