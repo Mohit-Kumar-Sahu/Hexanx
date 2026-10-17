@@ -143,12 +143,27 @@ export default function AyraSection() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               priority
             />
+
+            {/* AYRA PLATFORM HOVER REDIRECT OVERLAY */}
+            <a 
+              href="https://ayra.hexanx.in" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="absolute inset-0 bg-slate-900/50 dark:bg-slate-950/70 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center z-30"
+            >
+              <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2 px-8 py-3.5 bg-white/20 dark:bg-black/40 border border-white/30 text-white rounded-full font-bold hover:bg-white/30 dark:hover:bg-black/60 shadow-2xl backdrop-blur-md">
+                <span>Visit Ayra Platform</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </div>
+            </a>
             
             {/* Subtle Gradient Overlay for Text Readability or Premium Vibe */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none z-10" />
             
             {/* Floating Success Badge */}
-            <div className="absolute bottom-6 left-6 right-6 lg:left-8 lg:right-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20">
+            <div className="absolute bottom-6 left-6 right-6 lg:left-8 lg:right-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-white/20 z-20 pointer-events-none">
               <div className="w-12 h-12 flex-shrink-0 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" /></svg>
               </div>
