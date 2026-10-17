@@ -22,7 +22,7 @@ const ECOSYSTEM_TABS = [
     url: 'https://os.hexanx.in',
     image: '/hexanxosR.png',
     statBadge: 'AES-256 Encryption',
-    secondaryBadge: 'Facial & Geo Tracking',
+    secondaryBadge: 'Facial & Geo Attendance',
     description: 'Enterprise workspace ecosystem with biometric geo-attendance, automated payroll compliance (PF, ESI, TDS), and IT asset tracking.',
     features: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow'],
     tags: ['Attendance Engine', 'Payroll Automation', 'Asset Tracking', 'Leave Workflow']
@@ -145,91 +145,94 @@ export default function LayeredEcosystemShowcase() {
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
             >
-              {/* LEFT COLUMN: BRANDING, TYPOGRAPHY & ACTIONS */}
-              <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 lg:space-y-8 relative z-10 py-4">
-                
-                {/* ROW 1: Product Logo & Primary Badges */}
-                <div className="flex flex-wrap items-center gap-4">
-                  {/* Product Logo (Dynamic or Fallback) */}
-                  <div className="flex items-center gap-2.5 px-4 py-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
-                    {currentProduct.logo ? (
-                      <Image
-                        src={currentProduct.logo}
-                        alt={`${currentProduct.name} Logo`}
-                        width={24}
-                        height={24}
-                        className="w-6 h-6 object-contain"
-                      />
-                    ) : (
-                      <div className="w-6 h-6 flex-shrink-0 text-slate-900 dark:text-white">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                      </div>
-                    )}
-                    <span className="font-extrabold text-slate-900 dark:text-white text-lg tracking-tight">
-                      {currentProduct.name}
-                    </span>
-                  </div>
+              {/* LEFT COLUMN: RESTORED ORIGINAL DESIGN */}
+              <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-center space-y-6 relative z-10">
+
+                {/* 1. TITLE & LOGO AT THE TOP (User Requested Tweak) */}
+                <div className="flex flex-col gap-4">
+                  {/* Huge Title */}
+                  <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    {currentProduct.name}
+                  </h2>
                   
-                  {/* Category Pill */}
-                  <div className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-widest rounded-full border border-blue-100 dark:border-blue-800/30">
-                    {currentProduct.category || "Enterprise ERP"}
+                  {/* Badges Row (Logo + Categories) */}
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    {/* Logo Pill */}
+                    <div className="flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
+                      <div className="w-4 h-4 text-slate-900 dark:text-white flex items-center justify-center">
+                        {currentProduct.logo ? (
+                          <img src={currentProduct.logo} alt="" className="w-4 h-4 object-contain" />
+                        ) : (
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        )}
+                      </div>
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{currentProduct.name}</span>
+                    </div>
+                    
+                    {/* Category Pill */}
+                    <div className="px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wide rounded-full border border-blue-100 dark:border-blue-800/30">
+                      {currentProduct.category || "ENTERPRISE ERP"}
+                    </div>
+
+                    {/* Sub-category Pill */}
+                    <div className="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium rounded-full border border-slate-200 dark:border-slate-700">
+                      {currentProduct.client || "Enterprise Workspace"}
+                    </div>
                   </div>
                 </div>
 
-                {/* ROW 2: Main Title & Description */}
-                <div className="space-y-4 pt-2">
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                {/* 2. SECURITY PILLS */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold rounded-full border border-emerald-200 dark:border-emerald-800/30">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                    {currentProduct.statBadge || "AES-256 Encryption"}
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[11px] font-semibold rounded-full border border-slate-200 dark:border-slate-700">
+                    <svg className="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    {currentProduct.secondaryBadge || "Facial & Geo Attendance"}
+                  </div>
+                </div>
+
+                {/* 3. TAGLINE & DESCRIPTION */}
+                <div className="space-y-3">
+                  <h3 className="text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-semibold">
                     {currentProduct.tagline || currentProduct.subtitle}
-                  </h2>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px] sm:text-base max-w-lg">
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[15px]">
                     {currentProduct.description}
                   </p>
                 </div>
 
-                {/* ROW 3: Security & Tech Pills */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50/50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold rounded border border-emerald-100 dark:border-emerald-800/30">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    {currentProduct.statBadge || "AES-256 Encryption"}
-                  </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-50/50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-xs font-bold rounded border border-purple-100 dark:border-purple-800/30">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    {currentProduct.secondaryBadge || "Facial & Geo Tracking"}
-                  </div>
-                </div>
-
-                {/* ROW 4: Feature List */}
-                <div className="grid grid-cols-2 gap-4 pt-4">
+                {/* 4. FEATURE GRID (Original Outlined Pills) */}
+                <div className="grid grid-cols-2 gap-3 pt-2">
                   {(currentProduct.features || currentProduct.tags || []).map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5">
-                      <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
-                      </div>
-                      <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 leading-snug">{feature}</span>
+                    <div key={idx} className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full shadow-sm">
+                      <svg className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300 truncate">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* ROW 5: Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-6">
+                {/* 5. ACTION BUTTONS */}
+                <div className="flex flex-wrap items-center gap-3 pt-4">
                   <Link
                     href="/booking"
-                    className="px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full text-sm hover:-translate-y-0.5 hover:shadow-lg transition-all flex items-center gap-2"
+                    className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-full text-sm hover:scale-105 transition-transform flex items-center gap-2"
                   >
-                    <span>Get Started</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <span>GET STARTED</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </Link>
                   <a
                     href={currentProduct.url || currentProduct.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-7 py-3.5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-full text-sm hover:-translate-y-0.5 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2 shadow-sm border border-slate-200 dark:border-slate-700"
+                    className="px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-full text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 border border-slate-200 dark:border-slate-700 shadow-sm"
                   >
-                    <span>Live Platform</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <span>LIVE PLATFORM</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   </a>
                 </div>
-                
+
               </div>
 
               {/* Apple-Grade Mockup Frame Container (Right) */}
